@@ -1,14 +1,14 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-04-02 21:18:04
- * @LastEditors: RA
+ * @LastEditTime: 2020-04-03 16:49:03
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React from 'react';
 import 'reset.css';
 import './App.scss';
-import { BrowserRouter as  Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import routes from './router';
 function App() {
   return (
@@ -32,8 +32,7 @@ function App() {
             }
           })
         }
-
-      </Router >
+      </Router>
     </div >
 
   );

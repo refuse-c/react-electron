@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-04-02 16:53:11
- * @LastEditors: RA
+ * @LastEditTime: 2020-04-03 17:35:18
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -10,15 +10,19 @@ import './index.scss';
 class Footer extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {}
   }
-  render() { 
-    return ( 
+  gotoPlayer = () => {
+    this.props.history.push({ pathname: '/player' })
+  }
+  render() {
+    console.log(this.props)
+    return (
       <div className="footer">
-        <img src="" alt=""/>
+        <img onClick={this.gotoPlayer} src="https://p1.music.126.net/cm7rMj_I2qHwKyB2gRsauA==/109951163667867598.jpg?param=300y300" alt="" />
       </div>
-     );
+    );
   }
 }
- 
+
 export default Footer;

@@ -2,13 +2,14 @@
   display: flex;
   align-items: center;
   width: 100%;
-  height: 40px;
+  height: 36px;
   -webkit-app-region: drag;
+  background-color: #0071fb;
   .left {
     width: 200px;
     height: 100%;
     background-color: snow;
-    background: url("../../common/images/logo.png") center center / 100% 100%
+    background: url("../../common/images/logo-w.png") center center / 100% 30px
       no-repeat;
   }
   .center {

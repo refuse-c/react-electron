@@ -1,13 +1,12 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:07:55
- * @LastEditTime: 2020-04-02 21:33:35
- * @LastEditors: RA
+ * @LastEditTime: 2020-04-03 17:02:07
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
 import './index.scss';
-// import Find from '../find'
 import { Route } from 'react-router-dom';
 class Info extends Component {
   constructor(props) {
@@ -19,7 +18,6 @@ class Info extends Component {
       <div className="info">
         {
           this.props.routes.map((item, key) => {
-            console.log(item.path, item.component.name)
             return <Route true key={key} path={item.path} component={item.component} />
           })
         }
