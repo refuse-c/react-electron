@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:06:28
- * @LastEditTime: 2020-04-03 17:58:45
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-04-04 12:06:52
+ * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -10,52 +10,65 @@ import { NavLink } from 'react-router-dom';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import './index.scss';
+import { musicList } from '../../api/api';
+import { RAGet } from '../../api/netWork';
+
 
 class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: 287070050,
       menuList: [
-        { title: 'EMusic', type: 'title' },
-        { title: '搜索', type: 'menu', path: '/search' },
-        { title: '发现', type: 'menu', path: '/home/find' },
-        { title: '视频', type: 'menu', path: '/home/video' },
-        { title: '朋友', type: 'menu', path: '/home/frind' },
-        { title: '我的音乐', type: 'title' },
-        { title: '本地音乐', type: 'menu', path: '/home/local' },
-        { title: '下载管理', type: 'menu', path: '/home/down' },
-        { title: '最近播放', type: 'menu', path: '/home/lately' },
-        { title: '创建的歌单', type: 'title' },
-        { title: '收藏的歌单', type: 'title' },
-      ],
-      getList1: [
-        { title: 'add1', type: 'list', path: '/home/list:id', id: '1' },
-        { title: 'add2', type: 'list', path: '/home/list:id', id: '2' },
-        { title: 'add3', type: 'list', path: '/home/list:id', id: '3' },
-        { title: 'add4', type: 'list', path: '/home/list:id', id: '4' },
-      ],
-      getList2: [
-        { title: 'add5', type: 'list', path: '/home/list:id', id: '5' },
-        { title: 'add6', type: 'list', path: '/home/list:id', id: '6' },
-        { title: 'add7', type: 'list', path: '/home/list:id', id: '7' },
-        { title: 'add8', type: 'list', path: '/home/list:id', id: '8' },
+        { name: 'EMusic' },
+        { name: '搜索', path: '/search' },
+        { name: '发现', path: '/home/find' },
+        { name: '视频', path: '/home/video' },
+        { name: '朋友', path: '/home/frind' },
+        { name: '我的音乐', },
+        { name: '本地音乐', path: '/home/local' },
+        { name: '下载管理', path: '/home/down' },
+        { name: '最近播放', path: '/home/lately' },
+        { name: '创建的歌单' },
+        { name: '收藏的歌单' },
       ]
     }
   }
   componentDidMount = () => {
-    const { menuList, getList1, getList2 } = this.state;
-    const goalIndex1 = menuList.findIndex((item) => { return item.title === '创建的歌单' })
-    getList1.map(item => {
-      return menuList.splice(goalIndex1 + 1, 0, item);
-    })
-    const goalIndex2 = menuList.findIndex((item) => { return item.title === '收藏的歌单' })
-    getList2.map(item => {
-      return menuList.splice(goalIndex2 + 2, 0, item);
-    })
-    this.setState({ menuList })
+    this.getMusicList(287070050);
   }
   handelIndex = index => {
-    console.log(index)
+    // console.log(index)
+  }
+  getMusicList = (id) => {
+    const { userId, menuList } = this.state;
+    RAGet(musicList.api_url, {
+      params: {
+        uid: id,
+      }
+    }).then(res => {
+      console.log(res)
+      if (res.code === 200) {
+        res.playlist.map((item, index) => {
+          item.path = '/home/list';
+          if (item.privacy !== 10) {
+            if (item.userId === Number(userId)) {
+              let index = menuList.findIndex((item) => { return item.name === '收藏的歌单' })
+              menuList.splice(index, 0, item);
+            }
+            if (item.userId !== Number(userId)) {
+              let index = menuList.findIndex((item) => { return item.name === '收藏的歌单' })
+              menuList.splice(index + 2, 0, item);
+            }
+          }
+          return index.id
+        })
+        this.setState({ menuList })
+      }
+
+    }).catch(err => {
+      console.log(err)
+    })
   }
   render() {
     const { menuList } = this.state;
@@ -75,9 +88,9 @@ class Menu extends Component {
                 return (
                   item.path !== undefined ?
                     <NavLink onClick={this.handelIndex.bind(this, index)} exact activeClassName="active" key={index} to={item.id !== undefined ? item.path + item.id : item.path}>
-                      <li className="menu_item" > {item.title}</li>
+                      <li className="menu_item" > {item.name}</li>
                     </NavLink> :
-                    <h3 key={index} className="menu_title">{item.title}</h3>
+                    <h3 key={index} className="menu_title">{item.name}</h3>
                 )
               })
             }

@@ -10,6 +10,8 @@
     "antd": "^4.1.0",
     "axios": "^0.19.2",
     "electron": "^8.2.0",
+    "fs": "0.0.1-security",
+    "iconv-lite": "^0.5.1",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -27,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-start": "electron ."
+    "electron-start": "chcp 65001 && electron ."
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-03-22 18:43:44
+ * @LastEditTime: 2020-04-04 18:52:43
  * @LastEditors: RA
  * @Description: 
  */
@@ -11,6 +11,7 @@
  * @param {string} v 时间戳
  */
 export const fomatDate = (v) => {
+  if (isEmpty(v)) return '';
   let date = new Date(v);
   let year = date.getFullYear()
   let month = date.getMonth() + 1
@@ -71,7 +72,7 @@ export const isEmpty = (v, allowBlank) => {
 * 时间格式化
 * @param {number} v 
 */
-export const FormatPlayTime = (v) => {
+export const formatPlayTime = (v) => {
   if (isEmpty(v)) {
     return v;
   }
@@ -86,12 +87,13 @@ export const FormatPlayTime = (v) => {
 * 序号格式化
 * @param {number} v 
 */
-export const FormatNum = (v) => {
+export const formatNum = (v) => {
   if (isEmpty(v)) {
     return v;
   }
   v = parseInt(v);
-  return v < 9 ? '00' + (v + 1) : (v < 99 ? '0' + (v + 1) : v + 1);
+  return v < 9 ? '0' + (v + 1) : (v + 1);
+  // return v < 9 ? '00' + (v + 1) : (v < 99 ? '0' + (v + 1) : v + 1);
 }
 
 /**

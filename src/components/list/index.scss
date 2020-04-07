@@ -1,0 +1,119 @@
+.list {
+  width: 100%;
+  height: 100%;
+  .list_info {
+    display: flex;
+    padding: 20px;
+    img {
+      width: 150px;
+      height: 150px;
+      min-width: 150px;
+      min-height: 150px;
+      border-radius: 1px;
+      border: 1px solid #e5e5e5;
+      // 黑白色
+      // -webkit-filter: grayscale(1); /* Webkit */
+      // filter: gray; /* IE6-9 */
+      // filter: grayscale(1); /* W3C */
+    }
+    .list_box {
+      display: flex;
+      flex-direction: column;
+      padding-left: 20px;
+      .list_user {
+        display: flex;
+        p {
+          width: 40px;
+          height: 20px;
+          color: #0071fb;
+          text-align: center;
+          line-height: 20px;
+          border-radius: 2px;
+          border: 1px solid #0071fb;
+        }
+        h2 {
+          text-align: left;
+          line-height: 20px;
+          font-size: 20px;
+          padding-left: 10px;
+        }
+      }
+      .list_author {
+        display: flex;
+        align-items: center;
+        padding-top: 10px;
+        img {
+          width: 30px;
+          height: 30px;
+          min-width: 30px;
+          min-height: 30px;
+          border-radius: 50%;
+        }
+        p {
+          padding-left: 10px;
+        }
+      }
+      .list_btn {
+        display: flex;
+        padding-top: 10px;
+        button {
+          padding: 2px 8px;
+        }
+        button:not(:first-child) {
+          margin-left: 15px;
+        }
+      }
+      .list_tag {
+        padding-top: 10px;
+        font-size: 12px;
+      }
+      .list_des {
+        padding-top: 10px;
+        font-size: 12px;
+      }
+    }
+  }
+  ul {
+    padding: 0 20px;
+    li {
+      display: flex;
+      height: 40px;
+      font-size: 13px;
+      div {
+        height: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 40px;
+      }
+      div:nth-child(1) {
+        width: 50px;
+        text-align: center;
+      }
+      div:nth-child(2) {
+        width: calc(50% - 70px);
+        padding: 0 10px;
+      }
+      div:nth-child(3) {
+        width: 20%;
+      }
+      div:nth-child(4) {
+        width: calc(30% - 70px);
+        padding: 0 10px;
+      }
+      div:nth-child(5) {
+        width: 60px;
+        text-align: right;
+      }
+      &:nth-child(even) {
+        background-color: #fafafa;
+      }
+      &:nth-child(odd) {
+        background-color: #f5f5f7;
+      }
+      &:hover {
+        background-color: #ebeced;
+      }
+    }
+  }
+}

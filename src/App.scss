@@ -1,16 +1,18 @@
 * {
   box-sizing: border-box;
+  cursor: default;
 }
 
 html,
 body {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.2;
   color: #333333;
   font-family: '华文细黑' !important;
 }
 
 a {
+  cursor: pointer;
   text-decoration: none;
   color: #333333 !important;
   background-color: transparent;

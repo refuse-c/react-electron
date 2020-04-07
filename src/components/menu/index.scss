@@ -1,7 +1,7 @@
 .menu {
   width: 200px;
   height: 100%;
-  background-color: #F3F3F5;
+  background-color: #f3f3f5;
 
   .menu_list {
     a {
@@ -9,13 +9,17 @@
 
       &:hover {
         color: #ffffff !important;
-        background-color: #0071fb;
+        background-color: rgba(0, 113, 251, 0.5);
       }
     }
 
     .active {
       color: #ffffff !important;
       background-color: #0071fb;
+      &:hover {
+        color: #ffffff !important;
+        background-color: #0071fb;
+      }
     }
 
     .menu_title {
@@ -34,7 +38,7 @@
       padding: 0 16px 0 40px;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: normal;
+      white-space: nowrap;
     }
   }
 }

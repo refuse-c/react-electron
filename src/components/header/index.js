@@ -1,12 +1,14 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 14:46:55
- * @LastEditTime: 2020-04-02 16:31:51
+ * @LastEditTime: 2020-04-04 15:24:21
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
 import './index.scss';
+const { ipcRenderer: ipc } = window.require('electron');
+
 // const { ipcRenderer } = require('electron');
 class Header extends Component {
   constructor(props) {
@@ -14,9 +16,8 @@ class Header extends Component {
     this.state = {}
   }
   buttonClick = type => {
-    console.log(type)
-    const { ipcRenderer } = window.require('electron');
-    ipcRenderer.send(type);
+    ipc.send(type);
+
   };
   render() {
 
@@ -25,9 +26,9 @@ class Header extends Component {
         <div className="left"></div>
         <div className="center"></div>
         <div className="right">
-          <div className="icons close" title="关闭" onClick={e => this.buttonClick('close', e)}></div>
           <div className="icons min" title="最小化" onClick={e => this.buttonClick('min', e)}></div>
           <div className="icons max" title="最大化" onClick={e => this.buttonClick('max', e)}></div>
+          <div className="icons close" title="关闭" onClick={e => this.buttonClick('close', e)}></div>
         </div>
       </div>
     );

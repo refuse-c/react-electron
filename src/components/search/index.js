@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-04-02 16:55:13
+ * @LastEditTime: 2020-04-04 01:31:34
  * @LastEditors: RA
  * @Description: 
  */
@@ -13,7 +13,7 @@ class Search extends Component {
   }
   render() {
     return (
-      <div className="search">search</div>
+      <div className="search">page search</div>
     );
   }
 }

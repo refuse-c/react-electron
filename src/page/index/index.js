@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:12:40
- * @LastEditTime: 2020-04-03 17:35:54
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-04-04 00:40:09
+ * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -16,7 +16,6 @@ class Index extends Component {
     this.state = {}
   }
   render() {
-    console.log(this.props.routes)
     const { routes } = this.props;
     return (
       <div className="index">

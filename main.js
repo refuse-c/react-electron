@@ -1,13 +1,17 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-04-02 16:20:47
+ * @LastEditTime: 2020-04-04 19:47:49
  * @LastEditors: RA
  * @Description: 
  */
 // 引入electron并创建一个Browserwindow
+const fs = require('fs');
 const { app, Menu, BrowserWindow, globalShortcut, ipcMain } = require('electron');
 // const path = require('path');
+//打开目录地址
+// const path1 = 'd:';
+// shell.openItem(path1);
 Menu.setApplicationMenu(null) //取消菜单栏
 // 保持window对象的全局引用,避免JavaScript对象被垃圾回收时,窗口被自动关闭.
 let mainWindow
@@ -34,7 +38,7 @@ function createWindow() {
   */
   // 加载应用----适用于 react 项目
   mainWindow.loadURL('http://localhost:3000/');
-  mainWindow.setMinimumSize(800, 500)
+  mainWindow.setMinimumSize(900, 500)
   // 关闭window时触发下列事件.
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -88,9 +92,12 @@ app.on("ready", () => {
     }
   });
   ipcMain.on('close', e => mainWindow.close());
+
 });
-
-
+const data = fs.readdirSync('F:/CloudMusic/');
+ipcMain.on('files', function (event) {
+  event.returnValue = data;
+});
 
 
 
