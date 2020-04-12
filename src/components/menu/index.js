@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:06:28
- * @LastEditTime: 2020-04-04 12:06:52
+ * @LastEditTime: 2020-04-12 16:43:39
  * @LastEditors: RA
  * @Description: 
  */
@@ -21,7 +21,8 @@ class Menu extends Component {
       userId: 287070050,
       menuList: [
         { name: 'EMusic' },
-        { name: '搜索', path: '/search' },
+        
+        { name: '搜索', path: '/home/search' },
         { name: '发现', path: '/home/find' },
         { name: '视频', path: '/home/video' },
         { name: '朋友', path: '/home/frind' },
@@ -38,7 +39,7 @@ class Menu extends Component {
     this.getMusicList(287070050);
   }
   handelIndex = index => {
-    // console.log(index)
+    console.log(index)
   }
   getMusicList = (id) => {
     const { userId, menuList } = this.state;
@@ -47,7 +48,6 @@ class Menu extends Component {
         uid: id,
       }
     }).then(res => {
-      console.log(res)
       if (res.code === 200) {
         res.playlist.map((item, index) => {
           item.path = '/home/list';

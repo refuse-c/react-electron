@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-04-08 10:37:05
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-04-09 22:16:25
+ * @LastEditors: RA
  * @Description: 
  */
 // 引入electron并创建一个Browserwindow
@@ -95,8 +95,9 @@ app.on("ready", () => {
 
 });
 
-// F: /CloudMusic/
-const data = fs.readdirSync('C:/Users/Xiang/Music');
+// F:/CloudMusic/                       
+// C:/Users/Xiang/Music
+const data = fs.readdirSync('F:/CloudMusic/');
 ipcMain.on('files', function (event) {
   event.returnValue = data;
 });

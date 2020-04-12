@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-04-04 19:04:06
+ * @LastEditTime: 2020-04-11 20:02:01
  * @Description:
  */
 import React, { Component } from 'react';
@@ -35,7 +35,6 @@ class List extends Component {
         id: id
       }
     }).then(res => {
-      console.log(res)
       const playList = res.playlist;
       this.setState({ playList });
     }).catch(err => {
@@ -88,7 +87,6 @@ class List extends Component {
                     <div>{item.ar.map(item => item.name + '').join(' - ')}</div>
                     <div>{item.al.name}</div>
                     <div>{formatPlayTime(item.dt / 1000)}</div>
-
                   </li>
                 )
               })

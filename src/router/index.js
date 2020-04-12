@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-04-03 17:58:34
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-04-12 16:45:45
+ * @LastEditors: RA
  * @Description: 
  */
 import Index from '../page/index/';
@@ -26,7 +26,7 @@ let routes = [
         component: Home,
         routes: [
           {
-            path: '/search',
+            path: '/home/search',
             component: Search,
           },
           {
@@ -61,7 +61,7 @@ let routes = [
       },
       {
         path: '/player',
-        component: Player,
+        component: Player
       }]
   }
 ]
