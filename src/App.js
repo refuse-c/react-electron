@@ -1,14 +1,14 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-04-03 16:49:03
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-04-18 11:42:44
+ * @LastEditors: RA
  * @Description: 
  */
 import React from 'react';
 import 'reset.css';
 import './App.scss';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import routes from './router';
 function App() {
   return (
@@ -32,6 +32,7 @@ function App() {
             }
           })
         }
+        <Redirect to="/home/find" />
       </Router>
     </div >
 

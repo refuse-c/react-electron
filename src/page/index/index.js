@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:12:40
- * @LastEditTime: 2020-04-04 00:40:09
+ * @LastEditTime: 2020-04-18 11:27:19
  * @LastEditors: RA
  * @Description: 
  */
@@ -40,6 +40,7 @@ class Index extends Component {
         }
         {/* <Redirect to="/home" /> */}
         <Footer {...this.props} />
+        <div className="inner"></div>
       </div >
     );
   }

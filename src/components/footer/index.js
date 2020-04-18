@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-04-12 16:31:21
+ * @LastEditTime: 2020-04-14 09:18:58
  * @LastEditors: RA
  * @Description: 
  */
@@ -44,6 +44,7 @@ class Footer extends Component {
         </div>
         <div className="tools">
           <i className="icon_unlike icon_like"></i>
+          <i className="icon_order"></i>
           <i className="icon_volume icon_mute"></i>
           <i className="icon_list"></i>
         </div>

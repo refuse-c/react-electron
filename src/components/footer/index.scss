@@ -6,7 +6,8 @@
   height: 50px;
   min-height: 50px;
   max-height: 50px;
-  border-top: 1px solid #0071fb;
+  // border-top: 1px solid #0071fb;
+  // background-image: linear-gradient(to right, skyblue, #dd5862);
   i {
     margin: 0 10px;
     display: block;
@@ -53,7 +54,7 @@
       p {
         font-size: 12px;
         padding-left: 10px;
-        color: #818181;
+        // color: #818181;
       }
     }
     input {
@@ -81,9 +82,9 @@
       height: 12px;
       width: 12px;
       margin-top: 0px;
-      background-color: #FC5244;
+      background-color: #fc5244;
       border-radius: 50%;
-      border: solid 4px #c2c2c4;
+      border: solid 4px #fff;
     }
 
     // input[name="progress"] {
@@ -107,6 +108,18 @@
     .icon_like {
       background: url("../../common/images/icon_like.png") center center /
         contain no-repeat;
+    }
+    .icon_order {
+      background: url("../../common/images/icon_order.png") center center / 20px
+        no-repeat;
+    }
+    .icon_cycle {
+      background: url("../../common/images/icon_cycle.png") center center / 20px
+        no-repeat;
+    }
+    .icon_random {
+      background: url("../../common/images/icon_random.png") center center /
+        20px no-repeat;
     }
     .icon_volume {
       background: url("../../common/images/icon_volume.png") center center /

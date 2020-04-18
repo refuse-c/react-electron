@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:06:28
- * @LastEditTime: 2020-04-12 16:43:39
+ * @LastEditTime: 2020-04-18 16:54:14
  * @LastEditors: RA
  * @Description: 
  */
@@ -21,15 +21,15 @@ class Menu extends Component {
       userId: 287070050,
       menuList: [
         { name: 'EMusic' },
-        
-        { name: '搜索', path: '/home/search' },
-        { name: '发现', path: '/home/find' },
-        { name: '视频', path: '/home/video' },
-        { name: '朋友', path: '/home/frind' },
-        { name: '我的音乐', },
-        { name: '本地音乐', path: '/home/local' },
-        { name: '下载管理', path: '/home/down' },
-        { name: '最近播放', path: '/home/lately' },
+
+        { name: '搜索', path: '/home/search', icon: 'search' },
+        { name: '发现', path: '/home/find', icon: 'find' },
+        { name: '视频', path: '/home/video', icon: 'video' },
+        { name: '朋友', path: '/home/frind', icon: 'frind' },
+        { name: '我的音乐' },
+        { name: '本地音乐', path: '/home/local', icon: 'local' },
+        { name: '下载管理', path: '/home/down', icon: 'down' },
+        { name: '最近播放', path: '/home/lately', icon: 'lately' },
         { name: '创建的歌单' },
         { name: '收藏的歌单' },
       ]
@@ -39,7 +39,7 @@ class Menu extends Component {
     this.getMusicList(287070050);
   }
   handelIndex = index => {
-    console.log(index)
+    // console.log(index)
   }
   getMusicList = (id) => {
     const { userId, menuList } = this.state;
@@ -88,7 +88,7 @@ class Menu extends Component {
                 return (
                   item.path !== undefined ?
                     <NavLink onClick={this.handelIndex.bind(this, index)} exact activeClassName="active" key={index} to={item.id !== undefined ? item.path + item.id : item.path}>
-                      <li className="menu_item" > {item.name}</li>
+                      <li className={`menu_item ` + item.icon} > {item.name}</li>
                     </NavLink> :
                     <h3 key={index} className="menu_title">{item.name}</h3>
                 )

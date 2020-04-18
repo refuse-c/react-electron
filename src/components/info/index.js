@@ -1,13 +1,13 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:07:55
- * @LastEditTime: 2020-04-12 16:46:32
+ * @LastEditTime: 2020-04-18 11:47:08
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
 import './index.scss';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 // import 'react-scrollbar/dist/css/scrollArea.css';
 // import ScrollArea from 'react-scrollbar';
 class Info extends Component {
@@ -23,7 +23,6 @@ class Info extends Component {
             return <Route true key={key} path={item.path} component={item.component} />
           })
         }
-        <Redirect to="/home/search" />
       </div>
     );
   }

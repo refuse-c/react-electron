@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-04-03 21:15:40
+ * @LastEditTime: 2020-04-18 14:33:36
  * @LastEditors: RA
  * @Description: 
  */
@@ -20,4 +20,8 @@ export const search = {
 //热搜
 export const seracHot = {
   api_url: "/search/hot/detail"
+}
+
+export const serachDefaule = {
+  api_url: "search/default"
 }

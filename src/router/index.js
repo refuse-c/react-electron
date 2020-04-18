@@ -1,14 +1,14 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-04-12 16:45:45
+ * @LastEditTime: 2020-04-18 16:14:40
  * @LastEditors: RA
  * @Description: 
  */
 import Index from '../page/index/';
 import Player from '../page/player';
 import Home from '../page/home';
-import Search from '../components/search';
+import Search from '../page/search';
 import Find from '../components/find';
 import Video from '../components/video';
 import Frind from '../components/frind';
@@ -22,7 +22,7 @@ let routes = [
     component: Index,
     routes: [
       {
-        path: '/',
+        path: '/home',
         component: Home,
         routes: [
           {
@@ -31,7 +31,7 @@ let routes = [
           },
           {
             path: '/home/find',
-            component: Find
+            component: Find,
           },
           {
             path: '/home/video',
@@ -61,7 +61,7 @@ let routes = [
       },
       {
         path: '/player',
-        component: Player
+        component: Player,
       }]
   }
 ]

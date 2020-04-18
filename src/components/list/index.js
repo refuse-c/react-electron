@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-04-11 20:02:01
+ * @LastEditTime: 2020-04-18 13:19:39
  * @Description:
  */
 import React, { Component } from 'react';
@@ -62,7 +62,7 @@ class List extends Component {
                 <h2>{name}</h2>
               </div>
               <div className="list_author">
-                <img src={imgParam(creator && creator.avatarUrl, 150, 150)} alt="" />
+                <img src={imgParam(creator && creator.avatarUrl, 50, 50)} alt="" />
                 <p>{creator && creator.nickname}</p>
                 <p>{playList && fomatDate(createTime)}</p>
               </div>
