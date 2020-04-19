@@ -11,16 +11,16 @@
 
       &:hover {
         color: #ffffff !important;
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.1);
       }
     }
 
     .active {
       // color: #ffffff !important;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.4);
       &:hover {
         // color: #ffffff !important;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.4);
       }
     }
 
@@ -47,31 +47,35 @@
   }
 
   .search {
-    background: url("../../common/images/icon_mute.png") left center / contain
-      no-repeat;
+    background: url("../../common/images/icon_search.png") 10px center / 16px
+      16px no-repeat;
   }
   .find {
-    background: url("../../common/images/icon_mute.png") left center / contain
+    background: url("../../common/images/iocn_find.png") 10px center / 18px 18px
       no-repeat;
   }
   .video {
-    background: url("../../common/images/icon_mute.png") left center / contain
-      no-repeat;
+    background: url("../../common/images/icon_video.png") 10px center / 20px
+      20px no-repeat;
   }
   .frind {
-    background: url("../../common/images/icon_mute.png") left center / contain
-      no-repeat;
+    background: url("../../common/images/icon_friend.png") 10px center / 20px
+      20px no-repeat;
   }
   .local {
-    background: url("../../common/images/icon_mute.png") left center / contain
-      no-repeat;
+    background: url("../../common/images/icon_local.png") 10px center / 20px
+      20px no-repeat;
   }
   .down {
-    background: url("../../common/images/icon_mute.png") left center / contain
+    background: url("../../common/images/icon_down.png") 7px center / 25px 20px
       no-repeat;
   }
   .lately {
-    background: url("../../common/images/icon_mute.png") left center / contain
+    background: url("../../common/images/icon_time.png") 10px center / 18px 18px
       no-repeat;
+  }
+  .default {
+    background: url("../../common/images/icon_title_list.png") 10px center /
+      22px 22px no-repeat;
   }
 }

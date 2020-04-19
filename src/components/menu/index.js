@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:06:28
- * @LastEditTime: 2020-04-18 16:54:14
+ * @LastEditTime: 2020-04-19 19:01:33
  * @LastEditors: RA
  * @Description: 
  */
@@ -51,6 +51,7 @@ class Menu extends Component {
       if (res.code === 200) {
         res.playlist.map((item, index) => {
           item.path = '/home/list';
+          item.icon = 'default';
           if (item.privacy !== 10) {
             if (item.userId === Number(userId)) {
               let index = menuList.findIndex((item) => { return item.name === '收藏的歌单' })

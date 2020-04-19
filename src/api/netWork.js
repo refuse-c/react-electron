@@ -1,14 +1,14 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:54
- * @LastEditTime: 2020-04-02 09:29:55
+ * @LastEditTime: 2020-04-19 16:25:58
  * @LastEditors: RA
  * @Description: 
  */
 import axios from "axios";
 
 const Axios = axios.create({
-  baseURL: 'http://118.24.118.121:443',
+  baseURL: 'http://139.155.89.11:443',
   withCredentials: true,
   headers: {
     "Content-Type": "application/json"

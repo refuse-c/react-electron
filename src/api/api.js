@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-04-18 14:33:36
+ * @LastEditTime: 2020-04-18 19:36:18
  * @LastEditors: RA
  * @Description: 
  */
@@ -18,10 +18,14 @@ export const search = {
   api_url: "/search"
 }
 //热搜
-export const seracHot = {
+export const searchHot = {
   api_url: "/search/hot/detail"
 }
-
-export const serachDefaule = {
+// placeholder
+export const searchDefaule = {
   api_url: "search/default"
+}
+// 搜索建议
+export const searchSuggest = {
+  api_url: "search/suggest"
 }

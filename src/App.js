@@ -1,15 +1,17 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-04-18 11:42:44
+ * @LastEditTime: 2020-04-18 21:09:37
  * @LastEditors: RA
  * @Description: 
  */
 import React from 'react';
 import 'reset.css';
 import './App.scss';
+import debounce from './common/utils/debounce';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import routes from './router';
+global.debounce = debounce;// 防抖
 function App() {
   return (
     <div className="App">
@@ -32,7 +34,7 @@ function App() {
             }
           })
         }
-        <Redirect to="/home/find" />
+        <Redirect to="/home/search" />
       </Router>
     </div >
 

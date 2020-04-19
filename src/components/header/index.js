@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 14:46:55
- * @LastEditTime: 2020-04-04 15:24:21
+ * @LastEditTime: 2020-04-19 12:25:48
  * @LastEditors: RA
  * @Description: 
  */
@@ -23,7 +23,7 @@ class Header extends Component {
 
     return (
       <div className="header">
-        <div className="left"></div>
+        <div className="left">EMusic</div>
         <div className="center"></div>
         <div className="right">
           <div className="icons min" title="最小化" onClick={e => this.buttonClick('min', e)}></div>

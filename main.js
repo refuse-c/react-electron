@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-04-14 15:50:23
+ * @LastEditTime: 2020-04-19 12:22:24
  * @LastEditors: RA
  * @Description: 
  */
@@ -37,7 +37,7 @@ function createWindow() {
     }))
   */
   // 加载应用----适用于 react 项目
-  mainWindow.setIcon('./src/common/images/bhu.png');
+  mainWindow.setIcon('./src/common/images/logo.png');
   mainWindow.loadURL('http://localhost:3000/');
   mainWindow.setMinimumSize(900, 500)
   // 关闭window时触发下列事件.
