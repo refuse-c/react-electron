@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-04-18 19:52:00
+ * @LastEditTime: 2020-04-22 15:32:58
  * @LastEditors: RA
  * @Description: 
  */
@@ -232,4 +232,21 @@ export const imgParam = (url, width, height) => {
   const w = isEmpty(width) ? '100' : width;
   const h = isEmpty(height) ? '100' : height;
   return url + '?param=' + w + 'y' + h;
+}
+
+// 判断是不是空对象
+export const isEmptyObject = (obj) => {
+  return Object.keys(obj).length === 0 ? true : false;
+}
+
+// 组装音乐id
+export const AssembleIds = (arr) => {
+  console.log(arr)
+  if (isEmpty(arr)) return;
+  let ids = '';
+  arr.map((item, index) => {
+    ids += item.id + ',';
+    return index.id
+  })
+  return ids.substring(0, ids.length - 1);
 }

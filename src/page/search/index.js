@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-04-19 19:03:29
+ * @LastEditTime: 2020-04-22 16:12:37
  * @LastEditors: RA
  * @Description: 
  */
@@ -9,17 +9,25 @@ import React, { Component } from 'react';
 import './index.scss';
 import { RAGet } from '../../api/netWork';
 import { searchDefaule, search, searchSuggest, searchHot } from '../../api/api';
-import { isEmpty } from '../../common/utils/format';
+import { isEmpty, isEmptyObject } from '../../common/utils/format';
 import HotAndHistory from './hotAndHistory';
+import SearchSuggest from './searchSuggest';
+import SearchInfo from './searchInfo';
+import Empty from '../../components/empty';
 
 class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inputVal: '',
-      hotList: '',
-      historyList: JSON.parse(window.localStorage.getItem('historyList')) || [],
-      placeholder: ''
+      searchType: 1, //搜索类型；默认为 1; 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018: 综合
+      hotList: [], // 热搜
+      resultList: [],
+      suggestList: [], // 搜索建议
+      pageStatus: 1, // 1 hotAndHistory  2 searchSuggest 3 searchResult // 4 empty
+      placeholder: '', // input 初始值
+      showsuggest: false,//是否显示搜索建议
+      historyList: JSON.parse(window.localStorage.getItem('historyList')) || [], // 历史搜索
     }
   }
   componentDidMount = () => {
@@ -41,8 +49,24 @@ class Search extends Component {
   }
   // get child parameters
   getChildVal = inputVal => {
-    this.getSearch(inputVal);
-    this.setState({ inputVal });
+    this.getSearch(inputVal, 1);
+    this.setState({ inputVal, searchType: 1 });
+  }
+  getTextAndType = (text, type) => {
+    this.getSearch(text, type);
+    this.setState({ inputVal: text, searchType: type });
+  }
+  getType = (type) => {
+    const { inputVal, placeholder } = this.state;
+    let val = inputVal;
+    if (isEmpty(val)) {
+      val = placeholder;
+      this.setState({ inputVal: placeholder });
+    } else {
+      val = inputVal;
+    }
+    this.getSearch(val, type);
+    this.setState({ searchType: type });
   }
   // get index
   getIndex = index => {
@@ -55,7 +79,8 @@ class Search extends Component {
   //enter search
   keyPress = e => {
     let keycode = e.which || e.keyCode;
-    const { inputVal, placeholder } = this.state;
+    const { inputVal, placeholder, searchType } = this.state;
+    if (isEmpty(inputVal)) this.setState({ showsuggest: false })
     let val = inputVal;
     if (keycode === 13) {
       if (isEmpty(val)) {
@@ -64,12 +89,15 @@ class Search extends Component {
       } else {
         val = inputVal;
       }
-      this.getSearch(val);
+      this.getSearch(val, searchType);
     }
   }
   //change input value
   changeInput = e => {
     let inputVal = e.target.value.trim();
+    if (isEmpty(inputVal)) {
+      this.setState({ pageStatus: 1 })
+    }
     this.setState({ inputVal })
     global.debounce(() => this.getSearchSuggest(inputVal))
   }
@@ -81,20 +109,25 @@ class Search extends Component {
         keywords: val
       }
     }).then(res => {
-      console.log(res)
+      const suggestList = JSON.parse(JSON.stringify(res.result));
+      isEmptyObject(res.result) ? this.setState({ showsuggest: false, suggestList }) : this.setState({ showsuggest: true, suggestList })
     }).catch(err => {
       console.log(err)
     })
   }
   // search
-  getSearch = val => {
-    this.historyList(val)
+  getSearch = (keywords, type) => {
+    this.historyList(keywords);
+    this.setState({ showsuggest: false, pageStatus: 3 });
+
     RAGet(search.api_url, {
       params: {
-        keywords: val
+        keywords,
+        type
       }
     }).then(res => {
-      console.log(res)
+      const resultList = JSON.parse(JSON.stringify(res.result));
+      this.setState({ resultList })
     }).catch(err => {
       console.log(err)
     })
@@ -120,7 +153,7 @@ class Search extends Component {
       })
   }
   render() {
-    const { inputVal, hotList, historyList, placeholder } = this.state;
+    const { inputVal, hotList, historyList, suggestList, showsuggest, placeholder, pageStatus, searchType, resultList } = this.state;
     return (
       <div className="search">
         <div className="search_input">
@@ -129,15 +162,30 @@ class Search extends Component {
             ref={input => this.input = input}
             onChange={this.changeInput}
             value={inputVal}
-            onKeyPress={this.keyPress}
+            onKeyUp={this.keyPress}
             placeholder={placeholder} />
         </div>
-        <HotAndHistory
-          hotList={hotList}
-          historyList={historyList}
-          getIndex={this.getIndex.bind(this)}
-          getChildVal={this.getChildVal.bind(this)}
-        />
+        <div className="search-content">
+          {
+            pageStatus === 1 ?
+              <HotAndHistory
+                hotList={hotList}
+                historyList={historyList}
+                getIndex={this.getIndex.bind(this)}
+                getChildVal={this.getChildVal.bind(this)}
+              />
+              :
+              pageStatus === 3 ?
+                <SearchInfo getType={this.getType.bind(this)} searchType={searchType} resultList={resultList} />
+                :
+                <Empty msg={`123211313`} />
+          }
+          {
+            showsuggest ?
+              <SearchSuggest suggestList={suggestList} getTextAndType={this.getTextAndType.bind(this)} />
+              :null
+          }
+        </div>
       </div>
     );
   }

@@ -2,7 +2,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-18 20:57:49
- * @LastEditTime: 2020-04-19 18:57:39
+ * @LastEditTime: 2020-04-21 12:40:18
  * @LastEditors: RA
  * @Description: 
  */
@@ -13,7 +13,7 @@ import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import { formatNum } from '../../common/utils/format';
 
-class hotAndHistory extends Component {
+class HotAndHistory extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -114,4 +114,4 @@ class hotAndHistory extends Component {
   }
 }
 
-export default hotAndHistory;
+export default HotAndHistory;

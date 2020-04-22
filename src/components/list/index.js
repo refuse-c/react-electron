@@ -2,21 +2,23 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-04-18 13:19:39
+ * @LastEditTime: 2020-04-22 17:43:31
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
 import { playList } from '../../api/api';
 import { RAGet } from '../../api/netWork';
-import { formatNum, formatPlayTime, imgParam, fomatDate } from '../../common/utils/format';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
+import MusicList from '../musicList';
+import { imgParam, fomatDate, AssembleIds, isEmpty } from '../../common/utils/format';
 class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playList: []
+      playList: [],
+      musicIds: '' //音乐id
     }
   }
   componentDidMount = () => {
@@ -24,7 +26,7 @@ class List extends Component {
     this.getPlayList(id)
   }
   componentWillReceiveProps = () => {
-    this.setState({ playList: [] });//清空数据
+    this.setState({ playList: [], musicIds: '' });//清空数据
     const id = window.location.href.split('list')[1];
     this.getPlayList(id)
   }
@@ -36,14 +38,15 @@ class List extends Component {
       }
     }).then(res => {
       const playList = res.playlist;
-      this.setState({ playList });
+      const musicIds = AssembleIds(res.privileges);
+      this.setState({ playList, musicIds });
     }).catch(err => {
       console.log(err)
     })
   }
   render() {
-    const { playList } = this.state;
-    const { name, tracks, creator, tags, createTime, description } = this.state.playList;
+    const { playList, musicIds } = this.state;
+    const { name, creator, tags, createTime, description } = this.state.playList;
     return (
       <div className="list">
         <ScrollArea
@@ -75,23 +78,12 @@ class List extends Component {
               <div className="list_tag">标签：{tags && tags.map(item => item + '').join(' / ')}</div>
               <div className="list_des">介绍：{description && description}</div>
             </div>
-
           </div>
-          <ul>
+          <div className="list_info_list">
             {
-              tracks && tracks.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <div>{formatNum(index)}</div>
-                    <div>{item.name}</div>
-                    <div>{item.ar.map(item => item.name + '').join(' - ')}</div>
-                    <div>{item.al.name}</div>
-                    <div>{formatPlayTime(item.dt / 1000)}</div>
-                  </li>
-                )
-              })
+              !isEmpty(musicIds) ? <MusicList musicIds={musicIds} /> : null
             }
-          </ul>
+          </div>
         </ScrollArea >
       </div >
     );

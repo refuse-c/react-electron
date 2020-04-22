@@ -78,50 +78,7 @@
       }
     }
   }
-  ul {
-    padding: 0 20px;
-    li {
-      display: flex;
-      height: 40px;
-      font-size: 13px;
-      padding: 0 15px;
-      div {
-        height: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        line-height: 40px;
-      }
-      div:nth-child(1) {
-        // width: 50px;
-        white-space: nowrap;
-        text-align: center;
-      }
-      div:nth-child(2) {
-        flex: 3;
-        padding: 0 10px;
-      }
-      div:nth-child(3) {
-        flex: 2;
-      }
-      div:nth-child(4) {
-        flex: 2;
-        padding: 0 10px;
-      }
-      div:nth-child(5) {
-        // width: 60px;
-        white-space: nowrap;
-        text-align: right;
-      }
-      // &:nth-child(even) {
-      //   background-color: #fafafa;
-      // }
-      // &:nth-child(odd) {
-      //   background-color: #f5f5f7;
-      // }
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-    }
+  .list_info_list {
+    padding: 0 15px;
   }
 }

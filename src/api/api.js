@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-04-18 19:36:18
+ * @LastEditTime: 2020-04-22 12:54:33
  * @LastEditors: RA
  * @Description: 
  */
@@ -28,4 +28,7 @@ export const searchDefaule = {
 // 搜索建议
 export const searchSuggest = {
   api_url: "search/suggest"
+}
+export const getMusicDetail = {
+  api_url: "/song/detail"
 }
