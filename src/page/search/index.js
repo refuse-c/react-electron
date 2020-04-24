@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-04-22 16:12:37
+ * @LastEditTime: 2020-04-24 17:03:29
  * @LastEditors: RA
  * @Description: 
  */
@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import './index.scss';
 import { RAGet } from '../../api/netWork';
 import { searchDefaule, search, searchSuggest, searchHot } from '../../api/api';
-import { isEmpty, isEmptyObject } from '../../common/utils/format';
+import { isEmpty, isEmptyObject, pagingParams } from '../../common/utils/format';
 import HotAndHistory from './hotAndHistory';
 import SearchSuggest from './searchSuggest';
 import SearchInfo from './searchInfo';
@@ -31,6 +31,8 @@ class Search extends Component {
     }
   }
   componentDidMount = () => {
+    // let arr = ['张三', '李四', '王五', 'a', 'd', 'c', '小红', '小明'];
+    // console.log(arr.sort())
     this.getSearchHot();
     this.getPlaceholder();
   }
@@ -46,6 +48,10 @@ class Search extends Component {
     array.unshift(str);
     this.setState({ historyList: array })
     window.localStorage.setItem('historyList', JSON.stringify(array));
+  }
+  getCurrentPage(currentPage) {
+    const { inputVal, searchType } = this.state;
+    this.getSearch(inputVal ,searchType, currentPage)
   }
   // get child parameters
   getChildVal = inputVal => {
@@ -89,7 +95,7 @@ class Search extends Component {
       } else {
         val = inputVal;
       }
-      this.getSearch(val, searchType);
+      this.getSearch(val, searchType,1);
     }
   }
   //change input value
@@ -116,16 +122,13 @@ class Search extends Component {
     })
   }
   // search
-  getSearch = (keywords, type) => {
+  getSearch = (keywords, type,currentPage) => {
     this.historyList(keywords);
     this.setState({ showsuggest: false, pageStatus: 3 });
-
     RAGet(search.api_url, {
-      params: {
-        keywords,
-        type
-      }
+      params: pagingParams(keywords, type,currentPage)
     }).then(res => {
+      console.log(res)
       const resultList = JSON.parse(JSON.stringify(res.result));
       this.setState({ resultList })
     }).catch(err => {
@@ -176,14 +179,14 @@ class Search extends Component {
               />
               :
               pageStatus === 3 ?
-                <SearchInfo getType={this.getType.bind(this)} searchType={searchType} resultList={resultList} />
+                <SearchInfo pageCallbackFn={this.getCurrentPage.bind(this)} getType={this.getType.bind(this)} searchType={searchType} resultList={resultList} />
                 :
                 <Empty msg={`123211313`} />
           }
           {
             showsuggest ?
               <SearchSuggest suggestList={suggestList} getTextAndType={this.getTextAndType.bind(this)} />
-              :null
+              : null
           }
         </div>
       </div>

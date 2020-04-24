@@ -1,13 +1,16 @@
 /*
  * @Author: RA
  * @Date: 2020-04-21 14:01:33
- * @LastEditTime: 2020-04-22 15:34:22
+ * @LastEditTime: 2020-04-24 15:34:10
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
 import MusicList from '../../components/musicList';
-import { AssembleIds } from '../../common/utils/format';
+import { AssembleIds, returnsongCount } from '../../common/utils/format';
+import 'react-scrollbar/dist/css/scrollArea.css';
+import ScrollArea from 'react-scrollbar';
+import Pagination from '../../components/pagination';
 class SearchInfo extends Component {
   constructor(props) {
     super(props);
@@ -35,83 +38,82 @@ class SearchInfo extends Component {
         type: 1002
       }],
       activeStatus: 1,
-      resultList: []
+      resultList: [],
+      currentPage: 0
       //搜索类型；默认为 1; 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018: 综合
     }
   }
   componentDidMount = () => {
     const { resultList, searchType } = this.props;
-    console.log(this.props)
     this.setState({ resultList, activeStatus: searchType })
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps.resultList)
+  static getDerivedStateFromProps(nextProps, prevState) {
     const { resultList } = nextProps;
-    this.setState({ resultList })
+    if (resultList !== prevState.resultList) {
+      return { resultList }
+    }
+    return null;
   }
 
   sendType = (type) => {
-    this.setState({ activeStatus: type })
+    this.setState({ activeStatus: type });
     this.props.getType(type);
   }
+  getCurrentPage(currentPage) {
+    const getCurrentPage = this.props.pageCallbackFn;
+    getCurrentPage(currentPage);
+    this.setState({ currentPage });
+  }
   render() {
-    const { siNavList, activeStatus, resultList } = this.state;
+    const { siNavList, activeStatus, resultList, currentPage } = this.state;
+    console.log(resultList)
+    const { songCount } = this.state.resultList;
+    console.log(songCount)
     const musicIds = AssembleIds(this.state.resultList.songs);
-    console.log(this.state.resultList.songs, musicIds)
     return (
+
       <div className="search-info">
-        <ul className="si-nav">
-          {siNavList.map((item, index) => {
-            const style = Number(activeStatus) === item.type ? 'si-item-active' : ''
-            return (
-              <li
-                key={index}
-                onClick={this.sendType.bind(this, item.type)}
-                className={'si-item ' + style}
-              >
-                {item.name}
-              </li>
-            )
-          })}
-        </ul>
-        <ul>
-          {
-            activeStatus === 1 && musicIds ?
-              <MusicList musicIds={musicIds} />
-              :
-              activeStatus === 100 ?
-                resultList.artists && resultList.artists.map((item, index) => {
-                  return (
-                    <li
-                      key={index}
-                    >
-                      {item.name}
-                    </li>
-                  )
-                }) :
-                activeStatus === 10 ?
-                  resultList.albums && resultList.albums.map((item, index) => {
-                    return (
-                      <li
-                        key={index}
-                      >
-                        {item.name}
-                      </li>
-                    )
-                  }) :
-                  activeStatus === 1014 ?
-                    resultList.videos && resultList.videos.map((item, index) => {
+        <div className="rolling-box">
+          <ScrollArea
+            speed={0.8}
+            className="area"
+            contentClassName="content"
+            vertical={true}
+            horizontal={true}
+            minScrollSize={5}
+          >
+            <ul className="si-nav">
+              {siNavList.map((item, index) => {
+                const style = Number(activeStatus) === item.type ? 'si-item-active' : ''
+                return (
+                  <li
+                    key={index}
+                    onClick={this.sendType.bind(this, item.type)}
+                    className={'si-item ' + style}
+                  >
+                    {item.name}
+                  </li>
+                )
+              })}
+            </ul>
+            <ul>
+              {
+                activeStatus === 1 && musicIds ?
+                  <MusicList musicIds={musicIds} currentPage={currentPage} />
+                  :
+                  activeStatus === 100 ?
+                    resultList.artists && resultList.artists.map((item, index) => {
                       return (
                         <li
                           key={index}
                         >
-                          {item.title}
+                          {item.name}
                         </li>
                       )
                     }) :
-                    activeStatus === 1000 ?
-                      resultList.playlists && resultList.playlists.map((item, index) => {
+                    activeStatus === 10 ?
+                      resultList.albums && resultList.albums.map((item, index) => {
                         return (
                           <li
                             key={index}
@@ -120,28 +122,51 @@ class SearchInfo extends Component {
                           </li>
                         )
                       }) :
-                      activeStatus === 1009 ?
-                        resultList.djRadios && resultList.djRadios.map((item, index) => {
+                      activeStatus === 1014 ?
+                        resultList.videos && resultList.videos.map((item, index) => {
                           return (
                             <li
                               key={index}
                             >
-                              {item.name}
+                              {item.title}
                             </li>
                           )
                         }) :
-                        activeStatus === 1002 ?
-                          resultList.userprofiles && resultList.userprofiles.map((item, index) => {
+                        activeStatus === 1000 ?
+                          resultList.playlists && resultList.playlists.map((item, index) => {
                             return (
                               <li
                                 key={index}
                               >
-                                {item.nickname}
+                                {item.name}
                               </li>
                             )
-                          }) : null
-          }
-        </ul>
+                          }) :
+                          activeStatus === 1009 ?
+                            resultList.djRadios && resultList.djRadios.map((item, index) => {
+                              return (
+                                <li
+                                  key={index}
+                                >
+                                  {item.name}
+                                </li>
+                              )
+                            }) :
+                            activeStatus === 1002 ?
+                              resultList.userprofiles && resultList.userprofiles.map((item, index) => {
+                                return (
+                                  <li
+                                    key={index}
+                                  >
+                                    {item.nickname}
+                                  </li>
+                                )
+                              }) : null
+              }
+            </ul>
+          </ScrollArea>
+        </div>
+        {songCount && <Pagination pageCallbackFn={this.getCurrentPage.bind(this)} totalPage={returnsongCount(activeStatus, songCount)} currentPage={1} />}
       </div>
     );
   }

@@ -8,15 +8,16 @@ body {
   font-size: 14px;
   line-height: 1.2;
   // color: #333333;
-    color: #fafafa;
-  font-family: '微软雅黑' !important;
+  user-select: none;
+  color: #fafafa;
+  font-family: "微软雅黑" !important;
 }
 
 a {
   cursor: pointer;
   text-decoration: none;
   // color: #333333 !important;
-    color: #fafafa !important;
+  color: #fafafa !important;
   background-color: transparent;
 }
 

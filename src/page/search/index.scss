@@ -14,16 +14,16 @@
       color: #fff;
       border: 1px solid #ccc;
       border-radius: 4px;
-      background-color: transparent;
+      background-color: rgba(255, 255, 255, 0.5);
     }
     input::placeholder {
-      color: #ccc;
+      color: #666;
       font-size: 16px;
     }
   }
   .search-content {
     height: calc(100% - 70px);
-    padding: 0 15px;
+    // padding: 0 15px;
   }
 }
 .hot-and-history {
@@ -38,6 +38,7 @@
       color: #444;
       line-height: 30px;
       padding-right: 15px;
+      margin-left: 15px;
       border-bottom: 1px solid #bbb;
       .search-clear {
         width: 25px;
@@ -48,7 +49,7 @@
     }
     .scrolling {
       padding: 0 0 20px 0;
-      height: calc(100vh - 225px);
+      height: calc(100vh - 190px);
     }
     li:hover {
       background-color: rgba(0, 0, 0, 0.1);
@@ -178,25 +179,26 @@
 .search-info {
   width: 100%;
   height: 100%;
-  // background-color: skyblue;
-  .si-nav {
-    display: flex;
-    align-items: center;
-    height: 40px;
-    border-bottom: 1px solid #ccc;
-    .si-item {
-      margin: 0 15px;
-      padding: 5px;
-      white-space: nowrap;
-      border-bottom: 2px solid transparent;
-      &:first-child {
-        margin-left: 0;
-      }
-    }
+  .rolling-box {
+    height: calc(100% - 50px);
 
-    .si-item-active {
-      color: red;
-      border-bottom: 2px solid red;
+    // background-color: skyblue;
+    .si-nav {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      border-bottom: 1px solid #ccc;
+      .si-item {
+        margin: 0 15px;
+        padding: 5px;
+        white-space: nowrap;
+        border-bottom: 2px solid transparent;
+      }
+
+      .si-item-active {
+        color: red;
+        border-bottom: 2px solid red;
+      }
     }
   }
 }
