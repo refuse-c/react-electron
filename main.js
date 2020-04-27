@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-04-19 12:22:24
+ * @LastEditTime: 2020-04-26 23:24:39
  * @LastEditors: RA
  * @Description: 
  */
@@ -39,12 +39,13 @@ function createWindow() {
   // 加载应用----适用于 react 项目
   mainWindow.setIcon('./src/common/images/logo.png');
   mainWindow.loadURL('http://localhost:3000/');
+  // mainWindow.loadFile('./build/index.html')
   mainWindow.setMinimumSize(900, 500)
   // 关闭window时触发下列事件.
   mainWindow.on('closed', function () {
     mainWindow = null
   })
- 
+
 }
 
 // 当 Electron 完成初始化并准备创建浏览器窗口时调用此方法
@@ -65,23 +66,23 @@ app.on('activate', function () {
   }
 })
 //快捷键监听全局模式；
-app.on("ready", () => {
-  globalShortcut.register("Alt+X", () => {
+app.on('ready', () => {
+  globalShortcut.register('Alt+X', () => {
     mainWindow.show(); //alt+x打开软件；
   });
-  globalShortcut.register("Alt+Z", () => {
+  globalShortcut.register('Alt+Z', () => {
     mainWindow.minimize(); //alt+c最小化软件
   });
-  globalShortcut.register("Alt+C", () => {
+  globalShortcut.register('Alt+C', () => {
     app.exit(); //alt+z退出软件，测试期间使用
   });
-  globalShortcut.register("Alt+K", () => {
+  globalShortcut.register('Alt+K', () => {
     mainWindow.webContents.openDevTools(); //进入调试模式
   });
-  globalShortcut.register("Alt+L", () => {
+  globalShortcut.register('Alt+L', () => {
     mainWindow.webContents.closeDevTools(); //关闭调试模式
   });
-  globalShortcut.register("Alt+Q", () => {
+  globalShortcut.register('Alt+Q', () => {
     mainWindow.reload(); //刷新页面
   });
   //自定义窗口最小化,最大化,关闭按钮
@@ -100,19 +101,44 @@ app.on("ready", () => {
 // F:/CloudMusic/                       
 // C:/Users/Xiang/Music
 const data = fs.readdirSync('F:/CloudMusic/');
+const id3 = require('node-id3');
+// var btoa = require('btoa');
 ipcMain.on('files', function (event) {
-  event.returnValue = data;
+  const localList = [];
+  data.forEach(element => {
+    if (
+      element.indexOf('.wav') !== -1 ||
+      element.indexOf('.mp3') !== -1 ||
+      element.indexOf('.ogg') !== -1 ||
+      element.indexOf('.acc') !== -1 ||
+      element.indexOf('.flac') !== -1
+    ) {
+      let obj = {};
+      let tags = id3.read('F:/CloudMusic/' + element)
+      obj.album = tags.album;
+      obj.title = tags.title;
+      obj.artist = tags.artist;
+      // obj.trackNumber = Number(tags.trackNumber);
+      obj.url = 'f:/CloudMusic/' + element;
+      // obj.tags = tags;
+      // let image = tags.image.imageBuffer;
+      // obj.image = image.imageBuffer;
+      // if (image) {
+        // var base64String = "";
+        // for (var i = 0; i < image.length; i++) {
+        //   base64String += String.fromCharCode(image[i]);
+        // }
+        // image.forEach(element => {
+          // base64String += String.fromCharCode(element)
+        // });
+        // console.log(base64String)
+        // var base64 = "data:image/jpeg;base64," + btoa(base64String);
+        // console.log(base64)
+        // obj.pic = base64
+      // }
+      localList.push(obj)
+    }
+  });
+  // console.log(localList)
+  event.returnValue = localList;
 });
-
-
-
-
-
-
-
-
-
-
-
-
-// 你可以在这个脚本中续写或者使用require引入独立的js文件.

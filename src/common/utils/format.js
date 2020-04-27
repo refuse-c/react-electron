@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-04-24 15:56:08
+ * @LastEditTime: 2020-04-26 13:41:45
  * @LastEditors: RA
  * @Description: 
  */
@@ -277,20 +277,19 @@ export const pagingParams = (keyword, type, spageNum) => {
   // console.log(params)
   return params;
 }
-export const returnsongCount = (type, totalPage) => {
-  console.log(type, totalPage,totalPage % 50)
+export const returnsongCount = (type, resultList) => {
+  console.log(type, resultList);
   let total = 0;
-  if (isEmpty(totalPage)) return;
+  if (isEmpty(resultList)) return;
   switch (type) {
-    case 1: total= totalPage % 50 === 0 ? parseInt(totalPage / 50) : parseInt(totalPage / 50) + 1;break;
-    case 10: total= totalPage % 20 === 0 ? parseInt(totalPage / 20) : parseInt(totalPage / 20) + 1;break;
-    case 100: total= totalPage % 20 === 0 ? parseInt(totalPage / 20) : parseInt(totalPage / 20) + 1;break;
-    case 1000: total= totalPage % 20 === 0 ? parseInt(totalPage / 20) : parseInt(totalPage / 20) + 1;break;
-    case 1002: total= totalPage % 20 === 0 ? parseInt(totalPage / 20) : parseInt(totalPage / 20) + 1;break;
-    case 1009: total= totalPage % 10 === 0 ? parseInt(totalPage / 10) : parseInt(totalPage / 10) + 1;break;
-    case 1014: total= totalPage % 24 === 0 ? parseInt(totalPage / 24) : parseInt(totalPage / 24) + 1;break;
-    default: total= totalPage % 50 === 0 ? parseInt(totalPage / 50) : parseInt(totalPage / 50) + 1;break;
+    case 1: total = resultList.songCount % 50 === 0 ? parseInt(resultList.songCount / 50) : parseInt(resultList.songCount / 50) + 1; break;
+    case 10: total = resultList.albumCount % 20 === 0 ? parseInt(resultList.albumCount / 20) : parseInt(resultList.albumCount / 20) + 1; break;
+    case 100: total = resultList.artistCount % 20 === 0 ? parseInt(resultList.artistCount / 20) : parseInt(resultList.artistCount / 20) + 1; break;
+    case 1000: total = resultList.playlistCount % 20 === 0 ? parseInt(resultList.playlistCount / 20) : parseInt(resultList.playlistCount / 20) + 1; break;
+    case 1002: total = resultList.userprofileCount % 20 === 0 ? parseInt(resultList.userprofileCount / 20) : parseInt(resultList.userprofileCount / 20) + 1; break;
+    case 1009: total = resultList.djRadiosCount % 10 === 0 ? parseInt(resultList.djRadiosCount / 10) : parseInt(resultList.djRadiosCount / 10) + 1; break;
+    case 1014: total = resultList.videoCount % 24 === 0 ? parseInt(resultList.videoCount / 24) : parseInt(resultList.videoCount / 24) + 1; break;
+    default: total = resultList.songCount % 50 === 0 ? parseInt(resultList.songCount / 50) : parseInt(resultList.songCount / 50) + 1; break;
   }
-  console.log(total)
   return total;
 } 

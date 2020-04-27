@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-21 14:01:33
- * @LastEditTime: 2020-04-24 15:34:10
+ * @LastEditTime: 2020-04-26 13:43:25
  * @LastEditors: RA
  * @Description: 
  */
@@ -67,9 +67,8 @@ class SearchInfo extends Component {
   }
   render() {
     const { siNavList, activeStatus, resultList, currentPage } = this.state;
-    console.log(resultList)
     const { songCount } = this.state.resultList;
-    console.log(songCount)
+    console.log(resultList)
     const musicIds = AssembleIds(this.state.resultList.songs);
     return (
 
@@ -166,7 +165,11 @@ class SearchInfo extends Component {
             </ul>
           </ScrollArea>
         </div>
-        {songCount && <Pagination pageCallbackFn={this.getCurrentPage.bind(this)} totalPage={returnsongCount(activeStatus, songCount)} currentPage={1} />}
+        {
+
+          returnsongCount(activeStatus, resultList) ?
+            <Pagination pageCallbackFn={this.getCurrentPage.bind(this)} totalPage={returnsongCount(activeStatus, resultList)} currentPage={1} />
+            : null}
       </div>
     );
   }

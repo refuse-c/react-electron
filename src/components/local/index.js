@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-04-08 17:53:08
+ * @LastEditors: RA
+ * @LastEditTime: 2020-04-26 23:14:17
  * @Description:
  */
 import React, { Component } from 'react';
@@ -23,7 +23,7 @@ class Local extends Component {
   }
   render() {
     const { list } = this.state;
-    // console.log(list)
+    console.log(list)
     return (
       <ScrollArea
         speed={0.8}
@@ -33,17 +33,16 @@ class Local extends Component {
         horizontal={true}
         minScrollSize={5}
       >
+        <audio src="file:///F:/CloudMusic/%E6%A2%85%E8%89%B3%E8%8A%B3%20-%20%E4%B8%80%E7%94%9F%E7%88%B1%E4%BD%A0%E5%8D%83%E7%99%BE%E5%9B%9E.mp3" controls></audio>
         <div className="local">
-          {/* <input id="inputBox" type="file" /> */}
           {
             list.map((item, index) => {
               return (
-                <div key={index}>{item}</div>
+                <div key={index}>{item.title}</div>
               )
             })
           }
-       }
-      </div>
+        </div>
       </ScrollArea>
     );
   }

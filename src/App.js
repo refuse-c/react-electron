@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-04-18 21:09:37
+ * @LastEditTime: 2020-04-26 17:41:24
  * @LastEditors: RA
  * @Description: 
  */
@@ -34,7 +34,7 @@ function App() {
             }
           })
         }
-        <Redirect to="/home/search" />
+        <Redirect to="/home/local" />
       </Router>
     </div >
 
