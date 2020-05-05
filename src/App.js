@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-04-26 17:41:24
+ * @LastEditTime: 2020-05-01 21:37:57
  * @LastEditors: RA
  * @Description: 
  */
@@ -15,6 +15,7 @@ global.debounce = debounce;// 防抖
 function App() {
   return (
     <div className="App">
+     
       <Router>
         {
           routes.map((route, key) => {
@@ -34,7 +35,7 @@ function App() {
             }
           })
         }
-        <Redirect to="/home/local" />
+        <Redirect to="/home/search" />
       </Router>
     </div >
 

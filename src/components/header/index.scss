@@ -20,6 +20,14 @@
   }
   .center {
     width: calc(100% - 350px);
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      li {
+        padding: 0 0 0 20px;
+      }
+    }
   }
   .right {
     display: flex;

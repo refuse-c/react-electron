@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-04-26 13:41:45
+ * @LastEditTime: 2020-05-01 22:02:37
  * @LastEditors: RA
  * @Description: 
  */
@@ -274,11 +274,9 @@ export const pagingParams = (keyword, type, spageNum) => {
   } else {
     params.offset = ((spageNum - 1) * params.limit) - 1
   }
-  // console.log(params)
   return params;
 }
 export const returnsongCount = (type, resultList) => {
-  console.log(type, resultList);
   let total = 0;
   if (isEmpty(resultList)) return;
   switch (type) {
@@ -292,4 +290,21 @@ export const returnsongCount = (type, resultList) => {
     default: total = resultList.songCount % 50 === 0 ? parseInt(resultList.songCount / 50) : parseInt(resultList.songCount / 50) + 1; break;
   }
   return total;
-} 
+}
+
+
+//数据筛选
+export const dataScreening = (arr, ar) => {
+
+}
+
+
+/**
+ * 手机号码格式化
+ */
+export const formatTel = (val) => {
+  if (val.length === 3 || val.length === 8) {
+    val += " ";
+  }
+  return val;
+}

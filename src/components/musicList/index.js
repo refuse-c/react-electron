@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-22 12:07:13
- * @LastEditTime: 2020-04-24 16:04:24
+ * @LastEditTime: 2020-05-01 14:30:58
  * @LastEditors: RA
  * @Description: 
  */
@@ -13,17 +13,21 @@ import { formatNum, formatPlayTime, isEmpty } from '../../common/utils/format';
 import { RAGet } from '../../api/netWork';
 import { getMusicDetail } from '../../api/api';
 
+// store 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { gainMusicList } from '../../store/actions';
 class MusicList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       musicIds: '',
-      musicList: []
+      // musicList: [],
+      playList: []
     }
   }
   componentDidMount = () => {
     const { musicIds } = this.props;
-    // console.log(musicIds)
     this.getMusicDetail(musicIds);
   }
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -43,26 +47,22 @@ class MusicList extends Component {
       this.getMusicDetail(this.props.musicIds);
     }
   }
-  // componentWillReceiveProps = (nextProps) => {
-  //   const { musicIds } = nextProps;
-  //   console.log(musicIds)
-  //   this.getMusicDetail(musicIds);
-  // }
   getMusicDetail = (ids) => {
-    this.setState({ musicList: [] })
+    if (isEmpty(ids)) return;
+    this.props.gainMusicList([])
     RAGet(getMusicDetail.api_url, {
       params: { ids: ids }
     }).then(res => {
-      console.log(res)
       const musicList = res.songs;
-      this.setState({ musicList })
+      this.props.gainMusicList(musicList)
     }).catch(err => {
       console.log(err)
     })
   }
   render() {
-    const { musicList } = this.state;
-    const { currentPage } = this.props;
+    const { currentPage, playList, musicList } = this.props;
+    console.log(musicList, playList)
+
     return (
       <div className="music_list">
         <ul>
@@ -86,4 +86,18 @@ class MusicList extends Component {
   }
 }
 
-export default MusicList;
+//注册store
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    musicList: state.musicList,
+    playList: state.playList
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    gainMusicList: bindActionCreators(gainMusicList, dispatch),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MusicList);

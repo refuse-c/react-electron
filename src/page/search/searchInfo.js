@@ -1,12 +1,13 @@
 /*
  * @Author: RA
  * @Date: 2020-04-21 14:01:33
- * @LastEditTime: 2020-04-26 13:43:25
+ * @LastEditTime: 2020-05-01 22:26:57
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
 import MusicList from '../../components/musicList';
+import Singer from '../../components/singer';
 import { AssembleIds, returnsongCount } from '../../common/utils/format';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
@@ -67,7 +68,7 @@ class SearchInfo extends Component {
   }
   render() {
     const { siNavList, activeStatus, resultList, currentPage } = this.state;
-    const { songCount } = this.state.resultList;
+    // const { songCount } = this.state.resultList;
     console.log(resultList)
     const musicIds = AssembleIds(this.state.resultList.songs);
     return (
@@ -101,26 +102,30 @@ class SearchInfo extends Component {
                 activeStatus === 1 && musicIds ?
                   <MusicList musicIds={musicIds} currentPage={currentPage} />
                   :
-                  activeStatus === 100 ?
-                    resultList.artists && resultList.artists.map((item, index) => {
-                      return (
-                        <li
-                          key={index}
-                        >
-                          {item.name}
-                        </li>
-                      )
-                    }) :
-                    activeStatus === 10 ?
-                      resultList.albums && resultList.albums.map((item, index) => {
-                        return (
-                          <li
-                            key={index}
-                          >
-                            {item.name}
-                          </li>
-                        )
-                      }) :
+                  activeStatus === 100 && resultList.artists ?
+                    // resultList.artists && resultList.artists.map((item, index) => {
+                    //   return (
+                    //     <li
+                    //       key={index}
+                    //     >
+                    //       {item.name}
+                    //     </li>
+                    //   )
+                    // }) 
+                    <Singer data={resultList.artists} />
+                    :
+                    activeStatus === 10 && resultList.albums ?
+                      // resultList.albums && resultList.albums.map((item, index) => {
+                      //   return (
+                      //     <li
+                      //       key={index}
+                      //     >
+                      //       {item.name}
+                      //     </li>
+                      //   )
+                      // }) 
+                      <Singer data={resultList.albums} />
+                      :
                       activeStatus === 1014 ?
                         resultList.videos && resultList.videos.map((item, index) => {
                           return (

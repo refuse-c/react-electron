@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-04-26 23:14:17
+ * @LastEditTime: 2020-04-27 11:54:11
  * @Description:
  */
 import React, { Component } from 'react';
@@ -33,7 +33,7 @@ class Local extends Component {
         horizontal={true}
         minScrollSize={5}
       >
-        <audio src="file:///F:/CloudMusic/%E6%A2%85%E8%89%B3%E8%8A%B3%20-%20%E4%B8%80%E7%94%9F%E7%88%B1%E4%BD%A0%E5%8D%83%E7%99%BE%E5%9B%9E.mp3" controls></audio>
+        {/* <audio src="file:///F:/CloudMusic/%E6%A2%85%E8%89%B3%E8%8A%B3%20-%20%E4%B8%80%E7%94%9F%E7%88%B1%E4%BD%A0%E5%8D%83%E7%99%BE%E5%9B%9E.mp3" controls></audio> */}
         <div className="local">
           {
             list.map((item, index) => {

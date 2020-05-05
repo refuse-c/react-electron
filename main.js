@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-04-26 23:24:39
+ * @LastEditTime: 2020-04-27 10:50:05
  * @LastEditors: RA
  * @Description: 
  */
@@ -102,7 +102,6 @@ app.on('ready', () => {
 // C:/Users/Xiang/Music
 const data = fs.readdirSync('F:/CloudMusic/');
 const id3 = require('node-id3');
-// var btoa = require('btoa');
 ipcMain.on('files', function (event) {
   const localList = [];
   data.forEach(element => {

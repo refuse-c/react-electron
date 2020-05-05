@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 14:46:55
- * @LastEditTime: 2020-04-19 12:25:48
+ * @LastEditTime: 2020-05-01 14:42:46
  * @LastEditors: RA
  * @Description: 
  */
@@ -24,7 +24,14 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="left">EMusic</div>
-        <div className="center"></div>
+        <div className="center">
+          <ul>
+            <li><img src="" alt="" />未登录</li>
+            <li>皮肤</li>
+            <li>设置</li>
+          </ul>
+
+        </div>
         <div className="right">
           <div className="icons min" title="最小化" onClick={e => this.buttonClick('min', e)}></div>
           <div className="icons max" title="最大化" onClick={e => this.buttonClick('max', e)}></div>

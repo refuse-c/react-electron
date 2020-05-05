@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:54
- * @LastEditTime: 2020-04-20 13:01:46
+ * @LastEditTime: 2020-04-27 17:20:44
  * @LastEditors: RA
  * @Description: 
  */
@@ -9,9 +9,11 @@ import axios from "axios";
 
 const Axios = axios.create({
   baseURL: 'http://139.155.89.11:443',
-  withCredentials: true,
+  // withCredentials: true,
   headers: {
-    "Content-Type": "application/json"
+    // "Content-Type": "application/json"
+    'X-Requested-With': 'XMLHttpRequest',
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
   },
 });
 
@@ -38,9 +40,9 @@ Axios.interceptors.response.use(
 export const RAPost = (path, params) => {
   return new Promise((resolve, reject) => {
     Axios.post(path, params).then(res => {
-      if (res.status === 200) {
-        resolve(res.data);
-      }
+      // if (res.status === 200) {
+      resolve(res.data);
+      // }
     }).catch(err => {
       console.error(err);
       reject(err);

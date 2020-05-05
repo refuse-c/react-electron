@@ -1,0 +1,68 @@
+.login {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  width: 500px;
+  height: 300px;
+  box-shadow: 0 0 5px #fff;
+  border-radius: 5px;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+  input,
+  button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+  }
+  .login-title {
+    width: 300px;
+    line-height: 40px;
+    font-size: 24px;
+    text-align: center;
+  }
+  .login-form {
+    width: 300px;
+    li {
+      display: flex;
+      align-items: center;
+      height: 30px;
+      font-size: 16px;
+      margin-top: 20px;
+
+      input {
+        width: 100%;
+        height: 100%;
+        padding: 0 40px;
+        border-radius: 2px;
+        color: #fff;
+        box-shadow: 0 0 2px #fff;
+        &::placeholder {
+          color: #666;
+        }
+        &:focus {
+          box-shadow: 0 0 2px #42B983;
+        }
+      }
+      .icon-tel {
+        background: url("../../common/images/phone.png") 10px center / 20px 20px
+          no-repeat;
+      }
+      .icon-pwd {
+        background: url("../../common/images/pwd.png") 10px center / 20px 20px
+          no-repeat;
+      }
+      button {
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        border-radius: 2px;
+        background-color: #42B983;
+      }
+    }
+  }
+}
