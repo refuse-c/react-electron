@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-05-01 13:07:45
+ * @LastEditTime: 2020-05-07 00:37:09
  * @Description:
  */
 import React, { Component } from 'react';
@@ -12,7 +12,12 @@ import { RAGet } from '../../api/netWork';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import MusicList from '../musicList';
-import { imgParam, fomatDate, AssembleIds, isEmpty } from '../../common/utils/format';
+import { imgParam, fomatDate, dataScreening, isEmpty } from '../../common/utils/format';
+
+// store 
+import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+// import { gainMusicList, gainMusicId, gainPlayLIst } from '../../store/actions';
 class List extends Component {
   constructor(props) {
     super(props);
@@ -37,8 +42,11 @@ class List extends Component {
         id: id
       }
     }).then(res => {
+      console.log(res)
       const playList = res.playlist;
-      const musicIds = AssembleIds(res.privileges);
+      const nickname = this.props.userInfo.profile.nickname || '1';
+      const musicIds = dataScreening(res.playlist.tracks);
+      playList.name = playList.name.replace(nickname, '我');
       this.setState({ playList, musicIds });
     }).catch(err => {
       console.log(err)
@@ -90,4 +98,15 @@ class List extends Component {
   }
 }
 
-export default List;
+//注册store
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    userInfo: state.userInfo,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(List);

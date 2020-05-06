@@ -1,13 +1,17 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-04-14 09:18:58
+ * @LastEditTime: 2020-05-07 00:02:43
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
 import './index.scss';
 import { formatPlayTime } from '../../common/utils/format';
+// store 
+import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+// import { gainMusicList, gainMusicId, gainPlayLIst } from '../../store/actions';
 class Footer extends Component {
   constructor(props) {
     super(props);
@@ -23,10 +27,11 @@ class Footer extends Component {
   }
   changeInput = () => {
     this.setState({ currentTime: this.input.value })
-    // this.input.value
   }
   render() {
     const { currentTime } = this.state;
+    const { musicId } = this.props;
+    console.log(musicId)
     return (
       <div className="footer">
         <div className="control">
@@ -52,5 +57,16 @@ class Footer extends Component {
     );
   }
 }
+//注册store
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    musicId: state.musicId,
+    playList: state.playList
+  }
+}
 
-export default Footer;
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);

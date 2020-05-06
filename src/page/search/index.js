@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-04-26 11:25:55
+ * @LastEditTime: 2020-05-06 23:46:52
  * @LastEditors: RA
  * @Description: 
  */
@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import './index.scss';
 import { RAGet } from '../../api/netWork';
 import { searchDefaule, search, searchSuggest, searchHot } from '../../api/api';
-import { isEmpty, isEmptyObject, pagingParams } from '../../common/utils/format';
+import { isEmpty, isEmptyObject, pagingParams, dataScreening } from '../../common/utils/format';
 import HotAndHistory from './hotAndHistory';
 import SearchSuggest from './searchSuggest';
 import SearchInfo from './searchInfo';
@@ -51,7 +51,7 @@ class Search extends Component {
   }
   getCurrentPage(currentPage) {
     const { inputVal, searchType } = this.state;
-    this.getSearch(inputVal ,searchType, currentPage)
+    this.getSearch(inputVal, searchType, currentPage)
   }
   // get child parameters
   getChildVal = inputVal => {
@@ -95,7 +95,7 @@ class Search extends Component {
       } else {
         val = inputVal;
       }
-      this.getSearch(val, searchType,1);
+      this.getSearch(val, searchType, 1);
     }
   }
   //change input value
@@ -122,13 +122,14 @@ class Search extends Component {
     })
   }
   // search
-  getSearch = (keywords, type,currentPage) => {
+  getSearch = (keywords, type, currentPage) => {
     this.historyList(keywords);
     this.setState({ showsuggest: false, pageStatus: 3 });
     RAGet(search.api_url, {
-      params: pagingParams(keywords, type,currentPage)
+      params: pagingParams(keywords, type, currentPage)
     }).then(res => {
-      console.log(res)
+      // console.log(res)
+      // console.log(dataScreening(res.result.songs))
       const resultList = JSON.parse(JSON.stringify(res.result));
       this.setState({ resultList })
     }).catch(err => {

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-24 12:07:27
- * @LastEditTime: 2020-04-26 13:40:36
+ * @LastEditTime: 2020-05-06 23:27:48
  * @LastEditors: RA
  * @Description: 
  */
@@ -73,7 +73,7 @@ class Pagination extends Component {
   }
   render() {
     const { groupCount, startPage, currentPage, totalPage } = this.state;
-    console.log(totalPage)
+    // console.log(totalPage)
     let pages = []
 
     // 如果当前面不是第一页 则添加上一页
@@ -84,7 +84,7 @@ class Pagination extends Component {
     /*总页码小于等于10时，全部显示出来*/
     if (totalPage <= 10) {
       for (let i = 1; i <= totalPage; i++) {
-        console.log(totalPage)
+        // console.log(totalPage)
         pages.push(<li key={i} onClick={this.pageClick.bind(this, i)}
           className={currentPage === i ? "activePage" : null}>{i}</li>)
       }

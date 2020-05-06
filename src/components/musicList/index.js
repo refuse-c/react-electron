@@ -1,76 +1,54 @@
 /*
  * @Author: RA
  * @Date: 2020-04-22 12:07:13
- * @LastEditTime: 2020-05-01 14:30:58
+ * @LastEditTime: 2020-05-06 23:59:12
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
 
 import './index.scss';
-
 import { formatNum, formatPlayTime, isEmpty } from '../../common/utils/format';
-import { RAGet } from '../../api/netWork';
-import { getMusicDetail } from '../../api/api';
 
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { gainMusicList } from '../../store/actions';
+import { gainMusicList, gainMusicId, gainPlayLIst } from '../../store/actions';
 class MusicList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      musicIds: '',
+      musicIds: [],
       // musicList: [],
       playList: []
     }
   }
-  componentDidMount = () => {
-    const { musicIds } = this.props;
-    this.getMusicDetail(musicIds);
-  }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { musicIds } = nextProps;
-    if (musicIds !== prevState.musicIds) {
-      return {
-        musicIds,
-        props: {
-          musicIds
-        }
+  addMusic = (item) => {
+    const { playList } = this.props;
+    const array = JSON.parse(JSON.stringify(playList));
+    array.forEach((element, index) => {
+      if (element.id === item.id) {
+        // if (index === 0) return;
+        array.splice(index, 1)
       }
-    }
-    return null;
-  }
-  componentDidUpdate(prevProps) {
-    if (prevProps.musicIds !== this.props.musicIds) {
-      this.getMusicDetail(this.props.musicIds);
-    }
-  }
-  getMusicDetail = (ids) => {
-    if (isEmpty(ids)) return;
-    this.props.gainMusicList([])
-    RAGet(getMusicDetail.api_url, {
-      params: { ids: ids }
-    }).then(res => {
-      const musicList = res.songs;
-      this.props.gainMusicList(musicList)
-    }).catch(err => {
-      console.log(err)
-    })
+    });
+    array.unshift(item);
+    this.props.gainMusicId(item.id);
+    this.props.gainPlayLIst(array);
   }
   render() {
-    const { currentPage, playList, musicList } = this.props;
-    console.log(musicList, playList)
-
+    const { currentPage, musicIds } = this.props;
     return (
       <div className="music_list">
         <ul>
           {
-            musicList && musicList.map((item, index) => {
+            musicIds && musicIds.map((item, index) => {
               const num = isEmpty(currentPage) || currentPage === 0 ? 1 : currentPage
               return (
-                <li key={index}>
+                <li
+                  key={index}
+                  onClick={this.addMusic.bind(this, item, index)}
+                >
                   <div>{formatNum((num - 1) * 50 + index)}</div>
                   <div>{item.name}</div>
                   <div>{item.ar.map(item => item.name + '').join(' - ')}</div>
@@ -81,7 +59,7 @@ class MusicList extends Component {
             })
           }
         </ul>
-      </div>
+      </div >
     );
   }
 }
@@ -98,6 +76,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     gainMusicList: bindActionCreators(gainMusicList, dispatch),
+    gainMusicId: bindActionCreators(gainMusicId, dispatch),
+    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MusicList);

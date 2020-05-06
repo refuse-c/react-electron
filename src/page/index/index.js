@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:12:40
- * @LastEditTime: 2020-05-01 22:04:15
+ * @LastEditTime: 2020-05-06 18:45:08
  * @LastEditors: RA
  * @Description: 
  */
@@ -11,20 +11,24 @@ import Footer from '../../components/footer';
 import Header from '../../components/header';
 import Login from '../login';
 import { Route } from 'react-router-dom';
+
+// store 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { gainMusicList } from '../../store/actions';
 class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loginShow: false
+      // loginShow: true
     }
   }
   render() {
-    const { loginShow } = this.state;
-    const { routes } = this.props;
+    const { showLogin, routes } = this.props;
     return (
       <div className="index">
         {
-          loginShow ? <Login /> : null
+          showLogin ? <Login /> : null
         }
         <Header />
         {
@@ -53,5 +57,17 @@ class Index extends Component {
   }
 }
 
+//注册store
+const mapStateToProps = (state) => {
+  return {
+    isLogin: state.isLogin,
+    showLogin: state.showLogin,
+  }
+}
 
-export default Index;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    gainMusicList: bindActionCreators(gainMusicList, dispatch),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Index);

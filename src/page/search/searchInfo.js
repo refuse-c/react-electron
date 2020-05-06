@@ -1,14 +1,14 @@
 /*
  * @Author: RA
  * @Date: 2020-04-21 14:01:33
- * @LastEditTime: 2020-05-01 22:26:57
+ * @LastEditTime: 2020-05-06 13:26:56
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
 import MusicList from '../../components/musicList';
 import Singer from '../../components/singer';
-import { AssembleIds, returnsongCount } from '../../common/utils/format';
+import { dataScreening, returnsongCount } from '../../common/utils/format';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import Pagination from '../../components/pagination';
@@ -68,9 +68,10 @@ class SearchInfo extends Component {
   }
   render() {
     const { siNavList, activeStatus, resultList, currentPage } = this.state;
-    // const { songCount } = this.state.resultList;
-    console.log(resultList)
-    const musicIds = AssembleIds(this.state.resultList.songs);
+    // const musicIds = AssembleIds(this.state.resultList.songs);
+    const musicIds = dataScreening(this.state.resultList.songs);
+
+
     return (
 
       <div className="search-info">
@@ -103,27 +104,9 @@ class SearchInfo extends Component {
                   <MusicList musicIds={musicIds} currentPage={currentPage} />
                   :
                   activeStatus === 100 && resultList.artists ?
-                    // resultList.artists && resultList.artists.map((item, index) => {
-                    //   return (
-                    //     <li
-                    //       key={index}
-                    //     >
-                    //       {item.name}
-                    //     </li>
-                    //   )
-                    // }) 
                     <Singer data={resultList.artists} />
                     :
                     activeStatus === 10 && resultList.albums ?
-                      // resultList.albums && resultList.albums.map((item, index) => {
-                      //   return (
-                      //     <li
-                      //       key={index}
-                      //     >
-                      //       {item.name}
-                      //     </li>
-                      //   )
-                      // }) 
                       <Singer data={resultList.albums} />
                       :
                       activeStatus === 1014 ?
