@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:28
- * @LastEditTime: 2020-05-06 23:22:19
+ * @LastEditTime: 2020-05-07 20:43:23
  * @LastEditors: RA
  * @Description: 
  */
@@ -49,10 +49,30 @@ export const gainMenuList = (data) => {
   }
 }
 // 获取音乐id
-//是否显示已经登录
 export const gainMusicId = (data) => {
   return {
     type: ACTIONSTYPES.MUSIC_ID,
+    data
+  }
+}
+//播放顺序
+export const setPlayModel = (data) => {
+  return {
+    type: ACTIONSTYPES.PLAY_MODEL,
+    data
+  }
+}
+//播放状态
+export const setIsPlay = (data) => {
+  return {
+    type: ACTIONSTYPES.IS_PLAY,
+    data
+  }
+}
+//音乐index
+export const setIndex = (data) => {
+  return {
+    type: ACTIONSTYPES.SET_INDEX,
     data
   }
 }

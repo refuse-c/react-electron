@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-04-27 10:50:05
+ * @LastEditTime: 2020-05-07 09:56:05
  * @LastEditors: RA
  * @Description: 
  */
@@ -117,27 +117,10 @@ ipcMain.on('files', function (event) {
       obj.album = tags.album;
       obj.title = tags.title;
       obj.artist = tags.artist;
-      // obj.trackNumber = Number(tags.trackNumber);
       obj.url = 'f:/CloudMusic/' + element;
-      // obj.tags = tags;
-      // let image = tags.image.imageBuffer;
-      // obj.image = image.imageBuffer;
-      // if (image) {
-        // var base64String = "";
-        // for (var i = 0; i < image.length; i++) {
-        //   base64String += String.fromCharCode(image[i]);
-        // }
-        // image.forEach(element => {
-          // base64String += String.fromCharCode(element)
-        // });
-        // console.log(base64String)
-        // var base64 = "data:image/jpeg;base64," + btoa(base64String);
-        // console.log(base64)
-        // obj.pic = base64
-      // }
+
       localList.push(obj)
     }
   });
-  // console.log(localList)
   event.returnValue = localList;
 });

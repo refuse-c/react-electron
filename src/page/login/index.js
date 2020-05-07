@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-01 14:34:45
- * @LastEditTime: 2020-05-07 00:19:59
+ * @LastEditTime: 2020-05-07 10:27:59
  * @LastEditors: RA
  * @Description: 
  */
@@ -62,7 +62,6 @@ class Login extends Component {
         password: pwd
       }
     }).then(res => {
-      console.log(res)
       if (res.code !== 200) return;
       let userInfo = {};
       userInfo.account = res.account;
@@ -92,20 +91,22 @@ class Login extends Component {
           item.icon = 'default';
           if (item.privacy !== 10) {
             if (item.userId === Number(id)) {
-              let index = menuList.findIndex((item) => { return item.name === '收藏的歌单' })
+              const title = { name: '创建的歌单' };
+              let index = menuList.findIndex((item) => { return item.name === '创建的歌单' })
+              if (index === -1) menuList.push(title);
               item.name = item.name.replace(nickname, '我');
-              menuList.splice(index, 0, item);
-            }
-            if (item.userId !== Number(id)) {
+              menuList.push(item)
+            } else {
+              const title = { name: '收藏的歌单' };
               let index = menuList.findIndex((item) => { return item.name === '收藏的歌单' })
-              menuList.splice(index + 2, 0, item);
+              if (index === -1) menuList.push(title);
+              menuList.push(item)
             }
           }
           return index.id
         })
         this.props.gainMenuList(menuList);
       }
-
     }).catch(err => {
       console.log(err)
     })

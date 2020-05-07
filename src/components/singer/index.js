@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-01 22:18:42
- * @LastEditTime: 2020-05-01 22:30:59
+ * @LastEditTime: 2020-05-07 10:26:12
  * @LastEditors: RA
  * @Description: 
  */
@@ -15,10 +15,8 @@ class Singer extends Component {
   }
   render() {
     const { data } = this.props;
-    console.log(data)
     return (
       <div className="singer">
-        {/* img1v1Url  picUrl name*/}
         <ul>
           {
             data.map((item, index) => {

@@ -23,7 +23,6 @@ class Local extends Component {
   }
   render() {
     const { list } = this.state;
-    console.log(list)
     return (
       <ScrollArea
         speed={0.8}

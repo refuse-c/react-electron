@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:08
- * @LastEditTime: 2020-05-07 00:02:02
+ * @LastEditTime: 2020-05-07 20:43:30
  * @LastEditors: RA
  * @Description: 
  */
@@ -10,13 +10,14 @@ import * as ACTIONTYPES from './actionTypes';
 
 const defaultState = {
   index: 0,
+  isPlay: false,
   musicId: '',
   currentTime: 0,
   duration: 0,
   isLogin: false,
   showLogin: false,
   theme: localStorage.getItem('themeIndex') || 0,
-  playModel: localStorage.getItem('playModel') || 1,//1顺序播放 2随机播放 3单曲循环
+  playModel: localStorage.getItem('playModel') || '1',//1顺序播放 2随机播放 3单曲循环
   playStatus: false,
   userInfo: {},
   playList: [],//播放列表
@@ -31,8 +32,8 @@ const defaultState = {
     { name: '本地音乐', path: '/home/local', icon: 'local' },
     { name: '下载管理', path: '/home/down', icon: 'down' },
     { name: '最近播放', path: '/home/lately', icon: 'lately' },
-    { name: '创建的歌单' },
-    { name: '收藏的歌单' },
+    // { name: '创建的歌单' },
+    // { name: '收藏的歌单' },
   ]
 }
 
@@ -98,6 +99,31 @@ const musicId = (state = defaultState.musicId, action) => {
       return state;
   }
 }
+const playModel = (state = defaultState.playModel, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.PLAY_MODEL:
+      localStorage.setItem('playModel', action.data);
+      return action.data
+    default:
+      return state;
+  }
+}
+const isPlay = (state = defaultState.isPlay, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.IS_PLAY:
+      return action.data;
+    default:
+      return state;
+  }
+}
+const index = (state = defaultState.index, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.SET_INDEX:
+      return action.data;
+    default:
+      return state;
+  }
+}
 export default combineReducers({
   musicList,
   playList,
@@ -105,5 +131,8 @@ export default combineReducers({
   showLogin,
   isLogin,
   menuList,
-  musicId
+  musicId,
+  playModel,
+  isPlay,
+  index
 })

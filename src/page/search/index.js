@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-05-06 23:46:52
+ * @LastEditTime: 2020-05-07 10:56:41
  * @LastEditors: RA
  * @Description: 
  */
@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import './index.scss';
 import { RAGet } from '../../api/netWork';
 import { searchDefaule, search, searchSuggest, searchHot } from '../../api/api';
-import { isEmpty, isEmptyObject, pagingParams, dataScreening } from '../../common/utils/format';
+import { isEmpty, isEmptyObject, pagingParams } from '../../common/utils/format';
 import HotAndHistory from './hotAndHistory';
 import SearchSuggest from './searchSuggest';
 import SearchInfo from './searchInfo';
@@ -31,8 +31,6 @@ class Search extends Component {
     }
   }
   componentDidMount = () => {
-    // let arr = ['张三', '李四', '王五', 'a', 'd', 'c', '小红', '小明'];
-    // console.log(arr.sort())
     this.getSearchHot();
     this.getPlaceholder();
   }
@@ -128,8 +126,6 @@ class Search extends Component {
     RAGet(search.api_url, {
       params: pagingParams(keywords, type, currentPage)
     }).then(res => {
-      // console.log(res)
-      // console.log(dataScreening(res.result.songs))
       const resultList = JSON.parse(JSON.stringify(res.result));
       this.setState({ resultList })
     }).catch(err => {

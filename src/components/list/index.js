@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-05-07 00:37:09
+ * @LastEditTime: 2020-05-07 09:56:41
  * @Description:
  */
 import React, { Component } from 'react';
@@ -42,7 +42,6 @@ class List extends Component {
         id: id
       }
     }).then(res => {
-      console.log(res)
       const playList = res.playlist;
       const nickname = this.props.userInfo.profile.nickname || '1';
       const musicIds = dataScreening(res.playlist.tracks);
@@ -100,7 +99,6 @@ class List extends Component {
 
 //注册store
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     userInfo: state.userInfo,
   }

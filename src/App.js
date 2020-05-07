@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-05-01 21:37:57
+ * @LastEditTime: 2020-05-07 12:29:31
  * @LastEditors: RA
  * @Description: 
  */
@@ -11,11 +11,13 @@ import './App.scss';
 import debounce from './common/utils/debounce';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import routes from './router';
+
+// import Audio from './components/audio';
 global.debounce = debounce;// 防抖
 function App() {
   return (
     <div className="App">
-     
+      {/* <Audio /> */}
       <Router>
         {
           routes.map((route, key) => {

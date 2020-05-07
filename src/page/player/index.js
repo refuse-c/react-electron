@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 16:31:03
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-04-03 17:17:51
+ * @LastEditors: RA
+ * @LastEditTime: 2020-05-07 10:26:22
  * @Description:
  */
 import React, { Component } from 'react';
@@ -13,7 +13,6 @@ class Player extends Component {
     this.state = {}
   }
   back = () => {
-    console.log(this.props)
     this.props.history.goBack();
   }
   render() {

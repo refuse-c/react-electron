@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-01 21:07:14
+ * @LastEditTime: 2020-05-07 11:14:28
  * @LastEditors: RA
  * @Description: 
  */
@@ -36,4 +36,8 @@ export const getMusicDetail = {
 //手机号登录
 export const loginTel = {
   api_url: "/login/cellphone"
+}
+// 获取音乐url
+export const getMusicUrl = {
+  api_url: '/song/url'
 }

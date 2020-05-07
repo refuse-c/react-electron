@@ -49,3 +49,11 @@ canvas {
   width: 5px !important;
   border-radius: 5px;
 }
+
+.ra_active {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.ra_active:hover {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
