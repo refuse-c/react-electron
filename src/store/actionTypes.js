@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:14:35
- * @LastEditTime: 2020-05-07 20:42:24
+ * @LastEditTime: 2020-05-08 19:32:00
  * @LastEditors: RA
  * @Description: 
  */
@@ -15,3 +15,4 @@ export const MUSIC_ID = 'MUSIC_ID';//音乐id
 export const PLAY_MODEL = 'PLAY_MODEL';//播放顺序
 export const IS_PLAY = 'IS_PLAY';//播放顺序
 export const SET_INDEX = 'SET_INDEX';//播放顺序
+export const SHOW_PLAYLIST = 'SHOW_PLAYLIST';//显示播放列表

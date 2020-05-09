@@ -1,0 +1,56 @@
+.play-list {
+  position: fixed;
+  z-index: 100;
+  bottom: 51px;
+  right: 0;
+  width: 500px;
+  margin: 0 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #fff;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  .play-lis-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    font-size: 16px;
+    text-align: center;
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .scroll {
+    height: 70vh;
+    max-height: 400px;
+    padding: 10px 0;
+    .scrollbar {
+      background-color: #fff !important;
+    }
+    ul {
+      li {
+        display: flex;
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        padding: 0 15px;
+        div {
+          &:nth-child(1) {
+            width: 30px;
+          }
+          &:nth-child(2) {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          &:nth-child(3) {
+            width: 40px;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}

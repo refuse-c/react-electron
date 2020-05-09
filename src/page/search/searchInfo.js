@@ -68,8 +68,8 @@ class SearchInfo extends Component {
   }
   render() {
     const { siNavList, activeStatus, resultList, currentPage } = this.state;
-    // const musicIds = AssembleIds(this.state.resultList.songs);
-    const musicIds = dataScreening(this.state.resultList.songs);
+    // const muscicList = AssembleIds(this.state.resultList.songs);
+    const muscicList = dataScreening(this.state.resultList.songs);
 
 
     return (
@@ -100,8 +100,8 @@ class SearchInfo extends Component {
             </ul>
             <ul>
               {
-                activeStatus === 1 && musicIds ?
-                  <MusicList musicIds={musicIds} currentPage={currentPage} />
+                activeStatus === 1 && muscicList ?
+                  <MusicList muscicList={muscicList} currentPage={currentPage} />
                   :
                   activeStatus === 100 && resultList.artists ?
                     <Singer data={resultList.artists} />

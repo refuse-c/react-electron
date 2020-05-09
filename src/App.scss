@@ -57,3 +57,18 @@ canvas {
 .ra_active:hover {
   background-color: rgba(0, 0, 0, 0.4) !important;
 }
+.rc_active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.rc_active:hover {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+}
+.ra_disabled{
+  pointer-events: none;
+  color:#ccc;
+}
+.rc_disabled{
+  pointer-events: none;
+  color:#666;
+}

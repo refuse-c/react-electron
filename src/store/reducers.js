@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:08
- * @LastEditTime: 2020-05-07 20:43:30
+ * @LastEditTime: 2020-05-09 19:14:39
  * @LastEditors: RA
  * @Description: 
  */
@@ -19,8 +19,9 @@ const defaultState = {
   theme: localStorage.getItem('themeIndex') || 0,
   playModel: localStorage.getItem('playModel') || '1',//1顺序播放 2随机播放 3单曲循环
   playStatus: false,
+  showPlayList: false,
   userInfo: {},
-  playList: [],//播放列表
+  playList: JSON.parse(localStorage.getItem('playList')) || [],//播放列表
   musicList: [],//音乐列表
   menuList: [
     { name: 'EMusic' },
@@ -51,6 +52,7 @@ const playList = (state = defaultState.playList, action) => {
   switch (action.type) {
 
     case ACTIONTYPES.PLAY_LIST:
+      localStorage.setItem('playList', JSON.stringify(action.data));
       return action.data
     default:
       return state;
@@ -119,11 +121,24 @@ const isPlay = (state = defaultState.isPlay, action) => {
 const index = (state = defaultState.index, action) => {
   switch (action.type) {
     case ACTIONTYPES.SET_INDEX:
+      let newState = JSON.parse(JSON.stringify(state))
+      newState = action.data
+      return newState
+    default:
+      return state;
+  }
+}
+// const newState = JSON.parse(JSON.stringify(state)); // 深度拷贝
+//         newState.musicList = action.data;
+const showPlayList = (state = defaultState.showPlayList, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.SHOW_PLAYLIST:
       return action.data;
     default:
       return state;
   }
 }
+
 export default combineReducers({
   musicList,
   playList,
@@ -134,5 +149,6 @@ export default combineReducers({
   musicId,
   playModel,
   isPlay,
-  index
+  index,
+  showPlayList
 })

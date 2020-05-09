@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 14:46:55
- * @LastEditTime: 2020-05-06 15:22:40
+ * @LastEditTime: 2020-05-08 23:02:52
  * @LastEditors: RA
  * @Description: 
  */
@@ -24,6 +24,15 @@ class Header extends Component {
   showLogin = () => {
     this.props.isSHowLogin(true);
   }
+  openIm = () => {
+    // const path = this.props.history.location.pathname;
+    // if (path === '/player') {
+    //   this.props.history.goBack();
+    // } else {
+    console.log(this.props)
+    this.props.history.push({ pathname: '/im' })
+    // }
+  }
   render() {
     const { userInfo, isLogin } = this.props;
     return (
@@ -37,10 +46,11 @@ class Header extends Component {
                 {userInfo.account && userInfo.profile.nickname}
               </li>
               :
-              <li onClick={this.showLogin}><img src="" alt="" />未登录</li>
+              <li onClick={this.showLogin}>未登录</li>
             }
             <li>皮肤</li>
             <li>设置</li>
+            <li onClick={this.openIm}>IM</li>
           </ul>
 
         </div>

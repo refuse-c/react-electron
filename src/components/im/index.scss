@@ -1,0 +1,12 @@
+.im {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 90px);
+  overflow: hidden;
+
+  button {
+    padding: 0 20px;
+    height: 30px;
+    line-height: 30px;
+  }
+}

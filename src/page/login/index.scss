@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   transform: translate(-50%, -50%);
-  z-index: 100;
+  z-index: 101;
   width: 500px;
   height: 300px;
   box-shadow: 0 0 5px #fff;
@@ -18,6 +18,15 @@
     outline: none;
     border: none;
     background-color: transparent;
+  }
+  .fork {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: url("../../common/images/iocn_fork.png") center center / 14px
+      14px no-repeat;
   }
   .login-title {
     width: 300px;
@@ -45,7 +54,7 @@
           color: #666;
         }
         &:focus {
-          box-shadow: 0 0 2px #42B983;
+          box-shadow: 0 0 2px #42b983;
         }
       }
       .icon-tel {
@@ -61,7 +70,7 @@
         height: 100%;
         color: #fff;
         border-radius: 2px;
-        background-color: #42B983;
+        background-color: #42b983;
       }
     }
   }

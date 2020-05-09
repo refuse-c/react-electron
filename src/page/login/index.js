@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-01 14:34:45
- * @LastEditTime: 2020-05-07 10:27:59
+ * @LastEditTime: 2020-05-08 21:51:46
  * @LastEditors: RA
  * @Description: 
  */
@@ -26,7 +26,7 @@ class Login extends Component {
     }
   }
   componentDidMount = () => {
-
+    // this.getMusicList(287070050)
   }
   inputKeyPress = e => {
     const name = e.target.name;
@@ -111,9 +111,13 @@ class Login extends Component {
       console.log(err)
     })
   }
+  fork = () => {
+    this.props.isSHowLogin(false);
+  }
   render() {
     return (
       <div className="login">
+        <i onClick={this.fork} className="fork"></i>
         <div className="login-title">欢迎使用EMusic</div>
         <ul className="login-form">
           <li>

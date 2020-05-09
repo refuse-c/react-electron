@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-05-06 11:31:49
+ * @LastEditTime: 2020-05-08 19:01:28
  * @LastEditors: RA
  * @Description: 
  */
@@ -16,6 +16,7 @@ import Local from '../components/local';
 import Down from '../components/down';
 import Lately from '../components/lately';
 import List from '../components/list';
+import IM from '../components/im';
 let routes = [
   {
     path: '/',
@@ -62,7 +63,12 @@ let routes = [
       {
         path: '/player',
         component: Player,
-      }]
+      },
+      {
+        path: '/im',
+        component: IM,
+      }
+    ]
   }
 ]
 export default routes;

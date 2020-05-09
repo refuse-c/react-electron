@@ -1,30 +1,34 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-07 20:52:11
+ * @LastEditTime: 2020-05-10 00:45:33
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
 import './index.scss';
-import { formatPlayTime, isEmpty } from '../../common/utils/format';
+import { RAGet } from '../../api/netWork';
+import { getMusicDetail } from '../../api/api';
+import { formatPlayTime, isEmpty, imgParam } from '../../common/utils/format';
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setPlayModel, setIsPlay } from '../../store/actions';
+import { setPlayModel, setIsPlay, setIndex, gainMusicId, gainPlayLIst, setPlayListStatus } from '../../store/actions';
 class Footer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentTime: 0,
-      musicId: props.musicId,
+      musicId: '',
       duration: 0,
       progress: 0,
-      isPause: false,
+      isPlay: false,
       bufferTime: 0
     }
   }
   componentDidMount() {
+    const { playList, index } = this.props;
+    playList.length > 0 ? this.props.gainMusicId(playList[index].id) : this.props.gainMusicId();
     const audio = this.audio;
     // 这里需要设置audio的canplay事件监听
     audio.addEventListener("canplay", () => {
@@ -46,40 +50,87 @@ class Footer extends Component {
       //进度条
       const range = this.range;
       const { duration } = this.state;
+      if (isEmpty(duration)) return;
       let progress = (currentTime / duration) * range.max;
       if (isNaN(progress)) return;
       this.setState({ progress });
-      // 当前缓存缓存宽度计算 500是进度条宽度
-      // const bufferWidth = 500 * (bufferTime / audio.duration);
-      // 当前播放宽度计算 500是进度条宽度
-      // const playWidth = 500 * (audio.currentTime / audio.duration);
-      // 如果正在拖动进度条的时候，不监听播放进度
-      // if (!processItemMove) {
-      // this.processPlayed.style.width = `${playWidth}px`;
-      // this.processItem.style.left = `${playWidth - 4}px`;
-      // 未拖动时根据时间变化设置当前时间
-      // this.setState({
-      //   currentTime: this.getTime(currentTime)
-      // });
-      // }
-      // this.processBuffered.style.width = `${bufferWidth}px`;
     });
 
     // 当前音乐播放完毕监听
     audio.addEventListener("ended", () => {
-      // this.endedPlayMusic();
+      this.handelNext();
     });
-    // 初始化音量
-    // this.initVolumeProcess();
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { musicId, isPlay } = nextProps;
+    if (musicId !== prevState.musicId) {
+      return {
+        musicId,
+        props: {
+          musicId: musicId
+        }
+      }
+    }
+    if (isPlay !== prevState.isPlay) {
+      return {
+        isPlay,
+        props: {
+          isPlay: isPlay
+        }
+      }
+    }
+    return null;
+  }
+  componentDidUpdate(prevState) {
+    // 当前音乐更新了
+    if (prevState.musicId !== this.state.musicId) {
+      const { musicId } = this.state;
+      const { isPlay } = this.props;
+      if (!isPlay) return;
+      this.getMusicDetail(musicId);
+      this.props.gainMusicId(musicId);
+      this.props.setIsPlay(true);
+      const audio = this.audio;
+      audio.play();
+    }
+    if (prevState.isPlay !== this.state.isPlay) {
+      const { isPlay, musicId } = this.props;
+      if (isPlay) {
+        const audio = this.audio;
+        audio.play();
+        this.props.setIsPlay(true);
+        this.getMusicDetail(musicId);
+      }
+
+    }
+  }
+  //获取音乐图片
+  getMusicDetail = (id) => {
+    RAGet(getMusicDetail.api_url, {
+      params: {
+        ids: id
+      }
+    }).then(res => {
+      const { index, playList } = this.props;
+      playList[index].picUrl = res.songs[0].al.picUrl;
+      this.props.gainPlayLIst(playList);
+    }).catch(err => {
+      console.log(err)
+    })
   }
   gotoPlayer = () => {
-    this.props.history.push({ pathname: '/player' })
+    const path = this.props.history.location.pathname;
+    if (path === '/player') {
+      this.props.history.goBack();
+    } else {
+      this.props.history.push({ pathname: '/player' })
+    }
+
   }
-  // 暂停
+  // 播放
   onPlay = () => {
     const audio = this.audio;
     if (isEmpty(audio.src.split('?id=')[1])) return;
-    // this.setState({ isPause: true });
     this.props.setIsPlay(true);
     audio.play();
   };
@@ -88,18 +139,63 @@ class Footer extends Component {
   onPause = () => {
     const audio = this.audio;
     if (isEmpty(audio.src.split('?id=')[1])) return;
-    // this.setState({ isPause: false });
     this.props.setIsPlay(false);
     audio.pause();
   };
+  handelPrev = () => {
+    const { playList, isPlay, index } = this.props;
+    const maxLength = playList.length - 1;
+    let num = 0;
+    if (index === 0) {
+      num = maxLength;
+    } else {
+      let i = index;
+      num = --i;
+      if (playList[num].st === -200) {
+        num = --num
+      }
+    }
+    if (!isPlay) {
+      this.props.setIsPlay(true);
+    }
+    this.props.setIndex(num);
+    this.props.gainMusicId(playList[num].id);
+  }
+
+  handelNext = () => {
+    const { playModel, playList, isPlay, index } = this.props;
+    const maxLength = playList.length - 1;
+    let num = 0;
+    if (playModel === '1') {
+      if (index === maxLength) {
+        num = 0;
+      } else {
+        let i = index;
+        num = ++i;
+      }
+      if (playList[num].st === -200) {
+        num = ++num;
+      }
+    } else if (playModel === '2') {
+      num = index;
+    } else {
+      num = Math.floor(Math.random() * maxLength);
+    }
+    if (!isPlay) {
+      this.props.setIsPlay(true);
+    }
+    this.props.setIndex(num);
+    this.props.gainMusicId(playList[num].id);
+  }
   changeInput = () => {
-    const { duration } = this.state;
+    const audio = this.audio;
     const range = this.range;
+    const { duration } = this.state;
     const max = range.max;
     const val = range.value;
     const currentTime = val / max * duration;
-    // console.log(currentTime)
-    // this.setState({ currentTime: })
+    audio.currentTime = currentTime;
+    this.setState({ currentTime })
   }
   playModel = () => {
     const { playModel } = this.props;
@@ -109,18 +205,31 @@ class Footer extends Component {
       default: this.props.setPlayModel('1'); break;
     }
   }
+  showPlayList = () => {
+    const { showPlayList } = this.props;
+    showPlayList ? this.props.setPlayListStatus(false) : this.props.setPlayListStatus(true)
+  }
   render() {
-    const { currentTime, duration, progress, isPause } = this.state;
-    const { playModel, playList, index, isPlay } = this.props;
+    const { currentTime, duration, progress } = this.state;
+    const { playModel, playList, index, isPlay, musicId } = this.props;
     return (
       <div className="footer">
         <div className="control">
-          <img
-            onClick={this.gotoPlayer}
-            src="https://p1.music.126.net/cm7rMj_I2qHwKyB2gRsauA==/109951163667867598.jpg?param=300y300"
-            alt=""
-          />
-          <i className="icon_prev"></i>
+          {
+            playList.length !== 0 && !isEmpty(playList[index].picUrl) ?
+              <img
+                onClick={this.gotoPlayer}
+                src={imgParam(playList[index].picUrl, 100, 100)}
+                alt=""
+              /> :
+              <img
+                onClick={this.gotoPlayer}
+                src={require('../../common/images/logo.png')}
+                alt=""
+              />
+          }
+
+          <i onClick={this.handelPrev} className="icon_prev"></i>
           {
             isPlay ?
               <i
@@ -135,7 +244,7 @@ class Footer extends Component {
               >
               </i>
           }
-          <i className="icon_next"></i>
+          <i onClick={this.handelNext.bind(this)} className="icon_next"></i>
         </div>
         <div className="progress">
           <div className="progress_time">
@@ -177,14 +286,14 @@ class Footer extends Component {
 
           }
           <i className="icon_volume icon_mute"></i>
-          <i className="icon_list"></i>
+          <i onClick={this.showPlayList} className="icon_list"></i>
         </div>
         {
           playList.length !== 0 ?
             <audio
-              autoPlay
+              loop={playModel === '1' ? false : playModel === '2' ? true : false}
               ref={ref => (this.audio = ref)}
-              src={`https://music.163.com/song/media/outer/url?id=${playList[index].id}`}
+              src={`https://music.163.com/song/media/outer/url?id=${musicId}`}
             ></audio>
             : <audio ref={ref => (this.audio = ref)}></audio>
         }
@@ -201,9 +310,8 @@ const mapStateToProps = (state) => {
     playList: state.playList,
     playModel: state.playModel,
     index: state.index,
-    isPlay: state.index
-
-
+    isPlay: state.isPlay,
+    showPlayList: state.showPlayList,
   }
 }
 
@@ -211,6 +319,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setPlayModel: bindActionCreators(setPlayModel, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
+    setIndex: bindActionCreators(setIndex, dispatch),
+    gainMusicId: bindActionCreators(gainMusicId, dispatch),
+    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+    setPlayListStatus: bindActionCreators(setPlayListStatus, dispatch),
+
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Footer);

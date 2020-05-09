@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:28
- * @LastEditTime: 2020-05-07 20:43:23
+ * @LastEditTime: 2020-05-08 19:32:08
  * @LastEditors: RA
  * @Description: 
  */
@@ -73,6 +73,13 @@ export const setIsPlay = (data) => {
 export const setIndex = (data) => {
   return {
     type: ACTIONSTYPES.SET_INDEX,
+    data
+  }
+}
+//显示播放列表
+export const setPlayListStatus = (data) => {
+  return {
+    type: ACTIONSTYPES.SHOW_PLAYLIST,
     data
   }
 }

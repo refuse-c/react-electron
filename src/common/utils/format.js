@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-06 23:47:02
+ * @LastEditTime: 2020-05-09 14:28:42
  * @LastEditors: RA
  * @Description: 
  */
@@ -376,7 +376,8 @@ export const dataScreening = (arr) => {
     obj.ar = item.artists || item.ar || '';
     obj.dt = item.duration || item.dt;
     obj.mv = item.mv || item.mvid || '';
-    obj.index = index;
+    obj.picUrl = '';
+    obj.st = item.st;
     newArr.push(obj);
     return index.id
   });
@@ -394,4 +395,37 @@ export const formatTel = (val) => {
     val += " ";
   }
   return val;
+}
+
+/**
+ * @param {obj obj} 
+ * @return: obj
+ * @description:合并相同元素的object 
+ */
+export const aa = (arr1, arr2) => {
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i].id === arr2[j].id) {
+        // arr1[i].id = arr2[j].id;
+        // arr1[i].fee = arr2[j].fee;
+        // arr1[i].payed = arr2[j].payed;
+        arr1[i].st = arr2[j].st;
+        // arr1[i].pl = arr2[j].pl;
+        // arr1[i].dl = arr2[j].dl;
+        // arr1[i].sp = arr2[j].sp;
+        // arr1[i].cp = arr2[j].cp;
+        // arr1[i].subp = arr2[j].subp;
+        // arr1[i].cs = arr2[j].cs;
+        // arr1[i].maxbr = arr2[j].maxbr;
+        // arr1[i].fl = arr2[j].fl;
+        // arr1[i].toast = arr2[j].toast;
+        // arr1[i].flag = arr2[j].flag;
+        // arr1[i].preSell = arr2[j].preSell;
+        // arr1[i].playMaxbr = arr2[j].playMaxbr;
+        // arr1[i].downloadMaxbr = arr2[j].downloadMaxbr;
+        break;
+      }
+    }
+  }
+  return arr1;
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-22 12:07:13
- * @LastEditTime: 2020-05-07 20:48:32
+ * @LastEditTime: 2020-05-09 16:20:35
  * @LastEditors: RA
  * @Description: 
  */
@@ -13,15 +13,12 @@ import { formatNum, formatPlayTime, isEmpty } from '../../common/utils/format';
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { gainMusicList, setIndex, gainPlayLIst, setIsPlay } from '../../store/actions';
-import { RAGet } from '../../api/netWork';
-import { getMusicUrl } from '../../api/api';
+import { gainMusicList, setIndex, gainPlayLIst, setIsPlay, gainMusicId } from '../../store/actions';
 class MusicList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      musicIds: [],
-      // musicList: [],
+      muscicList: [],
       playList: []
     }
   }
@@ -38,35 +35,25 @@ class MusicList extends Component {
     this.props.setIndex(0);
     this.props.gainPlayLIst(array);
     this.props.setIsPlay(true);
+    this.props.gainMusicId(item.id);
   }
-  getMusicUrl = (id) => {
-    RAGet(getMusicUrl.api_url, {
-      params: {
-        id: id
-      }
-    }).then(res => {
-      console.log(res.data[0].url)
-    }).catch(err => {
-      console.log(err)
-    })
-  }
+
   render() {
-    const { currentPage, musicIds, musicId } = this.props;
+    const { currentPage, muscicList, musicId } = this.props;
     return (
       <div className="music_list">
         <ul>
           {
-            musicIds && musicIds.map((item, index) => {
-              // console.log(item)
+            muscicList && muscicList.map((item, index) => {
               const num = isEmpty(currentPage) || currentPage === 0 ? 1 : currentPage
               const indexs = musicId === item.id ? index : ''
-
               const sty = index === indexs ? 'ra_active' : ''
+              const dis = item.st === -200 ? 'ra_disabled' : ''
               return (
                 <li
                   key={index}
-                  className={sty}
-                  onClick={this.addMusic.bind(this, item, index)}
+                  className={sty + dis}
+                  onDoubleClick={this.addMusic.bind(this, item, index)}
                 >
                   <div>{formatNum((num - 1) * 50 + index)}</div>
                   <div>{item.name}</div>
@@ -85,7 +72,6 @@ class MusicList extends Component {
 
 //注册store
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     musicList: state.musicList,
     playList: state.playList,
@@ -99,6 +85,8 @@ const mapDispatchToProps = (dispatch) => {
     setIndex: bindActionCreators(setIndex, dispatch),
     gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
+    gainMusicId: bindActionCreators(gainMusicId, dispatch),
+
 
   }
 }
