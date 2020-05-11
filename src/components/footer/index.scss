@@ -66,15 +66,12 @@
       -webkit-appearance: none;
       height: 2px;
       border-radius: 10px;
-      background-size: 0% 100%;
+      background-size:20% 100%;
       background-color: #c2c2c4;
-    }
-    input[type="range"] {
-      -webkit-appearance: none;
-      height: 2px;
-      border-radius: 10px;
-      background-size: 0% 100%;
-      background-color: #c2c2c4;
+      -webkit-appearance: none;/*清除系统默认样式*/
+      width: 100%;
+      background: -webkit-linear-gradient(#61bd12, #61bd12) no-repeat, #ddd;/*设置左边颜色为#61bd12，右边颜色为#ddd*/
+      background-size: 1% 100%;/*设置左右宽度比例*/
     }
 
     input[type="range"]::-webkit-slider-thumb {
@@ -86,6 +83,7 @@
       border-radius: 50%;
       border: solid 4px #fff;
     }
+
 
     // input[name="progress"] {
     //   background-color: transparent;

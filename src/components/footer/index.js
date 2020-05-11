@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-10 00:45:33
+ * @LastEditTime: 2020-05-10 19:14:13
  * @LastEditors: RA
  * @Description: 
  */
@@ -30,6 +30,7 @@ class Footer extends Component {
     const { playList, index } = this.props;
     playList.length > 0 ? this.props.gainMusicId(playList[index].id) : this.props.gainMusicId();
     const audio = this.audio;
+    audio.volume = 0.1;
     // 这里需要设置audio的canplay事件监听
     audio.addEventListener("canplay", () => {
       //获取总时间
@@ -51,8 +52,10 @@ class Footer extends Component {
       const range = this.range;
       const { duration } = this.state;
       if (isEmpty(duration)) return;
-      let progress = (currentTime / duration) * range.max;
+      const time = currentTime / duration;
+      let progress = time * range.max;
       if (isNaN(progress)) return;
+      range.style.backgroundSize = time * 100 + `% 100%`;
       this.setState({ progress });
     });
 
