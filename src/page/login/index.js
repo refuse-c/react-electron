@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-01 14:34:45
- * @LastEditTime: 2020-05-08 21:51:46
+ * @LastEditTime: 2020-05-14 18:09:50
  * @LastEditors: RA
  * @Description: 
  */
@@ -22,7 +22,8 @@ class Login extends Component {
     super(props);
     this.state = {
       tel: '13272946536',
-      pwd: 'Wangyi123'
+      pwd: 'Wangyi123',
+      userInfo: {}
     }
   }
   componentDidMount = () => {
@@ -62,8 +63,10 @@ class Login extends Component {
         password: pwd
       }
     }).then(res => {
+      console.log(res)
       if (res.code !== 200) return;
       let userInfo = {};
+      sessionStorage.setItem('token', res.token);
       userInfo.account = res.account;
       userInfo.token = res.token;
       userInfo.profile = res.profile;
@@ -87,7 +90,7 @@ class Login extends Component {
     }).then(res => {
       if (res.code === 200) {
         res.playlist.map((item, index) => {
-          item.path = '/home/list';
+          item.path = '/home/single';
           item.icon = 'default';
           if (item.privacy !== 10) {
             if (item.userId === Number(id)) {

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-04-27 11:54:11
+ * @LastEditTime: 2020-05-12 11:41:17
  * @Description:
  */
 import React, { Component } from 'react';
@@ -10,7 +10,7 @@ import './index.scss';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 // const fs = window.require('fs');
-const { ipcRenderer: ipc } = window.require('electron');
+// const { ipcRenderer: ipc } = window.require('electron');
 class Local extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +19,7 @@ class Local extends Component {
     }
   }
   componentDidMount = () => {
-    this.setState({ list: ipc.sendSync('files') })
+    // this.setState({ list: ipc.sendSync('files') })
   }
   render() {
     const { list } = this.state;

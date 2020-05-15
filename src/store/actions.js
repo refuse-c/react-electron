@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:28
- * @LastEditTime: 2020-05-08 19:32:08
+ * @LastEditTime: 2020-05-15 11:04:53
  * @LastEditors: RA
  * @Description: 
  */
@@ -80,6 +80,35 @@ export const setIndex = (data) => {
 export const setPlayListStatus = (data) => {
   return {
     type: ACTIONSTYPES.SHOW_PLAYLIST,
+    data
+  }
+}
+//搜索信息
+export const gainSearchInfo = (data) => {
+  return {
+    type: ACTIONSTYPES.SEARCH_INFO,
+    data
+  }
+}
+//搜索展示tab
+export const setMenuIndex = (data) => {
+  return {
+    type: ACTIONSTYPES.MENU_INDEX,
+    data
+  }
+}
+//分页数字
+export const setPageNum = (data) => {
+  return {
+    type: ACTIONSTYPES.PAGE_NUM,
+    data
+  }
+}
+//总数
+export const setTotal = (data) => {
+  console.log(data)
+  return {
+    type: ACTIONSTYPES.Page_TOTAL,
     data
   }
 }

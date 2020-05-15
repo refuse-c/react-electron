@@ -1,56 +1,45 @@
 /*
  * @Author: RA
  * @Date: 2020-04-24 12:07:27
- * @LastEditTime: 2020-05-06 23:27:48
+ * @LastEditTime: 2020-05-14 14:17:31
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react'
 import './index.scss';
+
+//store
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setPageNum } from '../../store/actions';
 class Pagination extends Component {
   constructor(props) {
     super(props)
     this.state = {
       currentPage: 1, //当前页码
-      groupCount: 5, //页码分组，显示7个页码，其余用省略号显示
-      startPage: 1,  //分组开始页码
+      groupCount: 5, //页码分组，显示3个页码，其余用省略号显示
+      startPage: 3,  //分组开始页码
       totalPage: 1 //总页数
     }
   }
-  // componentWillMount() {
-  //   const totalPage = this.props.totalPage;
-  //   this.setState({ totalPage })
-  // }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { totalPage } = nextProps;
-    if (totalPage !== prevState.totalPage) {
-      return {
-        totalPage,
-        props: {
-          totalPage: totalPage || 0
-        }
-      }
+  componentDidUpdate(prevProps) {
+    if (prevProps.totalPage !== this.props.totalPage || prevProps.pageNum !== this.props.pageNum) {
+      this.setState({ totalPage: this.props.totalPage, currentPage: this.props.pageNum })
     }
-    return null;
   }
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.totalPage !== this.props.totalPage) {
-  //     console.log(this.props.totalPage)
-  //     this.setState({ totalPage:this.props.totalPage })
-  //   }
-  // }
   // 点击页码
   pageClick(currentPage) {
     const { groupCount } = this.state
-    const getCurrentPage = this.props.pageCallbackFn;
-    //当 当前页码 大于 分组的页码 时，使 当前页 前面 显示 两个页码
+    // const getCurrentPage = this.props.pageCallbackFn;
+    //当当前页码 大于 分组的页码 时，使 当前页 前面 显示 两个页码
     let startPage = currentPage >= groupCount ? currentPage - 2 : 1
     this.setState({
       startPage,
       currentPage
     })
     //将当前页码返回父组件
-    getCurrentPage(currentPage)
+    // getCurrentPage(currentPage)
+    this.props.setPageNum(currentPage);
   }
   //上一页事件
   prePageHandeler() {
@@ -67,13 +56,12 @@ class Pagination extends Component {
   // 获取从父组件传来的总页数与当前页数
   componentDidMount() {
     this.setState({
-      currentPage: this.props.currentPage,
+      currentPage: this.props.pageNum,
       totalPage: this.props.totalPage
     })
   }
   render() {
     const { groupCount, startPage, currentPage, totalPage } = this.state;
-    // console.log(totalPage)
     let pages = []
 
     // 如果当前面不是第一页 则添加上一页
@@ -84,7 +72,6 @@ class Pagination extends Component {
     /*总页码小于等于10时，全部显示出来*/
     if (totalPage <= 10) {
       for (let i = 1; i <= totalPage; i++) {
-        // console.log(totalPage)
         pages.push(<li key={i} onClick={this.pageClick.bind(this, i)}
           className={currentPage === i ? "activePage" : null}>{i}</li>)
       }
@@ -99,7 +86,7 @@ class Pagination extends Component {
         pages.push(<li className="" key={-1}>···</li>)
       }
       //非第一页和最后一页显示
-      for (let i = currentPage - 2; i < currentPage + 3; i++) {
+      for (let i = currentPage - 1; i < currentPage + 2; i++) {
         if (i <= totalPage - 1 && i > 1) {
           pages.push(<li className={currentPage === i ? "activePage" : null} key={i}
             onClick={this.pageClick.bind(this, i)}>{i}</li>)
@@ -125,4 +112,17 @@ class Pagination extends Component {
     )
   }
 }
-export default Pagination;
+
+//注册store
+const mapStateToProps = (state) => {
+  return {
+    pageNum: state.pageNum,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setPageNum: bindActionCreators(setPageNum, dispatch),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Pagination);

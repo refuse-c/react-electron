@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-09 14:28:42
+ * @LastEditTime: 2020-05-15 11:43:32
  * @LastEditors: RA
  * @Description: 
  */
@@ -344,20 +344,20 @@ export const pagingParams = (keyword, type, spageNum) => {
  * @return: 
  * @description: 数据分页返回数据总页数
  */
-export const returnsongCount = (type, resultList) => {
-  let total = 0;
-  if (isEmpty(resultList)) return;
+export const returnsongCount = (type, total) => {
+  let totals = 0;
+  if (isEmpty(total)) return;
   switch (type) {
-    case 1: total = resultList.songCount % 50 === 0 ? parseInt(resultList.songCount / 50) : parseInt(resultList.songCount / 50) + 1; break;
-    case 10: total = resultList.albumCount % 20 === 0 ? parseInt(resultList.albumCount / 20) : parseInt(resultList.albumCount / 20) + 1; break;
-    case 100: total = resultList.artistCount % 20 === 0 ? parseInt(resultList.artistCount / 20) : parseInt(resultList.artistCount / 20) + 1; break;
-    case 1000: total = resultList.playlistCount % 20 === 0 ? parseInt(resultList.playlistCount / 20) : parseInt(resultList.playlistCount / 20) + 1; break;
-    case 1002: total = resultList.userprofileCount % 20 === 0 ? parseInt(resultList.userprofileCount / 20) : parseInt(resultList.userprofileCount / 20) + 1; break;
-    case 1009: total = resultList.djRadiosCount % 10 === 0 ? parseInt(resultList.djRadiosCount / 10) : parseInt(resultList.djRadiosCount / 10) + 1; break;
-    case 1014: total = resultList.videoCount % 24 === 0 ? parseInt(resultList.videoCount / 24) : parseInt(resultList.videoCount / 24) + 1; break;
-    default: total = resultList.songCount % 50 === 0 ? parseInt(resultList.songCount / 50) : parseInt(resultList.songCount / 50) + 1; break;
+    case 1: totals = total % 50 === 0 ? parseInt(total / 50) : parseInt(total / 50) + 1; break;
+    case 10: totals = total % 20 === 0 ? parseInt(total / 20) : parseInt(total / 20) + 1; break;
+    case 100: totals = total % 20 === 0 ? parseInt(total / 20) : parseInt(total / 20) + 1; break;
+    case 1000: totals = total % 20 === 0 ? parseInt(total / 20) : parseInt(total / 20) + 1; break;
+    case 1002: totals = total % 20 === 0 ? parseInt(total / 20) : parseInt(total / 20) + 1; break;
+    case 1009: totals = total % 10 === 0 ? parseInt(total / 10) : parseInt(total / 10) + 1; break;
+    case 1014: totals = total % 24 === 0 ? parseInt(total / 24) : parseInt(total / 24) + 1; break;
+    default: totals = total % 50 === 0 ? parseInt(total / 50) : parseInt(total / 50) + 1; break;
   }
-  return total;
+  return totals;
 }
 
 /**
@@ -428,4 +428,19 @@ export const aa = (arr1, arr2) => {
     }
   }
   return arr1;
+}
+
+/**
+ * @param {type} 
+ * @return: 
+ * @description: 是否是数组并且有值
+ */
+export const isArrays = (v) => {
+  if (isEmpty(v)) return false;
+  // if (typeof (v).toString() !== 'object') return false;
+  if (v.length >= 1) {
+    return true
+  } else {
+    return false
+  }
 }

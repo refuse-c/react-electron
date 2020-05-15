@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-05-07 10:56:41
+ * @LastEditTime: 2020-05-15 11:05:02
  * @LastEditors: RA
  * @Description: 
  */
@@ -15,12 +15,17 @@ import SearchSuggest from './searchSuggest';
 import SearchInfo from './searchInfo';
 import Empty from '../../components/empty';
 
+//store
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setPageNum, gainSearchInfo, setMenuIndex, setTotal } from '../../store/actions';
 class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputVal: '',
+      inputVal: this.props.searchInfo.searchText || '',
       searchType: 1, //搜索类型；默认为 1; 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018: 综合
+      pageNum: 1,
       hotList: [], // 热搜
       resultList: [],
       suggestList: [], // 搜索建议
@@ -33,7 +38,36 @@ class Search extends Component {
   componentDidMount = () => {
     this.getSearchHot();
     this.getPlaceholder();
+    // const { searchInfo } = this.props;
+    // console.log(searchInfo)
+    // this.setState({ pageStatus: 3 })
   }
+
+
+
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { pageNum } = nextProps;
+    if (pageNum !== prevState.pageNum) {
+      return {
+        pageNum,
+        props: {
+          pageNum: pageNum
+        }
+      }
+    }
+    return null;
+  }
+  componentDidUpdate(prevState) {
+    // 更新分页时
+    if (prevState.pageNum !== this.state.pageNum) {
+      const { pageNum } = this.state;
+      const { inputVal, searchType } = this.state;
+      this.getSearch(inputVal, searchType, pageNum)
+    }
+  }
+
+
   // historyList
   historyList = str => {
     const { historyList } = this.state;
@@ -47,19 +81,21 @@ class Search extends Component {
     this.setState({ historyList: array })
     window.localStorage.setItem('historyList', JSON.stringify(array));
   }
-  getCurrentPage(currentPage) {
-    const { inputVal, searchType } = this.state;
-    this.getSearch(inputVal, searchType, currentPage)
-  }
-  // get child parameters
+  //历史/热门 搜索
   getChildVal = inputVal => {
     this.getSearch(inputVal, 1);
     this.setState({ inputVal, searchType: 1 });
+    this.props.setPageNum(1)
+    this.props.setMenuIndex(1);
   }
+  //搜索建议
   getTextAndType = (text, type) => {
     this.getSearch(text, type);
+    this.props.setMenuIndex(type);
     this.setState({ inputVal: text, searchType: type });
+    this.props.setPageNum(1)
   }
+
   getType = (type) => {
     const { inputVal, placeholder } = this.state;
     let val = inputVal;
@@ -93,6 +129,7 @@ class Search extends Component {
       } else {
         val = inputVal;
       }
+      this.props.setPageNum(1);
       this.getSearch(val, searchType, 1);
     }
   }
@@ -120,14 +157,82 @@ class Search extends Component {
     })
   }
   // search
-  getSearch = (keywords, type, currentPage) => {
+  getSearch = (keywords, type, pageNum) => {
+    //清空数据
+    this.props.gainSearchInfo({});
+    const pageNums = isEmpty(pageNum) ? 1 : pageNum;
     this.historyList(keywords);
     this.setState({ showsuggest: false, pageStatus: 3 });
     RAGet(search.api_url, {
-      params: pagingParams(keywords, type, currentPage)
+      params: pagingParams(keywords, type, pageNums)
     }).then(res => {
-      const resultList = JSON.parse(JSON.stringify(res.result));
-      this.setState({ resultList })
+      if (res.code !== 200) return;
+      const data = res.result;
+      let searchInfo = {
+        pageNum: pageNums,
+        searchText: keywords,
+        // singleArr: [],
+        // singerArr: [],
+        // albumArr: [],
+        // videoArr: [],
+        // listArr: [],
+        // djArr: [],
+        // userArr: [],
+      }
+      switch (Number(type)) {
+        case 1:
+          searchInfo.menuIndex = 0;
+          // searchInfo.total = data.songCount;
+          this.props.setTotal(data.songCount);
+          searchInfo.singleArr = data.songs || [];
+          break;//1: 单曲
+        case 10:
+          searchInfo.menuIndex = 1;
+          // searchInfo.total = data.albumCount;
+          this.props.setTotal(data.albumCount);
+          searchInfo.albumArr = data.albums || [];
+          break;//10: 专辑
+        case 100:
+          searchInfo.menuIndex = 2;
+          // searchInfo.total = data.artistCount;
+          this.props.setTotal(data.artistCount);
+          searchInfo.singerArr = data.artists || [];
+          break;//100: 歌手
+        case 1000:
+          searchInfo.menuIndex = 3;
+          // searchInfo.total = data.playlistCount;
+          this.props.setTotal(data.playlistCount);
+          searchInfo.listArr = data.playlists || [];
+          break;//1000: 歌单
+        case 1002:
+          searchInfo.menuIndex = 4;
+          // searchInfo.total = data.userprofileCount;
+          this.props.setTotal(data.userprofileCount);
+          searchInfo.userArr = data.userprofiles || [];
+          break;//1002: 用户
+        case 1009:
+          searchInfo.menuIndex = 5;
+          // searchInfo.total = data.djRadiosCount;
+          this.props.setTotal(data.djRadiosCount);
+          searchInfo.djArr = data.djRadios || [];
+          break;//1009: 电台
+        case 1014:
+          searchInfo.menuIndex = 6;
+          // searchInfo.total = data.videoCount;
+          this.props.setTotal(data.videoCount);
+          searchInfo.videoArr = data.videos || [];
+          break;//1014: 视频
+        default:
+          searchInfo.menuIndex = 7;
+          // searchInfo.total = data.songCount;
+          this.props.setTotal(data.songCount);
+          searchInfo.singleArr = data.songs || [];
+          break;
+      }
+      this.props.gainSearchInfo(searchInfo);
+      //搜索类型；默认为 1; 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018: 综合
+      // const resultList = JSON.parse(JSON.stringify(res.result));
+      // this.setState({ resultList })
     }).catch(err => {
       console.log(err)
     })
@@ -153,7 +258,7 @@ class Search extends Component {
       })
   }
   render() {
-    const { inputVal, hotList, historyList, suggestList, showsuggest, placeholder, pageStatus, searchType, resultList } = this.state;
+    const { inputVal, hotList, historyList, suggestList, showsuggest, placeholder, pageStatus } = this.state;
     return (
       <div className="search">
         <div className="search_input">
@@ -176,7 +281,7 @@ class Search extends Component {
               />
               :
               pageStatus === 3 ?
-                <SearchInfo pageCallbackFn={this.getCurrentPage.bind(this)} getType={this.getType.bind(this)} searchType={searchType} resultList={resultList} />
+                <SearchInfo getType={this.getType.bind(this)} />//searchType={searchType} resultList={resultList}  pageCallbackFn={this.getCurrentPage.bind(this)}
                 :
                 <Empty msg={`123211313`} />
           }
@@ -190,5 +295,22 @@ class Search extends Component {
     );
   }
 }
+//注册store
+const mapStateToProps = (state) => {
+  return {
+    searchInfo: state.searchInfo,
+    pageNum: state.pageNum,
+    menuIndex: state.menuIndex,
+    total: state.total
+  }
+}
 
-export default Search;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    gainSearchInfo: bindActionCreators(gainSearchInfo, dispatch),
+    setPageNum: bindActionCreators(setPageNum, dispatch),
+    setMenuIndex: bindActionCreators(setMenuIndex, dispatch),
+    setTotal: bindActionCreators(setTotal, dispatch),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

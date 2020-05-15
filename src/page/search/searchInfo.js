@@ -1,17 +1,27 @@
 /*
  * @Author: RA
  * @Date: 2020-04-21 14:01:33
- * @LastEditTime: 2020-05-06 13:26:56
+ * @LastEditTime: 2020-05-15 11:59:03
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
-import MusicList from '../../components/musicList';
 import Singer from '../../components/singer';
 import { dataScreening, returnsongCount } from '../../common/utils/format';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import Pagination from '../../components/pagination';
+import MusicList from '../../components/musicList';
+import Video from '../../components/video';
+import Album from '../../components/album';
+import List from '../../components/list';
+import User from '../../components/user';
+
+
+//store
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { gainSearchInfo, setMenuIndex, setPageNum } from '../../store/actions';
 class SearchInfo extends Component {
   constructor(props) {
     super(props);
@@ -31,10 +41,12 @@ class SearchInfo extends Component {
       }, {
         name: '歌单',
         type: 1000
-      }, {
-        name: '电台',
-        type: 1009
-      }, {
+      },
+      //  {
+      //   name: '电台',
+      //   type: 1009
+      // },
+      {
         name: '用户',
         type: 1002
       }],
@@ -45,35 +57,32 @@ class SearchInfo extends Component {
     }
   }
   componentDidMount = () => {
-    const { resultList, searchType } = this.props;
-    this.setState({ resultList, activeStatus: searchType })
+
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { resultList } = nextProps;
-    if (resultList !== prevState.resultList) {
-      return { resultList }
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   const { resultList } = nextProps;
+  //   if (resultList !== prevState.resultList) {
+  //     return { resultList }
+  //   }
+  //   return null;
+  // }
 
   sendType = (type) => {
-    this.setState({ activeStatus: type });
+    // this.setState({ activeStatus: type });
     this.props.getType(type);
+    this.props.setMenuIndex(type);
+    this.props.setPageNum(1);
   }
-  getCurrentPage(currentPage) {
-    const getCurrentPage = this.props.pageCallbackFn;
-    getCurrentPage(currentPage);
-    this.setState({ currentPage });
-  }
+  // getCurrentPage(currentPage) {
+  //   const getCurrentPage = this.props.pageCallbackFn;
+  //   getCurrentPage(currentPage);
+  //   this.setState({ currentPage });
+  // }
   render() {
-    const { siNavList, activeStatus, resultList, currentPage } = this.state;
-    // const muscicList = AssembleIds(this.state.resultList.songs);
-    const muscicList = dataScreening(this.state.resultList.songs);
-
-
+    const { siNavList } = this.state;
+    const { menuIndex, searchInfo, pageNum, total } = this.props;// singleArr, singerArr, albumArr, videoArr, listArr, djArr, userArr,
     return (
-
       <div className="search-info">
         <div className="rolling-box">
           <ScrollArea
@@ -86,7 +95,7 @@ class SearchInfo extends Component {
           >
             <ul className="si-nav">
               {siNavList.map((item, index) => {
-                const style = Number(activeStatus) === item.type ? 'si-item-active' : ''
+                const style = Number(menuIndex) === item.type ? 'si-item-active' : ''
                 return (
                   <li
                     key={index}
@@ -100,67 +109,63 @@ class SearchInfo extends Component {
             </ul>
             <ul>
               {
-                activeStatus === 1 && muscicList ?
-                  <MusicList muscicList={muscicList} currentPage={currentPage} />
+                // singleArr
+                // singerArr
+                // albumArr
+                // videoArr
+                // listArr
+                // djArr
+                // userArr
+                // 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018: 综合
+                menuIndex === 1 && searchInfo.singleArr ?
+                  <MusicList muscicList={dataScreening(searchInfo.singleArr)} pageNum={pageNum} />
                   :
-                  activeStatus === 100 && resultList.artists ?
-                    <Singer data={resultList.artists} />
+                  menuIndex === 10 && searchInfo.albumArr ?
+                    <Album data={searchInfo.albumArr} />
                     :
-                    activeStatus === 10 && resultList.albums ?
-                      <Singer data={resultList.albums} />
+                    menuIndex === 100 && searchInfo.singerArr ?
+                      <Singer data={searchInfo.singerArr} />
                       :
-                      activeStatus === 1014 ?
-                        resultList.videos && resultList.videos.map((item, index) => {
-                          return (
-                            <li
-                              key={index}
-                            >
-                              {item.title}
-                            </li>
-                          )
-                        }) :
-                        activeStatus === 1000 ?
-                          resultList.playlists && resultList.playlists.map((item, index) => {
-                            return (
-                              <li
-                                key={index}
-                              >
-                                {item.name}
-                              </li>
-                            )
-                          }) :
-                          activeStatus === 1009 ?
-                            resultList.djRadios && resultList.djRadios.map((item, index) => {
-                              return (
-                                <li
-                                  key={index}
-                                >
-                                  {item.name}
-                                </li>
-                              )
-                            }) :
-                            activeStatus === 1002 ?
-                              resultList.userprofiles && resultList.userprofiles.map((item, index) => {
-                                return (
-                                  <li
-                                    key={index}
-                                  >
-                                    {item.nickname}
-                                  </li>
-                                )
-                              }) : null
+                      menuIndex === 1000 && searchInfo.listArr ?
+                        <List data={searchInfo.listArr} />
+                        :
+                        //   menuIndex === 1009 ?
+                        //  :
+                        menuIndex === 1002 && searchInfo.userArr ?
+                          <User data={searchInfo.userArr} />
+                          :
+                          menuIndex === 1014 && searchInfo.videoArr ?
+                            <Video data={searchInfo.videoArr} />
+                            :
+                            null
               }
             </ul>
           </ScrollArea>
         </div>
         {
-
-          returnsongCount(activeStatus, resultList) ?
-            <Pagination pageCallbackFn={this.getCurrentPage.bind(this)} totalPage={returnsongCount(activeStatus, resultList)} currentPage={1} />
+          returnsongCount(menuIndex, total) ?
+            <Pagination totalPage={returnsongCount(menuIndex, total)} pageNum={1} />
             : null}
+        {/* pageCallbackFn={this.getCurrentPage.bind(this)}  */}
       </div>
     );
   }
 }
+//注册store
+const mapStateToProps = (state) => {
+  return {
+    searchInfo: state.searchInfo,
+    menuIndex: state.menuIndex,
+    pageNum: state.pageNum,
+    total: state.total
+  }
+}
 
-export default SearchInfo;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    gainSearchInfo: bindActionCreators(gainSearchInfo, dispatch),
+    setMenuIndex: bindActionCreators(setMenuIndex, dispatch),
+    setPageNum: bindActionCreators(setPageNum, dispatch),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SearchInfo);

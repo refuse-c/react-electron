@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-01 22:18:42
- * @LastEditTime: 2020-05-07 10:26:12
+ * @LastEditTime: 2020-05-13 15:33:26
  * @LastEditors: RA
  * @Description: 
  */
@@ -14,7 +14,7 @@ class Singer extends Component {
     this.state = {}
   }
   render() {
-    const { data } = this.props;
+    const {data} = this.props;
     return (
       <div className="singer">
         <ul>

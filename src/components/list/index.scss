@@ -1,84 +1,38 @@
 .list {
   width: 100%;
-  height: 100%;
-  .list_info {
-    display: flex;
-    padding: 20px 15px;
-    img {
-      width: 150px;
-      height: 150px;
-      min-width: 150px;
-      min-height: 150px;
-      border-radius: 1px;
-      border: 1px solid #e5e5e5;
-      border-radius: 4px;
-      // 黑白色
-      // -webkit-filter: grayscale(1); /* Webkit */
-      // filter: gray; /* IE6-9 */
-      // filter: grayscale(1); /* W3C */
-    }
-    .list_box {
+  ul {
+    li {
+      width: 100%;
+      height: 50px;
       display: flex;
-      flex-direction: column;
-      padding-left: 20px;
-      .list_user {
-        display: flex;
-        p {
-          width: 40px;
-          height: 20px;
-          color: #0071fb;
-          text-align: center;
-          line-height: 20px;
-          border-radius: 2px;
-          border: 1px solid #0071fb;
+      align-items: center;
+      justify-content: flex-start;
+      margin: 10px 10px 0 0;
+
+      img {
+        width: 50px;
+        height: 100%;
+        border-radius: 2px;
+      }
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 50px;
+        padding-left: 20px;
+        &:nth-child(2) {
+          flex: 3;
         }
-        h2 {
-          text-align: left;
-          line-height: 20px;
-          font-size: 20px;
-          padding-left: 10px;
+        &:nth-child(3) {
+          flex: 1;
+        }
+        &:nth-child(4) {
+          flex: 2;
         }
       }
-      .list_author {
-        display: flex;
-        align-items: center;
-        padding-top: 10px;
-        img {
-          width: 30px;
-          height: 30px;
-          min-width: 30px;
-          min-height: 30px;
-          border-radius: 50%;
-        }
-        p {
-          padding-left: 10px;
-        }
-      }
-      .list_btn {
-        display: flex;
-        padding-top: 10px;
-        button {
-          padding: 2px 8px;
-          border: 1px solid #fafafa;
-          outline: none;
-          color: #fafafa;
-          background-color: transparent;
-        }
-        button:not(:first-child) {
-          margin-left: 15px;
-        }
-      }
-      .list_tag {
-        padding-top: 10px;
-        font-size: 12px;
-      }
-      .list_des {
-        padding-top: 10px;
-        font-size: 12px;
+      &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.2);
       }
     }
-  }
-  .list_info_list {
-    padding: 0 15px;
   }
 }

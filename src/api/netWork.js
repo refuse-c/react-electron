@@ -1,19 +1,20 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:54
- * @LastEditTime: 2020-04-27 17:20:44
+ * @LastEditTime: 2020-05-12 15:40:54
  * @LastEditors: RA
  * @Description: 
  */
 import axios from "axios";
-
 const Axios = axios.create({
-  baseURL: 'http://139.155.89.11:443',
-  // withCredentials: true,
+  baseURL: 'http://139.155.89.11:3389',
+  withCredentials: true,
   headers: {
     // "Content-Type": "application/json"
-    'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    // 'X-Requested-With': 'XMLHttpRequest',
+    // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    // 'Cookies': Cookies.get()
+
   },
 });
 

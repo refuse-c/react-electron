@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:08
- * @LastEditTime: 2020-05-09 19:14:39
+ * @LastEditTime: 2020-05-15 11:01:06
  * @LastEditors: RA
  * @Description: 
  */
@@ -20,9 +20,13 @@ const defaultState = {
   playModel: localStorage.getItem('playModel') || '1',//1顺序播放 2随机播放 3单曲循环
   playStatus: false,
   showPlayList: false,
-  userInfo: {},
+  userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
   playList: JSON.parse(localStorage.getItem('playList')) || [],//播放列表
   musicList: [],//音乐列表
+  searchInfo: {},
+  menuIndex: 1,
+  pageNum: 1,
+  total: 0,
   menuList: [
     { name: 'EMusic' },
     { name: '搜索', path: '/home/search', icon: 'search' },
@@ -50,9 +54,8 @@ const musicList = (state = defaultState.musicList, action) => {
 //获取播放列表
 const playList = (state = defaultState.playList, action) => {
   switch (action.type) {
-
     case ACTIONTYPES.PLAY_LIST:
-      localStorage.setItem('playList', JSON.stringify(action.data));
+      window.localStorage.setItem('playList', JSON.stringify(action.data));
       return action.data
     default:
       return state;
@@ -62,6 +65,7 @@ const playList = (state = defaultState.playList, action) => {
 const userInfo = (state = defaultState.userInfo, action) => {
   switch (action.type) {
     case ACTIONTYPES.USER_INFO:
+      window.localStorage.setItem('userInfo', JSON.stringify(action.data));
       return action.data;
     default:
       return state;
@@ -121,15 +125,13 @@ const isPlay = (state = defaultState.isPlay, action) => {
 const index = (state = defaultState.index, action) => {
   switch (action.type) {
     case ACTIONTYPES.SET_INDEX:
-      let newState = JSON.parse(JSON.stringify(state))
-      newState = action.data
-      return newState
+      // let newState = JSON.parse(JSON.stringify(state))
+      // newState = action.data
+      return action.data//newState
     default:
       return state;
   }
 }
-// const newState = JSON.parse(JSON.stringify(state)); // 深度拷贝
-//         newState.musicList = action.data;
 const showPlayList = (state = defaultState.showPlayList, action) => {
   switch (action.type) {
     case ACTIONTYPES.SHOW_PLAYLIST:
@@ -138,7 +140,38 @@ const showPlayList = (state = defaultState.showPlayList, action) => {
       return state;
   }
 }
-
+const searchInfo = (state = defaultState.searchInfo, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.SEARCH_INFO:
+      return action.data;
+    default:
+      return state;
+  }
+}
+const menuIndex = (state = defaultState.menuIndex, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.MENU_INDEX:
+      return action.data;
+    default:
+      return state;
+  }
+}
+const pageNum = (state = defaultState.pageNum, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.PAGE_NUM:
+      return action.data;
+    default:
+      return state;
+  }
+}
+const total = (state = defaultState.total, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.Page_TOTAL:
+      return action.data;
+    default:
+      return state;
+  }
+}
 export default combineReducers({
   musicList,
   playList,
@@ -150,5 +183,9 @@ export default combineReducers({
   playModel,
   isPlay,
   index,
-  showPlayList
+  showPlayList,
+  searchInfo,
+  menuIndex,
+  pageNum,
+  total
 })

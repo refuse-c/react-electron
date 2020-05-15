@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-05-14 21:11:59
+ * @LastEditTime: 2020-05-14 19:28:49
  * @Description:
  */
 import React, { Component } from 'react';
@@ -14,7 +14,7 @@ import { imgParam } from '../../common/utils/format';
 // import { bindActionCreators } from 'redux';
 // import { setPageNum, gainSearchInfo, setMenuIndex } from '../../store/actions';
 
-class List extends Component {
+class Album extends Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -22,16 +22,15 @@ class List extends Component {
   render() {
     const { data } = this.props;
     return (
-      <div className="list">
+      <div className="album">
         <ul>
           {
             data && data.map((item, index) => {
               return (
                 <li key={index}>
-                  <img src={imgParam(item.coverImgUrl, 50, 50)} alt="" />
+                  <img src={imgParam(item.picUrl, 50, 50)} alt="" />
                   <p>{item.name}</p>
-                  <p>{item.trackCount}</p>
-                  <p>by {item.creator.nickname}</p>
+                  <p>{item.artist.name}</p>
                 </li>
               )
             })
@@ -56,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
     // setMenuIndex: bindActionCreators(setMenuIndex, dispatch),
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default connect(mapStateToProps, mapDispatchToProps)(Album);

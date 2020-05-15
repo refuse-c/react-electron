@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:14:35
- * @LastEditTime: 2020-05-08 19:32:00
+ * @LastEditTime: 2020-05-15 11:00:25
  * @LastEditors: RA
  * @Description: 
  */
@@ -16,3 +16,7 @@ export const PLAY_MODEL = 'PLAY_MODEL';//播放顺序
 export const IS_PLAY = 'IS_PLAY';//播放顺序
 export const SET_INDEX = 'SET_INDEX';//播放顺序
 export const SHOW_PLAYLIST = 'SHOW_PLAYLIST';//显示播放列表
+export const SEARCH_INFO = 'SEARCH_INFO';//搜索信息
+export const MENU_INDEX = 'MENU_INDEX';//搜索展示tab index
+export const PAGE_NUM = 'PAGE_NUM';//分页num
+export const Page_TOTAL = 'Page_TOTAL';//分页总数

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-07 11:14:28
+ * @LastEditTime: 2020-05-13 11:00:30
  * @LastEditors: RA
  * @Description: 
  */
@@ -40,4 +40,8 @@ export const loginTel = {
 // 获取音乐url
 export const getMusicUrl = {
   api_url: '/song/url'
+}
+// 登录状态
+export const loginStatus = {
+  api_url: '/login/status'
 }

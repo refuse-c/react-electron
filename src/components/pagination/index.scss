@@ -9,22 +9,29 @@
     display: flex;
     height: 30px;
     li {
-      padding: 0 15px;
+      width: 40px;
       height: 30px;
+      text-align: center;
       line-height: 30px;
       margin: 0 -1px 5px 0;
-      // background-color: #fff;
       color: #fff;
       font-size: 12px;
-      border: 1px solid rgba(255,255,255,0.1);
-      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      &:first-child,
+      &:last-child {
+        width: 50px;
+      }
       &:hover {
         color: #fff;
-        background-color: #009688;
+        background-color: rgba(0, 150, 136, 0.5);
       }
     }
   }
   .activePage {
     background-color: #009688;
+    &:hover {
+      color: #fff;
+      background-color: #009688;
+    }
   }
 }

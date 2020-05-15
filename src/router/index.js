@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-05-08 19:01:28
+ * @LastEditTime: 2020-05-14 18:10:36
  * @LastEditors: RA
  * @Description: 
  */
@@ -15,7 +15,7 @@ import Frind from '../components/frind';
 import Local from '../components/local';
 import Down from '../components/down';
 import Lately from '../components/lately';
-import List from '../components/list';
+import Single from '../components/single';
 import IM from '../components/im';
 let routes = [
   {
@@ -55,8 +55,8 @@ let routes = [
             component: Lately
           },
           {
-            path: '/home/list:id',
-            component: List
+            path: '/home/single:id',
+            component: Single
           }
         ]
       },
