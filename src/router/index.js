@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-05-14 18:10:36
+ * @LastEditTime: 2020-05-16 22:37:32
  * @LastEditors: RA
  * @Description: 
  */
@@ -11,12 +11,21 @@ import Home from '../page/home';
 import Search from '../page/search';
 import Find from '../page/find';
 import Video from '../components/video';
-import Frind from '../components/frind';
+import Frind from '../page/frind';
 import Local from '../components/local';
 import Down from '../components/down';
 import Lately from '../components/lately';
 import Single from '../components/single';
 import IM from '../components/im';
+
+
+import Recommendation from '../components/recommendation';
+import FindList from '../components/findList';
+import HostRadio from '../components/hostRadio';
+import RankingList from '../components/rankingList';
+import FindSinger from '../components/findSinger';
+import NewMusic from '../components/newMusic';
+import DailySpecial from '../components/dailySpecial';
 let routes = [
   {
     path: '/',
@@ -31,8 +40,34 @@ let routes = [
             component: Search,
           },
           {
-            path: '/home/find',
+            path: '/home/find/',
             component: Find,
+            routes: [
+              {
+                path: '/home/find',
+                component: Recommendation,
+              },
+              {
+                path: '/home/find/findList',
+                component: FindList,
+              },
+              {
+                path: '/home/find/hostRadio',
+                component: HostRadio,
+              },
+              {
+                path: '/home/find/rankingList',
+                component: RankingList,
+              },
+              {
+                path: '/home/find/findSinger',
+                component: FindSinger,
+              },
+              {
+                path: '/home/find/newMusic',
+                component: NewMusic,
+              }
+            ]
           },
           {
             path: '/home/video',
@@ -57,6 +92,10 @@ let routes = [
           {
             path: '/home/single:id',
             component: Single
+          },
+          {
+            path: '/home/dailySpecial',
+            component: DailySpecial
           }
         ]
       },

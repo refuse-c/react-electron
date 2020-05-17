@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-05-14 18:34:07
+ * @LastEditTime: 2020-05-17 18:28:52
  * @Description:
  */
 import React, { Component } from 'react';
@@ -129,7 +129,8 @@ const mapDispatchToProps = (dispatch) => {
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),
-
   }
 }
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(List);

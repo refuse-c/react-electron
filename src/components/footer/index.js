@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-15 11:55:15
+ * @LastEditTime: 2020-05-17 19:28:02
  * @LastEditors: RA
  * @Description: 
  */
@@ -69,7 +69,7 @@ class Footer extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { musicId } = nextProps;
+    const { musicId, isPlay } = nextProps;
     if (musicId !== prevState.musicId) {
       return {
         musicId,
@@ -78,14 +78,14 @@ class Footer extends Component {
         }
       }
     }
-    // if (isPlay !== prevState.isPlay) {
-    //   return {
-    //     isPlay,
-    //     props: {
-    //       isPlay: isPlay
-    //     }
-    //   }
-    // }
+    if (isPlay !== prevState.isPlay) {
+      return {
+        isPlay,
+        props: {
+          isPlay: isPlay
+        }
+      }
+    }
     return null;
   }
   componentDidUpdate(prevState) {
@@ -97,6 +97,16 @@ class Footer extends Component {
       this.getMusicUrl(musicId);
       this.getMusicDetail(musicId);
       this.props.gainMusicId(musicId);
+    }
+    if (prevState.isPlay !== this.state.isPlay) {
+      const { isPlay } = this.state;
+      const { musicId } = this.props;
+      if (isPlay) {
+        this.getMusicUrl(musicId);
+        this.getMusicDetail(musicId);
+        this.props.gainMusicId(musicId);
+      };
+
     }
   }
   //获取音乐url

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-05-07 12:29:31
+ * @LastEditTime: 2020-05-17 01:01:01
  * @LastEditors: RA
  * @Description: 
  */
@@ -37,7 +37,7 @@ function App() {
             }
           })
         }
-        <Redirect to="/home/search" />
+        <Redirect to="/home/dailySpecial" />
       </Router>
     </div >
 

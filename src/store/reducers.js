@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:08
- * @LastEditTime: 2020-05-15 11:01:06
+ * @LastEditTime: 2020-05-15 18:30:43
  * @LastEditors: RA
  * @Description: 
  */
@@ -30,7 +30,7 @@ const defaultState = {
   menuList: [
     { name: 'EMusic' },
     { name: '搜索', path: '/home/search', icon: 'search' },
-    { name: '发现', path: '/home/find', icon: 'find' },
+    { name: '发现', path: '/home/find/', icon: 'find' },
     { name: '视频', path: '/home/video', icon: 'video' },
     { name: '朋友', path: '/home/frind', icon: 'frind' },
     { name: '我的音乐' },

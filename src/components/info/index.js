@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:07:55
- * @LastEditTime: 2020-04-18 11:47:08
+ * @LastEditTime: 2020-05-15 18:17:04
  * @LastEditors: RA
  * @Description: 
  */
@@ -16,11 +16,16 @@ class Info extends Component {
     this.state = {}
   }
   render() {
+    const { routes } = this.props;
     return (
       <div className="info">
         {
-          this.props.routes.map((item, key) => {
-            return <Route true key={key} path={item.path} component={item.component} />
+          routes.map((route, key) => {
+            return <Route key={key} path={route.path}
+              render={props => (
+                <route.component {...props} routes={route.routes} />
+              )}
+            />
           })
         }
       </div>

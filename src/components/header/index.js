@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 14:46:55
- * @LastEditTime: 2020-05-14 18:13:09
+ * @LastEditTime: 2020-05-16 20:50:38
  * @LastEditors: RA
  * @Description: 
  */
@@ -39,6 +39,7 @@ class Header extends Component {
   getLoginStatus = () => {
     RAGet(loginStatus.api_url, {})
       .then(res => {
+        console.log(res.profile.userId)
         if (res.code !== 200) return;
         const { userId, nickname } = res.profile
         this.getMusicList(userId, nickname);

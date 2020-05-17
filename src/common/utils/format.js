@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-15 11:43:32
+ * @LastEditTime: 2020-05-16 22:25:54
  * @LastEditors: RA
  * @Description: 
  */
@@ -442,5 +442,35 @@ export const isArrays = (v) => {
     return true
   } else {
     return false
+  }
+}
+
+/**
+ * @param {type}
+ * @return:
+ * @description:获取年/月/日/星期
+ */
+
+export const getDate = (str) => {
+  const date = new Date()
+  switch (str) {
+    case 'day':
+      const day = date.getDate();
+      const days = day < 10 ? '0' + day : day;
+      return days;
+    case 'week':
+      const week = date.getDay();
+      let weeks = '';
+      switch (week) {
+        case 1: weeks = '星期一'; break;
+        case 2: weeks = '星期二'; break;
+        case 3: weeks = '星期三'; break;
+        case 4: weeks = '星期四'; break;
+        case 5: weeks = '星期五'; break;
+        case 6: weeks = '星期六'; break;
+        default: weeks = '星期天'; break;
+      }
+      return weeks;
+    default: return null;
   }
 }

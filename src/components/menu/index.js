@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:06:28
- * @LastEditTime: 2020-05-06 23:46:30
+ * @LastEditTime: 2020-05-15 18:10:32
  * @LastEditors: RA
  * @Description: 
  */
@@ -41,7 +41,7 @@ class Menu extends Component {
               menuList && menuList.map((item, index) => {
                 return (
                   item.path !== undefined ?
-                    <NavLink onClick={this.handelIndex.bind(this, index)} exact activeClassName="active" key={index} to={item.id !== undefined ? item.path + item.id : item.path}>
+                    <NavLink onClick={this.handelIndex.bind(this, index)}  activeClassName="active" key={index} to={item.id !== undefined ? item.path + item.id : item.path}>
                       <li className={`menu_item ` + item.icon} > {item.name}</li>
                     </NavLink> :
                     <h3 key={index} className="menu_title">{item.name}</h3>

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:12:40
- * @LastEditTime: 2020-05-09 12:36:27
+ * @LastEditTime: 2020-05-15 18:46:14
  * @LastEditors: RA
  * @Description: 
  */
@@ -44,20 +44,11 @@ class Index extends Component {
           <Header {...this.props} />
           {
             routes.map((route, key) => {
-              if (route.exact) {
-                return <Route key={key} exact path={route.path}
-                  render={props => (
-                    <route.component {...props} routes={route.routes} />
-                  )}
-                />
-              } else {
                 return <Route key={key} path={route.path}
                   render={props => (
                     <route.component {...props} routes={route.routes} />
                   )}
                 />
-
-              }
             })
           }
         </div>
@@ -66,7 +57,7 @@ class Index extends Component {
           showPlayList ? <PlayList {...this.props} /> : null
         }
 
-        <div className="inner"></div>
+        {/* <div className="inner"></div> */}
       </div >
     );
   }

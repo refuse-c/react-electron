@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-13 11:00:30
+ * @LastEditTime: 2020-05-16 21:20:31
  * @LastEditors: RA
  * @Description: 
  */
@@ -44,4 +44,16 @@ export const getMusicUrl = {
 // 登录状态
 export const loginStatus = {
   api_url: '/login/status'
+}
+//推荐歌单
+export const recommendList = {
+  api_url: '/recommend/resource'
+}
+//推荐歌曲
+export const recommendSong = {
+  api_url: '/recommend/songs'
+}
+//独家放送
+export const privatecontent = {
+  api_url: '/personalized/privatecontent'
 }
