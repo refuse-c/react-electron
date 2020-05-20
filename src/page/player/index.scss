@@ -35,16 +35,16 @@
         }
       }
       .player-info {
-        flex: 1.5;
+        flex: 1;
         .name {
           font-size: 16px;
           line-height: 30px;
-          text-align: center;
+          // text-align: center;
         }
         .singer {
           display: flex;
           align-items: flex-start;
-          justify-content: center;
+          // justify-content: center;
           text-align: center;
           line-height: 20px;
           p {
@@ -56,7 +56,7 @@
           }
         }
         .song-lrc {
-          text-align: center;
+          // text-align: center;
           margin-top: 20px;
           overflow-y: hidden;
           height: 300px;
