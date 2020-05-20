@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-20 12:17:27
+ * @LastEditTime: 2020-05-20 22:05:14
  * @LastEditors: RA
  * @Description: 
  */
@@ -33,7 +33,7 @@ class Footer extends Component {
     const range = this.range;
     const buffer = this.buffer;
     const { playList, index } = this.props;
-    playList.length > 0 ? this.props.gainMusicId(playList[index].id) : this.props.gainMusicId();
+    playList.length > 0 ? this.props.gainMusicId(playList[index].id) : this.props.gainMusicId(null);
     audio.volume = 0.1;
     // canplay事件监听
     audio.addEventListener("canplay", () => {
@@ -277,7 +277,13 @@ class Footer extends Component {
         <div className="progress">
           <div className="progress_time">
             <p>{formatPlayTime(currentTime)}</p>
-            <p>{formatPlayTime(duration || playList[index].dt / 1000)}</p>
+            {
+              playList.length > 0 ?
+                <p>{formatPlayTime(duration || playList[index].dt / 1000)}</p>
+                :
+                <p>{`00:00`}</p>
+            }
+
           </div>
           <input
             onChange={this.changeInput}
