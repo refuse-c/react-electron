@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-05-20 16:38:48
+ * @LastEditTime: 2020-05-20 22:26:43
  * @LastEditors: RA
  * @Description: 
  */
@@ -19,8 +19,8 @@ let mainWindow
 function createWindow() {
   //创建浏览器窗口,宽高自定义具体大小你开心就好
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 600,
+    width: 1000,
+    height: 500,
     useContentSize: true,
     frame: false,
     webPreferences: {

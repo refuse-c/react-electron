@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 16:31:03
  * @LastEditors: RA
- * @LastEditTime: 2020-05-20 13:06:56
+ * @LastEditTime: 2020-05-20 22:24:19
  * @Description:
  */
 import React, { Component } from 'react';
@@ -92,14 +92,14 @@ class Player extends Component {
 
   render() {
     const { lyric, songsAlbum } = this.state;
-    const { currentTime } = this.props;
+    const { currentTime, isPlay } = this.props;
     return (
       <div className="player">
         {/* <button onClick={this.back} className="back">back</button> */}
         <div className="content">
           <div className="player-top">
             <div className="album-img">
-              <div>
+              <div className={isPlay ? 'turn' : ''}>
                 {
                   !isEmpty(songsAlbum.al) ?
                     <img src={imgParam(songsAlbum.al.picUrl, 200, 200)} alt="" />
@@ -120,10 +120,9 @@ class Player extends Component {
                     })
                   }
                 </p>
-                <p>专辑：{songsAlbum.al && songsAlbum.al.name}</p>
+                <p>专辑：<span>{songsAlbum.al && songsAlbum.al.name}</span></p>
               </div>
               <div
-
                 className="song-lrc"
                 ref={ul => this.ul = ul}
                 onWheel={this.handleScroll}
@@ -175,6 +174,7 @@ const mapStateToProps = (state) => {
     musicId: state.musicId,
     currentTime: state.currentTime,
     index: state.index,
+    isPlay: state.isPlay,
   }
 }
 
