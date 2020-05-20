@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-16 22:25:54
+ * @LastEditTime: 2020-05-20 13:45:58
  * @LastEditors: RA
  * @Description: 
  */
@@ -11,7 +11,7 @@
  * @return: 
  * @description: 日期格式化
  */
-export const fomatDate = (v) => {
+export const formatDate = (v) => {
   if (isEmpty(v)) return '';
   let date = new Date(v);
   let year = date.getFullYear()
@@ -258,7 +258,7 @@ export const getSinger = (arr) => {
  * @return: 
  * @description: 不能为空||空格
  */
-export const fomatStr = (str) => {
+export const formatStr = (str) => {
   const regExp = /^[ ]+$/g;
   return (str === '' || str === null || str === undefined || str.length === 0 || regExp.test(str)) ? true : false
 }
@@ -268,7 +268,7 @@ export const fomatStr = (str) => {
  * @return: 
  * @description: 判断是不是数字
  */
-export const fomatIsNum = (str) => {
+export const formatIsNum = (str) => {
   const regExp = /^[0-9]*$/g;
   return regExp.test(str)
 }
@@ -473,4 +473,72 @@ export const getDate = (str) => {
       return weeks;
     default: return null;
   }
+}
+
+/**
+ * @param {type} 
+ * @return: 
+ * @description: 歌词解析 
+ */
+export const foramtLrc = (array) => {
+  let lrcArr = [];
+  let s = '';
+  let t = '';
+
+  const lrcs = array.split('\n'); //用回车拆分成数组
+  if (array.length === 0) return;
+  lrcs.map((item, index) => {
+    const cutSpace = item.replace(/(^\s*)|(\s*$)/g, ""); //去除前后空格
+    t = cutSpace.substring(cutSpace.indexOf("[") + 1, cutSpace.indexOf("]")); //取[]间的内容
+    s = t.split(":")  //分离: 前后文字
+    if (isNaN(parseInt(s[0]))) { //不是数值
+      for (let i in lrcArr) {
+        if (i !== "ms" && i === s[0].toLowerCase()) {
+          lrcArr[i] = s[1];
+        }
+      }
+    } else {
+      let start = 0;
+      const arr = item.match(/\[(\d+:.+?)\]/g); //提取时间字段，可能有多个
+      arr.map((item, index) => {
+        start += item.length; //计算歌词位置
+        return index.id
+      });
+      const content = item.substring(start); //获取歌词内容
+      arr.map((item, index) => {
+        t = item.substring(1, item.length - 1); //取[]间的内容
+        s = t.split(":"); //分离:前后文字
+        lrcArr.push({ //对象{t:时间,c:歌词}加入ms数组
+          t: (parseFloat(s[0]) * 60 + parseFloat(s[1])).toFixed(3),
+          c: content
+        });
+        return index.id
+      });
+    }
+    return index.id
+  });
+  lrcArr.sort(function (a, b) { //按时间顺序排序
+    return a.t - b.t;
+  });
+  return lrcArr
+}
+/**
+ * @param {type} 
+ * @return: 
+ * @description: 获取当前行的歌词 
+ */
+
+export const getTimeIndex = (timeArr, time) => {
+  let timeIndex = -1;
+  const length = timeArr.length;
+  const currentTime = Math.floor(time) + 0.1;
+  for (let i = 0; i < length; i++) {
+    if (timeArr[i].t >= currentTime) {
+      timeIndex = i - 1;
+      break;
+    } else {
+      timeIndex = i;
+    }
+  }
+  return Number(timeIndex);
 }

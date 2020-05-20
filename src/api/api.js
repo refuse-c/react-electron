@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-16 21:20:31
+ * @LastEditTime: 2020-05-20 15:28:33
  * @LastEditors: RA
  * @Description: 
  */
@@ -47,7 +47,7 @@ export const loginStatus = {
 }
 //推荐歌单
 export const recommendList = {
-  api_url: '/recommend/resource'
+  api_url: '/personalized'
 }
 //推荐歌曲
 export const recommendSong = {
@@ -56,4 +56,12 @@ export const recommendSong = {
 //独家放送
 export const privatecontent = {
   api_url: '/personalized/privatecontent'
+}
+//获取歌词
+export const getLyric = {
+  api_url: '/lyric'
+}
+//获取轮播图
+export const getBanner = {
+  api_url: '/banner'
 }

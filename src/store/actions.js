@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:28
- * @LastEditTime: 2020-05-15 11:04:53
+ * @LastEditTime: 2020-05-19 20:44:15
  * @LastEditors: RA
  * @Description: 
  */
@@ -109,6 +109,13 @@ export const setTotal = (data) => {
   console.log(data)
   return {
     type: ACTIONSTYPES.Page_TOTAL,
+    data
+  }
+}
+//总数
+export const setCurrentTime = (data) => {
+  return {
+    type: ACTIONSTYPES.CURRENT_TIME,
     data
   }
 }

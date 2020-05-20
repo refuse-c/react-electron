@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:08
- * @LastEditTime: 2020-05-15 18:30:43
+ * @LastEditTime: 2020-05-19 22:14:02
  * @LastEditors: RA
  * @Description: 
  */
@@ -156,6 +156,14 @@ const menuIndex = (state = defaultState.menuIndex, action) => {
       return state;
   }
 }
+const currentTime = (state = defaultState.currentTime, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.CURRENT_TIME:
+      return action.data;
+    default:
+      return state;
+  }
+}
 const pageNum = (state = defaultState.pageNum, action) => {
   switch (action.type) {
     case ACTIONTYPES.PAGE_NUM:
@@ -187,5 +195,6 @@ export default combineReducers({
   searchInfo,
   menuIndex,
   pageNum,
-  total
+  total,
+  currentTime
 })

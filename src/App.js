@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-05-17 01:01:01
+ * @LastEditTime: 2020-05-19 21:22:18
  * @LastEditors: RA
  * @Description: 
  */
@@ -12,12 +12,10 @@ import debounce from './common/utils/debounce';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import routes from './router';
 
-// import Audio from './components/audio';
 global.debounce = debounce;// 防抖
 function App() {
   return (
     <div className="App">
-      {/* <Audio /> */}
       <Router>
         {
           routes.map((route, key) => {
@@ -37,9 +35,9 @@ function App() {
             }
           })
         }
-        <Redirect to="/home/dailySpecial" />
+        <Redirect to="/home/find" />
       </Router>
-    </div >
+    </div>
 
   );
 }

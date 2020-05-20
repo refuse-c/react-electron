@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 14:46:55
- * @LastEditTime: 2020-05-16 20:50:38
+ * @LastEditTime: 2020-05-18 16:24:38
  * @LastEditors: RA
  * @Description: 
  */
@@ -33,13 +33,11 @@ class Header extends Component {
     this.props.isSHowLogin(true);
   }
   openIm = () => {
-    console.log(this.props)
     this.props.history.push({ pathname: '/im' })
   }
   getLoginStatus = () => {
     RAGet(loginStatus.api_url, {})
       .then(res => {
-        console.log(res.profile.userId)
         if (res.code !== 200) return;
         const { userId, nickname } = res.profile
         this.getMusicList(userId, nickname);

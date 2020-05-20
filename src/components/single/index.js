@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-05-17 18:28:52
+ * @LastEditTime: 2020-05-20 13:10:06
  * @Description:
  */
 import React, { Component } from 'react';
@@ -12,7 +12,7 @@ import { RAGet } from '../../api/netWork';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import MusicList from '../musicList';
-import { imgParam, fomatDate, dataScreening, isEmpty, aa } from '../../common/utils/format';
+import { imgParam, formatDate, dataScreening, isEmpty, aa } from '../../common/utils/format';
 
 // store 
 import { connect } from 'react-redux';
@@ -56,7 +56,7 @@ class List extends Component {
       }
     }).then(res => {
       // console.log(res)
-
+      console.log(res)
       const playList = res.playlist;
       const tracks = res.playlist.tracks;
       const privileges = res.privileges;
@@ -92,7 +92,7 @@ class List extends Component {
               <div className="single_author">
                 <img src={imgParam(creator && creator.avatarUrl, 50, 50)} alt="" />
                 <p>{creator && creator.nickname}</p>
-                <p>{playList && fomatDate(createTime)}</p>
+                <p>{playList && formatDate(createTime)}</p>
               </div>
               <div className="single_btn">
                 <button onClick={this.playAll}>播放全部</button>

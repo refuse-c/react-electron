@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-17 19:28:02
+ * @LastEditTime: 2020-05-20 12:17:27
  * @LastEditors: RA
  * @Description: 
  */
@@ -11,9 +11,10 @@ import { RAGet } from '../../api/netWork';
 import { getMusicDetail, getMusicUrl } from '../../api/api';
 import { formatPlayTime, isEmpty, imgParam } from '../../common/utils/format';
 // store 
-import { connect } from 'react-redux';
+import { connect } from
+  'react-redux';
 import { bindActionCreators } from 'redux';
-import { setPlayModel, setIsPlay, setIndex, gainMusicId, gainPlayLIst, setPlayListStatus } from '../../store/actions';
+import { setPlayModel, setIsPlay, setIndex, gainMusicId, gainPlayLIst, setPlayListStatus, setCurrentTime } from '../../store/actions';
 class Footer extends Component {
   constructor(props) {
     super(props);
@@ -43,8 +44,9 @@ class Footer extends Component {
     //播放中监听时间变化
     audio.addEventListener("timeupdate", () => {
       const { duration } = this.state;
-      const currentTime = parseInt(audio.currentTime);
+      const currentTime = (audio.currentTime).toFixed(3);
       this.setState({ currentTime });
+      this.props.setCurrentTime(currentTime);
       // 缓存时间
       if (isEmpty(duration)) return;
       const buffered = audio.buffered;
@@ -60,7 +62,7 @@ class Footer extends Component {
       if (isNaN(progress)) return;
       range.style.backgroundSize = time * 100 + `% 100%`;
       this.setState({ progress });
-    });
+    }, 1);
 
     // 当前音乐播放完毕监听
     audio.addEventListener("ended", () => {
@@ -106,7 +108,6 @@ class Footer extends Component {
         this.getMusicDetail(musicId);
         this.props.gainMusicId(musicId);
       };
-
     }
   }
   //获取音乐url
@@ -122,7 +123,7 @@ class Footer extends Component {
       this.setState({ url });
       if (isEmpty(url)) {
         console.log('当前音乐不可播放,3s后切换至下一首,id是' + id);
-        audio.pause();
+        // audio.pause();
         audio.src = '';
         setTimeout(() => {
           this.handelNext();
@@ -356,6 +357,7 @@ const mapDispatchToProps = (dispatch) => {
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
     gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
     setPlayListStatus: bindActionCreators(setPlayListStatus, dispatch),
+    setCurrentTime: bindActionCreators(setCurrentTime, dispatch),
 
   }
 }

@@ -2,11 +2,12 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: RA
- * @LastEditTime: 2020-05-14 21:11:59
+ * @LastEditTime: 2020-05-19 21:25:56
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
+import { NavLink } from 'react-router-dom';
 
 //store
 import { connect } from 'react-redux';
@@ -26,13 +27,16 @@ class List extends Component {
         <ul>
           {
             data && data.map((item, index) => {
+              const path = '/home/single';
               return (
-                <li key={index}>
-                  <img src={imgParam(item.coverImgUrl, 50, 50)} alt="" />
-                  <p>{item.name}</p>
-                  <p>{item.trackCount}</p>
-                  <p>by {item.creator.nickname}</p>
-                </li>
+                <NavLink to={path + item.id}>
+                  <li key={index}>
+                    <img src={imgParam(item.coverImgUrl, 50, 50)} alt="" />
+                    <p>{item.name}</p>
+                    <p>{item.trackCount}</p>
+                    <p>by {item.creator.nickname}</p>
+                  </li>
+                </NavLink>
               )
             })
           }

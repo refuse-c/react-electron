@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:14:35
- * @LastEditTime: 2020-05-15 11:00:25
+ * @LastEditTime: 2020-05-19 20:33:21
  * @LastEditors: RA
  * @Description: 
  */
@@ -20,3 +20,4 @@ export const SEARCH_INFO = 'SEARCH_INFO';//搜索信息
 export const MENU_INDEX = 'MENU_INDEX';//搜索展示tab index
 export const PAGE_NUM = 'PAGE_NUM';//分页num
 export const Page_TOTAL = 'Page_TOTAL';//分页总数
+export const CURRENT_TIME = 'CURRENT_TIME';//分页总数

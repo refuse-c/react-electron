@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-05-07 09:56:05
+ * @LastEditTime: 2020-05-20 16:38:48
  * @LastEditors: RA
  * @Description: 
  */
@@ -40,7 +40,7 @@ function createWindow() {
   mainWindow.setIcon('./src/common/images/logo.png');
   mainWindow.loadURL('http://localhost:3000/');
   // mainWindow.loadFile('./build/index.html')
-  mainWindow.setMinimumSize(900, 500)
+  mainWindow.setMinimumSize(1000, 500)
   // 关闭window时触发下列事件.
   mainWindow.on('closed', function () {
     mainWindow = null

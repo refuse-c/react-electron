@@ -1,28 +1,40 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-16 22:42:36
+ * @LastEditTime: 2020-05-20 16:33:44
  * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
 import './index.scss';
 import { NavLink } from 'react-router-dom';
-import { recommendList, privatecontent } from '../../api/api';
+import { recommendList, privatecontent, getBanner } from '../../api/api';
 import { RAGet } from '../../api/netWork';
 import { imgParam, getDate } from '../../common/utils/format';
 class Recommendation extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      bannersData: {},
       recommendListData: {},
-      privatecontentData: {}
+      privatecontentData: {},
+      bannerActive: 1
     }
   }
   componentDidMount = () => {
+    this.getBanner();
     this.getRecommendList();
     this.getPrivatecontentList();
-
+  }
+  getBanner = () => {
+    RAGet(getBanner.api_url, {
+      params: { type: 0 }
+    }).then(res => {
+      const bannersData = res.banners;
+      this.setState({ bannersData })
+    }).catch(err => {
+      console.log(err)
+    })
   }
   getRecommendList = () => {
     const recommended = {
@@ -33,9 +45,13 @@ class Recommendation extends Component {
       copywriter: '根据您的音乐口味生成每日推荐',
       custom: 1
     }
-    RAGet(recommendList.api_url, {})
+    RAGet(recommendList.api_url, {
+      params: {
+        limit: 9
+      }
+    })
       .then(res => {
-        const recommendListData = res.recommend;
+        const recommendListData = res.result;
         recommendListData.unshift(recommended);
         if (recommendListData.length >= 10) {
           recommendListData.length = 10;
@@ -55,12 +71,23 @@ class Recommendation extends Component {
       })
   }
   render() {
-    const { recommendListData, privatecontentData } = this.state;
-    console.log(recommendListData)
+    const { bannersData, recommendListData, privatecontentData } = this.state;
+    console.log(bannersData)
     return (
-
       <div className="recommendation">
-        <div className="recommend-banner">banner</div>
+        <div className="recommend-banner">
+          <ul>
+            {
+              bannersData.length > 0 && bannersData.map((item, index) => {
+                return (
+                  <li key={index}>
+                    <img src={imgParam(item.imageUrl, 700, 200)} alt="" />
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </div>
         <div className="recommend-title">
           <p>推荐歌单</p>
           <p>更多></p>
