@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-20 15:28:33
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-21 17:02:13
+ * @LastEditors: refuse_c
  * @Description: 
  */
 //获取歌单
@@ -64,4 +64,12 @@ export const getLyric = {
 //获取轮播图
 export const getBanner = {
   api_url: '/banner'
+}
+//最新音乐
+export const topSongs = {
+  api_url: '/top/song'
+}
+//推荐mv
+export const personalizedMv = {
+  api_url: '/personalized/mv'
 }

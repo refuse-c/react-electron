@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 16:31:03
- * @LastEditors: RA
- * @LastEditTime: 2020-05-20 22:24:19
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-21 12:17:43
  * @Description:
  */
 import React, { Component } from 'react';
@@ -134,7 +134,7 @@ class Player extends Component {
                 >
                   <ul>
                     {
-                      lyric.length > 0 ?
+                      !isEmpty(lyric) && lyric.length > 0 ?
                         lyric.map((item, index, lyric) => {
                           const num = getTimeIndex(lyric, currentTime)
                           // if (wheelStatus) {

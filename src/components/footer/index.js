@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-20 22:05:14
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-21 11:39:39
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -244,7 +244,7 @@ class Footer extends Component {
       <div className="footer">
         <div className="control">
           {
-            playList.length !== 0 && !isEmpty(playList[index].picUrl) ?
+            playList.length > 0 && !isEmpty(playList[index].picUrl) ?
               <img
                 onClick={this.gotoPlayer}
                 src={imgParam(playList[index].picUrl, 100, 100)}

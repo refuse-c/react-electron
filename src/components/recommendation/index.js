@@ -1,16 +1,16 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-20 16:33:44
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-21 17:33:12
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
 import './index.scss';
 import { NavLink } from 'react-router-dom';
-import { recommendList, privatecontent, getBanner } from '../../api/api';
+import { recommendList, privatecontent, getBanner, topSongs, personalizedMv } from '../../api/api';
 import { RAGet } from '../../api/netWork';
-import { imgParam, getDate } from '../../common/utils/format';
+import { imgParam, getDate, dataScreening } from '../../common/utils/format';
 class Recommendation extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +18,8 @@ class Recommendation extends Component {
       bannersData: {},
       recommendListData: {},
       privatecontentData: {},
+      topSongsData: {},
+      personalizedMvData: {},
       bannerActive: 1
     }
   }
@@ -25,6 +27,8 @@ class Recommendation extends Component {
     this.getBanner();
     this.getRecommendList();
     this.getPrivatecontentList();
+    this.getTopSongs();
+    this.getPersonalizedMv();
   }
   getBanner = () => {
     RAGet(getBanner.api_url, {
@@ -70,9 +74,27 @@ class Recommendation extends Component {
         console.log(err)
       })
   }
+  getTopSongs = () => {
+    RAGet(topSongs.api_url, {
+      params: { type: 0 }
+    }).then(res => {
+      const topSongsData = dataScreening(res.data);
+      this.setState({ topSongsData });
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  getPersonalizedMv = () => {
+    RAGet(personalizedMv.api_url)
+      .then(res => {
+        const personalizedMvData = res.result;
+        this.setState({ personalizedMvData });
+      }).catch(err => {
+        console.log(err)
+      })
+  }
   render() {
-    const { bannersData, recommendListData, privatecontentData } = this.state;
-    console.log(bannersData)
+    const { bannersData, recommendListData, privatecontentData, topSongsData, personalizedMvData } = this.state;
     return (
       <div className="recommendation">
         <div className="recommend-banner">
@@ -137,6 +159,52 @@ class Recommendation extends Component {
                 return (
                   <NavLink to={path + item.id} key={index} >
                     <li >
+                      <img src={imgParam(item.picUrl, 330, 190)} alt="" />
+                      <p>{item.name}</p>
+                    </li>
+                  </NavLink>
+                )
+              })
+            }
+          </ul>
+        </div>
+        <div className="recommend-title">
+          <p>最新音乐</p>
+          <p>更多></p>
+        </div>
+        <div className="top-songs">
+          <ul>
+            {
+              topSongsData.length > 0 && topSongsData.map((item, index) => {
+                const num = index < 9 ? '0' + (index + 1) : index + 1;
+                if (index > 9) return false;
+                return (
+                  <li key={index}>
+                    <p>{num}</p>
+                    <img src={imgParam(item.al.blurPicUrl, 50, 50)} alt="" />
+                    <div>
+                      <p>{item.name}</p>
+                      <p>{item.ar.map(item => item.name + '').join(' / ')}</p>
+                    </div>
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </div>
+        <div className="recommend-title">
+          <p>推荐MV</p>
+          <p>更多></p>
+        </div>
+        <div className="privatecontent-list">
+          <ul>
+            {
+              personalizedMvData.length > 0 && personalizedMvData.map((item, index) => {
+                const path = '/home/single';
+                if (index > 2) return false;
+                return (
+                  <NavLink to={path + item.id} key={index} >
+                    <li>
                       <img src={imgParam(item.picUrl, 330, 190)} alt="" />
                       <p>{item.name}</p>
                     </li>

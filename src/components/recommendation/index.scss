@@ -10,29 +10,36 @@
     width: 900px;
     height: 200px;
     position: relative;
+    margin-bottom: 20px;
+
     ul {
       width: 100%;
       height: 100%;
+
       li {
         position: absolute;
         top: 0;
         left: 0;
         z-index: 0;
         overflow: hidden;
+
         &:nth-child(1) {
           z-index: 1;
           width: 50%;
         }
+
         &:nth-child(2) {
           z-index: 3;
           width: 80%;
           left: 10%;
         }
+
         &:nth-child(3) {
           z-index: 1;
           width: 50%;
           left: 50%;
         }
+
         img {
           width: 700px;
           height: 200px;
@@ -41,28 +48,33 @@
       }
     }
   }
+
   .recommend-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 40px;
     font-size: 18px;
+    margin-bottom: 10px;
     border-bottom: 1px solid #bbb;
   }
+
   .recommend-list {
     ul {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      margin-top: 10px;
+
       &::after {
         content: "";
         width: 18%;
       }
+
       a {
         width: 18%;
         margin-bottom: 20px;
       }
+
       .recommend-bg {
         position: relative;
 
@@ -77,20 +89,25 @@
           width: 100%;
           height: 100%;
           color: #333;
+
           h3 {
             font-size: 64px;
           }
+
           h4 {
             font-size: 18px;
           }
         }
       }
+
       li {
         width: 100%;
+
         img {
           width: 100%;
           border-radius: 2px;
         }
+
         p {
           overflow: hidden;
           text-overflow: ellipsis;
@@ -100,25 +117,73 @@
       }
     }
   }
+
   .privatecontent-list {
     ul {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      margin-bottom: 20px;
+
       a {
         width: 30%;
-        margin-top: 10px;
       }
+
       li {
         width: 100%;
+
         img {
           width: 100%;
         }
+
         p {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
           font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .top-songs {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+
+      li {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+
+        &:hover {
+          background-color: rgba($color: #000000, $alpha: .1);
+        }
+
+        img {
+          padding: 0 10px;
+        }
+
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: calc(100% - 100px);
+
+          p {
+            width: 100%;
+            height: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            &:last-child {
+              font-size: 12px;
+              color: #dddddd;
+            }
+          }
         }
       }
     }

@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-05-20 22:26:43
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-21 09:38:23
+ * @LastEditors: refuse_c
  * @Description: 
  */
 // 引入electron并创建一个Browserwindow
@@ -100,7 +100,7 @@ app.on('ready', () => {
 
 // F:/CloudMusic/                       
 // C:/Users/Xiang/Music
-const data = fs.readdirSync('F:/CloudMusic/');
+const data = fs.readdirSync('F:');
 const id3 = require('node-id3');
 ipcMain.on('files', function (event) {
   const localList = [];
