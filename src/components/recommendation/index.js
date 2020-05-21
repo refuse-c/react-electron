@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-21 17:50:02
+ * @LastEditTime: 2020-05-21 17:55:46
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -113,6 +113,9 @@ class Recommendation extends Component {
     this.props.setIsPlay(true);
     this.props.gainMusicId(item.id);
   }
+  handelMore = index => {
+    console.log(index)
+  }
   render() {
     const { bannersData, recommendListData, privatecontentData, topSongsData, personalizedMvData } = this.state;
     return (
@@ -132,7 +135,7 @@ class Recommendation extends Component {
         </div>
         <div className="recommend-title">
           <p>推荐歌单</p>
-          <p>更多></p>
+          <p onClick={this.handelMore.bind(this, 1)}>更多></p>
         </div>
         <div className="recommend-list">
           <ul>
@@ -169,7 +172,7 @@ class Recommendation extends Component {
         </div>
         <div className="recommend-title">
           <p>独家放送</p>
-          <p>更多></p>
+          <p onClick={this.handelMore.bind(this, 2)}>更多></p>
         </div>
         <div className="privatecontent-list">
           <ul>
@@ -190,7 +193,7 @@ class Recommendation extends Component {
         </div>
         <div className="recommend-title">
           <p>最新音乐</p>
-          <p>更多></p>
+          <p onClick={this.handelMore.bind(this, 3)}>更多></p>
         </div>
         <div className="top-songs">
           <ul>
@@ -217,7 +220,7 @@ class Recommendation extends Component {
         </div>
         <div className="recommend-title">
           <p>推荐MV</p>
-          <p>更多></p>
+          <p onClick={this.handelMore.bind(this, 4)}>更多></p>
         </div>
         <div className="privatecontent-list">
           <ul>
