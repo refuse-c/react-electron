@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-21 17:33:12
+ * @LastEditTime: 2020-05-21 17:50:02
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -11,6 +11,11 @@ import { NavLink } from 'react-router-dom';
 import { recommendList, privatecontent, getBanner, topSongs, personalizedMv } from '../../api/api';
 import { RAGet } from '../../api/netWork';
 import { imgParam, getDate, dataScreening } from '../../common/utils/format';
+
+// store 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { gainMusicList, setIndex, gainPlayLIst, setIsPlay, gainMusicId } from '../../store/actions';
 class Recommendation extends Component {
   constructor(props) {
     super(props);
@@ -92,6 +97,21 @@ class Recommendation extends Component {
       }).catch(err => {
         console.log(err)
       })
+  }
+  addMusic = (item) => {
+    const { playList } = this.props;
+    const array = JSON.parse(JSON.stringify(playList));
+    array.forEach((element, index) => {
+      if (element.id === item.id) {
+        // if (index === 0) return;
+        array.splice(index, 1)
+      }
+    });
+    array.unshift(item);
+    this.props.setIndex(0);
+    this.props.gainPlayLIst(array);
+    this.props.setIsPlay(true);
+    this.props.gainMusicId(item.id);
   }
   render() {
     const { bannersData, recommendListData, privatecontentData, topSongsData, personalizedMvData } = this.state;
@@ -179,7 +199,10 @@ class Recommendation extends Component {
                 const num = index < 9 ? '0' + (index + 1) : index + 1;
                 if (index > 9) return false;
                 return (
-                  <li key={index}>
+                  <li
+                    key={index}
+                    onDoubleClick={this.addMusic.bind(this, item, index)}
+                  >
                     <p>{num}</p>
                     <img src={imgParam(item.al.blurPicUrl, 50, 50)} alt="" />
                     <div>
@@ -219,4 +242,22 @@ class Recommendation extends Component {
   }
 }
 
-export default Recommendation;
+//注册store
+const mapStateToProps = (state) => {
+  return {
+    musicList: state.musicList,
+    playList: state.playList,
+    musicId: state.musicId,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    gainMusicList: bindActionCreators(gainMusicList, dispatch),
+    setIndex: bindActionCreators(setIndex, dispatch),
+    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+    setIsPlay: bindActionCreators(setIsPlay, dispatch),
+    gainMusicId: bindActionCreators(gainMusicId, dispatch),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Recommendation);
