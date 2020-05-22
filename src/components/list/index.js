@@ -1,17 +1,18 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: RA
- * @LastEditTime: 2020-05-19 21:25:56
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-22 16:48:53
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
 import { NavLink } from 'react-router-dom';
+import Empty from '../../components/empty';
 
 //store
 import { connect } from 'react-redux';
-import { imgParam } from '../../common/utils/format';
+import { imgParam, isArrays } from '../../common/utils/format';
 // import { bindActionCreators } from 'redux';
 // import { setPageNum, gainSearchInfo, setMenuIndex } from '../../store/actions';
 
@@ -24,24 +25,27 @@ class List extends Component {
     const { data } = this.props;
     return (
       <div className="list">
-        <ul>
-          {
-            data && data.map((item, index) => {
-              const path = '/home/single';
-              return (
-                <NavLink to={path + item.id}>
-                  <li key={index}>
-                    <img src={imgParam(item.coverImgUrl, 50, 50)} alt="" />
-                    <p>{item.name}</p>
-                    <p>{item.trackCount}</p>
-                    <p>by {item.creator.nickname}</p>
-                  </li>
-                </NavLink>
-              )
-            })
-          }
-        </ul>
-
+        {
+          isArrays(data) ?
+            < ul >
+              {
+                data && data.map((item, index) => {
+                  const path = '/home/single';
+                  return (
+                    <NavLink to={path + item.id}>
+                      <li key={index}>
+                        <img src={imgParam(item.coverImgUrl, 50, 50)} alt="" />
+                        <p>{item.name}</p>
+                        <p>{item.trackCount}</p>
+                        <p>by {item.creator.nickname}</p>
+                      </li>
+                    </NavLink>
+                  )
+                })
+              }
+            </ul>
+            : <Empty />
+        }
       </div>
     );
   }

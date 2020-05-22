@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-05-16 22:37:32
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-22 17:46:24
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import Index from '../page/index/';
@@ -17,6 +17,8 @@ import Down from '../components/down';
 import Lately from '../components/lately';
 import Single from '../components/single';
 import IM from '../components/im';
+import AlbumList from '../components/albumList';
+import VideoDetail from '../components/videoDetail'
 
 
 import Recommendation from '../components/recommendation';
@@ -96,7 +98,12 @@ let routes = [
           {
             path: '/home/dailySpecial',
             component: DailySpecial
+          },
+          {
+            path: '/home/albumList:id',
+            component: AlbumList
           }
+
         ]
       },
       {
@@ -106,7 +113,11 @@ let routes = [
       {
         path: '/im',
         component: IM,
-      }
+      },
+      {
+        path: '/videoDetail:id',
+        component: VideoDetail
+      },
     ]
   }
 ]

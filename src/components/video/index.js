@@ -1,14 +1,15 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: RA
- * @LastEditTime: 2020-05-14 18:48:09
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-22 17:46:35
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
-import { imgParam } from '../../common/utils/format';
-
+import { imgParam, isArrays } from '../../common/utils/format';
+import { NavLink } from 'react-router-dom';
+import Empty from '../../components/empty';
 //store
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
@@ -21,21 +22,32 @@ class Video extends Component {
   }
   render() {
     const { data } = this.props;
+    console.log(data)
+    const path = '/videoDetail';
     return (
       <div className="video">
-        <ul>
-          {
-            data && data.map((item, index) => {
-              return (
-                <li key={index}>
-                  <img src={imgParam(item.coverUrl,160,90)} alt="" />
-                  <h4>{item.title}</h4>
-                  <p>by {item.creator[0].userName}</p>
-                </li>
-              )
-            })
-          }
-        </ul>
+        {
+          isArrays(data) ?
+            <ul>
+              {
+                data && data.map((item, index) => {
+                  return (
+                    <NavLink
+                      key={index}
+                      to={path + item.vid}
+                    >
+                      <li>
+                        <img src={imgParam(item.coverUrl, 160, 90)} alt="" />
+                        <h4>{item.title}</h4>
+                        <p>by {item.creator[0].userName}</p>
+                      </li>
+                    </NavLink>
+                  )
+                })
+              }
+            </ul>
+            : <Empty />
+        }
 
       </div>
     );

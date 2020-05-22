@@ -1,16 +1,17 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: RA
- * @LastEditTime: 2020-05-15 10:44:12
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-22 16:52:04
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
+import Empty from '../../components/empty';
 
 //store
 import { connect } from 'react-redux';
-import { imgParam } from '../../common/utils/format';
+import { imgParam, isArrays } from '../../common/utils/format';
 // import { bindActionCreators } from 'redux';
 // import { setPageNum, gainSearchInfo, setMenuIndex } from '../../store/actions';
 
@@ -24,22 +25,27 @@ class User extends Component {
     console.log(data)
     return (
       <div className="user">
-        <ul>
-          {
-            data && data.map((item, index) => {
-              const gender = item.gender === 1 ? 'man' : item.gender === 2 ? 'woman' : ''
-              return (
-                <li key={index}>
-                  <img src={imgParam(item.avatarUrl, 50, 50)} alt="" />
-                  <p>{item.nickname} <span className={gender}></span></p>
+        {
+          isArrays(data) ?
+            <ul>
+              {
+                data && data.map((item, index) => {
+                  const gender = item.gender === 1 ? 'man' : item.gender === 2 ? 'woman' : ''
+                  return (
+                    <li key={index}>
+                      <img src={imgParam(item.avatarUrl, 50, 50)} alt="" />
+                      <p>{item.nickname} <span className={gender}></span></p>
 
-                  <p>{item.description || item.signature}</p>
+                      <p>{item.description || item.signature}</p>
 
-                </li>
-              )
-            })
-          }
-        </ul>
+                    </li>
+                  )
+                })
+              }
+            </ul>
+            :
+            <Empty />
+        }
 
       </div>
     );

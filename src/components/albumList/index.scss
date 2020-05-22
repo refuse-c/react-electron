@@ -1,0 +1,81 @@
+.album_list {
+  width: 100%;
+  height: 100%;
+
+  .album_list_info {
+    display: flex;
+    padding: 20px 15px;
+
+    img {
+      width: 150px;
+      height: 150px;
+      min-width: 150px;
+      min-height: 150px;
+      border-radius: 1px;
+      border: 1px solid #e5e5e5;
+      border-radius: 4px;
+      // 黑白色
+      // -webkit-filter: grayscale(1); /* Webkit */
+      // filter: gray; /* IE6-9 */
+      // filter: grayscale(1); /* W3C */
+    }
+
+    .album_list_box {
+      display: flex;
+      flex-direction: column;
+      padding-left: 20px;
+
+      .album_list_user {
+        display: flex;
+
+        p {
+          width: 40px;
+          height: 20px;
+          color: #fff;
+          text-align: center;
+          line-height: 20px;
+          border-radius: 2px;
+          background-color: #C62F2F;
+        }
+
+        h2 {
+          text-align: left;
+          line-height: 20px;
+          font-size: 20px;
+          padding-left: 10px;
+        }
+      }
+
+      .album_list_btn {
+        display: flex;
+        padding-top: 10px;
+
+        button {
+          padding: 2px 8px;
+          border: 1px solid #fafafa;
+          outline: none;
+          color: #fafafa;
+          background-color: transparent;
+        }
+
+        button:not(:first-child) {
+          margin-left: 15px;
+        }
+      }
+
+      .album_list_tag {
+        padding-top: 10px;
+        font-size: 12px;
+      }
+
+      .album_list_des {
+        padding-top: 10px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .album_list_info_album_list {
+    padding: 0 15px;
+  }
+}

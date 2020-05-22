@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-05-19 21:22:18
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-22 17:55:16
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React from 'react';
@@ -35,7 +35,7 @@ function App() {
             }
           })
         }
-        <Redirect to="/home/find" />
+        <Redirect to="/videoDetailC6B041BC93D37665B75499051067896F" />
       </Router>
     </div>
 

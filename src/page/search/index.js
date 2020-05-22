@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-05-15 11:05:02
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-22 16:55:17
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -38,9 +38,9 @@ class Search extends Component {
   componentDidMount = () => {
     this.getSearchHot();
     this.getPlaceholder();
-    // const { searchInfo } = this.props;
-    // console.log(searchInfo)
-    // this.setState({ pageStatus: 3 })
+    const { searchInfo } = this.props;
+    if (isEmpty(Object.keys(searchInfo))) return;
+    this.setState({ pageStatus: 3 })
   }
 
 
@@ -119,7 +119,7 @@ class Search extends Component {
   //enter search
   keyPress = e => {
     let keycode = e.which || e.keyCode;
-    const { inputVal, placeholder, searchType } = this.state;
+    const { inputVal, placeholder } = this.state;
     if (isEmpty(inputVal)) this.setState({ showsuggest: false })
     let val = inputVal;
     if (keycode === 13) {
@@ -129,8 +129,11 @@ class Search extends Component {
       } else {
         val = inputVal;
       }
+      const { menuIndex } = this.props;
+      // const index = menuIndex ? menuIndex : 1;
+      // console.log(index)
       this.props.setPageNum(1);
-      this.getSearch(val, searchType, 1);
+      this.getSearch(val, menuIndex, 1);
     }
   }
   //change input value
@@ -171,62 +174,89 @@ class Search extends Component {
       let searchInfo = {
         pageNum: pageNums,
         searchText: keywords,
-        // singleArr: [],
-        // singerArr: [],
-        // albumArr: [],
-        // videoArr: [],
-        // listArr: [],
-        // djArr: [],
-        // userArr: [],
       }
       switch (Number(type)) {
         case 1:
           searchInfo.menuIndex = 0;
-          // searchInfo.total = data.songCount;
-          this.props.setTotal(data.songCount);
-          searchInfo.singleArr = data.songs || [];
+          if (data) {
+            this.props.setTotal(data.songCount);
+            searchInfo.singleArr = data.songs || [];
+          } else {
+            this.props.setTotal(0);
+            searchInfo.singleArr = [];
+          }
           break;//1: 单曲
         case 10:
           searchInfo.menuIndex = 1;
-          // searchInfo.total = data.albumCount;
-          this.props.setTotal(data.albumCount);
-          searchInfo.albumArr = data.albums || [];
+          if (data) {
+            this.props.setTotal(data.albumCount);
+            searchInfo.albumArr = data.albums || [];
+          } else {
+            this.props.setTotal(0);
+            searchInfo.albumArr = [];
+          }
           break;//10: 专辑
         case 100:
           searchInfo.menuIndex = 2;
-          // searchInfo.total = data.artistCount;
-          this.props.setTotal(data.artistCount);
-          searchInfo.singerArr = data.artists || [];
+          if (data) {
+            this.props.setTotal(data.artistCount);
+            searchInfo.singerArr = data.artists || [];
+          } else {
+            this.props.setTotal(0);
+            searchInfo.singerArr = [];
+          }
+
           break;//100: 歌手
         case 1000:
           searchInfo.menuIndex = 3;
-          // searchInfo.total = data.playlistCount;
-          this.props.setTotal(data.playlistCount);
-          searchInfo.listArr = data.playlists || [];
+          if (data) {
+            this.props.setTotal(data.playlistCount);
+            searchInfo.listArr = data.playlists || [];
+          } else {
+            this.props.setTotal(0);
+            searchInfo.listArr = [];
+          }
           break;//1000: 歌单
         case 1002:
           searchInfo.menuIndex = 4;
-          // searchInfo.total = data.userprofileCount;
-          this.props.setTotal(data.userprofileCount);
-          searchInfo.userArr = data.userprofiles || [];
+          if (data && data.userprofileCount) {
+            this.props.setTotal(data.userprofileCount);
+            searchInfo.userArr = data.userprofiles || [];
+          } else {
+            this.props.setTotal(0);
+            searchInfo.userArr = [];
+
+          }
           break;//1002: 用户
         case 1009:
           searchInfo.menuIndex = 5;
-          // searchInfo.total = data.djRadiosCount;
-          this.props.setTotal(data.djRadiosCount);
-          searchInfo.djArr = data.djRadios || [];
+          if (data) {
+            this.props.setTotal(data.djRadiosCount);
+            searchInfo.djArr = data.djRadios || [];
+          } else {
+            this.props.setTotal(0);
+            searchInfo.djArr = [];
+          }
           break;//1009: 电台
         case 1014:
           searchInfo.menuIndex = 6;
-          // searchInfo.total = data.videoCount;
-          this.props.setTotal(data.videoCount);
-          searchInfo.videoArr = data.videos || [];
+          if (data && data.videoCount) {
+            this.props.setTotal(data.videoCount);
+            searchInfo.videoArr = data.videos || [];
+          } else {
+            this.props.setTotal(0);
+            searchInfo.videoArr = [];
+          }
           break;//1014: 视频
         default:
           searchInfo.menuIndex = 7;
-          // searchInfo.total = data.songCount;
-          this.props.setTotal(data.songCount);
-          searchInfo.singleArr = data.songs || [];
+          if (data) {
+            this.props.setTotal(data.songCount);
+            searchInfo.singleArr = data.songs || [];
+          } else {
+            this.props.setTotal(0);
+            searchInfo.singleArr = [];
+          }
           break;
       }
       this.props.gainSearchInfo(searchInfo);
@@ -235,6 +265,7 @@ class Search extends Component {
       // this.setState({ resultList })
     }).catch(err => {
       console.log(err)
+      this.props.setTotal(null)
     })
   }
   // hot search

@@ -2,17 +2,17 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-05-22 16:48:00
+ * @LastEditTime: 2020-05-22 13:50:11
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
-import { playList } from '../../api/api';
+import { albumList } from '../../api/api';
 import { RAGet } from '../../api/netWork';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import MusicList from '../musicList';
-import { imgParam, formatDate, dataScreening, isEmpty, aa } from '../../common/utils/format';
+import { imgParam, formatDate, isEmpty, dataScreening } from '../../common/utils/format';
 
 // store 
 import { connect } from 'react-redux';
@@ -22,8 +22,8 @@ class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playList: [],
-      muscicList: '' //音乐id
+      muscicList: '',
+      albumDetail: {}
     }
   }
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -40,39 +40,36 @@ class List extends Component {
     this.props.gainMusicId(muscicList[0].id);
   }
   componentDidMount = () => {
-    const id = window.location.href.split('single')[1];
-    this.getPlayList(id)
+    console.log(window.location.href)
+    const id = window.location.href.split('albumList')[1];
+    this.getAlbumList(id)
   }
   componentWillReceiveProps = () => {
     this.setState({ playList: [], muscicList: '' });//清空数据
-    const id = window.location.href.split('single')[1];
-    this.getPlayList(id)
+    const id = window.location.href.split('albumList')[1];
+    this.getAlbumList(id)
   }
   //获取歌单音乐列表
-  getPlayList = (id) => {
-    RAGet(playList.api_url, {
+  getAlbumList = (id) => {
+    RAGet(albumList.api_url, {
       params: {
         id: id
       }
     }).then(res => {
-      // console.log(res)
-      const playList = res.playlist;
-      const tracks = res.playlist.tracks;
-      const privileges = res.privileges;
-      const data = aa(tracks, privileges)
-      const nickname = (this.props.userInfo.profile && this.props.userInfo.profile.nickname) || '';
+      const data = res.songs;
+      const albumDetail = res.album;
       const muscicList = dataScreening(data);
-      playList.name = playList.name.replace(nickname, '我');
-      this.setState({ playList, muscicList });
+
+      this.setState({ albumDetail, muscicList });
     }).catch(err => {
       console.log(err)
     })
   }
   render() {
-    const { playList, muscicList } = this.state;
-    const { name, creator, tags, createTime, description } = this.state.playList;
+    const { albumDetail, muscicList } = this.state;
+    const { name, artists, publishTime, info } = albumDetail;
     return (
-      <div className="single">
+      <div className="album_list">
         <ScrollArea
           speed={0.8}
           className="area"
@@ -81,29 +78,24 @@ class List extends Component {
           horizontal={true}
           minScrollSize={5}
         >
-          <div className="single_info">
-            <img src={imgParam(playList.coverImgUrl, 150, 150)} alt="" />
-            <div className="single_box">
-              <div className="single_user">
-                <p>歌单</p>
+          <div className="album_list_info">
+            <img src={imgParam(albumDetail.blurPicUrl, 150, 150)} alt="" />
+            <div className="album_list_box">
+              <div className="album_list_user">
+                <p>专辑</p>
                 <h2>{name}</h2>
               </div>
-              <div className="single_author">
-                <img src={imgParam(creator && creator.avatarUrl, 50, 50)} alt="" />
-                <p>{creator && creator.nickname}</p>
-                <p>{playList && formatDate(createTime)}</p>
-              </div>
-              <div className="single_btn">
+              <div className="album_list_btn">
                 <button onClick={this.playAll}>播放全部</button>
-                <button>收藏</button>
-                <button>分享</button>
+                <button>收藏{info && info.commentCount}</button>
+                <button>分享{info && info.shareCount}</button>
                 <button>下载全部</button>
               </div>
-              <div className="single_tag">标签：{tags && tags.map(item => item + '').join(' / ')}</div>
-              <div className="single_des">介绍：{description && description}</div>
+              <div className="album_list_tag">歌手：{artists && artists.map(item => item.name + '').join(' / ')}</div>
+              <div className="album_list_des">时间：{formatDate(publishTime && publishTime)}</div>
             </div>
           </div>
-          <div className="single_info_list">
+          <div className="album_list_info_list">
             {
               !isEmpty(muscicList) ? <MusicList muscicList={muscicList} /> : null
             }

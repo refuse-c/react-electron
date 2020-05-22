@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-21 11:39:39
+ * @LastEditTime: 2020-05-22 12:30:42
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -115,6 +115,7 @@ class Footer extends Component {
     RAGet(getMusicUrl.api_url, {
       params: {
         id: id,
+        br: 128000//码率, 默认设置了 999000 即最大码率, 如果要 320k 则可设置为 320000, 其他类推
       }
     }).then(res => {
       const audio = this.audio;

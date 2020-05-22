@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-21 14:01:33
- * @LastEditTime: 2020-05-15 11:59:03
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-22 16:51:17
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -109,13 +109,6 @@ class SearchInfo extends Component {
             </ul>
             <ul>
               {
-                // singleArr
-                // singerArr
-                // albumArr
-                // videoArr
-                // listArr
-                // djArr
-                // userArr
                 // 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018: 综合
                 menuIndex === 1 && searchInfo.singleArr ?
                   <MusicList muscicList={dataScreening(searchInfo.singleArr)} pageNum={pageNum} />
@@ -145,8 +138,9 @@ class SearchInfo extends Component {
         {
           returnsongCount(menuIndex, total) ?
             <Pagination totalPage={returnsongCount(menuIndex, total)} pageNum={1} />
-            : null}
-        {/* pageCallbackFn={this.getCurrentPage.bind(this)}  */}
+            :
+            null
+        }
       </div>
     );
   }

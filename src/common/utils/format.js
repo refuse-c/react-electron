@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-20 13:45:58
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-22 14:08:02
+ * @LastEditors: refuse_c
  * @Description: 
  */
 
@@ -346,7 +346,7 @@ export const pagingParams = (keyword, type, spageNum) => {
  */
 export const returnsongCount = (type, total) => {
   let totals = 0;
-  if (isEmpty(total)) return;
+  if (isEmpty(total)) return false;
   switch (type) {
     case 1: totals = total % 50 === 0 ? parseInt(total / 50) : parseInt(total / 50) + 1; break;
     case 10: totals = total % 20 === 0 ? parseInt(total / 20) : parseInt(total / 20) + 1; break;
@@ -377,7 +377,7 @@ export const dataScreening = (arr) => {
     obj.dt = item.duration || item.dt;
     obj.mv = item.mv || item.mvid || '';
     obj.picUrl = '';
-    obj.st = item.st;
+    obj.st = item.privilege ? item.privilege.st : item.st || '';
     newArr.push(obj);
     return index.id
   });

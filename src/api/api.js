@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-21 17:02:13
+ * @LastEditTime: 2020-05-22 17:36:20
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -72,4 +72,16 @@ export const topSongs = {
 //推荐mv
 export const personalizedMv = {
   api_url: '/personalized/mv'
+}
+//获取专辑列表
+export const albumList = {
+  api_url: '/album'
+}
+//获取视频详情
+export const videoDetail = {
+  api_url: '/video/detail'
+}
+//获取视频url
+export const videoUrl = {
+  api_url: '/video/url'
 }

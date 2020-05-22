@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:28
- * @LastEditTime: 2020-05-19 20:44:15
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-22 13:52:09
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import * as ACTIONSTYPES from './actionTypes';
@@ -106,7 +106,6 @@ export const setPageNum = (data) => {
 }
 //总数
 export const setTotal = (data) => {
-  console.log(data)
   return {
     type: ACTIONSTYPES.Page_TOTAL,
     data
