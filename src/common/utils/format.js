@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-22 14:08:02
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-22 21:04:46
+ * @LastEditors: RA
  * @Description: 
  */
 
@@ -229,11 +229,11 @@ export const getDevice = (data) => {
  * @return: 
  * @description: 格式化播放次数
  */
-export const fomatPlaycount = (v) => {
+export const formatPlaycount = (v) => {
   if (isEmpty(v)) {
     return v;
   }
-  return v >= 10000 ? parseFloat(v / 10000).toFixed(1) + '万' : v
+  return v >= 10000 ? Math.floor(v / 10000) + '万' : v
 }
 
 /**

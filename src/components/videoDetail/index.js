@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-05-22 17:57:03
+ * @LastEditors: RA
+ * @LastEditTime: 2020-05-22 23:34:51
  * @Description:
  */
 import React, { Component } from 'react';
@@ -13,23 +13,43 @@ import ScrollArea from 'react-scrollbar';
 //store
 import { connect } from 'react-redux';
 import { RAGet } from '../../api/netWork';
-import { videoDetail, videoUrl } from '../../api/api';
-// import { bindActionCreators } from 'redux';
-// import { setPageNum, gainSearchInfo, setMenuIndex } from '../../store/actions';
+import { videoDetail, videoUrl, relatedAllvideo } from '../../api/api';
+import { formatDate, formatPlaycount, formatPlayTime, imgParam, isEmpty } from '../../common/utils/format';
+import { bindActionCreators } from 'redux';
+import { setIsPlay } from '../../store/actions';
 
 class Video extends Component {
   constructor(props) {
     super(props);
     this.state = {
       videoUrl: '',
+      videoDetail: {},
+      videoGroup: {}
     }
   }
 
   componentDidMount = () => {
+    this.props.setIsPlay(false);
     const id = window.location.href.split('videoDetail')[1];
-    console.log(id);
     this.getVideoDetail(id);
     this.getVideoUrl(id);
+    this.getRelatedAllvideo(id);
+
+    const video = this.video;
+
+    // 当前音乐播放完毕监听
+    video.addEventListener("ended", () => {
+      const id = this.state.videoGroup[0].vid;
+      if (isEmpty(id)) return;
+      this.getVideoDetail(id);
+      this.getVideoUrl(id);
+      this.getRelatedAllvideo(id);
+    });
+  }
+  nextViode = (id) => {
+    this.getVideoDetail(id);
+    this.getVideoUrl(id);
+    this.getRelatedAllvideo(id);
   }
   getVideoDetail = (id) => {
     RAGet(videoDetail.api_url, {
@@ -37,7 +57,8 @@ class Video extends Component {
         id: id
       }
     }).then(res => {
-      console.log(res)
+      const videoDetail = res.data;
+      this.setState({ videoDetail });
     }).catch(err => {
       console.log(err)
     })
@@ -48,19 +69,28 @@ class Video extends Component {
         id: id
       }
     }).then(res => {
-      console.log(res)
       const videoUrl = res.urls[0].url;
       this.setState({ videoUrl });
-      console.log(videoUrl)
     }).catch(err => {
       console.log(err)
     })
   }
-
+  getRelatedAllvideo = (id) => {
+    RAGet(relatedAllvideo.api_url, {
+      params: {
+        id: id
+      }
+    }).then(res => {
+      const videoGroup = res.data;
+      this.setState({ videoGroup });
+    }).catch(err => {
+      console.log(err)
+    })
+  }
   render() {
-    const { videoUrl } = this.state;
+    const { videoUrl, videoDetail, videoGroup } = this.state;
     return (
-      <div className="video-detail">
+      <div className="video-info">
         <ScrollArea
           speed={1}
           className="area"
@@ -68,12 +98,52 @@ class Video extends Component {
         >
           <div className="video-content">
             <div className="video-left">
-              <div className="name">32132131</div>
+              <div className="name" onClick={e => this.props.history.goBack()}>{videoDetail.title}</div>
               <video
                 src={videoUrl}
-                autoPlay={`true`}
+                autoPlay
+                controls
+                ref={video => (this.video = video)}
               >
               </video>
+            </div>
+            <div className="video-right">
+              <h3>视频介绍</h3>
+              <div className="video-time">
+                <p>发布时间：{formatDate(videoDetail.publishTime)}</p>
+                <p>播放次数：{formatPlaycount(videoDetail.playTime)}</p>
+              </div>
+              <div>
+                <p className="description">简介：{videoDetail.description}</p>
+                <div className="videoGroup">标签：{
+                  videoDetail.videoGroup && videoDetail.videoGroup.map((item, index) => {
+                    return (
+                      <span key={index}>{item.name}</span>
+                    )
+                  })
+                }
+                </div>
+              </div>
+              <div className="video-detail"></div>
+              <h3>相关推荐</h3>
+              <div className="video-group">
+                <ul>
+                  {
+                    videoGroup.length > 0 && videoGroup.map((item, index) => {
+                      return (
+                        <li key={index} onClick={this.nextViode.bind(this, item.vid)}>
+                          <img src={imgParam(item.coverUrl, 120, 70)} alt="" />
+                          <div>
+                            <p className="overflow">{item.title}</p>
+                            <p>{formatPlayTime(item.durationms / 1000)}</p>
+                            <p>by {item.creator[0].userName}</p>
+                          </div>
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
+              </div>
             </div>
           </div>
         </ScrollArea>
@@ -90,9 +160,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // gainSearchInfo: bindActionCreators(gainSearchInfo, dispatch),
-    // setPageNum: bindActionCreators(setPageNum, dispatch),
-    // setMenuIndex: bindActionCreators(setMenuIndex, dispatch),
+    setIsPlay: bindActionCreators(setIsPlay, dispatch),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Video);

@@ -62,11 +62,19 @@ canvas {
 .rc_active:hover {
   background-color: rgba(255, 255, 255, 0.3) !important;
 }
-.ra_disabled{
+.ra_disabled {
   pointer-events: none;
-  color:#ccc;
+  color: #ccc;
 }
-.rc_disabled{
+.rc_disabled {
   pointer-events: none;
-  color:#666;
+  color: #666;
+}
+.overflow {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-all;
 }

@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-22 17:36:20
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-22 20:47:16
+ * @LastEditors: RA
  * @Description: 
  */
 //获取歌单
@@ -84,4 +84,8 @@ export const videoDetail = {
 //获取视频url
 export const videoUrl = {
   api_url: '/video/url'
+}
+//相关视频
+export const relatedAllvideo = {
+  api_url: '/related/allvideo'
 }

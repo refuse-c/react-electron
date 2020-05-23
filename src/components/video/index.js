@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-05-22 17:46:35
+ * @LastEditors: RA
+ * @LastEditTime: 2020-05-22 23:26:42
  * @Description:
  */
 import React, { Component } from 'react';
@@ -22,7 +22,6 @@ class Video extends Component {
   }
   render() {
     const { data } = this.props;
-    console.log(data)
     const path = '/videoDetail';
     return (
       <div className="video">

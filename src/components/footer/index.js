@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-22 12:30:42
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-22 23:33:45
+ * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -11,8 +11,7 @@ import { RAGet } from '../../api/netWork';
 import { getMusicDetail, getMusicUrl } from '../../api/api';
 import { formatPlayTime, isEmpty, imgParam } from '../../common/utils/format';
 // store 
-import { connect } from
-  'react-redux';
+import { connect } from'react-redux';
 import { bindActionCreators } from 'redux';
 import { setPlayModel, setIsPlay, setIndex, gainMusicId, gainPlayLIst, setPlayListStatus, setCurrentTime } from '../../store/actions';
 class Footer extends Component {
@@ -107,6 +106,8 @@ class Footer extends Component {
         this.getMusicUrl(musicId);
         this.getMusicDetail(musicId);
         this.props.gainMusicId(musicId);
+      } else {
+        this.audio.pause();
       };
     }
   }

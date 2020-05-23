@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-05-22 16:55:17
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-22 23:32:32
+ * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -62,8 +62,9 @@ class Search extends Component {
     // 更新分页时
     if (prevState.pageNum !== this.state.pageNum) {
       const { pageNum } = this.state;
-      const { inputVal, searchType } = this.state;
-      this.getSearch(inputVal, searchType, pageNum)
+      const { inputVal } = this.state;
+      const {menuIndex} = this.props;
+      this.getSearch(inputVal, menuIndex, pageNum)
     }
   }
 
@@ -165,6 +166,7 @@ class Search extends Component {
     this.props.gainSearchInfo({});
     const pageNums = isEmpty(pageNum) ? 1 : pageNum;
     this.historyList(keywords);
+    // this.props.setMenuIndex(type);
     this.setState({ showsuggest: false, pageStatus: 3 });
     RAGet(search.api_url, {
       params: pagingParams(keywords, type, pageNums)

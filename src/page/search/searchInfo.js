@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-21 14:01:33
- * @LastEditTime: 2020-05-22 16:51:17
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-22 23:38:40
+ * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -136,10 +136,10 @@ class SearchInfo extends Component {
           </ScrollArea>
         </div>
         {
-          returnsongCount(menuIndex, total) ?
-            <Pagination totalPage={returnsongCount(menuIndex, total)} pageNum={1} />
-            :
+          !returnsongCount(menuIndex, total) || returnsongCount(menuIndex, total) === 1 ?
             null
+            :
+            <Pagination totalPage={returnsongCount(menuIndex, total)} pageNum={1} />
         }
       </div>
     );
