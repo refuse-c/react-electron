@@ -13,7 +13,7 @@
     "fs": "0.0.1-security",
     "iconv-lite": "^0.5.1",
     "node-id3": "^0.1.16",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
