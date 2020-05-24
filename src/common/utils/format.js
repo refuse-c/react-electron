@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-22 21:04:46
+ * @LastEditTime: 2020-05-24 18:22:59
  * @LastEditors: RA
  * @Description: 
  */
@@ -531,7 +531,7 @@ export const foramtLrc = (array) => {
 export const getTimeIndex = (timeArr, time) => {
   let timeIndex = -1;
   const length = timeArr.length;
-  const currentTime = Math.floor(time) + 0.1;
+  const currentTime = Math.floor(time) + 0.2;
   for (let i = 0; i < length; i++) {
     if (timeArr[i].t >= currentTime) {
       timeIndex = i - 1;

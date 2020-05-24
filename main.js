@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-05-21 09:38:23
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-24 14:19:22
+ * @LastEditors: RA
  * @Description: 
  */
 // 引入electron并创建一个Browserwindow
@@ -20,7 +20,7 @@ function createWindow() {
   //创建浏览器窗口,宽高自定义具体大小你开心就好
   mainWindow = new BrowserWindow({
     width: 1000,
-    height: 500,
+    height: 600,
     useContentSize: true,
     frame: false,
     webPreferences: {
@@ -40,7 +40,7 @@ function createWindow() {
   mainWindow.setIcon('./src/common/images/logo.png');
   mainWindow.loadURL('http://localhost:3000/');
   // mainWindow.loadFile('./build/index.html')
-  mainWindow.setMinimumSize(1000, 500)
+  mainWindow.setMinimumSize(1000, 600)
   // 关闭window时触发下列事件.
   mainWindow.on('closed', function () {
     mainWindow = null
