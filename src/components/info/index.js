@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:07:55
- * @LastEditTime: 2020-05-15 18:17:04
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-25 11:17:23
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -21,7 +21,7 @@ class Info extends Component {
       <div className="info">
         {
           routes.map((route, key) => {
-            return <Route key={key} path={route.path}
+            return <Route key={route.path + key} path={route.path}
               render={props => (
                 <route.component {...props} routes={route.routes} />
               )}

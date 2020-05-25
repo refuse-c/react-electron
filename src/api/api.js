@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-22 20:47:16
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-25 14:10:58
+ * @LastEditors: refuse_c
  * @Description: 
  */
 //获取歌单
@@ -88,4 +88,16 @@ export const videoUrl = {
 //相关视频
 export const relatedAllvideo = {
   api_url: '/related/allvideo'
+}
+//歌单分类
+export const playlistCatlist = {
+  api_url: '/playlist/catlist'
+}
+//热门歌单
+export const playlistHot = {
+  api_url: '/playlist/hot'
+}
+//歌单获取
+export const topPlaylist = {
+  api_url: '/top/playlist'
 }

@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-24 18:22:59
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-25 17:45:53
+ * @LastEditors: refuse_c
  * @Description: 
  */
 
@@ -541,4 +541,24 @@ export const getTimeIndex = (timeArr, time) => {
     }
   }
   return Number(timeIndex);
+}
+
+export const formatArr = (arr1, obj) => {
+  let newArr = {};
+  arr1.forEach(item => {
+    let element = '';
+    const { category } = item;
+    for (const key in obj) {
+      if (category === Number(key))
+        element = obj[key];
+    }
+    if (!newArr[category]) {
+      newArr[category] = {
+        title: element,
+        array: []
+      }
+    }
+    newArr[category].array.push(item);
+  });
+  return Object.values(newArr); // list 转换成功的数据
 }

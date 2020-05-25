@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 14:46:55
- * @LastEditTime: 2020-05-18 16:24:38
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-25 12:22:19
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -20,11 +20,28 @@ const { ipcRenderer: ipc } = window.require('electron');
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      pathname: '',
+      initpathname: ''
+    }
   }
   componentDidMount = () => {
+    const initpathname = this.props.history.location.pathname;
+    this.setState({ initpathname })
     if (isEmpty(this.props.userInfo.profile)) return;
     this.getLoginStatus();
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { pathname } = nextProps.history.location;
+    if (pathname !== prevState.pathname) {
+      return {
+        pathname,
+        props: {
+          pathname: pathname,
+        }
+      }
+    }
+    return null;
   }
   buttonClick = type => {
     ipc.send(type);
@@ -80,8 +97,15 @@ class Header extends Component {
   }
   render() {
     const { userInfo, isLogin } = this.props;
+    const { pathname, initpathname } = this.state;
     return (
       <div className="header">
+        {
+          pathname !== initpathname ?
+            <div className="header-back" onClick={() => this.props.history.goBack()}></div>
+            :
+            null
+        }
         <div className="left">EMusic</div>
         <div className="center">
           <ul>

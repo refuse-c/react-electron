@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 16:31:03
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-05-21 12:17:43
+ * @LastEditTime: 2020-05-25 11:07:03
  * @Description:
  */
 import React, { Component } from 'react';
@@ -136,7 +136,7 @@ class Player extends Component {
                     {
                       !isEmpty(lyric) && lyric.length > 0 ?
                         lyric.map((item, index, lyric) => {
-                          const num = getTimeIndex(lyric, currentTime)
+                          const num = getTimeIndex(lyric, currentTime);
                           // if (wheelStatus) {
                           if (num > 7) {
                             this.content.scrollArea.scrollYTo((num - 7) * 20);

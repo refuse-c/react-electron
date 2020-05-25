@@ -1,15 +1,19 @@
 // list components
 $imgUrl: "../images/";
+
 .icon_mv {
   background: url($imgUrl+"mv.png") center center / contain no-repeat;
 }
+
 .icon_more {
   background: url($imgUrl+"more.png") center center / 180% no-repeat;
 }
+
 //header components
 .icon_back {
   background: url($imgUrl+"back.png") center center / contain no-repeat;
 }
+
 //info components
 .arrow-right {
   background: url($imgUrl+"arrow_right.png") center center / contain no-repeat;
@@ -19,6 +23,7 @@ $imgUrl: "../images/";
 .icon_menu {
   background: url($imgUrl+"menu.png") center center / 135% no-repeat;
 }
+
 .icon_search {
   background: url($imgUrl+"search.png") center center / contain no-repeat;
 }
@@ -27,6 +32,7 @@ $imgUrl: "../images/";
 .icon_play {
   background: url($imgUrl+"play_all.png") center center / contain no-repeat;
 }
+
 .icon_list {
   margin-left: 0.05rem !important;
   background: url($imgUrl+"icon_list.png") center center / 160% no-repeat;
@@ -36,9 +42,22 @@ $imgUrl: "../images/";
 .icon_share {
   background: url($imgUrl+"share.png") center center / 140% no-repeat;
 }
+
 .icon_black_back {
   background: url($imgUrl+"black_back.png") center center / contain no-repeat;
 }
+
 .icon_singer {
   background: url($imgUrl+"icon_singer.png") center center / contain no-repeat;
+}
+
+.max_width {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.max_height {
+  width: 100%;
+  height: calc(100vh - 90px);
 }
