@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-05-22 13:50:11
+ * @LastEditors: RA
+ * @LastEditTime: 2020-05-25 20:27:12
  * @Description:
  */
 import React, { Component } from 'react';
@@ -12,25 +12,29 @@ import { RAGet } from '../../api/netWork';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import MusicList from '../musicList';
-import { imgParam, formatDate, isEmpty, dataScreening } from '../../common/utils/format';
+import {
+  imgParam,
+  formatDate,
+  isEmpty,
+  dataScreening,
+} from '../../common/utils/format';
 
-// store 
+// store
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { gainPlayLIst, gainMusicId, setIsPlay, setIndex } from '../../store/actions';
+import {
+  gainPlayLIst,
+  gainMusicId,
+  setIsPlay,
+  setIndex,
+} from '../../store/actions';
 class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
       muscicList: '',
-      albumDetail: {}
-    }
-  }
-  shouldComponentUpdate = (nextProps, nextState) => {
-    if (this.props.showPlayList !== nextProps.showPlayList) {
-      return false
-    }
-    return true;
+      albumDetail: {},
+    };
   }
   playAll = () => {
     const { muscicList } = this.state;
@@ -38,33 +42,35 @@ class List extends Component {
     this.props.setIsPlay(true);
     this.props.gainPlayLIst(muscicList);
     this.props.gainMusicId(muscicList[0].id);
-  }
+  };
   componentDidMount = () => {
-    console.log(window.location.href)
+    console.log(window.location.href);
     const id = window.location.href.split('albumList')[1];
-    this.getAlbumList(id)
-  }
+    this.getAlbumList(id);
+  };
   componentWillReceiveProps = () => {
-    this.setState({ playList: [], muscicList: '' });//清空数据
+    this.setState({ playList: [], muscicList: '' }); //清空数据
     const id = window.location.href.split('albumList')[1];
-    this.getAlbumList(id)
-  }
+    this.getAlbumList(id);
+  };
   //获取歌单音乐列表
   getAlbumList = (id) => {
     RAGet(albumList.api_url, {
       params: {
-        id: id
-      }
-    }).then(res => {
-      const data = res.songs;
-      const albumDetail = res.album;
-      const muscicList = dataScreening(data);
-
-      this.setState({ albumDetail, muscicList });
-    }).catch(err => {
-      console.log(err)
+        id: id,
+      },
     })
-  }
+      .then((res) => {
+        const data = res.songs;
+        const albumDetail = res.album;
+        const muscicList = dataScreening(data);
+
+        this.setState({ albumDetail, muscicList });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   render() {
     const { albumDetail, muscicList } = this.state;
     const { name, artists, publishTime, info } = albumDetail;
@@ -91,14 +97,19 @@ class List extends Component {
                 <button>分享{info && info.shareCount}</button>
                 <button>下载全部</button>
               </div>
-              <div className="album_list_tag">歌手：{artists && artists.map(item => item.name + '').join(' / ')}</div>
-              <div className="album_list_des">时间：{formatDate(publishTime && publishTime)}</div>
+              <div className="album_list_tag">
+                歌手：
+                {artists && artists.map((item) => item.name + '').join(' / ')}
+              </div>
+              <div className="album_list_des">
+                时间：{formatDate(publishTime && publishTime)}
+              </div>
             </div>
           </div>
           <div className="album_list_info_list">
-            {
-              !isEmpty(muscicList) ? <MusicList muscicList={muscicList} /> : null
-            }
+            {!isEmpty(muscicList) ? (
+              <MusicList muscicList={muscicList} />
+            ) : null}
           </div>
         </ScrollArea>
       </div>
@@ -110,9 +121,8 @@ class List extends Component {
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
-    showPlayList: state.showPlayList,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -120,8 +130,7 @@ const mapDispatchToProps = (dispatch) => {
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),
-  }
-}
-
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);

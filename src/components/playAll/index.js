@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-17 15:20:33
- * @LastEditTime: 2020-05-17 15:58:11
+ * @LastEditTime: 2020-05-25 20:25:14
  * @LastEditors: RA
  * @Description: 
  */
@@ -44,7 +44,6 @@ class PlayAll extends Component {
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
-    showPlayList: state.showPlayList,
   }
 }
 

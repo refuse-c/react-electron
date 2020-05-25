@@ -1,16 +1,16 @@
 /*
  * @Author: RA
  * @Date: 2020-05-08 19:19:33
- * @LastEditTime: 2020-05-21 12:16:33
- * @LastEditors: refuse_c
- * @Description: 
+ * @LastEditTime: 2020-05-25 20:38:47
+ * @LastEditors: RA
+ * @Description:
  */
 import React, { Component } from 'react';
 
 import './index.scss';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
-// store 
+// store
 import { connect } from 'react-redux';
 import { formatNum, formatPlayTime } from '../../common/utils/format';
 import { bindActionCreators } from 'redux';
@@ -19,16 +19,15 @@ class PlayList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPlayList: false,
-      index: 0
-    }
+      index: 0,
+    };
   }
   componentDidMount = () => {
     const { index } = this.props;
     setTimeout(() => {
       this.content.scrollArea.scrollYTo(index * 24);
     }, 10);
-  }
+  };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { index } = nextProps;
@@ -36,9 +35,9 @@ class PlayList extends Component {
       return {
         index,
         props: {
-          index: index
-        }
-      }
+          index: index,
+        },
+      };
     }
     return null;
   }
@@ -48,40 +47,39 @@ class PlayList extends Component {
       this.content.scrollArea.scrollYTo(index * 24);
     }
   }
-  two = (e) => {
+  stopBubbling = (e) => {
     e.stopPropagation();
-  }
+  };
   top = () => {
-    this.content.scrollArea.scrollTop()
-  }
+    this.content.scrollArea.scrollTop();
+  };
   playMusic = (index) => {
     const { playList } = this.props;
     const musicId = playList[index].id;
     this.props.setIndex(index);
     this.props.setIsPlay(true);
     this.props.gainMusicId(musicId);
-  }
+  };
   render() {
     const { playList, musicId, index } = this.props;
-    // console.log(playList)
     const length = playList.length;
     return (
-      <div className="play-list" onClick={this.two}>
-        <div
-          onClick={this.top}
-          className="play-lis-title">播放列表<p>{'（' + (index + 1) + ' / ' + length + '）'}</p></div>
+      <div className="play-list" onClick={this.stopBubbling}>
+        <div onClick={this.top} className="play-lis-title">
+          播放列表<p>{'（' + (index + 1) + ' / ' + length + '）'}</p>
+        </div>
         <div className="scroll">
           <ScrollArea
             speed={1}
             className="area"
-            ref={ref => (this.content = ref)}
+            ref={(ref) => (this.content = ref)}
           >
             <ul>
-              {
-                playList.length > 0 && playList.map((item, index) => {
-                  const indexs = musicId === item.id ? index : ''
-                  const sty = index === indexs ? 'rc_active' : ''
-                  const dis = item.st === -200 ? 'rc_disabled' : ''
+              {playList.length > 0 &&
+                playList.map((item, index) => {
+                  const indexs = musicId === item.id ? index : '';
+                  const sty = index === indexs ? 'rc_active' : '';
+                  const dis = item.st === -200 ? 'rc_disabled' : '';
                   return (
                     <li
                       key={index}
@@ -92,9 +90,8 @@ class PlayList extends Component {
                       <div>{item.name}</div>
                       <div>{formatPlayTime(item.dt / 1000)}</div>
                     </li>
-                  )
-                })
-              }
+                  );
+                })}
             </ul>
           </ScrollArea>
         </div>
@@ -108,16 +105,14 @@ const mapStateToProps = (state) => {
     playList: state.playList,
     musicId: state.musicId,
     index: state.index,
-    showPlayList: state.showPlayList,
-
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setIndex: bindActionCreators(setIndex, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
-  }
-}
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(PlayList);

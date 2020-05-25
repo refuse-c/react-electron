@@ -4,7 +4,7 @@
   min-height: calc(100vh - 130px);
   padding-top: 20px;
 
-  .current_name {
+  .song_list_text {
     display: table;
     font-size: 12px;
     padding: 5px 20px 5px 5px;
@@ -15,7 +15,7 @@
 
   .hot_tags {
     display: flex;
-    margin-top: 20px;
+    margin: 20px 0;
 
     ul {
       display: flex;
@@ -46,22 +46,32 @@
     border-radius: 5px;
     box-shadow: 0 0 5px #ccc;
     background-color: rgba($color: #000000, $alpha: 0.8);
-    overflow-y: scroll;
 
     &::before {
       position: absolute;
       content: '';
-      top: -12px;
-      left: 20px;
-      border-left: 9px solid transparent;
-      border-right: 9px solid transparent;
-      border-bottom: 12px solid rgba($color: #000000, $alpha: 0.8);
+      top: -10px;
+      left: 12px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid rgba($color: #000000, $alpha: 0.8);
     }
 
     .lists {
       display: flex;
       padding: 20px 10px;
       flex-direction: column;
+
+      & p:first-child {
+        width: 100%;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        margin: 5px;
+        border-radius: 2px;
+        font-size: 13px;
+        background-color: rgba($color: #fff, $alpha: 0.2);
+      }
 
       div {
         display: flex;
@@ -86,11 +96,75 @@
             line-height: 30px;
             margin: 5px;
             border-radius: 2px;
-            background-color: #ccc;
+            font-size: 13px;
+            background-color: rgba($color: #fff, $alpha: 0.2);
           }
         }
       }
     }
 
+  }
+}
+
+.a {
+  background-color: #dd5862 !important;
+}
+
+.recommend-list {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &::after {
+      content: "";
+      width: 18%;
+    }
+
+    a {
+      width: 18%;
+      margin-bottom: 20px;
+    }
+
+    .recommend-bg {
+      position: relative;
+
+      div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        color: #333;
+
+        h3 {
+          font-size: 64px;
+        }
+
+        h4 {
+          font-size: 18px;
+        }
+      }
+    }
+
+    li {
+      width: 100%;
+
+      img {
+        width: 100%;
+        border-radius: 2px;
+      }
+
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 12px;
+      }
+    }
   }
 }

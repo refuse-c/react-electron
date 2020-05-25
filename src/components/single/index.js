@@ -27,7 +27,7 @@ class List extends Component {
     }
   }
   shouldComponentUpdate = (nextProps, nextState) => {
-    if (this.props.showPlayList !== nextProps.showPlayList) {
+    if (this.props.showPlop !== nextProps.showPlop) {
       return false
     }
     return true;
@@ -118,7 +118,7 @@ class List extends Component {
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
-    showPlayList: state.showPlayList,
+    showPlop: state.showPlop,
   }
 }
 

@@ -1,9 +1,9 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:12:40
- * @LastEditTime: 2020-05-15 18:46:14
+ * @LastEditTime: 2020-05-25 20:32:57
  * @LastEditors: RA
- * @Description: 
+ * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
@@ -14,51 +14,46 @@ import PlayList from '../../components/playList';
 import Login from '../login';
 import { Route } from 'react-router-dom';
 
-// store 
+// store
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { gainMusicList, setPlayListStatus } from '../../store/actions';
+import { gainMusicList, setShowPopStatus } from '../../store/actions';
 class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
       // loginShow: true
-    }
+    };
   }
   //点击区域外掩藏
   handleHide = () => {
-    const { showPlayList } = this.props;
-    if (showPlayList) {
-      this.props.setPlayListStatus(false);
+    const { showPlop } = this.props;
+    if (showPlop) {
+      this.props.setShowPopStatus('');
     }
-
-  }
+  };
   render() {
-    const { showLogin, routes, showPlayList } = this.props;
+    const { showLogin, routes, showPlop } = this.props;
     return (
       <div className="index">
         <div onClick={this.handleHide}>
-          {
-            showLogin ? <Login /> : null
-          }
+          {showLogin ? <Login /> : null}
           <Header {...this.props} />
-          {
-            routes.map((route, key) => {
-                return <Route key={key} path={route.path}
-                  render={props => (
-                    <route.component {...props} routes={route.routes} />
-                  )}
-                />
-            })
-          }
+          {routes.map((route, key) => {
+            return (
+              <Route
+                key={key}
+                path={route.path}
+                render={(props) => (
+                  <route.component {...props} routes={route.routes} />
+                )}
+              />
+            );
+          })}
         </div>
         <Footer {...this.props} />
-        {
-          showPlayList ? <PlayList {...this.props} /> : null
-        }
-
-        {/* <div className="inner"></div> */}
-      </div >
+        {showPlop ==='play_list'? <PlayList {...this.props} /> : null}
+      </div>
     );
   }
 }
@@ -68,16 +63,15 @@ const mapStateToProps = (state) => {
   return {
     isLogin: state.isLogin,
     showLogin: state.showLogin,
-    showPlayList: state.showPlayList,
-    setPlayListStatus: state.setPlayListStatus,
-
-  }
-}
+    showPlop: state.showPlop,
+    setShowPopStatus: state.setShowPopStatus,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     gainMusicList: bindActionCreators(gainMusicList, dispatch),
-    setPlayListStatus: bindActionCreators(setPlayListStatus, dispatch),
-  }
-}
+    setShowPopStatus: bindActionCreators(setShowPopStatus, dispatch),
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

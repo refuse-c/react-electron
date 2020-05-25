@@ -1,88 +1,187 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-25 17:31:31
- * @LastEditors: refuse_c
- * @Description: 
+ * @LastEditTime: 2020-05-25 22:11:27
+ * @LastEditors: RA
+ * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
+
+import { NavLink } from 'react-router-dom';
 import { RAGet } from '../../api/netWork';
 import { playlistCatlist, playlistHot, topPlaylist } from '../../api/api';
 
 import List from './list';
-import { formatArr } from '../../common/utils/format';
+import { formatArr, imgParam } from '../../common/utils/format';
+
+// store
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setShowPopStatus, setSonglstText } from '../../store/actions';
 class FindList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allListData: {},
       hotListData: {},
-      current: '全部歌单',
-      showAllList: true
-    }
+      songListdata: {},
+      songListText: '全部歌单',
+    };
   }
 
   componentDidMount = () => {
+    const { songListText } = this.state;
     this.getPlaylistCatlist();
     this.getPlaylistHot();
+    this.getTopPlaylist(songListText);
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { songListText } = nextProps;
+    if (songListText !== prevState.songListText) {
+      return {
+        songListText,
+        props: {
+          songListText: songListText,
+        },
+      };
+    }
+    return null;
+  }
+  componentDidUpdate(prevState) {
+    // 当前音乐更新了
+    if (prevState.songListText !== this.state.songListText) {
+      const { songListText } = this.state;
+      this.getTopPlaylist(songListText);
+    }
   }
   getPlaylistCatlist = () => {
     RAGet(playlistCatlist.api_url)
-      .then(res => {
+      .then((res) => {
         const a = res.sub;
         const b = res.categories;
-        const allListData = formatArr(a, b)
+        const allListData = formatArr(a, b);
         this.setState({ allListData });
-      }).catch(err => {
-        console.log(err)
       })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   getPlaylistHot = () => {
     RAGet(playlistHot.api_url)
-      .then(res => {
+      .then((res) => {
         const hotListData = res.tags;
         this.setState({ hotListData });
-      }).catch(err => {
-        console.log(err)
       })
-  }
-  gettopPlaylist = () => {
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  getTopPlaylist = (songListText) => {
     RAGet(topPlaylist.api_url, {
       params: {
-        order: '',//可选值为 'new' 和 'hot', 分别对应最新和最热 , 默认为 'hot'
-        limit: '',//取出评论数量, 默认为 50
-        offset: '',// 偏移数量, 用于分页, 如: (评论页数 - 1) * 50, 其中 50 为 limit 的值
-        cat: ''
-      }
+        order: '', //可选值为 'new' 和 'hot', 分别对应最新和最热 , 默认为 'hot'
+        limit: 100, //取出评论数量, 默认为 50
+        offset: '', // 偏移数量, 用于分页, 如: (评论页数 - 1) * 50, 其中 50 为 limit 的值
+        cat: songListText,
+      },
     })
-  }
+      .then((res) => {
+        console.log(res.playlists);
+        const songListdata = res.playlists;
+        this.setState({ songListdata });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  showPlop = () => {
+    const { showPlop } = this.props;
+    showPlop === 'song_list'
+      ? this.props.setShowPopStatus('')
+      : this.props.setShowPopStatus('song_list');
+  };
+  chooseItem = (text) => {
+    console.log(text);
+    this.props.setShowPopStatus('');
+    this.props.setSonglstText(text);
+  };
   render() {
-    const { current, hotListData, allListData, showAllList } = this.state;
-    // console.log(hotListData)
-    // console.log(allListData)
+    const { showPlop } = this.props;
+    const { songListText, hotListData, allListData, songListdata } = this.state;
     return (
       <div className="findList">
-        <h3 className="current_name" onClick={() => this.setState({ showAllList: true })}>{current}</h3>
-        <div className="hot_tags">热门标签：
-        <ul>
-            {
-              hotListData.length > 0 && hotListData.map((item, index) => {
+        <h3 className="song_list_text" onClick={this.showPlop}>
+          {songListText}
+        </h3>
+        <div className="hot_tags">
+          热门标签：
+          <ul>
+            {hotListData.length > 0 &&
+              hotListData.map((item, index) => {
                 return (
-                  <li key={index}>{item.playlistTag.name}</li>
-                )
-              })
-            }
+                  <li
+                    onClick={this.chooseItem.bind(this, item.playlistTag.name)}
+                    key={index}
+                  >
+                    {item.playlistTag.name}
+                  </li>
+                );
+              })}
           </ul>
         </div>
-        {
-          showAllList && allListData ?
-            <List data={allListData} />
-            : null
-        }
+        {showPlop === 'song_list' && allListData ? (
+          <List data={allListData} />
+        ) : null}
+
+        <div className="recommend-list">
+          <ul>
+            {songListdata.length > 0 &&
+              songListdata.map((item, index) => {
+                const path = '/home/single';
+                const dailySpecial = '/home/dailySpecial';
+                return item.custom === 1 ? (
+                  <NavLink to={dailySpecial} key={index}>
+                    <li>
+                      <div className="recommend-bg">
+                        <img src={item.picUrl} alt="" />
+                        <div>
+                          <h4>{item.week}</h4>
+                          <h3>{item.day}</h3>
+                        </div>
+                      </div>
+
+                      <p>{item.name}</p>
+                    </li>
+                  </NavLink>
+                ) : (
+                  <NavLink to={path + item.id} key={index}>
+                    <li>
+                      <img src={imgParam(item.coverImgUrl, 160, 160)} alt="" />
+                      <p>{item.name}</p>
+                    </li>
+                  </NavLink>
+                );
+              })}
+          </ul>
+        </div>
       </div>
     );
   }
 }
+//注册store
+const mapStateToProps = (state) => {
+  return {
+    showPlop: state.showPlop,
+    songListText: state.songListText,
+  };
+};
 
-export default FindList;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setShowPopStatus: bindActionCreators(setShowPopStatus, dispatch),
+    setSonglstText: bindActionCreators(setSonglstText, dispatch),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(FindList);

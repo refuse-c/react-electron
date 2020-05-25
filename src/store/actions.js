@@ -1,120 +1,127 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:28
- * @LastEditTime: 2020-05-22 13:52:09
- * @LastEditors: refuse_c
- * @Description: 
+ * @LastEditTime: 2020-05-25 21:43:42
+ * @LastEditors: RA
+ * @Description:
  */
 import * as ACTIONSTYPES from './actionTypes';
 // 音乐列表
 export const gainMusicList = (data) => {
   return {
     type: ACTIONSTYPES.MUSIC_LIST,
-    data
-  }
-}
+    data,
+  };
+};
 //播放列表
 export const gainPlayLIst = (data) => {
   return {
     type: ACTIONSTYPES.PLAY_LIST,
-    data
-  }
-}
+    data,
+  };
+};
 //用户详情
 export const gainUserInfo = (data) => {
   return {
     type: ACTIONSTYPES.USER_INFO,
-    data
-  }
-}
+    data,
+  };
+};
 //是否显示登录页
 export const isSHowLogin = (data) => {
   return {
     type: ACTIONSTYPES.SHOW_LOGIN,
-    data
-  }
-}
+    data,
+  };
+};
 //是否显示已经登录
 export const isLogin = (data) => {
   return {
     type: ACTIONSTYPES.IS_LOGIN,
-    data
-  }
-}
+    data,
+  };
+};
 //是否显示已经登录
 export const gainMenuList = (data) => {
   return {
     type: ACTIONSTYPES.MENU_LIST,
-    data
-  }
-}
+    data,
+  };
+};
 // 获取音乐id
 export const gainMusicId = (data) => {
   return {
     type: ACTIONSTYPES.MUSIC_ID,
-    data
-  }
-}
+    data,
+  };
+};
 //播放顺序
 export const setPlayModel = (data) => {
   return {
     type: ACTIONSTYPES.PLAY_MODEL,
-    data
-  }
-}
+    data,
+  };
+};
 //播放状态
 export const setIsPlay = (data) => {
   return {
     type: ACTIONSTYPES.IS_PLAY,
-    data
-  }
-}
+    data,
+  };
+};
 //音乐index
 export const setIndex = (data) => {
   return {
     type: ACTIONSTYPES.SET_INDEX,
-    data
-  }
-}
+    data,
+  };
+};
 //显示播放列表
-export const setPlayListStatus = (data) => {
+export const setShowPopStatus = (data) => {
   return {
-    type: ACTIONSTYPES.SHOW_PLAYLIST,
-    data
-  }
-}
+    type: ACTIONSTYPES.SHOW_POP,
+    data,
+  };
+};
 //搜索信息
 export const gainSearchInfo = (data) => {
   return {
     type: ACTIONSTYPES.SEARCH_INFO,
-    data
-  }
-}
+    data,
+  };
+};
 //搜索展示tab
 export const setMenuIndex = (data) => {
   return {
     type: ACTIONSTYPES.MENU_INDEX,
-    data
-  }
-}
+    data,
+  };
+};
 //分页数字
 export const setPageNum = (data) => {
   return {
     type: ACTIONSTYPES.PAGE_NUM,
-    data
-  }
-}
+    data,
+  };
+};
 //总数
 export const setTotal = (data) => {
   return {
     type: ACTIONSTYPES.Page_TOTAL,
-    data
-  }
-}
-//总数
+    data,
+  };
+};
+//搜索分页总数
 export const setCurrentTime = (data) => {
   return {
     type: ACTIONSTYPES.CURRENT_TIME,
-    data
-  }
-}
+    data,
+  };
+};
+//歌单字段
+export const setSonglstText = (data) => {
+  return {
+    type: ACTIONSTYPES.SONG_LIST_TEXT,
+    data,
+  };
+};

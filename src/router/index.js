@@ -3,7 +3,7 @@
  * @Date: 2020-04-01 17:10:30
  * @LastEditTime: 2020-05-22 17:46:24
  * @LastEditors: refuse_c
- * @Description: 
+ * @Description:
  */
 import Index from '../page/index/';
 import Player from '../page/player';
@@ -18,8 +18,7 @@ import Lately from '../components/lately';
 import Single from '../components/single';
 import IM from '../components/im';
 import AlbumList from '../components/albumList';
-import VideoDetail from '../components/videoDetail'
-
+import VideoDetail from '../components/videoDetail';
 
 import Recommendation from '../components/recommendation';
 import FindList from '../components/findList';
@@ -68,43 +67,42 @@ let routes = [
               {
                 path: '/home/find/newMusic',
                 component: NewMusic,
-              }
-            ]
+              },
+            ],
           },
           {
             path: '/home/video',
-            component: Video
+            component: Video,
           },
           {
             path: '/home/frind',
-            component: Frind
+            component: Frind,
           },
           {
             path: '/home/local',
-            component: Local
+            component: Local,
           },
           {
             path: '/home/down',
-            component: Down
+            component: Down,
           },
           {
             path: '/home/lately',
-            component: Lately
+            component: Lately,
           },
           {
             path: '/home/single:id',
-            component: Single
+            component: Single,
           },
           {
             path: '/home/dailySpecial',
-            component: DailySpecial
+            component: DailySpecial,
           },
           {
             path: '/home/albumList:id',
-            component: AlbumList
-          }
-
-        ]
+            component: AlbumList,
+          },
+        ],
       },
       {
         path: '/player',
@@ -116,9 +114,9 @@ let routes = [
       },
       {
         path: '/videoDetail:id',
-        component: VideoDetail
+        component: VideoDetail,
       },
-    ]
-  }
-]
+    ],
+  },
+];
 export default routes;
