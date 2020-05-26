@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-26 17:07:59
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-26 19:09:26
+ * @LastEditors: RA
  * @Description:
  */
 import React, { Component } from 'react';
@@ -115,7 +115,7 @@ class FindList extends Component {
     return (
       <div className="findList">
         {
-          <SongList data={songListdata} />
+          // <SongList data={songListdata} />
         }
         <h3 className="song_list_text" onClick={this.showPlop}>
           {songListText}

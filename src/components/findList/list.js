@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-05-25 13:46:36
  * @LastEditors: RA
- * @LastEditTime: 2020-05-25 21:51:29
+ * @LastEditTime: 2020-05-26 19:18:40
  * @Description:
  */
 import React, { Component } from 'react';
@@ -52,7 +52,7 @@ class List extends Component {
                   <div key={'list' + index}>
                     <h3>{item.title}</h3>
                     <ul>
-                      {item.array.map((item, index) => {
+                      {item.list.map((item, index) => {
                         let active = item.name === songListText ? 'a' : 'b';
                         return (
                           <li
