@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-25 17:45:53
+ * @LastEditTime: 2020-05-26 16:17:00
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -561,4 +561,14 @@ export const formatArr = (arr1, obj) => {
     newArr[category].array.push(item);
   });
   return Object.values(newArr); // list 转换成功的数据
+}
+
+/**
+ * @description:
+ * @param {type}
+ * @return:格式化总页数
+ */
+export const formatTotal = (total, num) => {
+  const nums = isEmpty(num) ? 50 : num;
+  return total % nums === 0 ? Math.floor(total / nums) : Math.floor(total / nums) + 1;
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-05-25 13:40:17
+ * @LastEditTime: 2020-05-26 16:21:40
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -36,6 +36,7 @@ function App() {
           })
         }
         <Redirect to="/home/find/findList" />
+        {/* <Redirect to="/home/find/rankingList" /> */}
         {/* <Redirect to="/videoDetailC6B041BC93D37665B75499051067896F" /> */}
       </Router>
     </div>

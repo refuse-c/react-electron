@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-25 22:11:27
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-26 17:07:59
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -11,9 +11,10 @@ import './index.scss';
 import { NavLink } from 'react-router-dom';
 import { RAGet } from '../../api/netWork';
 import { playlistCatlist, playlistHot, topPlaylist } from '../../api/api';
-
+import Pagination from '../pagination';
 import List from './list';
-import { formatArr, imgParam } from '../../common/utils/format';
+import SongList from '../songList';
+import { formatArr, imgParam, isEmpty, formatTotal } from '../../common/utils/format';
 
 // store
 import { connect } from 'react-redux';
@@ -26,6 +27,7 @@ class FindList extends Component {
       allListData: {},
       hotListData: {},
       songListdata: {},
+      total: 0,
       songListText: '全部歌单',
     };
   }
@@ -88,7 +90,8 @@ class FindList extends Component {
       },
     })
       .then((res) => {
-        console.log(res.playlists);
+        const { total } = res;
+        this.setState({ total })
         const songListdata = res.playlists;
         this.setState({ songListdata });
       })
@@ -103,15 +106,17 @@ class FindList extends Component {
       : this.props.setShowPopStatus('song_list');
   };
   chooseItem = (text) => {
-    console.log(text);
     this.props.setShowPopStatus('');
     this.props.setSonglstText(text);
   };
   render() {
     const { showPlop } = this.props;
-    const { songListText, hotListData, allListData, songListdata } = this.state;
+    const { songListText, hotListData, allListData, songListdata, total } = this.state;
     return (
       <div className="findList">
+        {
+          <SongList data={songListdata} />
+        }
         <h3 className="song_list_text" onClick={this.showPlop}>
           {songListText}
         </h3>
@@ -137,7 +142,8 @@ class FindList extends Component {
 
         <div className="recommend-list">
           <ul>
-            {songListdata.length > 0 &&
+            {
+              songListdata.length > 0 &&
               songListdata.map((item, index) => {
                 const path = '/home/single';
                 const dailySpecial = '/home/dailySpecial';
@@ -156,16 +162,22 @@ class FindList extends Component {
                     </li>
                   </NavLink>
                 ) : (
-                  <NavLink to={path + item.id} key={index}>
-                    <li>
-                      <img src={imgParam(item.coverImgUrl, 160, 160)} alt="" />
-                      <p>{item.name}</p>
-                    </li>
-                  </NavLink>
-                );
-              })}
+                    <NavLink to={path + item.id} key={index}>
+                      <li>
+                        <img src={imgParam(item.coverImgUrl, 160, 160)} alt="" />
+                        <p>{item.name}</p>
+                      </li>
+                    </NavLink>
+                  );
+              })
+            }
           </ul>
         </div>
+        {
+          !isEmpty(total) && total > 0
+            ? <Pagination totalPage={formatTotal(total, 100)} pageNum={1} />
+            : null
+        }
       </div>
     );
   }

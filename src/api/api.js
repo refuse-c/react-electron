@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-25 14:10:58
+ * @LastEditTime: 2020-05-26 11:30:47
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -100,4 +100,24 @@ export const playlistHot = {
 //歌单获取
 export const topPlaylist = {
   api_url: '/top/playlist'
+}
+//排行榜
+export const topList = {
+  api_url: '/top/list'
+}
+//所有榜单
+export const allTopList = {
+  api_url: '/toplist'
+}
+//所有榜单摘要内容
+export const toplistDetail = {
+  api_url: '/toplist/detail'
+}
+//歌手榜
+export const toplistArtist = {
+  api_url: '/toplist/artist'
+}
+//batch批量请求
+export const batch = {
+  api_url: '/batch'
 }

@@ -1,0 +1,95 @@
+.song_list {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &::after {
+      content: "";
+      width: 18%;
+    }
+
+    a {
+      width: 18%;
+      margin-bottom: 20px;
+    }
+
+    .recommend-bg {
+      position: relative;
+
+      div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        color: #333;
+
+        h3 {
+          font-size: 64px;
+        }
+
+        h4 {
+          font-size: 18px;
+        }
+      }
+    }
+
+    li {
+      width: 100%;
+
+      div {
+        position: relative;
+
+        img {
+          width: 100%;
+          border-radius: 2px;
+        }
+
+        .play_count {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 25px;
+          line-height: 25px;
+          padding: 0 5px;
+          text-align: right;
+          background: url('../../common/images/a9p.png') center center / cover no-repeat;
+        }
+
+        .user_info {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 20px;
+          line-height: 20px;
+          padding: 0 5px 0 30px;
+          background: rgba(0, 0, 0, 0.2) url('../../common/images/icon_user.png') left 5px center / 20px 20px no-repeat;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+
+
+      p {
+        font-size: 12px;
+      }
+
+
+
+      .song_list_name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
