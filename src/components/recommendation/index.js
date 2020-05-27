@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-22 09:09:34
+ * @LastEditTime: 2020-05-27 09:56:58
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -133,7 +133,7 @@ class Recommendation extends Component {
             }
           </ul>
         </div>
-        <div className="recommend-title">
+        <div className="headline">
           <p>推荐歌单</p>
           <p onClick={this.handelMore.bind(this, 1)}>更多></p>
         </div>
@@ -170,7 +170,7 @@ class Recommendation extends Component {
             }
           </ul>
         </div>
-        <div className="recommend-title">
+        <div className="headline">
           <p>独家放送</p>
           <p onClick={this.handelMore.bind(this, 2)}>更多></p>
         </div>
@@ -191,7 +191,7 @@ class Recommendation extends Component {
             }
           </ul>
         </div>
-        <div className="recommend-title">
+        <div className="headline">
           <p>最新音乐</p>
           <p onClick={this.handelMore.bind(this, 3)}>更多></p>
         </div>
@@ -218,7 +218,7 @@ class Recommendation extends Component {
             }
           </ul>
         </div>
-        <div className="recommend-title">
+        <div className="headline">
           <p>推荐MV</p>
           <p onClick={this.handelMore.bind(this, 4)}>更多></p>
         </div>

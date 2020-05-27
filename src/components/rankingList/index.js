@@ -2,18 +2,24 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-26 12:45:08
+ * @LastEditTime: 2020-05-27 16:59:17
  * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
 import './index.scss';
 import { RAGet } from '../../api/netWork';
+import { imgParam, formatPlaycount, aa } from '../../common/utils/format'
 import { topList, allTopList, toplistDetail, toplistArtist } from '../../api/api';
 class RankingList extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      officialList: {},
+      globalList: {},
+      filterArr: ['云音乐飙升榜', '云音乐新歌榜', '网易原创歌曲榜', '云音乐热歌榜'],
+      allData: []
+    }
   }
 
   componentDidMount = () => {
@@ -22,20 +28,16 @@ class RankingList extends Component {
     this.getTopList(2);
     this.getTopList(3);
     this.getAllTopList();
-    this.getToplistArtist();
+    // this.getToplistArtist();
     // this.getToplistDetail();
+    // this.testResult();
   }
-  getTopList = () => {
-    RAGet(topList.api_url, {
-      params: {
-        idx: 6
-      }
-    }).then(res => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
-    })
-  }
+  // async testResult() {
+  //   this.getTopList(0);
+  //   this.getTopList(1);
+  //   this.getTopList(2);
+  //   this.getTopList(3);
+  // }
   // 排行榜
   getTopList = (id) => {
     RAGet(topList.api_url, {
@@ -44,15 +46,31 @@ class RankingList extends Component {
       }
     }).then(res => {
       console.log(res)
+      const obj = {};
+      const tracks = res.playlist.tracks;
+      const privileges = res.privileges;
+      const data = aa(tracks, privileges)
+      const { allData } = this.state;
+      obj.list = data;
+      obj.name = res.playlist.name;
+      obj.coverImgUrl = res.playlist.coverImgUrl;
+      allData.push(obj);
+      this.setState({ officialList: allData })
     }).catch(err => {
       console.log(err)
     })
   }
+
+
   //所有榜单
   getAllTopList = () => {
+    const { filterArr } = this.state;
     RAGet(allTopList.api_url)
       .then(res => {
-        console.log(res)
+        const list = res.list;
+        let globalList = list.filter(e => !filterArr.includes(e.name));
+        // 传入两个数组a，b，将数组a中包含b的值全部去掉，重复的也去掉，返回去掉之后新数组
+        this.setState({ globalList });
       }).catch(err => {
         console.log(err)
       })
@@ -75,9 +93,39 @@ class RankingList extends Component {
       })
   }
   render() {
+    const { officialList, globalList } = this.state;
     return (
-      <div className="ranking-ist">
-
+      <div className="ranking_ist">
+        <div className="headline">
+          <p>官方版</p>
+        </div>
+        <div className="official_List">
+          {
+            officialList.length === 4 && officialList.map((item, index) => {
+              
+            })
+          }
+        </div>
+        <div className="headline">
+          <p>全球版</p>
+        </div>
+        <div className="global_list">
+          <ul>
+            {
+              globalList.length > 0 && globalList.map((item, index) => {
+                return (
+                  <li key={index}>
+                    <div>
+                      <img src={imgParam(item.coverImgUrl, 300, 300)} alt="" />
+                      <p className="play_count">{formatPlaycount(item.playCount)}</p>
+                    </div>
+                    <p className="play_name">{item.name}</p>
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </div>
       </div>
     );
   }

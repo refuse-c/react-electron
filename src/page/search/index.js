@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-05-22 23:32:32
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-27 16:18:42
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -63,7 +63,7 @@ class Search extends Component {
     if (prevState.pageNum !== this.state.pageNum) {
       const { pageNum } = this.state;
       const { inputVal } = this.state;
-      const {menuIndex} = this.props;
+      const { menuIndex } = this.props;
       this.getSearch(inputVal, menuIndex, pageNum)
     }
   }
@@ -124,6 +124,7 @@ class Search extends Component {
     if (isEmpty(inputVal)) this.setState({ showsuggest: false })
     let val = inputVal;
     if (keycode === 13) {
+      global.debounce(() => null, 0)
       if (isEmpty(val)) {
         val = placeholder;
         this.setState({ inputVal: placeholder });
@@ -131,7 +132,6 @@ class Search extends Component {
         val = inputVal;
       }
       const { menuIndex } = this.props;
-      // const index = menuIndex ? menuIndex : 1;
       // console.log(index)
       this.props.setPageNum(1);
       this.getSearch(val, menuIndex, 1);
@@ -167,11 +167,11 @@ class Search extends Component {
     const pageNums = isEmpty(pageNum) ? 1 : pageNum;
     this.historyList(keywords);
     // this.props.setMenuIndex(type);
-    this.setState({ showsuggest: false, pageStatus: 3 });
     RAGet(search.api_url, {
       params: pagingParams(keywords, type, pageNums)
     }).then(res => {
       if (res.code !== 200) return;
+      this.setState({ showsuggest: false, pageStatus: 3 });
       const data = res.result;
       let searchInfo = {
         pageNum: pageNums,

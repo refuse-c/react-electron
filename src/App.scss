@@ -55,6 +55,7 @@ canvas {
 .ra_active:hover {
   background-color: rgba(0, 0, 0, 0.4) !important;
 }
+
 .rc_active {
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -62,14 +63,17 @@ canvas {
 .rc_active:hover {
   background-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 .ra_disabled {
   pointer-events: none;
   color: #ccc;
 }
+
 .rc_disabled {
   pointer-events: none;
   color: #666;
 }
+
 .overflow {
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -77,4 +81,15 @@ canvas {
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-break: break-all;
+}
+//标题
+.headline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #bbb;
 }
