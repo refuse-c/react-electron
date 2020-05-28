@@ -83,7 +83,7 @@ class AudioPlay extends Component {
     // 这里需要设置audio的canplay事件监听
     audio.addEventListener("canplay", () => {
       //获取总时间
-      const totalTime = parseInt(audio.duration);
+      const totalTime = Math.floor(audio.duration);
       this.setState({
         totalTime: this.getTime(totalTime)
       });
@@ -92,7 +92,7 @@ class AudioPlay extends Component {
     audio.addEventListener("timeupdate", () => {
       const { processItemMove } = this.state;
       //获取当前播放时间
-      const currentTime = parseInt(audio.currentTime);
+      const currentTime = Math.floor(audio.currentTime);
       // 缓存对象
       const buffered = audio.buffered;
       // 当前缓存时间
@@ -127,8 +127,8 @@ class AudioPlay extends Component {
   // 秒转换-分:秒的格式
   getTime = time => {
     if (time) {
-      const minute = parseInt((time / 60) % 60);
-      const second = parseInt(time % 60);
+      const minute = Math.floor((time / 60) % 60);
+      const second = Math.floor(time % 60);
       let minuteText = `${minute}`;
       let secondText = `${second}`;
       if (minute < 10) {

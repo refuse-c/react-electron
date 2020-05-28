@@ -2,25 +2,43 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-28 15:08:23
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-28 21:33:30
+ * @LastEditors: RA
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
 import { RAGet } from '../../api/netWork';
-import { imgParam, formatPlaycount, aa } from '../../common/utils/format';
+import PlayAll from '../playAll';
+import {
+  imgParam,
+  formatPlaycount,
+  aa,
+  setLocal,
+  getLocal,
+} from '../../common/utils/format';
 import {
   topList,
   allTopList,
   toplistDetail,
   toplistArtist,
 } from '../../api/api';
+
+// store
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  gainMusicList,
+  setIndex,
+  gainPlayLIst,
+  setIsPlay,
+  gainMusicId,
+} from '../../store/actions';
 class RankingList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      officialList: JSON.parse(window.localStorage.getItem('officialList')) || {},
+      officialList: getLocal('officialList') || {},
       globalList: {},
       singerList: {},
       filterArr: [
@@ -38,11 +56,10 @@ class RankingList extends Component {
     // this.getTopList(0);
     // this.getTopList(2);
     // this.getTopList(1);
-
     this.getAllTopList();
     this.getToplistArtist();
     this.getToplistDetail();
-    // this.testResult();
+    this.testResult();
   };
   async testResult() {
     this.getTopList(3);
@@ -67,7 +84,7 @@ class RankingList extends Component {
         obj.name = res.playlist.name;
         obj.coverImgUrl = res.playlist.coverImgUrl;
         allData.push(obj);
-        window.localStorage.setItem('officialList', JSON.stringify(allData));
+        setLocal('officialList', allData);
         this.setState({ officialList: allData });
       })
       .catch((err) => {
@@ -96,7 +113,7 @@ class RankingList extends Component {
         const { coverUrl } = res.artistToplist;
         const { singerList } = this.state;
         singerList.coverUrl = coverUrl;
-        this.setState({ singerList })
+        this.setState({ singerList });
       })
       .catch((err) => {
         console.log(err);
@@ -109,15 +126,34 @@ class RankingList extends Component {
         const list = res.list.artists;
         const { singerList } = this.state;
         singerList.list = list;
-        this.setState({ singerList })
+        this.setState({ singerList });
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  addMusic = (item) => {
+    let flag = null;
+    const array = getLocal('playList');
+    array.forEach((element, index) => {
+      if (element.id === item.id) {
+        flag = index;
+        return false;
+      }
+    });
+    if (flag) {
+      this.props.setIndex(flag);
+    } else {
+      array.unshift(item);
+      this.props.setIndex(0);
+      this.props.gainPlayLIst(array);
+    }
+
+    this.props.setIsPlay(true);
+    this.props.gainMusicId(item.id);
+  };
   render() {
     const { officialList, globalList, singerList } = this.state;
-    console.log(singerList)
     return (
       <div className="ranking_ist">
         <div className="headline">
@@ -128,13 +164,17 @@ class RankingList extends Component {
             officialList.map((item, index) => {
               return (
                 <div key={index}>
+                  <PlayAll cls={`play_all_img`} list={item.list} />
                   <img src={item.coverImgUrl} alt="" />
                   <ul>
                     {item.list.map((item, index) => {
                       let num = index < 9 ? '0' + (index + 1) : index + 1;
                       if (index > 9) return false;
                       return (
-                        <li key={index}>
+                        <li
+                          key={index}
+                          onClick={this.addMusic.bind(this, item)}
+                        >
                           <p>{num}</p>
                           <p>{item.name}</p>
                           <p>
@@ -146,29 +186,25 @@ class RankingList extends Component {
                   </ul>
                 </div>
               );
-            })
-          }
-          <div className="singer_list">
-            {
-              <img src={singerList.coverUrl} alt="" />}
+            })}
+          <div>
+            {<img src={singerList.coverUrl} alt="" />}
             <ul>
-              {
-                singerList.list &&
+              {singerList.list &&
                 singerList.list.map((item, index) => {
                   let num = index < 9 ? '0' + (index + 1) : index + 1;
                   if (index > 9) return false;
+
                   return (
                     <li key={index}>
                       <p>{num}</p>
                       <p>{item.name}</p>
                     </li>
                   );
-                })
-              }
+                })}
             </ul>
-
           </div>
-        </div >
+        </div>
         <div className="headline">
           <p>全球榜</p>
         </div>
@@ -190,9 +226,26 @@ class RankingList extends Component {
               })}
           </ul>
         </div>
-      </div >
+      </div>
     );
   }
 }
+//注册store
+const mapStateToProps = (state) => {
+  return {
+    musicList: state.musicList,
+    playList: state.playList,
+    musicId: state.musicId,
+  };
+};
 
-export default RankingList;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    gainMusicList: bindActionCreators(gainMusicList, dispatch),
+    setIndex: bindActionCreators(setIndex, dispatch),
+    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+    setIsPlay: bindActionCreators(setIsPlay, dispatch),
+    gainMusicId: bindActionCreators(gainMusicId, dispatch),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(RankingList);

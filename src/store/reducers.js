@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:08
- * @LastEditTime: 2020-05-25 21:49:50
+ * @LastEditTime: 2020-05-28 19:44:08
  * @LastEditors: RA
  * @Description:
  */
@@ -17,7 +17,6 @@ const defaultState = {
   isLogin: false,
   showLogin: false,
   theme: localStorage.getItem('themeIndex') || 0,
-  playModel: localStorage.getItem('playModel') || '1', //1顺序播放 2随机播放 3单曲循环
   playStatus: false,
   showPlop: false,
   userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
@@ -106,15 +105,6 @@ const musicId = (state = defaultState.musicId, action) => {
       return state;
   }
 };
-const playModel = (state = defaultState.playModel, action) => {
-  switch (action.type) {
-    case ACTIONTYPES.PLAY_MODEL:
-      localStorage.setItem('playModel', action.data);
-      return action.data;
-    default:
-      return state;
-  }
-};
 const isPlay = (state = defaultState.isPlay, action) => {
   switch (action.type) {
     case ACTIONTYPES.IS_PLAY:
@@ -196,7 +186,6 @@ export default combineReducers({
   isLogin,
   menuList,
   musicId,
-  playModel,
   isPlay,
   index,
   showPlop,

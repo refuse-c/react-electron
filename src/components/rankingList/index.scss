@@ -14,30 +14,26 @@
     }
 
     div {
+      position: relative;
       width: 30%;
       border: 1px solid #ccc;
       margin-bottom: 20px;
 
-      // &.singer_list {
-      //   p {
-      //     height: 100%;
-      //     padding-left: 10px;
-
-      //     &:first-child {
-      //       white-space: nowrap;
-      //     }
-
-      //     &:last-child {
-      //       text-align: left;
-      //       padding-right: 10px;
-      //     }
-      //   }
-      // }
+      .play_all_img {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        background: url('../../common/images/icon_play.png') center center / cover no-repeat;
+      }
 
       img {
         width: 100%;
         height: 80px;
-        object-fit: cover
+        object-fit: contain
       }
 
       ul {

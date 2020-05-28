@@ -55,13 +55,6 @@ export const gainMusicId = (data) => {
     data,
   };
 };
-//播放顺序
-export const setPlayModel = (data) => {
-  return {
-    type: ACTIONSTYPES.PLAY_MODEL,
-    data,
-  };
-};
 //播放状态
 export const setIsPlay = (data) => {
   return {

@@ -50,6 +50,10 @@
         .name {
           font-size: 16px;
           line-height: 30px;
+          height: 30px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           // text-align: center;
         }
 
@@ -58,10 +62,16 @@
           align-items: flex-start;
           // justify-content: center;
           text-align: center;
+          height: 20px;
           line-height: 20px;
 
           p {
+            max-width: 50%;
+            height: 20px;
             padding-right: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            // white-space: nowrap;
 
             span:hover {
               color: #ddd;

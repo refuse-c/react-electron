@@ -12,7 +12,6 @@ export const SHOW_LOGIN = 'SHOW_LOGIN';//是否显示登录
 export const IS_LOGIN = 'IS_LOGIN';//是否显示登录
 export const MENU_LIST = 'MENU_LIST';//是否显示登录
 export const MUSIC_ID = 'MUSIC_ID';//音乐id
-export const PLAY_MODEL = 'PLAY_MODEL';//播放顺序
 export const IS_PLAY = 'IS_PLAY';//播放顺序
 export const SET_INDEX = 'SET_INDEX';//播放顺序
 export const SHOW_POP = 'SHOW_POP';//显示播放列表

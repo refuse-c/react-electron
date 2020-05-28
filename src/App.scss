@@ -49,7 +49,7 @@ canvas {
 }
 
 .ra_active {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4) !important;
 }
 
 .ra_active:hover {
@@ -82,6 +82,7 @@ canvas {
   overflow: hidden;
   word-break: break-all;
 }
+
 //标题
 .headline {
   display: flex;

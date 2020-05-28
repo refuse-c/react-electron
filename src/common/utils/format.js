@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-28 12:28:59
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-28 22:09:22
+ * @LastEditors: RA
  * @Description:
  */
 
@@ -100,8 +100,8 @@ export const formatPlayTime = (v) => {
   if (isEmpty(v)) {
     return v;
   }
-  let m = parseInt(v / 60);
-  let s = parseInt(v % 60);
+  let m = Math.floor(v / 60);
+  let s = Math.floor(v % 60);
   let mm = m < 10 ? '0' + m : m;
   let ss = s < 10 ? '0' + s : s;
   return mm + ':' + ss;
@@ -116,7 +116,7 @@ export const formatNum = (v) => {
   if (isEmpty(v)) {
     return v;
   }
-  v = parseInt(v);
+  v = Math.floor(v);
   return v < 9 ? '0' + (v + 1) : v + 1;
   // return v < 9 ? '00' + (v + 1) : (v < 99 ? '0' + (v + 1) : v + 1);
 };
@@ -387,35 +387,35 @@ export const returnsongCount = (type, total) => {
   switch (type) {
     case 1:
       totals =
-        total % 50 === 0 ? parseInt(total / 50) : parseInt(total / 50) + 1;
+        total % 50 === 0 ? Math.floor(total / 50) : Math.floor(total / 50) + 1;
       break;
     case 10:
       totals =
-        total % 20 === 0 ? parseInt(total / 20) : parseInt(total / 20) + 1;
+        total % 20 === 0 ? Math.floor(total / 20) : Math.floor(total / 20) + 1;
       break;
     case 100:
       totals =
-        total % 20 === 0 ? parseInt(total / 20) : parseInt(total / 20) + 1;
+        total % 20 === 0 ? Math.floor(total / 20) : Math.floor(total / 20) + 1;
       break;
     case 1000:
       totals =
-        total % 20 === 0 ? parseInt(total / 20) : parseInt(total / 20) + 1;
+        total % 20 === 0 ? Math.floor(total / 20) : Math.floor(total / 20) + 1;
       break;
     case 1002:
       totals =
-        total % 20 === 0 ? parseInt(total / 20) : parseInt(total / 20) + 1;
+        total % 20 === 0 ? Math.floor(total / 20) : Math.floor(total / 20) + 1;
       break;
     case 1009:
       totals =
-        total % 10 === 0 ? parseInt(total / 10) : parseInt(total / 10) + 1;
+        total % 10 === 0 ? Math.floor(total / 10) : Math.floor(total / 10) + 1;
       break;
     case 1014:
       totals =
-        total % 24 === 0 ? parseInt(total / 24) : parseInt(total / 24) + 1;
+        total % 24 === 0 ? Math.floor(total / 24) : Math.floor(total / 24) + 1;
       break;
     default:
       totals =
-        total % 50 === 0 ? parseInt(total / 50) : parseInt(total / 50) + 1;
+        total % 50 === 0 ? Math.floor(total / 50) : Math.floor(total / 50) + 1;
       break;
   }
   return totals;
@@ -588,7 +588,7 @@ export const foramtLrc = (array) => {
           //对象{t:时间,c:歌词}加入ms数组
           t: (parseFloat(s[0]) * 60 + parseFloat(s[1])).toFixed(3),
           // c: isEmpty(content) ? '~ ~ ~ ~ ~ ~ ~ ~' : content,
-          c: content
+          c: content,
         });
         return index.id;
       });
@@ -610,7 +610,7 @@ export const foramtLrc = (array) => {
 export const getTimeIndex = (timeArr, time) => {
   let timeIndex = -1;
   const length = timeArr.length;
-  const currentTime = Math.floor(time) + 0.2;
+  const currentTime = Number(time) + 0.2;
   for (let i = 0; i < length; i++) {
     if (timeArr[i].t >= currentTime) {
       timeIndex = i - 1;
@@ -651,4 +651,18 @@ export const formatTotal = (total, num) => {
   return total % nums === 0
     ? Math.floor(total / nums)
     : Math.floor(total / nums) + 1;
+};
+
+//数据存储
+export const setLocal = (name, data) => {
+  window.localStorage.setItem(name, JSON.stringify(data));
+};
+export const getLocal = (name) => {
+  return JSON.parse(window.localStorage.getItem(name));
+};
+export const setSession = (name, data) => {
+  window.sessionStorage.setItem(name, JSON.stringify(data));
+};
+export const getSession = (name, data) => {
+  return JSON.parse(window.sessionStorage.getItem(name));
 };

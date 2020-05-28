@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-25 20:31:59
+ * @LastEditTime: 2020-05-28 22:36:19
  * @LastEditors: RA
  * @Description:
  */
@@ -9,12 +9,17 @@ import React, { Component } from 'react';
 import './index.scss';
 import { RAGet } from '../../api/netWork';
 import { getMusicDetail, getMusicUrl } from '../../api/api';
-import { formatPlayTime, isEmpty, imgParam } from '../../common/utils/format';
+import {
+  formatPlayTime,
+  isEmpty,
+  imgParam,
+  setLocal,
+  getLocal,
+} from '../../common/utils/format';
 // store
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  setPlayModel,
   setIsPlay,
   setIndex,
   gainMusicId,
@@ -26,6 +31,7 @@ class Footer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      playModel: getLocal('playModel') || '1', //1顺序播放 2随机播放 3单曲循环,
       currentTime: 0,
       musicId: '',
       duration: 0,
@@ -47,7 +53,7 @@ class Footer extends Component {
     // canplay事件监听
     audio.addEventListener('canplay', () => {
       //获取总时间
-      const duration = parseInt(audio.duration);
+      const duration = Math.floor(audio.duration);
       this.setState({ duration });
     });
     //播放中监听时间变化
@@ -104,7 +110,6 @@ class Footer extends Component {
     return null;
   }
   componentDidUpdate(prevState) {
-    // 当前音乐更新了
     if (prevState.musicId !== this.state.musicId) {
       const { musicId } = this.state;
       const { isPlay } = this.props;
@@ -212,7 +217,8 @@ class Footer extends Component {
   };
 
   handelNext = () => {
-    const { playModel, playList, index, isPlay } = this.props;
+    const { playModel } = this.state;
+    const { playList, index, isPlay } = this.props;
     const maxLength = playList.length - 1;
     let num = 0;
     if (playModel === '3') {
@@ -245,16 +251,19 @@ class Footer extends Component {
     this.setState({ currentTime });
   };
   playModel = () => {
-    const { playModel } = this.props;
+    const { playModel } = this.state;
     switch (playModel) {
       case '1':
-        this.props.setPlayModel('2');
+        setLocal('playModel', '2');
+        this.setState({ playModel: '2' });
         break;
       case '2':
-        this.props.setPlayModel('3');
+        setLocal('playModel', '3');
+        this.setState({ playModel: '3' });
         break;
       default:
-        this.props.setPlayModel('1');
+        setLocal('playModel', '1');
+        this.setState({ playModel: '1' });
         break;
     }
   };
@@ -265,8 +274,8 @@ class Footer extends Component {
       : this.props.setShowPopStatus('play_list');
   };
   render() {
-    const { currentTime, duration, progress, url } = this.state;
-    const { playModel, playList, index, isPlay } = this.props; //musicId
+    const { playModel, currentTime, duration, progress, url } = this.state;
+    const { playList, index, isPlay } = this.props; //musicId
     return (
       <div className="footer">
         <div className="control">
@@ -331,7 +340,6 @@ class Footer extends Component {
             preload={`auto`}
             loop={playModel === '2' ? true : false}
             ref={(ref) => (this.audio = ref)}
-            // src={`https://music.163.com/song/media/outer/url?id=${musicId}`}
             src={url}
           ></audio>
         ) : (
@@ -346,7 +354,6 @@ const mapStateToProps = (state) => {
   return {
     musicId: state.musicId,
     playList: state.playList,
-    playModel: state.playModel,
     index: state.index,
     isPlay: state.isPlay,
     showPlop: state.showPlop,
@@ -355,7 +362,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setPlayModel: bindActionCreators(setPlayModel, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
