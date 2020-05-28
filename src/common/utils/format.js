@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-26 19:20:11
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-28 12:28:59
+ * @LastEditors: refuse_c
  * @Description:
  */
 
@@ -587,7 +587,8 @@ export const foramtLrc = (array) => {
         lrcArr.push({
           //对象{t:时间,c:歌词}加入ms数组
           t: (parseFloat(s[0]) * 60 + parseFloat(s[1])).toFixed(3),
-          c: content,
+          // c: isEmpty(content) ? '~ ~ ~ ~ ~ ~ ~ ~' : content,
+          c: content
         });
         return index.id;
       });

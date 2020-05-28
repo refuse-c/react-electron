@@ -2,8 +2,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-27 20:39:02
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-28 15:08:23
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -20,8 +20,9 @@ class RankingList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      officialList: {},
+      officialList: JSON.parse(window.localStorage.getItem('officialList')) || {},
       globalList: {},
+      singerList: {},
       filterArr: [
         '云音乐飙升榜',
         '云音乐新歌榜',
@@ -33,22 +34,22 @@ class RankingList extends Component {
   }
 
   componentDidMount = () => {
+    // this.getTopList(3);
+    // this.getTopList(0);
+    // this.getTopList(2);
+    // this.getTopList(1);
+
+    this.getAllTopList();
+    this.getToplistArtist();
+    this.getToplistDetail();
+    // this.testResult();
+  };
+  async testResult() {
     this.getTopList(3);
     this.getTopList(0);
     this.getTopList(2);
     this.getTopList(1);
-
-    this.getAllTopList();
-    // this.getToplistArtist();
-    this.getToplistDetail();
-    // this.testResult();
-  };
-  // async testResult() {
-  //   this.getTopList(0);
-  //   this.getTopList(1);
-  //   this.getTopList(2);
-  //   this.getTopList(3);
-  // }
+  }
   // 排行榜
   getTopList = (id) => {
     RAGet(topList.api_url, {
@@ -57,17 +58,16 @@ class RankingList extends Component {
       },
     })
       .then((res) => {
-        // console.log(res)
         const obj = {};
         const tracks = res.playlist.tracks;
         const privileges = res.privileges;
         const data = aa(tracks, privileges);
-        console.log(data)
         const { allData } = this.state;
         obj.list = data;
         obj.name = res.playlist.name;
         obj.coverImgUrl = res.playlist.coverImgUrl;
         allData.push(obj);
+        window.localStorage.setItem('officialList', JSON.stringify(allData));
         this.setState({ officialList: allData });
       })
       .catch((err) => {
@@ -93,23 +93,31 @@ class RankingList extends Component {
   getToplistDetail = () => {
     RAGet(toplistDetail.api_url)
       .then((res) => {
-        // console.log(res);
+        const { coverUrl } = res.artistToplist;
+        const { singerList } = this.state;
+        singerList.coverUrl = coverUrl;
+        this.setState({ singerList })
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  //歌手榜
   getToplistArtist = () => {
     RAGet(toplistArtist.api_url)
       .then((res) => {
-        console.log(res);
+        const list = res.list.artists;
+        const { singerList } = this.state;
+        singerList.list = list;
+        this.setState({ singerList })
       })
       .catch((err) => {
         console.log(err);
       });
   };
   render() {
-    const { officialList, globalList } = this.state;
+    const { officialList, globalList, singerList } = this.state;
+    console.log(singerList)
     return (
       <div className="ranking_ist">
         <div className="headline">
@@ -138,8 +146,29 @@ class RankingList extends Component {
                   </ul>
                 </div>
               );
-            })}
-        </div>
+            })
+          }
+          <div className="singer_list">
+            {
+              <img src={singerList.coverUrl} alt="" />}
+            <ul>
+              {
+                singerList.list &&
+                singerList.list.map((item, index) => {
+                  let num = index < 9 ? '0' + (index + 1) : index + 1;
+                  if (index > 9) return false;
+                  return (
+                    <li key={index}>
+                      <p>{num}</p>
+                      <p>{item.name}</p>
+                    </li>
+                  );
+                })
+              }
+            </ul>
+
+          </div>
+        </div >
         <div className="headline">
           <p>全球榜</p>
         </div>
@@ -161,7 +190,7 @@ class RankingList extends Component {
               })}
           </ul>
         </div>
-      </div>
+      </div >
     );
   }
 }

@@ -6,11 +6,33 @@
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
+    min-height: 600px;
+
+    &::after {
+      content: '';
+      width: 30%;
+    }
 
     div {
       width: 30%;
       border: 1px solid #ccc;
       margin-bottom: 20px;
+
+      // &.singer_list {
+      //   p {
+      //     height: 100%;
+      //     padding-left: 10px;
+
+      //     &:first-child {
+      //       white-space: nowrap;
+      //     }
+
+      //     &:last-child {
+      //       text-align: left;
+      //       padding-right: 10px;
+      //     }
+      //   }
+      // }
 
       img {
         width: 100%;
@@ -31,10 +53,6 @@
             background-color: rgba(255, 255, 255, 0.1);
           }
 
-          // &:nth-child(even) {
-          // background-color: rgba(255, 255, 255, 0.2);
-          // }
-
           p {
             height: 100%;
             padding-left: 10px;
@@ -43,7 +61,11 @@
               white-space: nowrap;
             }
 
-            &:last-child {
+            &:nth-child(2) {
+              text-align: left;
+            }
+
+            &:nth-child(3) {
               text-align: right;
               padding-right: 10px;
             }

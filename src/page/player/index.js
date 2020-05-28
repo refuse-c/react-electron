@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 16:31:03
- * @LastEditors: RA
- * @LastEditTime: 2020-05-27 20:15:00
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-28 12:32:26
  * @Description:
  */
 import React, { Component } from 'react';
@@ -110,8 +110,8 @@ class Player extends Component {
                 {!isEmpty(songsAlbum.al) ? (
                   <img src={imgParam(songsAlbum.al.picUrl, 200, 200)} alt="" />
                 ) : (
-                  <img src={require('../../common/images/apg.png')} alt="" />
-                )}
+                    <img src={require('../../common/images/apg.png')} alt="" />
+                  )}
               </div>
             </div>
             <div className="player-info">
@@ -142,8 +142,8 @@ class Player extends Component {
                     {!isEmpty(lyric) && lyric.length > 0 ? (
                       lyric.map((item, index, lyric) => {
                         const num = getTimeIndex(lyric, currentTime);
-                        if (num > 7) {
-                          this.content.scrollArea.scrollYTo((num - 7) * 20);
+                        if (num > 4) {
+                          this.content.scrollArea.scrollYTo((num - 4) * 30);
                         } else {
                           this.content.scrollArea.scrollYTo(0);
                         }
@@ -158,8 +158,8 @@ class Player extends Component {
                         );
                       })
                     ) : (
-                      <li>暂无歌词</li>
-                    )}
+                        <li>暂无歌词</li>
+                      )}
                   </ul>
                 </ScrollArea>
               </div>

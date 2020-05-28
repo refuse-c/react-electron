@@ -3,21 +3,30 @@
   width: 100%;
   height: calc(100vh - 90px);
   overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.21);
+
+  .scrollarea-content {
+    transition: 0.5s cubic-bezier(0, 0, 1, 1) all;
+  }
+
   .content {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+
     .player-top {
       display: flex;
       justify-content: space-between;
       width: 100%;
       height: 410px;
-      background-color: rgba(0, 0, 0, 0.5);
+
+      // background-color: rgba(0, 0, 0, 0.5);
       .album-img {
         display: flex;
         align-items: center;
         justify-content: center;
         flex: 1;
+
         div {
           display: flex;
           align-items: center;
@@ -25,8 +34,8 @@
           border-radius: 50%;
           width: 300px;
           height: 300px;
-          background: url("../../common/images/apc.png") center center / 100%
-            no-repeat;
+          background: url("../../common/images/apc.png") center center / 100% no-repeat;
+
           img {
             width: 200px;
             height: 200px;
@@ -34,64 +43,77 @@
           }
         }
       }
+
       .player-info {
         flex: 1;
+
         .name {
           font-size: 16px;
           line-height: 30px;
           // text-align: center;
         }
+
         .singer {
           display: flex;
           align-items: flex-start;
           // justify-content: center;
           text-align: center;
           line-height: 20px;
+
           p {
             padding-right: 10px;
+
             span:hover {
               color: #ddd;
               text-decoration: underline;
             }
           }
         }
+
         .song-lrc {
           // text-align: center;
           margin-top: 20px;
           overflow-y: hidden;
           height: 300px;
+
           ul {
             li {
-              min-height: 20px;
-              line-height: 20px;
+              min-height: 30px;
+              line-height: 30px;
               font-size: 13px;
             }
           }
         }
       }
     }
+
     button {
       padding: 0 20px;
       height: 30px;
       line-height: 30px;
     }
   }
+
   .aa {
-    color: #dd5862;
-    font-size: 14px;
-  }
-  .bb {
     color: #fff;
+    font-size: 15px !important;
+  }
+
+  .bb {
+    color: #333;
   }
 }
+
 .turn {
   animation: turn 24s linear infinite;
   margin: 100px auto;
 }
+
 @keyframes turn {
   0% {
     -webkit-transform: rotate(0deg);
   }
+
   100% {
     -webkit-transform: rotate(360deg);
   }
