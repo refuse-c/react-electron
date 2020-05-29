@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-17 15:20:33
- * @LastEditTime: 2020-05-25 20:25:14
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-29 12:29:58
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -20,6 +20,7 @@ class PlayAll extends Component {
   }
   playAll = () => {
     const { list } = this.props;
+    console.log(list)
     if (isEmpty(list)) return;
     this.props.setIndex(0);
     this.props.setIsPlay(true);

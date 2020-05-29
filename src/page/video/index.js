@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-05-29 16:45:46
+ * @LastEditTime: 2020-05-29 17:37:04
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -11,34 +11,18 @@ import './index.scss';
 import { Route, NavLink } from 'react-router-dom';
 import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
-class Find extends Component {
+class Videos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      findNav: [
+      videoNav: [
         {
-          name: '个性推荐',
-          path: '/home/find'
+          name: '视频',
+          path: '/home/video/'
         },
         {
-          name: '歌单',
-          path: '/home/find/findList'
-        },
-        {
-          name: '主播电台',
-          path: '/home/find/hostRadio'
-        },
-        {
-          name: '排行榜',
-          path: '/home/find/rankingList'
-        },
-        {
-          name: '歌手',
-          path: '/home/find/findSinger'
-        },
-        {
-          name: '最新音乐',
-          path: '/home/find/newMusic'
+          name: 'MV',
+          path: '/home/video/mv'
         }
       ]
     }
@@ -47,15 +31,14 @@ class Find extends Component {
     // console.log(this.props)
   }
   render() {
-    const { findNav } = this.state;
+    const { videoNav } = this.state;
     const { routes } = this.props;
-    console.log(routes)
     return (
-      <div className="find">
-        <div className="find_nav">
+      <div className="videos">
+        <div className="videos_nav">
           <ul>
             {
-              findNav.map((item, index) => {
+              videoNav.map((item, index) => {
                 return (
                   <NavLink exact activeClassName="active" key={index} to={item.path}>
                     <li> {item.name}</li>
@@ -71,7 +54,7 @@ class Find extends Component {
           className="area"
           ref={ref => (this.content = ref)}
         >
-          <div className="find-area">
+          <div className="videos-area">
             {
               routes.map((route, key) => {
                 return <Route exact key={key} path={route.path}
@@ -84,9 +67,8 @@ class Find extends Component {
           </div>
         </ScrollArea>
       </div>
-      // </div>
     );
   }
 }
 
-export default Find;
+export default Videos;

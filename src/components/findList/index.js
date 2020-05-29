@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-26 19:09:26
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-29 16:50:35
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -13,7 +13,7 @@ import { RAGet } from '../../api/netWork';
 import { playlistCatlist, playlistHot, topPlaylist } from '../../api/api';
 import Pagination from '../pagination';
 import List from './list';
-import SongList from '../songList';
+// import SongList from '../songList';
 import { formatArr, imgParam, isEmpty, formatTotal } from '../../common/utils/format';
 
 // store

@@ -2,8 +2,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-28 21:33:30
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-29 15:03:05
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -16,6 +16,8 @@ import {
   aa,
   setLocal,
   getLocal,
+  isEmpty,
+  formatDate
 } from '../../common/utils/format';
 import {
   topList,
@@ -52,44 +54,44 @@ class RankingList extends Component {
   }
 
   componentDidMount = () => {
-    // this.getTopList(3);
-    // this.getTopList(0);
-    // this.getTopList(2);
-    // this.getTopList(1);
     this.getAllTopList();
-    this.getToplistArtist();
-    this.getToplistDetail();
     this.testResult();
   };
-  async testResult() {
-    this.getTopList(3);
-    this.getTopList(0);
-    this.getTopList(2);
-    this.getTopList(1);
+  testResult = async () => {
+    let a = await this.getTopList(3);
+    let b = await this.getTopList(0);
+    let c = await this.getTopList(2);
+    let d = await this.getTopList(1);
+    let e = await this.getToplistDetail();
+    let f = await this.getToplistArtist();
+    e.list = f;
+    e.type = 'singer'
+    const officialList = [a, b, c, d, e];
+    setLocal('officialList', officialList);
+    this.setState({ officialList });
+
   }
   // 排行榜
-  getTopList = (id) => {
-    RAGet(topList.api_url, {
+  getTopList = async (id) => {
+    let data = {};
+    await RAGet(topList.api_url, {
       params: {
         idx: id,
       },
     })
       .then((res) => {
-        const obj = {};
+        console.log(res)
         const tracks = res.playlist.tracks;
         const privileges = res.privileges;
-        const data = aa(tracks, privileges);
-        const { allData } = this.state;
-        obj.list = data;
-        obj.name = res.playlist.name;
-        obj.coverImgUrl = res.playlist.coverImgUrl;
-        allData.push(obj);
-        setLocal('officialList', allData);
-        this.setState({ officialList: allData });
+        data.name = res.playlist.name;
+        data.updateTime = res.playlist.updateTime
+        data.list = aa(tracks, privileges);
+        data.coverImgUrl = res.playlist.coverImgUrl;
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+    return data;
   };
 
   //所有榜单
@@ -107,31 +109,32 @@ class RankingList extends Component {
       });
   };
   //所有榜单摘要详情
-  getToplistDetail = () => {
-    RAGet(toplistDetail.api_url)
+  getToplistDetail = async () => {
+    let data = {};
+    await RAGet(toplistDetail.api_url)
       .then((res) => {
-        const { coverUrl } = res.artistToplist;
-        const { singerList } = this.state;
-        singerList.coverUrl = coverUrl;
-        this.setState({ singerList });
+        data.name = res.artistToplist.name;
+        data.coverImgUrl = res.artistToplist.coverUrl;
+        data.updateFrequency = res.artistToplist.updateFrequency;
       })
       .catch((err) => {
         console.log(err);
       });
+    return data;
   };
   //歌手榜
-  getToplistArtist = () => {
-    RAGet(toplistArtist.api_url)
+  getToplistArtist = async () => {
+    let data;
+    await RAGet(toplistArtist.api_url)
       .then((res) => {
-        const list = res.list.artists;
-        const { singerList } = this.state;
-        singerList.list = list;
-        this.setState({ singerList });
+        data = res.list.artists;
       })
       .catch((err) => {
         console.log(err);
       });
+    return data;
   };
+
   addMusic = (item) => {
     let flag = null;
     const array = getLocal('playList');
@@ -141,31 +144,44 @@ class RankingList extends Component {
         return false;
       }
     });
-    if (flag) {
+    if (!isEmpty(flag)) {
       this.props.setIndex(flag);
+      flag = null;
     } else {
       array.unshift(item);
       this.props.setIndex(0);
       this.props.gainPlayLIst(array);
     }
-
     this.props.setIsPlay(true);
     this.props.gainMusicId(item.id);
   };
   render() {
-    const { officialList, globalList, singerList } = this.state;
+    const { officialList, globalList } = this.state;
     return (
       <div className="ranking_ist">
         <div className="headline">
           <p>官方榜</p>
         </div>
         <div className="official_List">
-          {officialList.length === 4 &&
+          {officialList.length > 0 &&
             officialList.map((item, index) => {
               return (
-                <div key={index}>
-                  <PlayAll cls={`play_all_img`} list={item.list} />
-                  <img src={item.coverImgUrl} alt="" />
+                <div className="official_List_box" key={index}
+                  style={{ backgroundImage: 'url(' + require(`./img/${index}.png`) + ')' }}
+                >
+                  {
+                    item.type === 'singer'
+                      ? null
+                      : <PlayAll cls={`play_all_img`} list={item.list} />
+                  }
+
+                  <img src={require(`./img/text${index}.png`)} alt="" />
+                  {
+                    item.updateTime
+                      ? <span>{formatDate(item.updateTime, '0').substr(5) + '更新'}</span>
+                      : null
+                  }
+
                   <ul>
                     {item.list.map((item, index) => {
                       let num = index < 9 ? '0' + (index + 1) : index + 1;
@@ -173,37 +189,28 @@ class RankingList extends Component {
                       return (
                         <li
                           key={index}
-                          onClick={this.addMusic.bind(this, item)}
+                          onClick={item.ar ? this.addMusic.bind(this, item) : null}
                         >
                           <p>{num}</p>
                           <p>{item.name}</p>
-                          <p>
-                            {item.ar.map((item) => item.name + '').join(' - ')}
-                          </p>
+                          {
+                            item.ar
+                              ?
+                              <p>
+                                {item.ar.map((item) => item.name + '').join(' - ')}
+                              </p>
+                              :
+                              null
+                          }
                         </li>
                       );
-                    })}
+                    })
+                    }
                   </ul>
+                  <div>查看全部</div>
                 </div>
               );
             })}
-          <div>
-            {<img src={singerList.coverUrl} alt="" />}
-            <ul>
-              {singerList.list &&
-                singerList.list.map((item, index) => {
-                  let num = index < 9 ? '0' + (index + 1) : index + 1;
-                  if (index > 9) return false;
-
-                  return (
-                    <li key={index}>
-                      <p>{num}</p>
-                      <p>{item.name}</p>
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
         </div>
         <div className="headline">
           <p>全球榜</p>

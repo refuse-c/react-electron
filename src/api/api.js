@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-26 11:30:47
+ * @LastEditTime: 2020-05-29 17:00:12
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -69,13 +69,17 @@ export const getBanner = {
 export const topSongs = {
   api_url: '/top/song'
 }
-//推荐mv
-export const personalizedMv = {
-  api_url: '/personalized/mv'
-}
 //获取专辑列表
 export const albumList = {
   api_url: '/album'
+}
+//视频标签列表
+export const videoGroupList = {
+  api_url: '/video/group/list'
+}
+//单个标签数据
+export const videoGroup = {
+  api_url: '/video/group'
 }
 //获取视频详情
 export const videoDetail = {
@@ -120,4 +124,20 @@ export const toplistArtist = {
 //batch批量请求
 export const batch = {
   api_url: '/batch'
+}
+//mv地址
+export const mvUrl = {
+  api_url: '/mv/url'
+}
+//相似mv
+export const simiMv = {
+  api_url: '/simi/mv'
+}
+//mv详情
+export const mvDetail = {
+  api_url: '/mv/detail'
+}
+//推荐mv
+export const personalizedMv = {
+  api_url: '/personalized/mv'
 }

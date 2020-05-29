@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:08
- * @LastEditTime: 2020-05-28 19:44:08
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-29 16:49:56
+ * @LastEditors: refuse_c
  * @Description:
  */
 import { combineReducers } from 'redux';
@@ -32,7 +32,7 @@ const defaultState = {
     { name: '搜索', path: '/home/search', icon: 'search' },
     { name: '发现', path: '/home/find/', icon: 'find' },
     { name: '视频', path: '/home/video', icon: 'video' },
-    { name: '朋友', path: '/home/frind', icon: 'frind' },
+    { name: '朋友', path: '/home/friend', icon: 'friend' },
     { name: '我的音乐' },
     { name: '本地音乐', path: '/home/local', icon: 'local' },
     { name: '下载管理', path: '/home/down', icon: 'down' },

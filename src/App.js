@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-05-27 09:50:35
+ * @LastEditTime: 2020-05-29 16:50:20
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -35,9 +35,10 @@ function App() {
             }
           })
         }
-        {/* <Redirect to="/home/find/findList" /> */}
-        <Redirect to="/home/find/rankingList" />
-        {/* <Redirect to="/videoDetailC6B041BC93D37665B75499051067896F" /> */}
+        {/* <Redirect to="/home/search" /> */}
+        {/* <Redirect to="/home/find/rankingList" /> */}
+        <Redirect to="/home/video" />
+        {/* <Redirect to="/videoDetail5331966" /> */}
       </Router>
     </div>
 

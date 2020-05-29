@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-28 22:09:22
- * @LastEditors: RA
+ * @LastEditTime: 2020-05-29 14:30:29
+ * @LastEditors: refuse_c
  * @Description:
  */
 
@@ -11,7 +11,7 @@
  * @return:
  * @description: 日期格式化
  */
-export const formatDate = (v) => {
+export const formatDate = (v, type) => {
   if (isEmpty(v)) return '';
   let date = new Date(v);
   let year = date.getFullYear();
@@ -19,7 +19,14 @@ export const formatDate = (v) => {
   let day = date.getDate();
   month = month < 10 ? '0' + month : month;
   day = day < 10 ? '0' + day : day;
-  return year + '-' + month + '-' + day;
+  switch (type) {
+    case '0':
+      return year + '年' + month + '月' + day + '日';
+    default:
+      return year + '-' + month + '-' + day;
+  }
+
+
 };
 
 /**
@@ -663,6 +670,12 @@ export const getLocal = (name) => {
 export const setSession = (name, data) => {
   window.sessionStorage.setItem(name, JSON.stringify(data));
 };
-export const getSession = (name, data) => {
+export const getSession = (name) => {
   return JSON.parse(window.sessionStorage.getItem(name));
 };
+
+// 校验是否都是数字
+export const IsNum = (value) => {
+  var reg = new RegExp("^[0-9]*$");
+  return reg.test(value) ? true : false
+}

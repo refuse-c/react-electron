@@ -6,7 +6,7 @@
   background-color: rgba(255, 255, 255, 0.21);
 
   .scrollarea-content {
-    transition: 0.5s cubic-bezier(0, 0, 1, 1) all;
+    transition: 0.5s all ease;
   }
 
   .content {
@@ -25,7 +25,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        flex: 1;
+        width: 50%;
 
         div {
           display: flex;
@@ -45,7 +45,7 @@
       }
 
       .player-info {
-        flex: 1;
+        width: 50%;
 
         .name {
           font-size: 16px;
@@ -107,10 +107,12 @@
   .aa {
     color: #fff;
     font-size: 15px !important;
+    transition: 0s all ease;
   }
 
   .bb {
     color: #333;
+    transition: 0s all ease;
   }
 }
 

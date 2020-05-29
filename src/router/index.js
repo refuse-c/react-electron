@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-05-22 17:46:24
+ * @LastEditTime: 2020-05-29 17:18:17
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -10,8 +10,10 @@ import Player from '../page/player';
 import Home from '../page/home';
 import Search from '../page/search';
 import Find from '../page/find';
-import Video from '../components/video';
-import Frind from '../page/frind';
+import Videos from '../page/video';
+import Mv from '../page/video/mv';
+import Video from '../page/video/video';
+import Friend from '../page/friend';
 import Local from '../components/local';
 import Down from '../components/down';
 import Lately from '../components/lately';
@@ -71,12 +73,22 @@ let routes = [
             ],
           },
           {
-            path: '/home/video',
-            component: Video,
+            path: '/home/video/',
+            component: Videos,
+            routes: [
+              {
+                path: '/home/video/',
+                component: Video,
+              },
+              {
+                path: '/home/video/mv/',
+                component: Mv,
+              }
+            ]
           },
           {
-            path: '/home/frind',
-            component: Frind,
+            path: '/home/friend',
+            component: Friend,
           },
           {
             path: '/home/local',
