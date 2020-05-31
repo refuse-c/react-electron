@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-28 22:36:19
+ * @LastEditTime: 2020-05-31 12:40:54
  * @LastEditors: RA
  * @Description:
  */
@@ -34,11 +34,12 @@ class Footer extends Component {
       playModel: getLocal('playModel') || '1', //1顺序播放 2随机播放 3单曲循环,
       currentTime: 0,
       musicId: '',
-      duration: 0,
+      duration: props.playList[props.index].dt / 1000 || 0,
       progress: 0,
       isPlay: false,
       bufferTime: 0,
       url: '',
+      volumeNum: getLocal('volumeNum') || 50,
     };
   }
   componentDidMount() {
@@ -49,14 +50,10 @@ class Footer extends Component {
     playList.length > 0
       ? this.props.gainMusicId(playList[index].id)
       : this.props.gainMusicId(null);
-    audio.volume = 0.1;
-    // canplay事件监听
     audio.addEventListener('canplay', () => {
-      //获取总时间
       const duration = Math.floor(audio.duration);
       this.setState({ duration });
     });
-    //播放中监听时间变化
     audio.addEventListener(
       'timeupdate',
       () => {
@@ -64,7 +61,6 @@ class Footer extends Component {
         const currentTime = audio.currentTime.toFixed(3);
         this.setState({ currentTime });
         this.props.setCurrentTime(currentTime);
-        // 缓存时间
         if (isEmpty(duration)) return;
         const buffered = audio.buffered;
         let bufferTime = 0;
@@ -73,7 +69,6 @@ class Footer extends Component {
           const bw = (bufferTime / duration) * this.range.clientWidth;
           buffer.style.width = bw + 'px';
         }
-        //进度条
         const time = currentTime / duration;
         let progress = time * range.max;
         if (isNaN(progress)) return;
@@ -88,7 +83,6 @@ class Footer extends Component {
       this.handelNext();
     });
   }
-
   static getDerivedStateFromProps(nextProps, prevState) {
     const { musicId, isPlay } = nextProps;
     if (musicId !== prevState.musicId) {
@@ -130,7 +124,6 @@ class Footer extends Component {
       }
     }
   }
-  //获取音乐url
   getMusicUrl = (id) => {
     RAGet(getMusicUrl.api_url, {
       params: {
@@ -159,7 +152,6 @@ class Footer extends Component {
         this.props.setIsPlay(false);
       });
   };
-  //获取音乐图片
   getMusicDetail = (id) => {
     RAGet(getMusicDetail.api_url, {
       params: {
@@ -183,14 +175,11 @@ class Footer extends Component {
       this.props.history.push({ pathname: '/player' });
     }
   };
-  // 播放
   onPlay = () => {
     const { musicId } = this.props;
     this.props.setIsPlay(true);
     this.getMusicUrl(musicId);
   };
-
-  // 暂停
   onPause = () => {
     const audio = this.audio;
     this.props.setIsPlay(false);
@@ -215,7 +204,6 @@ class Footer extends Component {
     this.props.setIndex(num);
     this.props.gainMusicId(playList[num].id);
   };
-
   handelNext = () => {
     const { playModel } = this.state;
     const { playList, index, isPlay } = this.props;
@@ -241,14 +229,25 @@ class Footer extends Component {
     this.props.gainMusicId(playList[num].id);
   };
   changeInput = () => {
-    const audio = this.audio;
-    const range = this.range;
-    const { duration } = this.state;
+    const { audio, range } = this;
+    const { playList, index } = this.props;
+    const duration = this.state.duration || playList[index].dt / 1000;
+    if (!duration) return;
     const max = range.max;
     const val = range.value;
     const currentTime = (val / max) * duration;
     audio.currentTime = currentTime;
-    this.setState({ currentTime });
+    this.setState({ currentTime, progress: val });
+    const time = currentTime / duration;
+    range.style.backgroundSize = time * 100 + `% 100%`;
+  };
+  changeVolume = () => {
+    const audio = this.audio;
+    const volume = this.volume;
+    const volumeNum = volume.value;
+    this.setState({ volumeNum });
+    setLocal('volumeNum', volumeNum);
+    audio.volume = volumeNum / 100;
   };
   playModel = () => {
     const { playModel } = this.state;
@@ -274,7 +273,14 @@ class Footer extends Component {
       : this.props.setShowPopStatus('play_list');
   };
   render() {
-    const { playModel, currentTime, duration, progress, url } = this.state;
+    const {
+      playModel,
+      currentTime,
+      duration,
+      progress,
+      url,
+      volumeNum,
+    } = this.state;
     const { playList, index, isPlay } = this.props; //musicId
     return (
       <div className="footer">
@@ -305,7 +311,7 @@ class Footer extends Component {
           <div className="progress_time">
             <p>{formatPlayTime(currentTime)}</p>
             {playList.length > 0 ? (
-              <p>{formatPlayTime(duration || playList[index].dt / 1000)}</p>
+              <p>{formatPlayTime(duration)}</p>
             ) : (
               <p>{`00:00`}</p>
             )}
@@ -324,6 +330,18 @@ class Footer extends Component {
           ></div>
         </div>
         <div className="tools">
+          <i className="icon_volume"></i>
+          <div className="volume_progress">
+            <input
+              onChange={this.changeVolume}
+              ref={(volume) => (this.volume = volume)}
+              type="range"
+              min="0"
+              max="100"
+              value={volumeNum}
+              style={{ backgroundSize: `${volumeNum}% 100%` }}
+            />
+          </div>
           <i className="icon_unlike icon_like"></i>
           {playModel === '1' ? (
             <i onClick={this.playModel} className="icon_order"></i>
@@ -332,7 +350,6 @@ class Footer extends Component {
           ) : (
             <i onClick={this.playModel} className="icon_random"></i>
           )}
-          <i className="icon_volume"></i>
           <i onClick={this.showPlop} className="icon_list"></i>
         </div>
         {playList.length !== 0 ? (

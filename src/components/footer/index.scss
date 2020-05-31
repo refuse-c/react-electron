@@ -6,7 +6,8 @@
   height: 50px;
   min-height: 50px;
   max-height: 50px;
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+
   // border-top: 1px solid #0071fb;
   // background-image: linear-gradient(to right, skyblue, #dd5862);
   i {
@@ -16,77 +17,54 @@
     height: 30px;
     border-radius: 50%;
   }
+
   .control {
     display: flex;
     align-items: center;
     height: initial;
+
     img {
       width: 50px;
       height: 50px;
     }
+
     .icon_prev {
-      background: url("../../common/images/icon_prev.png") center center /
-        contain no-repeat;
+      background: url("../../common/images/icon_prev.png") center center / contain no-repeat;
     }
+
     .icon_play {
-      background: url("../../common/images/icon_play.png") center center /
-        contain no-repeat;
+      background: url("../../common/images/icon_play.png") center center / contain no-repeat;
     }
+
     .icon_pause {
-      background: url("../../common/images/icon_pause.png") center center /
-        contain no-repeat;
+      background: url("../../common/images/icon_pause.png") center center / contain no-repeat;
     }
+
     .icon_next {
-      background: url("../../common/images/icon_next.png") center center /
-        contain no-repeat;
+      background: url("../../common/images/icon_next.png") center center / contain no-repeat;
     }
   }
+
   .progress {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: calc(100% - 300px);
+    width: calc(100% - 400px);
     height: inherit;
     padding: 0 15px;
+
     .progress_time {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       height: 25px;
+
       p {
         font-size: 12px;
         padding-left: 10px;
-        // color: #818181;
       }
     }
-    input {
-      position: relative;
-      width: 100%;
-      outline: none;
-      border: none;
-    }
-    input[type="range"] {
-      -webkit-appearance: none;
-      height: 2px;
-      border-radius: 10px;
-      background-size: 20% 100%;
-      // background-color: rgba(0,0,0,0.5);
-      -webkit-appearance: none; /*清除系统默认样式*/
-      width: 100%;
-      background: -webkit-linear-gradient(#61bd12, #61bd12) no-repeat,
-        rgba(0, 0, 0, 0.2); /*设置左边颜色为#61bd12，右边颜色为#ddd*/
-      background-size: 1% 100%; /*设置左右宽度比例*/
-    }
 
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      height: 12px;
-      width: 12px;
-      margin-top: 0px;
-      background-color: #fc5244;
-      border-radius: 50%;
-      border: solid 4px #fff;
-    }
     .buffer-progress {
       position: absolute;
       top: 50%;
@@ -95,44 +73,99 @@
       width: 0;
       transform: translate(17px, 2px);
       height: 2px;
-      background-color: rgba(0,0,0,0.3);
+      background-color: rgba(0, 0, 0, 0.3);
     }
   }
+
+
+
   .tools {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    .volume_progress {
+      display: flex;
+      align-items: center;
+      width: 100px;
+    }
+
     .icon_unlike {
-      background: url("../../common/images/icon_unlike.png") center center /
-        contain no-repeat;
+      background: url("../../common/images/icon_unlike.png") center center / contain no-repeat;
     }
+
     .icon_like {
-      background: url("../../common/images/icon_like.png") center center /
-        contain no-repeat;
+      background: url("../../common/images/icon_like.png") center center / contain no-repeat;
     }
+
     .icon_order {
-      background: url("../../common/images/icon_order.png") center center / 20px
-        no-repeat;
+      background: url("../../common/images/icon_order.png") center center / 20px no-repeat;
     }
+
     .icon_cycle {
-      background: url("../../common/images/icon_cycle.png") center center / 20px
-        no-repeat;
+      background: url("../../common/images/icon_cycle.png") center center / 20px no-repeat;
     }
+
     .icon_random {
-      background: url("../../common/images/icon_random.png") center center /
-        20px no-repeat;
+      background: url("../../common/images/icon_random.png") center center / 20px no-repeat;
     }
+
     .icon_volume {
-      background: url("../../common/images/icon_volume.png") center center /
-        17px no-repeat;
+      background: url("../../common/images/icon_volume.png") center center / 17px no-repeat;
     }
+
     .icon_mute {
-      background: url("../../common/images/icon_mute.png") center center / 17px
-        17px no-repeat;
+      background: url("../../common/images/icon_mute.png") center center / 17px 17px no-repeat;
     }
+
     .icon_list {
-      background: url("../../common/images/icon_list.png") center center /
-        contain no-repeat;
+      background: url("../../common/images/icon_list.png") center center / contain no-repeat;
     }
   }
+
+  input {
+    position: relative;
+    width: 100%;
+    outline: none;
+    border: none;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    height: 2px;
+    border-radius: 10px;
+    background-size: 20% 100%;
+    // background-color: rgba(0,0,0,0.5);
+    -webkit-appearance: none;
+    /*清除系统默认样式*/
+    width: 100%;
+    background: -webkit-linear-gradient(#61bd12, #61bd12) no-repeat,
+      rgba(0, 0, 0, 0.2);
+    /*设置左边颜色为#61bd12，右边颜色为#ddd*/
+    background-size: 1% 100%;
+    /*设置左右宽度比例*/
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    margin-top: 0px;
+    background-color: #fc5244;
+    border-radius: 50%;
+    border: solid 4px #fff;
+    visibility: hidden;
+  }
+
+  input[type="range"]:hover::-webkit-slider-thumb {
+    visibility: visible;
+  }
 }
+
+// .aaa{
+//   position: fixed;
+//     bottom: 70px;
+//     right: 20px;
+//     transform: rotate(-90deg);
+//     width: 100px;
+// }

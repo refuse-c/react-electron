@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-05-29 17:37:04
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-05-31 12:41:15
+ * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -28,7 +28,6 @@ class Videos extends Component {
     }
   }
   componentDidMount = () => {
-    // console.log(this.props)
   }
   render() {
     const { videoNav } = this.state;
