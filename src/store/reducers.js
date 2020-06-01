@@ -1,12 +1,13 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:08
- * @LastEditTime: 2020-05-29 16:49:56
+ * @LastEditTime: 2020-06-01 17:36:51
  * @LastEditors: refuse_c
  * @Description:
  */
 import { combineReducers } from 'redux';
 import * as ACTIONTYPES from './actionTypes';
+import { getLocal, setLocal } from '../common/utils/format';
 
 const defaultState = {
   index: 0,
@@ -16,11 +17,11 @@ const defaultState = {
   duration: 0,
   isLogin: false,
   showLogin: false,
-  theme: localStorage.getItem('themeIndex') || 0,
+  theme: getLocal('themeIndex') || 0,
   playStatus: false,
-  showPlop: false,
-  userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
-  playList: JSON.parse(localStorage.getItem('playList')) || [], //播放列表
+  showPlop: '',
+  userInfo: getLocal('userInfo') || {},
+  playList: getLocal('playList') || [], //播放列表
   musicList: [], //音乐列表
   searchInfo: {},
   menuIndex: 1,
@@ -36,9 +37,7 @@ const defaultState = {
     { name: '我的音乐' },
     { name: '本地音乐', path: '/home/local', icon: 'local' },
     { name: '下载管理', path: '/home/down', icon: 'down' },
-    { name: '最近播放', path: '/home/lately', icon: 'lately' },
-    // { name: '创建的歌单' },
-    // { name: '收藏的歌单' },
+    { name: '最近播放', path: '/home/lately', icon: 'lately' }
   ],
 };
 
@@ -55,7 +54,7 @@ const musicList = (state = defaultState.musicList, action) => {
 const playList = (state = defaultState.playList, action) => {
   switch (action.type) {
     case ACTIONTYPES.PLAY_LIST:
-      window.localStorage.setItem('playList', JSON.stringify(action.data));
+      setLocal('playList', action.data)
       return action.data;
     default:
       return state;
@@ -65,7 +64,7 @@ const playList = (state = defaultState.playList, action) => {
 const userInfo = (state = defaultState.userInfo, action) => {
   switch (action.type) {
     case ACTIONTYPES.USER_INFO:
-      window.localStorage.setItem('userInfo', JSON.stringify(action.data));
+      setLocal('userInfo', action.data)
       return action.data;
     default:
       return state;

@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:12:40
- * @LastEditTime: 2020-05-25 20:32:57
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-01 17:31:03
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -22,14 +22,13 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // loginShow: true
     };
   }
   //点击区域外掩藏
   handleHide = () => {
     const { showPlop } = this.props;
     if (showPlop) {
-      this.props.setShowPopStatus('');
+      // this.props.setShowPopStatus('');
     }
   };
   render() {
@@ -52,7 +51,7 @@ class Index extends Component {
           })}
         </div>
         <Footer {...this.props} />
-        {showPlop ==='play_list'? <PlayList {...this.props} /> : null}
+        {showPlop === 'play_list' ? <PlayList {...this.props} /> : null}
       </div>
     );
   }

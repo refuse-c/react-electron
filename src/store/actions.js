@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:28
- * @LastEditTime: 2020-05-25 21:43:42
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-01 16:50:45
+ * @LastEditors: refuse_c
  * @Description:
  */
 import * as ACTIONSTYPES from './actionTypes';
@@ -14,7 +14,7 @@ export const gainMusicList = (data) => {
   };
 };
 //播放列表
-export const gainPlayLIst = (data) => {
+export const gainPlayList = (data) => {
   return {
     type: ACTIONSTYPES.PLAY_LIST,
     data,

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-17 15:20:33
- * @LastEditTime: 2020-05-29 12:29:58
+ * @LastEditTime: 2020-06-01 13:48:59
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -11,7 +11,7 @@ import './index.scss';
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { gainPlayLIst, gainMusicId, setIsPlay, setIndex } from '../../store/actions';
+import { gainPlayList, gainMusicId, setIsPlay, setIndex } from '../../store/actions';
 import { isEmpty } from '../../common/utils/format';
 class PlayAll extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class PlayAll extends Component {
     if (isEmpty(list)) return;
     this.props.setIndex(0);
     this.props.setIsPlay(true);
-    this.props.gainPlayLIst(list);
+    this.props.gainPlayList(list);
     this.props.gainMusicId(list[0].id);
   }
   render() {
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+    gainPlayList: bindActionCreators(gainPlayList, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 14:46:55
- * @LastEditTime: 2020-05-25 12:22:19
+ * @LastEditTime: 2020-06-01 10:27:32
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -10,7 +10,7 @@ import './index.scss';
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { isSHowLogin, gainUserInfo, gainMenuList } from '../../store/actions';
+import { isSHowLogin, gainMenuList } from '../../store/actions';
 import { RAGet } from '../../api/netWork';
 import { musicList, loginStatus } from '../../api/api';
 import { isEmpty } from '../../common/utils/format';
@@ -145,9 +145,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     isSHowLogin: bindActionCreators(isSHowLogin, dispatch),
-    gainUserInfo: bindActionCreators(gainUserInfo, dispatch),
     gainMenuList: bindActionCreators(gainMenuList, dispatch),
-    // isLogin: bindActionCreators(isLogin, dispatch)
 
   }
 }

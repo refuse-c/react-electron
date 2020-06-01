@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-29 16:50:35
+ * @LastEditTime: 2020-06-01 16:11:49
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -52,7 +52,6 @@ class FindList extends Component {
     return null;
   }
   componentDidUpdate(prevState) {
-    // 当前音乐更新了
     if (prevState.songListText !== this.state.songListText) {
       const { songListText } = this.state;
       this.getTopPlaylist(songListText);

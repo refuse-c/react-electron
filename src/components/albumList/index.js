@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: RA
- * @LastEditTime: 2020-05-25 20:27:12
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-01 16:36:36
  * @Description:
  */
 import React, { Component } from 'react';
@@ -23,7 +23,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  gainPlayLIst,
+  gainPlayList,
   gainMusicId,
   setIsPlay,
   setIndex,
@@ -38,9 +38,8 @@ class List extends Component {
   }
   playAll = () => {
     const { muscicList } = this.state;
-    this.props.setIndex(0);
     this.props.setIsPlay(true);
-    this.props.gainPlayLIst(muscicList);
+    this.props.gainPlayList(muscicList);
     this.props.gainMusicId(muscicList[0].id);
   };
   componentDidMount = () => {
@@ -59,17 +58,15 @@ class List extends Component {
       params: {
         id: id,
       },
-    })
-      .then((res) => {
-        const data = res.songs;
-        const albumDetail = res.album;
-        const muscicList = dataScreening(data);
+    }).then((res) => {
+      const data = res.songs;
+      const albumDetail = res.album;
+      const muscicList = dataScreening(data);
 
-        this.setState({ albumDetail, muscicList });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      this.setState({ albumDetail, muscicList });
+    }).catch((err) => {
+      console.log(err);
+    });
   };
   render() {
     const { albumDetail, muscicList } = this.state;
@@ -118,15 +115,11 @@ class List extends Component {
 }
 
 //注册store
-const mapStateToProps = (state) => {
-  return {
-    userInfo: state.userInfo,
-  };
-};
+const mapStateToProps = (state) => { };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+    gainPlayList: bindActionCreators(gainPlayList, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),

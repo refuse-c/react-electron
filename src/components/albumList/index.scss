@@ -3,8 +3,19 @@
   height: 100%;
 
   .album_list_info {
+    position: relative;
     display: flex;
-    padding: 20px 15px;
+    padding: 20px  15px;
+
+    &::before {
+      position: absolute;
+      top: 20px;
+      left: 165px;
+      content: '';
+      width: 20px;
+      height: 150px;
+      background: url('../../common/images/ayy.png') center center / cover no-repeat;
+    }
 
     img {
       width: 150px;
@@ -23,7 +34,7 @@
     .album_list_box {
       display: flex;
       flex-direction: column;
-      padding-left: 20px;
+      padding-left: 40px;
 
       .album_list_user {
         display: flex;

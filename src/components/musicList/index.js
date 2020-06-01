@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-22 12:07:13
- * @LastEditTime: 2020-05-28 22:46:36
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-01 17:44:38
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -16,13 +16,14 @@ import {
   getLocal,
 } from '../../common/utils/format';
 import Empty from '../../components/empty';
+import Tools from './tools';
 // store
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
   gainMusicList,
   setIndex,
-  gainPlayLIst,
+  gainPlayList,
   setIsPlay,
   gainMusicId,
 } from '../../store/actions';
@@ -32,6 +33,10 @@ class MusicList extends Component {
     this.state = {
       muscicList: [],
       playList: [],
+      showTools: false,
+      sty: {},
+      items: {},
+      indexs: NaN
     };
   }
   addMusic = (item) => {
@@ -48,17 +53,49 @@ class MusicList extends Component {
       flag = null;
     } else {
       array.unshift(item);
-      this.props.setIndex(0);
-      this.props.gainPlayLIst(array);
+      // this.props.setIndex(0);
+      this.props.gainPlayList(array);
     }
     this.props.setIsPlay(true);
     this.props.gainMusicId(item.id);
   };
+
+  handelContextMenu = (item, index, e) => {
+    this.setState({ showTools: false })
+    const a = e.screenX;
+    const b = e.screenY;
+    const c = window.screenX;
+    const d = window.screenY;
+    const f = window.innerWidth;
+    const g = window.innerHeight
+
+    let sty = {};
+    const obj = document.getElementsByClassName('aaaa')[index].getBoundingClientRect()
+    if (b - d > g - 210) {
+      sty.top = b - d - 210;
+    } else {
+      sty.top = obj.y + 20;
+    }
+    if (a - c > f - 200) {
+      sty.left = a - c - 220;
+    } else {
+      sty.left = a - c + 20;
+    }
+    this.setState({ showTools: true, sty, item, index })
+  }
+
+
   render() {
     const { pageNum, muscicList, musicId } = this.props;
+    const { sty, showTools, item, index } = this.state;
     return (
-      <div className="music_list">
-        <ul>
+      <div className="music_list" >
+        {
+          showTools
+            ? <Tools sty={sty} item={item} num={index} />
+            : null
+        }
+        <ul className="c">
           {isArrays(muscicList) ? (
             muscicList &&
             muscicList.map((item, index) => {
@@ -68,9 +105,11 @@ class MusicList extends Component {
               const dis = item.st === -200 ? 'ra_disabled' : '';
               return (
                 <li
+                  ref={musicList => this.musicList = musicList}
                   key={index}
-                  className={sty + dis}
+                  className={`aaaa ${sty + dis}`}
                   onDoubleClick={this.addMusic.bind(this, item, index)}
+                  onContextMenu={this.handelContextMenu.bind(this, item, index)}
                 >
                   <div>{formatNum((num - 1) * 50 + index)}</div>
                   <div>{item.name}</div>
@@ -81,10 +120,10 @@ class MusicList extends Component {
               );
             })
           ) : (
-            <Empty />
-          )}
+              <Empty />
+            )}
         </ul>
-      </div>
+      </div >
     );
   }
 }
@@ -102,7 +141,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     gainMusicList: bindActionCreators(gainMusicList, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),
-    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+    gainPlayList: bindActionCreators(gainPlayList, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
   };

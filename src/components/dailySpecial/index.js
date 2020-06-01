@@ -63,7 +63,7 @@ class DailySpecial extends Component {
               <p>{recommended.copywriter}</p>
             </div>
           </div>
-          <div className="tools">
+          <div className="tool">
             <PlayAlll
               cls={`btn1`}
               text={`播放全部`}

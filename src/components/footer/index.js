@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-05-31 12:40:54
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-01 17:18:43
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -23,7 +23,7 @@ import {
   setIsPlay,
   setIndex,
   gainMusicId,
-  gainPlayLIst,
+  gainPlayList,
   setShowPopStatus,
   setCurrentTime,
 } from '../../store/actions';
@@ -34,7 +34,7 @@ class Footer extends Component {
       playModel: getLocal('playModel') || '1', //1顺序播放 2随机播放 3单曲循环,
       currentTime: 0,
       musicId: '',
-      duration: props.playList[props.index].dt / 1000 || 0,
+      duration: 0,
       progress: 0,
       isPlay: false,
       bufferTime: 0,
@@ -61,7 +61,7 @@ class Footer extends Component {
         const currentTime = audio.currentTime.toFixed(3);
         this.setState({ currentTime });
         this.props.setCurrentTime(currentTime);
-        if (isEmpty(duration)) return;
+        // if (isEmpty(duration)) return;
         const buffered = audio.buffered;
         let bufferTime = 0;
         if (buffered.length !== 0) {
@@ -161,7 +161,7 @@ class Footer extends Component {
       .then((res) => {
         const { index, playList } = this.props;
         playList[index].picUrl = res.songs[0].al.picUrl;
-        this.props.gainPlayLIst(playList);
+        this.props.gainPlayList(playList);
       })
       .catch((err) => {
         console.log(err);
@@ -231,8 +231,10 @@ class Footer extends Component {
   changeInput = () => {
     const { audio, range } = this;
     const { playList, index } = this.props;
+    console.log(playList)
+    if (!playList) return;
     const duration = this.state.duration || playList[index].dt / 1000;
-    if (!duration) return;
+
     const max = range.max;
     const val = range.value;
     const currentTime = (val / max) * duration;
@@ -292,29 +294,29 @@ class Footer extends Component {
               alt=""
             />
           ) : (
-            <img
-              onClick={this.gotoPlayer}
-              src={require('../../common/images/logo.png')}
-              alt=""
-            />
-          )}
+              <img
+                onClick={this.gotoPlayer}
+                src={require('../../common/images/logo.png')}
+                alt=""
+              />
+            )}
 
           <i onClick={this.handelPrev} className="icon_prev"></i>
           {isPlay ? (
             <i onClick={this.onPause} className="icon_pause"></i>
           ) : (
-            <i onClick={this.onPlay} className="icon_play"></i>
-          )}
+              <i onClick={this.onPlay} className="icon_play"></i>
+            )}
           <i onClick={this.handelNext.bind(this)} className="icon_next"></i>
         </div>
         <div className="progress">
           <div className="progress_time">
             <p>{formatPlayTime(currentTime)}</p>
             {playList.length > 0 ? (
-              <p>{formatPlayTime(duration)}</p>
+              <p>{formatPlayTime(duration || playList[index].dt / 1000)}</p>
             ) : (
-              <p>{`00:00`}</p>
-            )}
+                <p>{`00:00`}</p>
+              )}
           </div>
           <input
             onChange={this.changeInput}
@@ -329,7 +331,7 @@ class Footer extends Component {
             ref={(buffer) => (this.buffer = buffer)}
           ></div>
         </div>
-        <div className="tools">
+        <div className="tool">
           <i className="icon_volume"></i>
           <div className="volume_progress">
             <input
@@ -348,8 +350,8 @@ class Footer extends Component {
           ) : playModel === '2' ? (
             <i onClick={this.playModel} className="icon_cycle"></i>
           ) : (
-            <i onClick={this.playModel} className="icon_random"></i>
-          )}
+                <i onClick={this.playModel} className="icon_random"></i>
+              )}
           <i onClick={this.showPlop} className="icon_list"></i>
         </div>
         {playList.length !== 0 ? (
@@ -360,8 +362,8 @@ class Footer extends Component {
             src={url}
           ></audio>
         ) : (
-          <audio ref={(ref) => (this.audio = ref)}></audio>
-        )}
+            <audio ref={(ref) => (this.audio = ref)}></audio>
+          )}
       </div>
     );
   }
@@ -382,7 +384,7 @@ const mapDispatchToProps = (dispatch) => {
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
-    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+    gainPlayList: bindActionCreators(gainPlayList, dispatch),
     setShowPopStatus: bindActionCreators(setShowPopStatus, dispatch),
     setCurrentTime: bindActionCreators(setCurrentTime, dispatch),
   };

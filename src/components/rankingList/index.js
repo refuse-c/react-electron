@@ -32,7 +32,7 @@ import { bindActionCreators } from 'redux';
 import {
   gainMusicList,
   setIndex,
-  gainPlayLIst,
+  gainPlayList,
   setIsPlay,
   gainMusicId,
 } from '../../store/actions';
@@ -150,7 +150,7 @@ class RankingList extends Component {
     } else {
       array.unshift(item);
       this.props.setIndex(0);
-      this.props.gainPlayLIst(array);
+      this.props.gainPlayList(array);
     }
     this.props.setIsPlay(true);
     this.props.gainMusicId(item.id);
@@ -250,7 +250,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     gainMusicList: bindActionCreators(gainMusicList, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),
-    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+    gainPlayList: bindActionCreators(gainPlayList, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
   };

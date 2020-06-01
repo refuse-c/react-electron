@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-08 19:19:33
- * @LastEditTime: 2020-05-25 20:38:47
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-01 17:32:58
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -12,7 +12,7 @@ import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 // store
 import { connect } from 'react-redux';
-import { formatNum, formatPlayTime } from '../../common/utils/format';
+import { formatNum, formatPlayTime, getLocal } from '../../common/utils/format';
 import { bindActionCreators } from 'redux';
 import { setIndex, setIsPlay, gainMusicId } from '../../store/actions';
 class PlayList extends Component {
@@ -20,6 +20,7 @@ class PlayList extends Component {
     super(props);
     this.state = {
       index: 0,
+      playList: getLocal('playList') || []
     };
   }
   componentDidMount = () => {
@@ -28,8 +29,11 @@ class PlayList extends Component {
       this.content.scrollArea.scrollYTo(index * 24);
     }, 10);
   };
-
+  // componentWillReceiveProps = (nextProps) => {
+  //   console.log(nextProps)
+  // }
   static getDerivedStateFromProps(nextProps, prevState) {
+    // console.log(nextProps, prevState)
     const { index } = nextProps;
     if (index !== prevState.index) {
       return {
@@ -62,6 +66,7 @@ class PlayList extends Component {
   };
   render() {
     const { playList, musicId, index } = this.props;
+    // console.log(playList)
     const length = playList.length;
     return (
       <div className="play-list" onClick={this.stopBubbling}>

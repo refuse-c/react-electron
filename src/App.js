@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-05-29 16:50:20
+ * @LastEditTime: 2020-06-01 16:53:50
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -31,13 +31,13 @@ function App() {
                   <route.component {...props} routes={route.routes} />
                 )}
               />
-
             }
           })
         }
-        {/* <Redirect to="/home/search" /> */}
+        <Redirect to="/home/search" />
+        <Redirect to="/home/single4883935921" />
         {/* <Redirect to="/home/find/rankingList" /> */}
-        <Redirect to="/home/video" />
+        {/* <Redirect to="/home/albumList4546" /> */}
         {/* <Redirect to="/videoDetail5331966" /> */}
       </Router>
     </div>

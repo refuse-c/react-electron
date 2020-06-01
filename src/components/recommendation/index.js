@@ -15,7 +15,7 @@ import { imgParam, getDate, dataScreening } from '../../common/utils/format';
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { gainMusicList, setIndex, gainPlayLIst, setIsPlay, gainMusicId } from '../../store/actions';
+import { gainMusicList, setIndex, gainPlayList, setIsPlay, gainMusicId } from '../../store/actions';
 class Recommendation extends Component {
   constructor(props) {
     super(props);
@@ -109,7 +109,7 @@ class Recommendation extends Component {
     });
     array.unshift(item);
     this.props.setIndex(0);
-    this.props.gainPlayLIst(array);
+    this.props.gainPlayList(array);
     this.props.setIsPlay(true);
     this.props.gainMusicId(item.id);
   }
@@ -258,7 +258,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     gainMusicList: bindActionCreators(gainMusicList, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),
-    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+    gainPlayList: bindActionCreators(gainPlayList, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
   }

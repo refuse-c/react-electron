@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-05-25 13:46:36
- * @LastEditors: RA
- * @LastEditTime: 2020-05-26 19:18:40
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-01 09:06:12
  * @Description:
  */
 import React, { Component } from 'react';
@@ -22,6 +22,7 @@ class List extends Component {
       currentText: '全部歌单',
     };
   }
+
   stopBubbling = (e) => {
     e.stopPropagation();
   };

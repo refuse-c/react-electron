@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-05-22 16:48:00
+ * @LastEditTime: 2020-06-01 14:37:31
  * @Description:
  */
 import React, { Component } from 'react';
@@ -17,7 +17,7 @@ import { imgParam, formatDate, dataScreening, isEmpty, aa } from '../../common/u
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { gainPlayLIst, gainMusicId, setIsPlay, setIndex } from '../../store/actions';
+import { gainPlayList, gainMusicId, setIsPlay, setIndex } from '../../store/actions';
 class List extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +36,7 @@ class List extends Component {
     const { muscicList } = this.state;
     this.props.setIndex(0);
     this.props.setIsPlay(true);
-    this.props.gainPlayLIst(muscicList);
+    this.props.gainPlayList(muscicList);
     this.props.gainMusicId(muscicList[0].id);
   }
   componentDidMount = () => {
@@ -124,7 +124,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    gainPlayLIst: bindActionCreators(gainPlayLIst, dispatch),
+    gainPlayList: bindActionCreators(gainPlayList, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),

@@ -1,10 +1,11 @@
 .music_list {
-  ul {
+  .c {
     li {
       display: flex;
       height: 40px;
       font-size: 13px;
       padding: 0 15px;
+
       div {
         height: 100%;
         overflow: hidden;
@@ -12,28 +13,56 @@
         white-space: nowrap;
         line-height: 40px;
       }
+
       div:nth-child(1) {
         // width: 50px;
         white-space: nowrap;
         text-align: center;
       }
+
       div:nth-child(2) {
         flex: 2;
         padding: 0 10px;
       }
+
       div:nth-child(3) {
         flex: 2;
       }
+
       div:nth-child(4) {
         flex: 2;
         padding: 0 10px;
       }
+
       div:nth-child(5) {
         white-space: nowrap;
         text-align: right;
       }
+
       &:hover {
         background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .tools {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    z-index: 99;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 10px 1px #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    ul {
+      width: 100%;
+
+      li {
+        padding: 0 10px;
+        height: 30px;
+        line-height: 30px;
       }
     }
   }
