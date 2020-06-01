@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:08
- * @LastEditTime: 2020-06-01 17:36:51
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-01 20:06:48
+ * @LastEditors: RA
  * @Description:
  */
 import { combineReducers } from 'redux';
@@ -28,6 +28,7 @@ const defaultState = {
   pageNum: 1,
   total: 0,
   songListText: '全部歌单',
+  toolStatus: false,
   menuList: [
     { name: 'EMusic' },
     { name: '搜索', path: '/home/search', icon: 'search' },
@@ -37,7 +38,7 @@ const defaultState = {
     { name: '我的音乐' },
     { name: '本地音乐', path: '/home/local', icon: 'local' },
     { name: '下载管理', path: '/home/down', icon: 'down' },
-    { name: '最近播放', path: '/home/lately', icon: 'lately' }
+    { name: '最近播放', path: '/home/lately', icon: 'lately' },
   ],
 };
 
@@ -54,7 +55,7 @@ const musicList = (state = defaultState.musicList, action) => {
 const playList = (state = defaultState.playList, action) => {
   switch (action.type) {
     case ACTIONTYPES.PLAY_LIST:
-      setLocal('playList', action.data)
+      setLocal('playList', action.data);
       return action.data;
     default:
       return state;
@@ -64,7 +65,7 @@ const playList = (state = defaultState.playList, action) => {
 const userInfo = (state = defaultState.userInfo, action) => {
   switch (action.type) {
     case ACTIONTYPES.USER_INFO:
-      setLocal('userInfo', action.data)
+      setLocal('userInfo', action.data);
       return action.data;
     default:
       return state;
@@ -176,6 +177,14 @@ const songListText = (state = defaultState.songListText, action) => {
       return state;
   }
 };
+const toolStatus = (state = defaultState.toolStatus, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.TOOLS:
+      return action.data;
+    default:
+      return state;
+  }
+};
 
 export default combineReducers({
   musicList,
@@ -194,4 +203,5 @@ export default combineReducers({
   total,
   currentTime,
   songListText,
+  toolStatus,
 });

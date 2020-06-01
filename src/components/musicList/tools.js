@@ -1,14 +1,13 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-06-01 11:13:01
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-01 18:01:38
+ * @LastEditors: RA
+ * @LastEditTime: 2020-06-01 20:14:13
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
 import copy from 'copy-to-clipboard';
-
 
 // store
 import { connect } from 'react-redux';
@@ -19,22 +18,25 @@ import {
   gainPlayList,
   setIsPlay,
   gainMusicId,
+  setToolsStatus,
 } from '../../store/actions';
 import { isEmpty, getLocal } from '../../common/utils/format';
 
 class Tools extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
   componentDidMount = () => {
     // console.log(this.props)
-  }
-  handleComment = () => {
+  };
+  handleComment = (e) => {
     const { item } = this.props;
-    console.log(item)
-  }
-  handlePlay = () => {
+    console.log(item);
+    this.props.setToolsStatus(false);
+    e.stopPropagation();
+  };
+  handlePlay = (e) => {
     const { item, playList } = this.props;
     const array = JSON.parse(JSON.stringify(playList));
     let flag = null;
@@ -53,9 +55,11 @@ class Tools extends Component {
     }
     this.props.setIsPlay(true);
     this.props.gainMusicId(item.id);
-  }
+    this.props.setToolsStatus(false);
+    e.stopPropagation();
+  };
 
-  handleNextPlay = () => {
+  handleNextPlay = (e) => {
     const { item, playList, index } = this.props;
     const array = JSON.parse(JSON.stringify(playList));
     if (array.length === 0) {
@@ -73,38 +77,49 @@ class Tools extends Component {
       }
     });
     if (index === num) return;
-    index > num ? array.splice(index, 0, item) : array.splice(index + 1, 0, item)
+    index > num
+      ? array.splice(index, 0, item)
+      : array.splice(index + 1, 0, item);
     this.props.gainPlayList(array);
-  }
-  handleCollect = () => {
+    this.props.setToolsStatus(false);
+    e.stopPropagation();
+  };
+  handleCollect = (e) => {
     const { item } = this.props;
-    console.log(item)
-  }
-  handleShare = () => {
+    console.log(item);
+    this.props.setToolsStatus(false);
+    e.stopPropagation();
+  };
+  handleShare = (e) => {
     const { item } = this.props;
-    console.log(item)
-  }
-  handleCopyUrl = () => {
+    console.log(item);
+    this.props.setToolsStatus(false);
+    e.stopPropagation();
+  };
+  handleCopyUrl = (e) => {
     const { item } = this.props;
     const userInfo = getLocal('userInfo');
     const userId = userInfo.profile.userId;
     if (userId) {
-      const url = `http://music.163.com/song?id=${item.id}&userid=${userId}`
-      copy(url) ? console.log("复制成功") : console.log("复制失败")
+      const url = `http://music.163.com/song?id=${item.id}&userid=${userId}`;
+      copy(url) ? console.log('复制成功') : console.log('复制失败');
     } else {
-      console.log("复制失败")
+      console.log('复制失败');
     }
-  }
-  handleDownload = () => {
+    this.props.setToolsStatus(false);
+    e.stopPropagation();
+  };
+  handleDownload = (e) => {
     const { item } = this.props;
-    console.log(item)
-  }
-
+    console.log(item);
+    this.props.setToolsStatus(false);
+    e.stopPropagation();
+  };
 
   render() {
     const { sty } = this.props;
     return (
-      <div style={sty} className="tools" >
+      <div style={sty} className="tools">
         <div>
           <ul>
             <li onClick={this.handleComment}>查看评论</li>
@@ -137,6 +152,7 @@ const mapDispatchToProps = (dispatch) => {
     gainPlayList: bindActionCreators(gainPlayList, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
+    setToolsStatus: bindActionCreators(setToolsStatus, dispatch),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Tools);

@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-22 12:07:13
- * @LastEditTime: 2020-06-01 17:44:38
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-01 20:09:13
+ * @LastEditors: RA
  * @Description:
  */
 import React, { Component } from 'react';
@@ -26,6 +26,7 @@ import {
   gainPlayList,
   setIsPlay,
   gainMusicId,
+  setToolsStatus,
 } from '../../store/actions';
 class MusicList extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class MusicList extends Component {
       showTools: false,
       sty: {},
       items: {},
-      indexs: NaN
+      indexs: NaN,
     };
   }
   addMusic = (item) => {
@@ -61,16 +62,18 @@ class MusicList extends Component {
   };
 
   handelContextMenu = (item, index, e) => {
-    this.setState({ showTools: false })
+    this.setState({ showTools: false });
     const a = e.screenX;
     const b = e.screenY;
     const c = window.screenX;
     const d = window.screenY;
     const f = window.innerWidth;
-    const g = window.innerHeight
+    const g = window.innerHeight;
 
     let sty = {};
-    const obj = document.getElementsByClassName('aaaa')[index].getBoundingClientRect()
+    const obj = document
+      .getElementsByClassName('aaaa')
+      [index].getBoundingClientRect();
     if (b - d > g - 210) {
       sty.top = b - d - 210;
     } else {
@@ -81,20 +84,16 @@ class MusicList extends Component {
     } else {
       sty.left = a - c + 20;
     }
-    this.setState({ showTools: true, sty, item, index })
-  }
-
+    this.setState({ showTools: true, sty, item, index });
+    this.props.setToolsStatus(true);
+  };
 
   render() {
-    const { pageNum, muscicList, musicId } = this.props;
-    const { sty, showTools, item, index } = this.state;
+    const { pageNum, muscicList, musicId, toolStatus } = this.props;
+    const { sty, item, index } = this.state;
     return (
-      <div className="music_list" >
-        {
-          showTools
-            ? <Tools sty={sty} item={item} num={index} />
-            : null
-        }
+      <div className="music_list">
+        {toolStatus ? <Tools sty={sty} item={item} num={index} /> : null}
         <ul className="c">
           {isArrays(muscicList) ? (
             muscicList &&
@@ -105,7 +104,7 @@ class MusicList extends Component {
               const dis = item.st === -200 ? 'ra_disabled' : '';
               return (
                 <li
-                  ref={musicList => this.musicList = musicList}
+                  ref={(musicList) => (this.musicList = musicList)}
                   key={index}
                   className={`aaaa ${sty + dis}`}
                   onDoubleClick={this.addMusic.bind(this, item, index)}
@@ -120,10 +119,10 @@ class MusicList extends Component {
               );
             })
           ) : (
-              <Empty />
-            )}
+            <Empty />
+          )}
         </ul>
-      </div >
+      </div>
     );
   }
 }
@@ -134,6 +133,7 @@ const mapStateToProps = (state) => {
     musicList: state.musicList,
     playList: state.playList,
     musicId: state.musicId,
+    toolStatus: state.toolStatus,
   };
 };
 
@@ -144,6 +144,7 @@ const mapDispatchToProps = (dispatch) => {
     gainPlayList: bindActionCreators(gainPlayList, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
+    setToolsStatus: bindActionCreators(setToolsStatus, dispatch),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MusicList);
