@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-05-29 16:30:32
+ * @LastEditTime: 2020-06-02 17:24:16
  * @Description:
  */
 import React, { Component } from 'react';
@@ -10,6 +10,7 @@ import './index.scss';
 import { imgParam, isArrays } from '../../common/utils/format';
 import { NavLink } from 'react-router-dom';
 import Empty from '../../components/empty';
+
 //store
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
@@ -36,7 +37,7 @@ class Video extends Component {
                       to={path + item.vid}
                     >
                       <li>
-                        <img src={imgParam(item.coverUrl, 160, 90)} alt="" />
+                        <img src={imgParam(item.coverUrl, 320, 180)} alt="" />
                         <h4>{item.title}</h4>
                         <p>by {item.creator[0].userName}</p>
                       </li>

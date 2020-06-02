@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-05-29 16:45:46
+ * @LastEditTime: 2020-06-02 10:02:10
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import './index.scss';
 
 import { Route, NavLink } from 'react-router-dom';
-import 'react-scrollbar/dist/css/scrollArea.css';
+// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 class Find extends Component {
   constructor(props) {

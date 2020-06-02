@@ -7,7 +7,7 @@
  */
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import 'react-scrollbar/dist/css/scrollArea.css';
+// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import './index.scss';
 
@@ -41,7 +41,7 @@ class Menu extends Component {
               menuList && menuList.map((item, index) => {
                 return (
                   item.path !== undefined ?
-                    <NavLink onClick={this.handelIndex.bind(this, index)}  activeClassName="active" key={index} to={item.id !== undefined ? item.path + item.id : item.path}>
+                    <NavLink onClick={this.handelIndex.bind(this, index)} activeClassName="active" key={index} to={item.id !== undefined ? item.path + item.id : item.path}>
                       <li className={`menu_item ` + item.icon} > {item.name}</li>
                     </NavLink> :
                     <h3 key={index} className="menu_title">{item.name}</h3>

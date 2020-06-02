@@ -1,11 +1,13 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-06-01 16:53:50
+ * @LastEditTime: 2020-06-02 16:22:19
  * @LastEditors: refuse_c
  * @Description: 
  */
 import React from 'react';
+import 'antd/dist/antd.css';
+import 'react-scrollbar/dist/css/scrollArea.css'
 import 'reset.css';
 import './App.scss';
 import debounce from './common/utils/debounce';
@@ -34,8 +36,8 @@ function App() {
             }
           })
         }
-        <Redirect to="/home/search" />
-        <Redirect to="/home/single4883935921" />
+        <Redirect to="/home/video/mv/" />
+        {/* <Redirect to="/home/single4883935921" /> */}
         {/* <Redirect to="/home/find/rankingList" /> */}
         {/* <Redirect to="/home/albumList4546" /> */}
         {/* <Redirect to="/videoDetail5331966" /> */}

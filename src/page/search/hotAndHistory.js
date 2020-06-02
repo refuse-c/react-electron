@@ -9,7 +9,7 @@
 import React, { Component } from 'react';
 
 import './index.scss';
-import 'react-scrollbar/dist/css/scrollArea.css';
+// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import { formatNum } from '../../common/utils/format';
 

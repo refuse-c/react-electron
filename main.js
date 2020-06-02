@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-05-24 14:19:22
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-02 16:05:54
+ * @LastEditors: refuse_c
  * @Description: 
  */
 // 引入electron并创建一个Browserwindow
@@ -100,27 +100,57 @@ app.on('ready', () => {
 
 // F:/CloudMusic/                       
 // C:/Users/Xiang/Music
-const data = fs.readdirSync('F:');
+const data = fs.readdirSync('F:/Emusic/');
 const id3 = require('node-id3');
 ipcMain.on('files', function (event) {
-  const localList = [];
+  let localList = [];
   data.forEach(element => {
-    if (
-      element.indexOf('.wav') !== -1 ||
-      element.indexOf('.mp3') !== -1 ||
-      element.indexOf('.ogg') !== -1 ||
-      element.indexOf('.acc') !== -1 ||
-      element.indexOf('.flac') !== -1
-    ) {
-      let obj = {};
-      let tags = id3.read('F:/CloudMusic/' + element)
-      obj.album = tags.album;
-      obj.title = tags.title;
-      obj.artist = tags.artist;
-      obj.url = 'f:/CloudMusic/' + element;
-
-      localList.push(obj)
-    }
+    // if (
+    //   element.indexOf('.wav') !== -1 ||
+    //   element.indexOf('.mp3') !== -1 ||
+    //   element.indexOf('.ogg') !== -1 ||
+    //   element.indexOf('.acc') !== -1 ||
+    //   element.indexOf('.flac') !== -1
+    // ) {
+    let obj = {};
+    let tags = id3.read('F:/Emusic/' + element)
+    obj.album = tags.album || '未知专辑';
+    obj.title = tags.title || element;
+    obj.artist = tags.artist || '未知歌手';
+    obj.url = 'F:/Emusic/' + element;
+    localList.push(obj)
+    // }
   });
   event.returnValue = localList;
 });
+
+ipcMain.on('down', (event, url, name) => {
+  const request = require('request');
+  const req = request(url, { timeout: 10000, pool: false });
+  req.setMaxListeners(50);
+  req.setHeader('user-agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36');
+
+  req.on('error', function (err) {
+    throw err;
+  });
+  req.on('response', function (res) {
+    res.setEncoding("binary");
+    var fileData = "";
+    res.on('data', function (chunk) {
+      fileData += chunk;
+    });
+    res.on('end', function () {
+      var fileName = name;
+      fs.writeFile('f:/Emusic/' + fileName, fileData, "binary", function (err) {
+        if (err) {
+          event.sender.send('reply', `音乐 ${name} 下载失败 `);
+          console.log("[downloadPic]文件   " + fileName + "  下载失败.");
+          console.log(err);
+        } else {
+          console.log("文件" + fileName + "下载成功");
+          event.sender.send('reply', `音乐 ${name} 下载成功 `);
+        }
+      });
+    });
+  })
+})

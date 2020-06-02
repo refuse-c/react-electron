@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import './index.scss';
 
-import 'react-scrollbar/dist/css/scrollArea.css';
+// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 // store
 import { connect } from 'react-redux';

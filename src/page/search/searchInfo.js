@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import Singer from '../../components/singer';
 import { dataScreening, returnsongCount } from '../../common/utils/format';
-import 'react-scrollbar/dist/css/scrollArea.css';
+// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import Pagination from '../../components/pagination';
 import MusicList from '../../components/musicList';

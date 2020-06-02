@@ -2,12 +2,12 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 16:31:03
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-01 16:56:08
+ * @LastEditTime: 2020-06-02 16:13:28
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
-import 'react-scrollbar/dist/css/scrollArea.css';
+// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 // store
 import { connect } from 'react-redux';
@@ -158,7 +158,7 @@ class Player extends Component {
                         );
                       })
                     ) : (
-                        <li>暂无歌词</li>
+                        <li>歌词加载中···</li>
                       )}
                   </ul>
                 </ScrollArea>

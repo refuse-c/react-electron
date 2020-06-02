@@ -1,11 +1,12 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:54
- * @LastEditTime: 2020-05-12 15:40:54
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-02 16:04:20
+ * @LastEditors: refuse_c
  * @Description: 
  */
 import axios from "axios";
+import { message } from 'antd';
 const Axios = axios.create({
   baseURL: 'http://139.155.89.11:3389',
   withCredentials: true,
@@ -39,6 +40,8 @@ Axios.interceptors.response.use(
   }
 );
 export const RAPost = (path, params) => {
+  message.destroy();
+  message.info('loading')
   return new Promise((resolve, reject) => {
     Axios.post(path, params).then(res => {
       // if (res.status === 200) {

@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import './index.scss';
 import { albumList } from '../../api/api';
 import { RAGet } from '../../api/netWork';
-import 'react-scrollbar/dist/css/scrollArea.css';
+// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import MusicList from '../musicList';
 import {

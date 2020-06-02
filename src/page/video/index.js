@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import './index.scss';
 
 import { Route, NavLink } from 'react-router-dom';
-import 'react-scrollbar/dist/css/scrollArea.css';
+// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 class Videos extends Component {
   constructor(props) {

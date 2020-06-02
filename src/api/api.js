@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-05-29 17:00:12
+ * @LastEditTime: 2020-06-02 17:33:39
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -140,4 +140,16 @@ export const mvDetail = {
 //推荐mv
 export const personalizedMv = {
   api_url: '/personalized/mv'
+}
+//全部 mv
+export const mvAll = {
+  api_url: '/mv/all'
+}
+//最新mv
+export const mvFirst = {
+  api_url: '/mv/first'
+}
+//网易出品
+export const mvRcmd = {
+  api_url: '/mv/exclusive/rcmd'
 }

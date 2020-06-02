@@ -60,3 +60,38 @@
     background: url('../../common/images/icon_arrow_b.png') right 5px center / 12px 12px no-repeat;
   }
 }
+
+.components_mv {
+  .contents {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      &::after {
+        content: "";
+        width: 24%;
+        /*只需要添加父元素的after伪元素中 高度0 ，宽度与item的宽一样*/
+      }
+
+      a {
+        width: 24%;
+      }
+
+      li {
+        width: 100%;
+        margin: 10px 10px 0;
+
+        img {
+          width: 100%;
+        }
+
+        h4 {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
