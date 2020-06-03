@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-06-03 22:23:52
+ * @LastEditTime: 2020-06-03 22:57:26
  * @LastEditors: RA
  * @Description:
  */
@@ -58,6 +58,7 @@ class Footer extends Component {
     audio.addEventListener(
       'timeupdate',
       () => {
+        audio.paused ? this.props.setIsPlay(false) : this.props.setIsPlay(true);
         const { duration } = this.state;
         const currentTime = audio.currentTime.toFixed(3);
         this.setState({ currentTime });
@@ -83,17 +84,6 @@ class Footer extends Component {
     audio.addEventListener('ended', () => {
       this.handelNext();
     });
-
-    // 监听音乐暂停时
-    audio.addEventListener('pause', () => {
-      this.props.setIsPlay(false);
-    });
-
-    // 监听播放暂停时
-    audio.addEventListener('play', () => {
-      this.props.setIsPlay(true);
-    });
-    // this.props.setIsPlay(true);
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     const { musicId, isPlay } = nextProps;
@@ -147,7 +137,7 @@ class Footer extends Component {
         const url = res.data[0].url;
         if (isEmpty(url)) {
           message.destroy();
-          message.error('当前音乐不可播放,3s后切换至下一首');
+          message.error('当前音乐不可播放,2s后切换至下一首');
           audio.src = '';
           setTimeout(() => {
             this.handelNext();
