@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-05-29 14:30:29
+ * @LastEditTime: 2020-06-03 10:57:10
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -255,7 +255,7 @@ export const formatPlaycount = (v) => {
   if (isEmpty(v)) {
     return v;
   }
-  return v >= 10000 ? Math.floor(v / 10000) + '万' : v;
+  return v >= 100000 ? Math.floor(v / 10000) + '万' : v;
 };
 
 /**

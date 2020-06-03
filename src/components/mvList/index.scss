@@ -1,0 +1,63 @@
+.mv_list {
+  width: 100%;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+
+    a {
+      width: 24%;
+
+      li {
+        position: relative;
+        width: 100%;
+        border-radius: 2px;
+        overflow: hidden;
+        margin-bottom: 20px;
+
+        span {
+          position: absolute;
+          top: 0;
+          right: 0;
+          font-size: 12px;
+          line-height: 18px;
+          padding: 0 5px 0 60px;
+          background: url('../../common/images/a9p.png') center center / cover no-repeat;
+
+          &::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 30px;
+            width: 18px;
+            height: 18px;
+            background: url('../../common/images/icon_mv.png') center center / contain no-repeat;
+          }
+        }
+
+        img {
+          width: 100%;
+          border-radius: 2px;
+        }
+
+        div {
+
+          & p:first-child {
+            font-size: 13px;
+            line-height: 20px;
+            color: #444;
+          }
+
+          & p:last-child {
+            font-size: 12px;
+            line-height: 16px;
+            color: #fefefe;
+          }
+        }
+
+      }
+    }
+  }
+}

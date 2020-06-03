@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-06-02 10:02:10
+ * @LastEditTime: 2020-06-03 16:43:28
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -49,7 +49,6 @@ class Find extends Component {
   render() {
     const { findNav } = this.state;
     const { routes } = this.props;
-    console.log(routes)
     return (
       <div className="find">
         <div className="find_nav">

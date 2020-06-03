@@ -7,7 +7,6 @@ html,
 body {
   font-size: 14px;
   line-height: 1.2;
-  // color: #333333;
   user-select: none;
   color: #fafafa;
   font-family: "微软雅黑" !important;
@@ -75,6 +74,13 @@ canvas {
 }
 
 .overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.overflows {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -86,31 +92,42 @@ canvas {
 //标题
 .headline {
   display: flex;
-  // align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  height: 40px;
-  padding-top: 10px;
-  font-size: 18px;
+  padding: 20px 0 10px;
+  line-height: 1;
   margin-bottom: 10px;
-  font-size: 16px;
   border-bottom: 1px solid #bbb;
 
   ul {
     display: flex;
     flex: auto;
     padding: 0 10px;
-    // line-height: 20px;
     align-self: flex-end;
 
     li {
       font-size: 14px;
       line-height: 1;
       padding: 0 10px;
-      margin-bottom: 5px;
 
       &:not(:first-child) {
         border-left: 1px solid #ccc;
       }
+    }
+  }
+
+  p:first-child {
+    font-size: 20px;
+    font-weight: 100;
+  }
+
+  p:last-child {
+    font-size: 14px;
+    color: #fff;
+
+    &:hover {
+      color: #222;
+      text-decoration: underline;
     }
   }
 }

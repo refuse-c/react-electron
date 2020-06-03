@@ -9,7 +9,7 @@
   .header-back {
     width: 40px;
     height: 40px;
-     -webkit-app-region: no-drag;
+    -webkit-app-region: no-drag;
     background: url('../../common/images/iocn_back.png') center center / 25px 25px no-repeat;
   }
 
@@ -21,14 +21,12 @@
     font-weight: bold;
     letter-spacing: 2px;
     background-color: snow;
-    // background: url("../../common/images/logo-w.png") center center / 100% 30px
-    //   no-repeat;
     padding-left: 50px;
     background: url("../../common/images/logo.png") 10px center / 30px 30px no-repeat;
   }
 
   .center {
-    width: calc(100% - 350px);
+    flex: auto;
 
     ul {
       display: flex;

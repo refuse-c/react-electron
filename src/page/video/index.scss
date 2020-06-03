@@ -68,30 +68,75 @@
       flex-wrap: wrap;
       justify-content: space-between;
 
-      &::after {
-        content: "";
-        width: 24%;
-        /*只需要添加父元素的after伪元素中 高度0 ，宽度与item的宽一样*/
-      }
-
       a {
-        width: 24%;
-      }
+        width: 50%;
 
-      li {
-        width: 100%;
-        margin: 10px 10px 0;
-
-        img {
-          width: 100%;
+        &:nth-child(odd) li {
+          border-right: 1px solid #b4b4b4;
         }
 
-        h4 {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+        li {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          padding: 10px;
+          height: 110px;
+          border-bottom: 1px solid #b4b4b4;
+
+          p:first-child {
+            white-space: nowrap;
+            padding-left: 10px;
+          }
+
+          .img_box {
+            position: relative;
+            padding: 0 10px;
+
+            span {
+              position: absolute;
+              top: 0;
+              right: 10px;
+              height: 20px;
+              line-height: 20px;
+              padding: 0 5px 0 40px;
+              font-size: 12px;
+              background: url('../../common/images/a9p.png') center center / cover no-repeat;
+
+            }
+
+          }
+
+          .c_info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            width: calc(100% - 200px);
+            height: 90px;
+
+            p {
+              width: 100%;
+              padding: 0;
+            }
+
+            & p:first-child {
+              font-size: 13px;
+              line-height: 30px;
+              color: #444;
+            }
+
+            & p:last-child {
+              font-size: 12px;
+              line-height: 20px;
+              color: #fefefe;
+            }
+          }
         }
       }
     }
+  }
+
+  .mvActive1 {
+    color: red !important;
   }
 }
