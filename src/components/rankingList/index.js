@@ -2,7 +2,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-29 15:03:05
+ * @LastEditTime: 2020-06-03 16:55:52
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -206,8 +206,8 @@ class RankingList extends Component {
                       );
                     })
                     }
+                    <div>查看全部</div>
                   </ul>
-                  <div>查看全部</div>
                 </div>
               );
             })}

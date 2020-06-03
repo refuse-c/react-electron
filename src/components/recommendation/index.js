@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-05-27 09:56:58
+ * @LastEditTime: 2020-06-03 16:54:30
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 import { recommendList, privatecontent, getBanner, topSongs, personalizedMv } from '../../api/api';
 import { RAGet } from '../../api/netWork';
 import { imgParam, getDate, dataScreening } from '../../common/utils/format';
-
+import MvList from '../mvList/';
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -114,7 +114,20 @@ class Recommendation extends Component {
     this.props.gainMusicId(item.id);
   }
   handelMore = index => {
-    console.log(index)
+    switch (index) {
+      case 1:
+        this.props.history.push({ pathname: '/home/find/findList' });
+        break;
+      case 2:
+        this.props.history.push({ pathname: '/home/personalized' });
+        break;
+      case 3:
+        this.props.history.push({ pathname: '/home/find/newMusic' });
+        break;
+      default:
+        this.props.history.push({ pathname: '/home/video/mv' });
+        break;
+    }
   }
   render() {
     const { bannersData, recommendListData, privatecontentData, topSongsData, personalizedMvData } = this.state;
@@ -178,7 +191,7 @@ class Recommendation extends Component {
           <ul>
             {
               privatecontentData.length > 0 && privatecontentData.map((item, index) => {
-                const path = '/home/single';
+                const path = '/videoDetail';
                 return (
                   <NavLink to={path + item.id} key={index} >
                     <li >
@@ -222,24 +235,9 @@ class Recommendation extends Component {
           <p>推荐MV</p>
           <p onClick={this.handelMore.bind(this, 4)}>更多></p>
         </div>
-        <div className="privatecontent-list">
-          <ul>
-            {
-              personalizedMvData.length > 0 && personalizedMvData.map((item, index) => {
-                const path = '/home/single';
-                if (index > 2) return false;
-                return (
-                  <NavLink to={path + item.id} key={index} >
-                    <li>
-                      <img src={imgParam(item.picUrl, 330, 190)} alt="" />
-                      <p>{item.name}</p>
-                    </li>
-                  </NavLink>
-                )
-              })
-            }
-          </ul>
-        </div>
+        {
+          personalizedMvData.length > 0 ? <MvList data={personalizedMvData} path={'/videoDetail'} /> : null
+        }
       </div>
     );
   }

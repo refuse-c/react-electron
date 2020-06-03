@@ -225,7 +225,7 @@ class Video extends Component {
                         >
                           <img src={item.coverUrl ? imgParam(item.coverUrl, 120, 70) : imgParam(item.cover, 120, 70)} alt="" />
                           <div>
-                            <p className="overflow">{item.title ? item.title : item.name}</p>
+                            <p className="overflows">{item.title ? item.title : item.name}</p>
                             <p>{formatPlayTime(item.durationms ? item.durationms / 1000 : item.duration / 1000)}</p >
                             <p>by {item.creator ? item.creator[0].userName : item.artists[0].name}</p>
                           </div>

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-06-02 17:33:39
+ * @LastEditTime: 2020-06-03 12:22:52
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -152,4 +152,8 @@ export const mvFirst = {
 //网易出品
 export const mvRcmd = {
   api_url: '/mv/exclusive/rcmd'
+}
+//mv排行
+export const mvTop = {
+  api_url: '/top/mv'
 }

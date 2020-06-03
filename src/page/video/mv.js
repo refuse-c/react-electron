@@ -2,15 +2,16 @@
  * @Author: REFUSE_C
  * @Date: 2020-05-29 16:21:25
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-02 18:03:22
+ * @LastEditTime: 2020-06-03 15:52:05
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
 import { RAGet } from '../../api/netWork';
-import { mvFirst, personalizedMv, mvRcmd } from '../../api/api';
+import { mvFirst, personalizedMv, mvRcmd, mvTop } from '../../api/api';
 import { NavLink } from 'react-router-dom';
-import { imgParam } from '../../common/utils/format';
+import { imgParam, formatPlaycount } from '../../common/utils/format';
+import MvList from '../../components/mvList'
 class ComponentMvs extends Component {
   constructor(props) {
     super(props);
@@ -31,19 +32,21 @@ class ComponentMvs extends Component {
       newMv: {},
       hotMv: {},
       wyMv: {},
-      mvTopRanking: {},
+      mvTop: {},
+      menu1State: 0,
+      menu2State: 0,
     }
   }
   componentDidMount = () => {
     this.getMvFirst('内地');
     this.getMvPersonalizedMv();
     this.getMvRcmd();
+    this.getMvTop('内地');
   }
   //最新mv
   getMvFirst = (text) => {
-    console.log(text)
     RAGet(mvFirst.api_url, {
-      paramsL: {
+      params: {
         area: text,
         limit: '8'
       }
@@ -59,7 +62,6 @@ class ComponentMvs extends Component {
   getMvPersonalizedMv = () => {
     RAGet(personalizedMv.api_url)
       .then(res => {
-        console.log(res)
         const hotMv = res.result;
         hotMv.length = hotMv.length > 8 ? hotMv.length = 8 : hotMv.length
         this.setState({ hotMv })
@@ -78,7 +80,6 @@ class ComponentMvs extends Component {
         console.log(err)
       })
   }
-
   getMvRcmd = () => {
     RAGet(mvRcmd.api_url)
       .then(res => {
@@ -89,10 +90,31 @@ class ComponentMvs extends Component {
         console.log(err)
       })
   }
-
+  handleMenu1 = (title, index) => {
+    this.getMvFirst(title);
+    this.setState({ menu1State: index })
+  }
+  handleMenu2 = (title, index) => {
+    this.getMvTop(title);
+    this.setState({ menu2State: index })
+  }
+  //mv排行榜
+  getMvTop = (text) => {
+    RAGet(mvTop.api_url, {
+      params: {
+        area: text,
+        limit: '8'
+      }
+    }).then(res => {
+      const mvTop = res.data;
+      mvTop.length = mvTop.length > 10 ? mvTop.length = 10 : mvTop.length
+      this.setState({ mvTop })
+    }).catch(err => {
+      console.log(err)
+    })
+  }
   render() {
-    const { mvNav, newMv, hotMv, wyMv, mvTopRanking } = this.state;
-    console.log(hotMv)
+    const { mvNav, newMv, hotMv, wyMv, mvTop, menu1State, menu2State } = this.state;
     const path = '/videoDetail';
     return (
       <div className="components_mv">
@@ -101,94 +123,68 @@ class ComponentMvs extends Component {
           <ul>
             {
               mvNav.map((item, index) => {
+                const mvActive1 = menu1State === index ? 'mvActive1' : ''
                 return (
-                  <li onClick={this.getMvFirst.bind(this, item.title)} key={index}>{item.title}</li>
+                  <li className={mvActive1} onClick={this.handleMenu1.bind(this, item.title, index)} key={index}>{item.title}</li>
                 )
               })
             }
           </ul>
           <p>更多></p>
         </div>
-        <div className="contents">
-          <ul>
-            {
-              newMv.length > 0 && newMv.map((item, index) => {
-                return (
-                  <NavLink
-                    key={index}
-                    to={path + item.id}
-                  >
-                    <li>
-                      <img src={imgParam(item.cover, 240, 140)} alt="" />
-                      <h4>{item.name}</h4>
-                      <p>by {item.artistName}</p>
-                    </li>
-                  </NavLink>
-                )
-              })
-            }
-          </ul>
-        </div>
+        {
+          newMv.length > 0 ? <MvList data={newMv} path={path} /> : null
+        }
         <div className="headline">
           <p>热播MV</p>
           <p>更多></p>
         </div>
-        <div className="contents">
-          <ul>
-            {
-              hotMv.length > 0 && hotMv.map((item, index) => {
-                return (
-                  <NavLink
-                    key={index}
-                    to={path + item.id}
-                  >
-                    <li>
-                      <img src={imgParam(item.picUrl, 240, 140)} alt="" />
-                      <h4>{item.name}</h4>
-                      <p>by {item.artistName}</p>
-                    </li>
-                  </NavLink>
-                )
-              })
-            }
-          </ul>
-        </div>
+        {
+          hotMv.length > 0 ? <MvList data={hotMv} path={path} /> : null
+        }
         <div className="headline">
           <p>网易出品</p>
           <p>更多></p>
         </div>
-        <div className="contents">
-          <ul>
-            {
-              wyMv.length > 0 && wyMv.map((item, index) => {
-                return (
-                  <NavLink
-                    key={index}
-                    to={path + item.id}
-                  >
-                    <li>
-                      <img src={imgParam(item.cover, 240, 140)} alt="" />
-                      <h4>{item.name}</h4>
-                      <p>by {item.artistName}</p>
-                    </li>
-                  </NavLink>
-                )
-              })
-            }
-          </ul>
-        </div>
+        {
+          wyMv.length > 0 ? <MvList data={wyMv} path={path} /> : null
+        }
         <div className="headline">
           <p>MV排行榜</p>
           <ul>
             {
               mvNav.map((item, index) => {
+                const mvActive1 = menu2State === index ? 'mvActive1' : ''
                 return (
-                  <li key={index}>{item.title}</li>
+                  <li className={mvActive1} onClick={this.handleMenu2.bind(this, item.title, index)} key={index}>{item.title}</li>
                 )
               })
             }
           </ul>
           <p>更多></p>
+        </div>
+        <div className="contents">
+          <ul>
+            {
+              mvTop.length > 0 && mvTop.map((item, index) => {
+                return (
+                  <NavLink key={index} to={path + item.id}>
+                    <li>
+                      <p>{index + 1}</p>
+                      <div className='img_box'>
+                        <img src={imgParam(item.cover, 150, 90)} alt="" />
+                        <span>{`热度：${formatPlaycount(item.playCount)}`}</span>
+                      </div>
+                      <div className='c_info'>
+                        <p className='overflow'>{item.name}</p>
+                        <p className='overflow'>{item.artistName}</p>
+                      </div>
+                    </li>
+                  </NavLink>
+                )
+              })
+            }
+          </ul>
         </div>
       </div>
     );

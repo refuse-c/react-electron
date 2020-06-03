@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-05-29 17:18:17
+ * @LastEditTime: 2020-06-03 16:40:32
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -14,6 +14,10 @@ import Videos from '../page/video';
 import Mv from '../page/video/mv';
 import Video from '../page/video/video';
 import Friend from '../page/friend';
+import Personalized from '../page/personalized';
+
+
+
 import Local from '../components/local';
 import Down from '../components/down';
 import Lately from '../components/lately';
@@ -113,6 +117,10 @@ let routes = [
           {
             path: '/home/albumList:id',
             component: AlbumList,
+          },
+          {
+            path: '/home/personalized',
+            component: Personalized,
           },
         ],
       },
