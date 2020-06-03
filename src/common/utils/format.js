@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-06-03 10:57:10
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-03 22:05:07
+ * @LastEditors: RA
  * @Description:
  */
 
@@ -25,8 +25,6 @@ export const formatDate = (v, type) => {
     default:
       return year + '-' + month + '-' + day;
   }
-
-
 };
 
 /**
@@ -566,7 +564,14 @@ export const foramtLrc = (array) => {
   let lrcArr = [];
   let s = '';
   let t = '';
-
+  if (isEmpty(array)) {
+    return (lrcArr = [
+      {
+        t: '0',
+        c: '暂无歌词,请欣赏',
+      },
+    ]);
+  }
   const lrcs = array.split('\n'); //用回车拆分成数组
   if (array.length === 0) return;
   lrcs.map((item, index) => {
@@ -676,6 +681,6 @@ export const getSession = (name) => {
 
 // 校验是否都是数字
 export const IsNum = (value) => {
-  var reg = new RegExp("^[0-9]*$");
-  return reg.test(value) ? true : false
-}
+  var reg = new RegExp('^[0-9]*$');
+  return reg.test(value) ? true : false;
+};

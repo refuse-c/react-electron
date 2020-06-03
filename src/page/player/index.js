@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 16:31:03
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-02 16:13:28
+ * @LastEditors: RA
+ * @LastEditTime: 2020-06-03 22:07:31
  * @Description:
  */
 import React, { Component } from 'react';
@@ -86,6 +86,11 @@ class Player extends Component {
       },
     })
       .then((res) => {
+        if (res.nolyric) {
+          const lyric = foramtLrc(null);
+          this.setState({ lyric });
+          return false;
+        }
         const lrc = res.lrc.lyric;
         // const tlyric = res.tlyric.lyric;
         // console.log(foramtLrc(lrc))
@@ -96,6 +101,12 @@ class Player extends Component {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  componentWillUnmount = () => {
+    this.setState = (state, callback) => {
+      return;
+    };
   };
 
   render() {
@@ -110,8 +121,8 @@ class Player extends Component {
                 {!isEmpty(songsAlbum.al) ? (
                   <img src={imgParam(songsAlbum.al.picUrl, 200, 200)} alt="" />
                 ) : (
-                    <img src={require('../../common/images/apg.png')} alt="" />
-                  )}
+                  <img src={require('../../common/images/apg.png')} alt="" />
+                )}
               </div>
             </div>
             <div className="player-info">
@@ -158,8 +169,8 @@ class Player extends Component {
                         );
                       })
                     ) : (
-                        <li>歌词加载中···</li>
-                      )}
+                      <li>歌词加载中···</li>
+                    )}
                   </ul>
                 </ScrollArea>
               </div>

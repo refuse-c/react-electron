@@ -2,14 +2,15 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-03 16:55:52
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-03 21:30:46
+ * @LastEditors: RA
  * @Description:
  */
 import React, { Component } from 'react';
 import './index.scss';
 import { RAGet } from '../../api/netWork';
 import PlayAll from '../playAll';
+import { NavLink } from 'react-router-dom';
 import {
   imgParam,
   formatPlaycount,
@@ -17,7 +18,7 @@ import {
   setLocal,
   getLocal,
   isEmpty,
-  formatDate
+  formatDate,
 } from '../../common/utils/format';
 import {
   topList,
@@ -65,12 +66,12 @@ class RankingList extends Component {
     let e = await this.getToplistDetail();
     let f = await this.getToplistArtist();
     e.list = f;
-    e.type = 'singer'
+    e.path = '/home/find/findSinger';
+    e.type = 'singer';
     const officialList = [a, b, c, d, e];
     setLocal('officialList', officialList);
     this.setState({ officialList });
-
-  }
+  };
   // 排行榜
   getTopList = async (id) => {
     let data = {};
@@ -80,17 +81,18 @@ class RankingList extends Component {
       },
     })
       .then((res) => {
-        console.log(res)
         const tracks = res.playlist.tracks;
         const privileges = res.privileges;
         data.name = res.playlist.name;
-        data.updateTime = res.playlist.updateTime
+        data.updateTime = res.playlist.updateTime;
         data.list = aa(tracks, privileges);
+        data.id = res.playlist.id;
+        data.path = '/home/single' + res.playlist.id;
         data.coverImgUrl = res.playlist.coverImgUrl;
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
     return data;
   };
 
@@ -157,6 +159,7 @@ class RankingList extends Component {
   };
   render() {
     const { officialList, globalList } = this.state;
+    const path = '/home/single';
     return (
       <div className="ranking_ist">
         <div className="headline">
@@ -166,21 +169,24 @@ class RankingList extends Component {
           {officialList.length > 0 &&
             officialList.map((item, index) => {
               return (
-                <div className="official_List_box" key={index}
-                  style={{ backgroundImage: 'url(' + require(`./img/${index}.png`) + ')' }}
+                <div
+                  className="official_List_box"
+                  key={index}
+                  style={{
+                    backgroundImage:
+                      'url(' + require(`./img/${index}.png`) + ')',
+                  }}
                 >
-                  {
-                    item.type === 'singer'
-                      ? null
-                      : <PlayAll cls={`play_all_img`} list={item.list} />
-                  }
+                  {item.type === 'singer' ? null : (
+                    <PlayAll cls={`play_all_img`} list={item.list} />
+                  )}
 
                   <img src={require(`./img/text${index}.png`)} alt="" />
-                  {
-                    item.updateTime
-                      ? <span>{formatDate(item.updateTime, '0').substr(5) + '更新'}</span>
-                      : null
-                  }
+                  {item.updateTime ? (
+                    <span>
+                      {formatDate(item.updateTime, '0').substr(5) + '更新'}
+                    </span>
+                  ) : null}
 
                   <ul>
                     {item.list.map((item, index) => {
@@ -189,25 +195,26 @@ class RankingList extends Component {
                       return (
                         <li
                           key={index}
-                          onClick={item.ar ? this.addMusic.bind(this, item) : null}
+                          onClick={
+                            item.ar ? this.addMusic.bind(this, item) : null
+                          }
                         >
                           <p>{num}</p>
                           <p>{item.name}</p>
-                          {
-                            item.ar
-                              ?
-                              <p>
-                                {item.ar.map((item) => item.name + '').join(' - ')}
-                              </p>
-                              :
-                              null
-                          }
+                          {item.ar ? (
+                            <p>
+                              {item.ar
+                                .map((item) => item.name + '')
+                                .join(' - ')}
+                            </p>
+                          ) : null}
                         </li>
                       );
-                    })
-                    }
-                    <div>查看全部</div>
+                    })}
                   </ul>
+                  <div>
+                    <NavLink to={item.path}>查看全部</NavLink>
+                  </div>
                 </div>
               );
             })}
@@ -220,15 +227,20 @@ class RankingList extends Component {
             {globalList.length > 0 &&
               globalList.map((item, index) => {
                 return (
-                  <li key={index}>
-                    <div>
-                      <img src={imgParam(item.coverImgUrl, 300, 300)} alt="" />
-                      <p className="play_count">
-                        {formatPlaycount(item.playCount)}
-                      </p>
-                    </div>
-                    <p className="play_name">{item.name}</p>
-                  </li>
+                  <NavLink key={index} to={path + item.id}>
+                    <li>
+                      <div>
+                        <img
+                          src={imgParam(item.coverImgUrl, 300, 300)}
+                          alt=""
+                        />
+                        <p className="play_count">
+                          {formatPlaycount(item.playCount)}
+                        </p>
+                      </div>
+                      <p className="play_name">{item.name}</p>
+                    </li>
+                  </NavLink>
                 );
               })}
           </ul>

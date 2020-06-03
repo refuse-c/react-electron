@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-06-03 16:43:28
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-03 22:02:49
+ * @LastEditors: RA
  * @Description: 
  */
 import React, { Component } from 'react';
@@ -46,6 +46,12 @@ class Find extends Component {
   componentDidMount = () => {
     // console.log(this.props)
   }
+  
+  componentWillUnmount = () => {
+    this.setState = (state, callback) => {
+      return;
+    };
+  };
   render() {
     const { findNav } = this.state;
     const { routes } = this.props;

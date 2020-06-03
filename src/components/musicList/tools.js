@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-06-01 11:13:01
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-02 16:10:54
+ * @LastEditors: RA
+ * @LastEditTime: 2020-06-03 21:38:11
  * @Description:
  */
 import React, { Component } from 'react';
@@ -34,8 +34,8 @@ class Tools extends Component {
     //接收消息并展示到页面上
     ipc.on('reply', (event, arg) => {
       message.destroy();
-      arg.indexOf('.成功') !== -1 ? message.error(arg) : message.info(arg)
-    })
+      arg.indexOf('.成功') !== -1 ? message.error(arg) : message.info(arg);
+    });
   };
   //评论
   handleComment = (e) => {
@@ -91,7 +91,7 @@ class Tools extends Component {
       : array.splice(index + 1, 0, item);
     this.props.gainPlayList(array);
     this.props.setToolsStatus(false);
-    message.info(`歌曲  ${item.name}  已添加到播放列表`)
+    message.info(`歌曲  ${item.name}  已添加到播放列表`);
     e.stopPropagation();
   };
   //收藏
@@ -115,6 +115,7 @@ class Tools extends Component {
     const userId = userInfo.profile.userId;
     if (userId) {
       const url = `http://music.163.com/song?id=${item.id}&userid=${userId}`;
+      message.destroy();
       copy(url) ? message.success('复制成功') : message.error('复制失败');
     } else {
       message.error('复制失败');
