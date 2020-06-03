@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-06-03 22:57:26
+ * @LastEditTime: 2020-06-03 23:23:21
  * @LastEditors: RA
  * @Description:
  */
@@ -55,30 +55,25 @@ class Footer extends Component {
       const duration = Math.floor(audio.duration);
       this.setState({ duration });
     });
-    audio.addEventListener(
-      'timeupdate',
-      () => {
-        audio.paused ? this.props.setIsPlay(false) : this.props.setIsPlay(true);
-        const { duration } = this.state;
-        const currentTime = audio.currentTime.toFixed(3);
-        this.setState({ currentTime });
-        this.props.setCurrentTime(currentTime);
-        // if (isEmpty(duration)) return;
-        const buffered = audio.buffered;
-        let bufferTime = 0;
-        if (buffered.length !== 0) {
-          bufferTime = buffered.end(buffered.length - 1);
-          const bw = (bufferTime / duration) * this.range.clientWidth;
-          buffer.style.width = bw + 'px';
-        }
-        const time = currentTime / duration;
-        let progress = time * range.max;
-        if (isNaN(progress)) return;
-        range.style.backgroundSize = time * 100 + `% 100%`;
-        this.setState({ progress });
-      },
-      1
-    );
+    audio.addEventListener('timeupdate', () => {
+      // audio.paused ? this.props.setIsPlay(false) : this.props.setIsPlay(true);
+      const { duration } = this.state;
+      const currentTime = audio.currentTime.toFixed(3);
+      this.setState({ currentTime });
+      this.props.setCurrentTime(currentTime);
+      const buffered = audio.buffered;
+      let bufferTime = 0;
+      if (buffered.length !== 0) {
+        bufferTime = buffered.end(buffered.length - 1);
+        const bw = (bufferTime / duration) * this.range.clientWidth;
+        buffer.style.width = bw + 'px';
+      }
+      const time = currentTime / duration;
+      let progress = time * range.max;
+      if (isNaN(progress)) return;
+      range.style.backgroundSize = time * 100 + `% 100%`;
+      this.setState({ progress });
+    });
 
     // 当前音乐播放完毕监听
     audio.addEventListener('ended', () => {
@@ -116,12 +111,13 @@ class Footer extends Component {
     }
     if (prevState.isPlay !== this.state.isPlay) {
       const { isPlay } = this.state;
-      // const { musicId } = this.props;
-      if (!isPlay) {
+      const { musicId } = this.props;
+      if (isPlay) {
+        this.getMusicUrl(musicId);
+        this.getMusicDetail(musicId);
+        this.props.gainMusicId(musicId);
+      } else {
         this.audio.pause();
-        // this.getMusicUrl(musicId);
-        // this.getMusicDetail(musicId);
-        // this.props.gainMusicId(musicId);
       }
     }
   }
@@ -134,17 +130,19 @@ class Footer extends Component {
     })
       .then((res) => {
         const audio = this.audio;
+        // console.log('音乐地址是' + res.data[0].url)
         const url = res.data[0].url;
+        this.setState({ url });
         if (isEmpty(url)) {
           message.destroy();
           message.error('当前音乐不可播放,2s后切换至下一首');
+          // audio.pause();
           audio.src = '';
           setTimeout(() => {
             this.handelNext();
           }, 2000);
           return;
         }
-        audio.src = url;
         audio.play();
       })
       .catch((err) => {
@@ -279,7 +277,7 @@ class Footer extends Component {
       currentTime,
       duration,
       progress,
-      // url,
+      url,
       volumeNum,
     } = this.state;
     const { playList, index, isPlay } = this.props; //musicId
@@ -358,7 +356,7 @@ class Footer extends Component {
             preload={`auto`}
             loop={playModel === '2' ? true : false}
             ref={(ref) => (this.audio = ref)}
-            // src={url}
+            src={url}
           ></audio>
         ) : (
           <audio ref={(ref) => (this.audio = ref)}></audio>
