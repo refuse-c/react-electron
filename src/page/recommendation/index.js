@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 import { recommendList, privatecontent, getBanner, topSongs, personalizedMv } from '../../api/api';
 import { RAGet } from '../../api/netWork';
 import { imgParam, getDate, dataScreening } from '../../common/utils/format';
-import MvList from '../mvList/';
+import MvList from '../../components/mvList';
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

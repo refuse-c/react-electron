@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-06-03 16:40:32
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-04 20:59:53
+ * @LastEditors: RA
  * @Description:
  */
 import Index from '../page/index/';
@@ -26,11 +26,11 @@ import IM from '../components/im';
 import AlbumList from '../components/albumList';
 import VideoDetail from '../components/videoDetail';
 
-import Recommendation from '../components/recommendation';
+import Recommendation from '../page/recommendation';
 import FindList from '../components/findList';
 import HostRadio from '../components/hostRadio';
 import RankingList from '../components/rankingList';
-import FindSinger from '../components/findSinger';
+import FindSinger from '../page/findSinger';
 import NewMusic from '../components/newMusic';
 import DailySpecial from '../components/dailySpecial';
 let routes = [

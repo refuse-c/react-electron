@@ -132,12 +132,11 @@
             img {
               position: absolute;
               width: 100%;
-
-              transition: all 0.5s ease;
+              transition: all 1s ease;
 
               &:hover {
                 transform: scale(1.1);
-                transition: all 0.5s ease;
+                transition: all 1s ease;
               }
             }
 

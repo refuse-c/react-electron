@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-06-03 22:05:07
+ * @LastEditTime: 2020-06-04 19:03:52
  * @LastEditors: RA
  * @Description:
  */
@@ -683,4 +683,42 @@ export const getSession = (name) => {
 export const IsNum = (value) => {
   var reg = new RegExp('^[0-9]*$');
   return reg.test(value) ? true : false;
+};
+export const a = (str) => {
+  switch (str) {
+    case '全部':
+      return '-1';
+    case '华语':
+      return '7';
+    case '欧美':
+      return '96';
+    case '日本':
+      return '8';
+    case '韩国':
+      return '16';
+    default:
+      return '0';
+  }
+};
+export const b = (str) => {
+  switch (str) {
+    case '全部':
+      return '-1';
+    case '男歌手':
+      return '1';
+    case '女歌手':
+      return '2';
+    default:
+      return '3';
+  }
+};
+export const c = (str) => {
+  switch (str) {
+    case '热门':
+      return '-1';
+    case '#':
+      return '0';
+    default:
+      return str.toLowerCase();
+  }
 };
