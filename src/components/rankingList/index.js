@@ -2,8 +2,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-03 21:30:46
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-04 15:22:09
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -189,7 +189,7 @@ class RankingList extends Component {
                   ) : null}
 
                   <ul>
-                    {item.list.map((item, index) => {
+                    {!isEmpty(item.list) && item.list.map((item, index) => {
                       let num = index < 9 ? '0' + (index + 1) : index + 1;
                       if (index > 9) return false;
                       return (
@@ -213,7 +213,11 @@ class RankingList extends Component {
                     })}
                   </ul>
                   <div>
-                    <NavLink to={item.path}>查看全部</NavLink>
+                    {
+                      item.path
+                        ? <NavLink to={item.path}>查看全部</NavLink>
+                        : null
+                    }
                   </div>
                 </div>
               );
@@ -245,7 +249,7 @@ class RankingList extends Component {
               })}
           </ul>
         </div>
-      </div>
+      </div >
     );
   }
 }

@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-06-03 23:23:21
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-04 10:15:33
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -56,7 +56,7 @@ class Footer extends Component {
       this.setState({ duration });
     });
     audio.addEventListener('timeupdate', () => {
-      // audio.paused ? this.props.setIsPlay(false) : this.props.setIsPlay(true);
+      audio.paused ? this.props.setIsPlay(false) : this.props.setIsPlay(true);
       const { duration } = this.state;
       const currentTime = audio.currentTime.toFixed(3);
       this.setState({ currentTime });
@@ -78,6 +78,7 @@ class Footer extends Component {
     // 当前音乐播放完毕监听
     audio.addEventListener('ended', () => {
       this.handelNext();
+      this.props.setIsPlay(true);
     });
   }
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -103,8 +104,6 @@ class Footer extends Component {
   componentDidUpdate(prevState) {
     if (prevState.musicId !== this.state.musicId) {
       const { musicId } = this.state;
-      const { isPlay } = this.props;
-      if (!isPlay) return;
       this.getMusicUrl(musicId);
       this.getMusicDetail(musicId);
       this.props.gainMusicId(musicId);
@@ -136,13 +135,14 @@ class Footer extends Component {
         if (isEmpty(url)) {
           message.destroy();
           message.error('当前音乐不可播放,2s后切换至下一首');
-          // audio.pause();
           audio.src = '';
           setTimeout(() => {
             this.handelNext();
           }, 2000);
           return;
         }
+        const { isPlay } = this.props;
+        if (!isPlay) return;
         audio.play();
       })
       .catch((err) => {
@@ -174,9 +174,11 @@ class Footer extends Component {
     }
   };
   onPlay = () => {
-    const { musicId } = this.props;
+    const { playList } = this.props;
+    if (isEmpty(playList)) {
+      return;
+    }
     this.props.setIsPlay(true);
-    this.getMusicUrl(musicId);
   };
   onPause = () => {
     const audio = this.audio;
@@ -185,6 +187,9 @@ class Footer extends Component {
   };
   handelPrev = () => {
     const { playList, index, isPlay } = this.props;
+    if (isEmpty(playList)) {
+      return;
+    }
     const maxLength = playList.length - 1;
     let num = 0;
     if (index === 0) {
@@ -201,10 +206,14 @@ class Footer extends Component {
     }
     this.props.setIndex(num);
     this.props.gainMusicId(playList[num].id);
+    this.props.setIsPlay(true);
   };
   handelNext = () => {
     const { playModel } = this.state;
     const { playList, index, isPlay } = this.props;
+    if (isEmpty(playList)) {
+      return;
+    }
     const maxLength = playList.length - 1;
     let num = 0;
     if (playModel === '3') {
@@ -225,6 +234,7 @@ class Footer extends Component {
     }
     this.props.setIndex(num);
     this.props.gainMusicId(playList[num].id);
+    this.props.setIsPlay(true);
   };
   changeInput = () => {
     const { audio, range } = this;
@@ -291,19 +301,19 @@ class Footer extends Component {
               alt=""
             />
           ) : (
-            <img
-              onClick={this.gotoPlayer}
-              src={require('../../common/images/logo.png')}
-              alt=""
-            />
-          )}
+              <img
+                onClick={this.gotoPlayer}
+                src={require('../../common/images/logo.png')}
+                alt=""
+              />
+            )}
 
           <i onClick={this.handelPrev} className="icon_prev"></i>
           {isPlay ? (
             <i onClick={this.onPause} className="icon_pause"></i>
           ) : (
-            <i onClick={this.onPlay} className="icon_play"></i>
-          )}
+              <i onClick={this.onPlay} className="icon_play"></i>
+            )}
           <i onClick={this.handelNext.bind(this)} className="icon_next"></i>
         </div>
         <div className="progress">
@@ -312,8 +322,8 @@ class Footer extends Component {
             {playList.length > 0 ? (
               <p>{formatPlayTime(duration || playList[index].dt / 1000)}</p>
             ) : (
-              <p>{`00:00`}</p>
-            )}
+                <p>{`00:00`}</p>
+              )}
           </div>
           <input
             onChange={this.changeInput}
@@ -347,8 +357,8 @@ class Footer extends Component {
           ) : playModel === '2' ? (
             <i onClick={this.playModel} className="icon_cycle"></i>
           ) : (
-            <i onClick={this.playModel} className="icon_random"></i>
-          )}
+                <i onClick={this.playModel} className="icon_random"></i>
+              )}
           <i onClick={this.showPlop} className="icon_list"></i>
         </div>
         {playList.length !== 0 ? (
@@ -359,8 +369,8 @@ class Footer extends Component {
             src={url}
           ></audio>
         ) : (
-          <audio ref={(ref) => (this.audio = ref)}></audio>
-        )}
+            <audio ref={(ref) => (this.audio = ref)}></audio>
+          )}
       </div>
     );
   }

@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: RA
- * @LastEditTime: 2020-06-01 20:21:24
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-04 10:21:21
  * @Description:
  */
 import React, { Component } from 'react';
@@ -19,7 +19,7 @@ import {
   isEmpty,
   aa,
 } from '../../common/utils/format';
-
+import PlayAll from '../playAll';
 // store
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -122,7 +122,8 @@ class List extends Component {
                 <p>{playList && formatDate(createTime)}</p>
               </div>
               <div className="single_btn">
-                <button onClick={this.playAll}>播放全部</button>
+                {/* <button onClick={this.playAll}>播放全部</button> */}
+                <PlayAll list={muscicList} text={`播放全部`} />
                 <button>收藏</button>
                 <button>分享</button>
                 <button>下载全部</button>

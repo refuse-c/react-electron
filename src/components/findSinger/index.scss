@@ -1,0 +1,79 @@
+.find_singer {
+  .menu_list {
+    margin-top: 10px;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      padding-left: 32px;
+      font-size: 14px;
+      line-height: 1;
+
+      p {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 2px 0;
+        margin: 5px 0;
+      }
+
+      li {
+        position: relative;
+        padding: 2px 5px;
+        // background-color: rgba($color: #000000, $alpha: 0.5);
+        margin: 5px 10px;
+        border-radius: 2px;
+
+        &:not(:last-child)::before {
+          position: absolute;
+          content: '';
+          top: 4px;
+          right: -10px;
+          width: 1px;
+          height: 10px;
+          background-color: #efefef;
+        }
+      }
+    }
+  }
+
+  .singer_list {
+    margin-top: 30px;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      li {
+        width: 18%;
+        margin-bottom: 10px;
+
+        div {
+          position: relative;
+          width: 100%;
+          padding: 100% 0 0;
+          border-radius: 2px;
+          overflow: hidden;
+
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          }
+        }
+        p{
+          padding: 10px 0;
+        }
+
+      }
+    }
+  }
+
+  .active {
+    background-color: skyblue;
+  }
+}

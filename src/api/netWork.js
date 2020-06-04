@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:54
- * @LastEditTime: 2020-06-02 16:04:20
+ * @LastEditTime: 2020-06-04 15:28:47
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -10,13 +10,7 @@ import { message } from 'antd';
 const Axios = axios.create({
   baseURL: 'http://139.155.89.11:3389',
   withCredentials: true,
-  headers: {
-    // "Content-Type": "application/json"
-    // 'X-Requested-With': 'XMLHttpRequest',
-    // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    // 'Cookies': Cookies.get()
-
-  },
+  headers: {},
 });
 
 
@@ -39,16 +33,14 @@ Axios.interceptors.response.use(
     console.log(err)
   }
 );
+
 export const RAPost = (path, params) => {
   message.destroy();
   message.info('loading')
   return new Promise((resolve, reject) => {
     Axios.post(path, params).then(res => {
-      // if (res.status === 200) {
       resolve(res.data);
-      // }
     }).catch(err => {
-      console.error(err);
       reject(err);
     });
   });
@@ -59,7 +51,6 @@ export const RAGet = (path, params) => {
     Axios.get(path, params).then(res => {
       resolve(res.data)
     }).catch(err => {
-      console.error(err);
       reject(err);
     });
   });

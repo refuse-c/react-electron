@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-06-03 12:22:52
+ * @LastEditTime: 2020-06-04 17:19:56
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -156,4 +156,8 @@ export const mvRcmd = {
 //mv排行
 export const mvTop = {
   api_url: '/top/mv'
+}
+//歌手列表
+export const artistList = {
+  api_url: '/artist/list'
 }

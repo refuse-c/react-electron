@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:12:40
- * @LastEditTime: 2020-06-01 20:20:04
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-04 14:52:12
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -27,6 +27,7 @@ class Index extends Component {
     super(props);
     this.state = {};
   }
+
   //点击区域外掩藏
   handleHide = () => {
     const { showPlop, toolStatus } = this.props;
@@ -35,7 +36,7 @@ class Index extends Component {
       this.props.setShowPopStatus('');
     }
     if (toolStatus) {
-      
+
     }
   };
   render() {

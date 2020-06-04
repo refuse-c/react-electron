@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-06-03 16:55:07
+ * @LastEditTime: 2020-06-04 16:06:33
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import routes from './router';
 
 global.debounce = debounce;// 防抖
+
 function App() {
   return (
     <div className="App">
@@ -36,7 +37,7 @@ function App() {
             }
           })
         }
-        <Redirect to="/home/find/rankingList" />
+        <Redirect to="/home/find/findSinger" />
         {/* <Redirect to="/home/single4883935921" /> */}
         {/* <Redirect to="/home/find/rankingList" /> */}
         {/* <Redirect to="/home/albumList4546" /> */}

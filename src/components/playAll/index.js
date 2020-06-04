@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-17 15:20:33
- * @LastEditTime: 2020-06-01 13:48:59
+ * @LastEditTime: 2020-06-04 10:22:40
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { gainPlayList, gainMusicId, setIsPlay, setIndex } from '../../store/actions';
 import { isEmpty } from '../../common/utils/format';
+import { message } from 'antd';
 class PlayAll extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +21,11 @@ class PlayAll extends Component {
   }
   playAll = () => {
     const { list } = this.props;
-    console.log(list)
-    if (isEmpty(list)) return;
+    if (isEmpty(list)) {
+      message.destroy();
+      message.error('当前列表还未就绪,请稍后再试!')
+      return;
+    };
     this.props.setIndex(0);
     this.props.setIsPlay(true);
     this.props.gainPlayList(list);
@@ -30,13 +34,13 @@ class PlayAll extends Component {
   render() {
     const { cls, text } = this.props;
     return (
-      <div
+      <button
         className={cls}
         onClick={this.playAll}
       >
         {text || ''}
 
-      </div>
+      </button>
     );
   }
 }
