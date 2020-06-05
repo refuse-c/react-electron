@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-06-04 20:59:53
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-05 18:01:28
+ * @LastEditors: refuse_c
  * @Description:
  */
 import Index from '../page/index/';
@@ -15,24 +15,22 @@ import Mv from '../page/video/mv';
 import Video from '../page/video/video';
 import Friend from '../page/friend';
 import Personalized from '../page/personalized';
-
-
-
-import Local from '../components/local';
-import Down from '../components/down';
-import Lately from '../components/lately';
-import Single from '../components/single';
-import IM from '../components/im';
-import AlbumList from '../components/albumList';
-import VideoDetail from '../components/videoDetail';
-
+import SingleDetail from '../page/singleDetail';
+import AlbumList from '../page/albumList';
+import VideoDetail from '../page/videoDetail';
 import Recommendation from '../page/recommendation';
-import FindList from '../components/findList';
-import HostRadio from '../components/hostRadio';
-import RankingList from '../components/rankingList';
+import RankingList from '../page/rankingList';
 import FindSinger from '../page/findSinger';
-import NewMusic from '../components/newMusic';
-import DailySpecial from '../components/dailySpecial';
+import NewMusic from '../page/newMusic';
+import IM from '../page/im';
+import Local from '../page/local';
+
+import Down from '../page/down';
+import Lately from '../page/lately';
+import FindList from '../page/findList';
+import HostRadio from '../page/hostRadio';
+import DailySpecial from '../page/dailySpecial';
+
 let routes = [
   {
     path: '/',
@@ -108,7 +106,7 @@ let routes = [
           },
           {
             path: '/home/single:id',
-            component: Single,
+            component: SingleDetail,
           },
           {
             path: '/home/dailySpecial',

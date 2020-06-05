@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-05-22 16:48:53
+ * @LastEditTime: 2020-06-05 17:45:00
  * @Description:
  */
 import React, { Component } from 'react';
@@ -27,7 +27,7 @@ class List extends Component {
       <div className="list">
         {
           isArrays(data) ?
-            < ul >
+            <ul>
               {
                 data && data.map((item, index) => {
                   const path = '/home/single';

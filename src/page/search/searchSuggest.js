@@ -1,9 +1,9 @@
 /*
  * @Author: RA
  * @Date: 2020-04-20 11:14:41
- * @LastEditTime: 2020-04-21 16:23:50
- * @LastEditors: RA
- * @Description: 
+ * @LastEditTime: 2020-06-05 17:41:12
+ * @LastEditors: refuse_c
+ * @Description: 搜索建议
  */
 import React, { Component } from 'react';
 

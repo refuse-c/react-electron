@@ -2,8 +2,8 @@
  * @Author: REFUSE_C
  * @Date: 2020-05-29 16:21:25
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-03 15:52:05
- * @Description:
+ * @LastEditTime: 2020-06-05 17:41:24
+ * @Description:视频->MV
  */
 import React, { Component } from 'react';
 import './index.scss';
@@ -119,7 +119,7 @@ class ComponentMvs extends Component {
     return (
       <div className="components_mv">
         <div className="headline">
-          <p>最新MV</p>
+          <p className="headline_title">最新MV</p>
           <ul>
             {
               mvNav.map((item, index) => {
@@ -136,21 +136,21 @@ class ComponentMvs extends Component {
           newMv.length > 0 ? <MvList data={newMv} path={path} /> : null
         }
         <div className="headline">
-          <p>热播MV</p>
-          <p>更多></p>
+          <p className="headline_title">热播MV</p>
+          <p className="headline_more">更多></p>
         </div>
         {
           hotMv.length > 0 ? <MvList data={hotMv} path={path} /> : null
         }
         <div className="headline">
-          <p>网易出品</p>
-          <p>更多></p>
+          <p className="headline_title">网易出品</p>
+          <p className="headline_more">更多></p>
         </div>
         {
           wyMv.length > 0 ? <MvList data={wyMv} path={path} /> : null
         }
         <div className="headline">
-          <p>MV排行榜</p>
+          <p className="headline_title">MV排行榜</p>
           <ul>
             {
               mvNav.map((item, index) => {
@@ -161,7 +161,7 @@ class ComponentMvs extends Component {
               })
             }
           </ul>
-          <p>更多></p>
+          <p className="headline_more">更多></p>
         </div>
         <div className="contents">
           <ul>

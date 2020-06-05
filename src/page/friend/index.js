@@ -2,12 +2,11 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-02 13:45:57
- * @Description:
+ * @LastEditTime: 2020-06-05 11:35:41
+ * @Description:朋友
  */
 import React, { Component } from 'react';
 import './index.scss';
-import { Button, Space } from 'antd';
 import { RAGet } from '../../api/netWork';
 import { getMusicUrl } from '../../api/api';
 import { isEmpty } from '../../common/utils/format';
@@ -19,7 +18,7 @@ class Frind extends Component {
     this.state = {}
   }
 
-  componentDidMount = () => {}
+  componentDidMount = () => { }
   getMusicUrl = (id) => {
     RAGet(getMusicUrl.api_url, {
       params: {
@@ -41,11 +40,7 @@ class Frind extends Component {
   render() {
     return (
       <div className="frind">
-        <Space>
-          <Button onClick={this.getMusicUrl}>download</Button>
-
-        </Space>
-
+        page friend
       </div>
     );
   }

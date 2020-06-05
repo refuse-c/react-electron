@@ -2,8 +2,8 @@
  * @Author: REFUSE_C
  * @Date: 2020-06-03 09:52:21
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-03 10:56:13
- * @Description:
+ * @LastEditTime: 2020-06-05 17:47:38
+ * @Description:视频->NV->list
  */
 import React, { Component } from 'react';
 import './index.scss';

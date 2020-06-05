@@ -2,8 +2,8 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-05-26 18:04:01
- * @Description:
+ * @LastEditTime: 2020-06-05 17:48:50
+ * @Description:检索->歌单组件
  */
 import React, { Component } from 'react';
 import './index.scss';

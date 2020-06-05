@@ -1,9 +1,9 @@
 /*
  * @Author: RA
  * @Date: 2020-04-22 12:07:13
- * @LastEditTime: 2020-06-01 20:09:13
- * @LastEditors: RA
- * @Description:
+ * @LastEditTime: 2020-06-05 11:37:16
+ * @LastEditors: refuse_c
+ * @Description:音乐列表展示组件
  */
 import React, { Component } from 'react';
 
@@ -15,7 +15,7 @@ import {
   isArrays,
   getLocal,
 } from '../../common/utils/format';
-import Empty from '../../components/empty';
+import Empty from '../empty';
 import Tools from './tools';
 // store
 import { connect } from 'react-redux';
@@ -42,7 +42,8 @@ class MusicList extends Component {
   }
   addMusic = (item) => {
     let flag = null;
-    const array = getLocal('playList');
+    const array = getLocal('playList') || [];
+
     array.forEach((element, index) => {
       if (element.id === item.id) {
         flag = index;
@@ -73,7 +74,7 @@ class MusicList extends Component {
     let sty = {};
     const obj = document
       .getElementsByClassName('aaaa')
-      [index].getBoundingClientRect();
+    [index].getBoundingClientRect();
     if (b - d > g - 210) {
       sty.top = b - d - 210;
     } else {
@@ -119,8 +120,8 @@ class MusicList extends Component {
               );
             })
           ) : (
-            <Empty />
-          )}
+              <Empty />
+            )}
         </ul>
       </div>
     );

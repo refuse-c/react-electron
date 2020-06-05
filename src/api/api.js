@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-06-04 17:19:56
+ * @LastEditTime: 2020-06-05 12:28:55
  * @LastEditors: refuse_c
  * @Description: 
  */
@@ -53,10 +53,15 @@ export const recommendList = {
 export const recommendSong = {
   api_url: '/recommend/songs'
 }
-//独家放送
+//独家放送入口
 export const privatecontent = {
   api_url: '/personalized/privatecontent'
 }
+//独家放送列表
+export const privatecontentList = {
+  api_url: '/personalized/privatecontent/list'
+}
+
 //获取歌词
 export const getLyric = {
   api_url: '/lyric'

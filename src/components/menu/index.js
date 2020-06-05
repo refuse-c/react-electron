@@ -1,20 +1,17 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:06:28
- * @LastEditTime: 2020-05-15 18:10:32
- * @LastEditors: RA
- * @Description: 
+ * @LastEditTime: 2020-06-05 17:46:21
+ * @LastEditors: refuse_c
+ * @Description: 左侧导航
  */
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import './index.scss';
 
 // store 
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import { isSHowLogin, gainUserInfo } from '../../store/actions';
 class Menu extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +19,7 @@ class Menu extends Component {
   }
 
   handelIndex = index => {
-    // console.log(index)
+
   }
   render() {
     const { menuList } = this.props;
@@ -62,7 +59,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {}
-// }
 export default connect(mapStateToProps)(Menu);

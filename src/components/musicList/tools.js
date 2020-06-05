@@ -1,9 +1,9 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-06-01 11:13:01
- * @LastEditors: RA
- * @LastEditTime: 2020-06-03 21:38:11
- * @Description:
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-05 17:47:21
+ * @Description:音乐列表->右击tools
  */
 import React, { Component } from 'react';
 import './index.scss';

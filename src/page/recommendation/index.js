@@ -1,9 +1,9 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-03 16:54:30
+ * @LastEditTime: 2020-06-05 11:23:56
  * @LastEditors: refuse_c
- * @Description: 
+ * @Description: 个性推荐
  */
 import React, { Component } from 'react';
 import './index.scss';
@@ -12,6 +12,7 @@ import { recommendList, privatecontent, getBanner, topSongs, personalizedMv } fr
 import { RAGet } from '../../api/netWork';
 import { imgParam, getDate, dataScreening } from '../../common/utils/format';
 import MvList from '../../components/mvList';
+import Exclusive from '../../components/exclusive';
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -147,8 +148,8 @@ class Recommendation extends Component {
           </ul>
         </div>
         <div className="headline">
-          <p>推荐歌单</p>
-          <p onClick={this.handelMore.bind(this, 1)}>更多></p>
+          <p className="headline_title">推荐歌单</p>
+          <p className="headline_more" onClick={this.handelMore.bind(this, 1)}>更多></p>
         </div>
         <div className="recommend-list">
           <ul>
@@ -184,29 +185,17 @@ class Recommendation extends Component {
           </ul>
         </div>
         <div className="headline">
-          <p>独家放送</p>
-          <p onClick={this.handelMore.bind(this, 2)}>更多></p>
+          <p className="headline_title">独家放送</p>
+          <p className="headline_more" onClick={this.handelMore.bind(this, 2)}>更多></p>
         </div>
-        <div className="privatecontent-list">
-          <ul>
-            {
-              privatecontentData.length > 0 && privatecontentData.map((item, index) => {
-                const path = '/videoDetail';
-                return (
-                  <NavLink to={path + item.id} key={index} >
-                    <li >
-                      <img src={imgParam(item.picUrl, 330, 190)} alt="" />
-                      <p>{item.name}</p>
-                    </li>
-                  </NavLink>
-                )
-              })
-            }
-          </ul>
-        </div>
+        {
+          privatecontentData.length > 0
+            ? <Exclusive data={privatecontentData} />
+            : null
+        }
         <div className="headline">
-          <p>最新音乐</p>
-          <p onClick={this.handelMore.bind(this, 3)}>更多></p>
+          <p className="headline_title">最新音乐</p>
+          <p className="headline_more" onClick={this.handelMore.bind(this, 3)}>更多></p>
         </div>
         <div className="top-songs">
           <ul>
@@ -232,13 +221,13 @@ class Recommendation extends Component {
           </ul>
         </div>
         <div className="headline">
-          <p>推荐MV</p>
-          <p onClick={this.handelMore.bind(this, 4)}>更多></p>
+          <p className="headline_title">推荐MV</p>
+          <p className="headline_more" onClick={this.handelMore.bind(this, 4)}>更多></p>
         </div>
         {
           personalizedMvData.length > 0 ? <MvList data={personalizedMvData} path={'/videoDetail'} /> : null
         }
-      </div>
+      </div >
     );
   }
 }

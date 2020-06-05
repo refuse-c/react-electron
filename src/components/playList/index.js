@@ -1,9 +1,9 @@
 /*
  * @Author: RA
  * @Date: 2020-05-08 19:19:33
- * @LastEditTime: 2020-06-01 17:32:58
+ * @LastEditTime: 2020-06-05 17:23:52
  * @LastEditors: refuse_c
- * @Description:
+ * @Description:当前播放音乐组件
  */
 import React, { Component } from 'react';
 

@@ -1,9 +1,9 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-05-29 16:21:35
- * @LastEditors: RA
- * @LastEditTime: 2020-05-31 12:41:31
- * @Description:
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-05 17:41:40
+ * @Description:视频->VIDEO
  */
 import React, { Component } from 'react';
 import { RAGet } from '../../api/netWork';

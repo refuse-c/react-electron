@@ -1,9 +1,9 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-04 20:54:17
- * @LastEditors: RA
- * @Description:
+ * @LastEditTime: 2020-06-05 13:52:51
+ * @LastEditors: refuse_c
+ * @Description: 歌手列表
  */
 import React, { Component } from 'react';
 import './index.scss';
@@ -195,11 +195,11 @@ class FindSinger extends Component {
           </ul>
         </div>
         {list.more === true ? (
-          <span onClick={this.handleMore}>
+          <span className="load_more" onClick={this.handleMore}>
             点我加载更多喔,不信你试试 ꒰⑅•ᴗ•⑅꒱
           </span>
         ) : list.more === false ? (
-          <span onClick={this.handleMore}>没有更多的啦,不要划了(＞﹏＜)</span>
+          <span className="load_more" onClick={this.handleMore}>没有更多的啦,不要划了(＞﹏＜)</span>
         ) : null}
       </div>
     );

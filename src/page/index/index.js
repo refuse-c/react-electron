@@ -1,14 +1,14 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:12:40
- * @LastEditTime: 2020-06-04 14:52:12
+ * @LastEditTime: 2020-06-05 17:23:16
  * @LastEditors: refuse_c
- * @Description:
+ * @Description:整体框架页(左侧nav + 右侧info)
  */
 import React, { Component } from 'react';
 import './index.scss';
-import Footer from '../../components/footer';
-import Header from '../../components/header';
+import Footer from '../footer';
+import Header from '../header';
 import PlayList from '../../components/playList';
 
 import Login from '../login';

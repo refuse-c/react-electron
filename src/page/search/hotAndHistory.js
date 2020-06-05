@@ -2,9 +2,9 @@
 /*
  * @Author: RA
  * @Date: 2020-04-18 20:57:49
- * @LastEditTime: 2020-04-21 12:40:18
- * @LastEditors: RA
- * @Description: 
+ * @LastEditTime: 2020-06-05 11:40:18
+ * @LastEditors: refuse_c
+ * @Description: 热门搜素/历史搜索
  */
 import React, { Component } from 'react';
 

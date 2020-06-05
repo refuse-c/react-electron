@@ -1,9 +1,9 @@
 /*
  * @Author: RA
  * @Date: 2020-04-21 14:01:33
- * @LastEditTime: 2020-06-01 16:56:56
+ * @LastEditTime: 2020-06-05 11:40:03
  * @LastEditors: refuse_c
- * @Description: 
+ * @Description: 搜索展示框架
  */
 import React, { Component } from 'react';
 import Singer from '../../components/singer';

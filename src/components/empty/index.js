@@ -1,9 +1,9 @@
 /*
  * @Author: RA
  * @Date: 2020-04-20 12:19:27
- * @LastEditTime: 2020-04-20 12:54:27
- * @LastEditors: RA
- * @Description: 
+ * @LastEditTime: 2020-06-05 09:29:11
+ * @LastEditors: refuse_c
+ * @Description: 空数据组件
  */
 import React, { Component } from 'react';
 import './index.scss';

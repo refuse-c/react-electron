@@ -1,15 +1,14 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-06-03 22:02:49
- * @LastEditors: RA
- * @Description: 
+ * @LastEditTime: 2020-06-05 11:34:34
+ * @LastEditors: refuse_c
+ * @Description: 发现音乐
  */
 import React, { Component } from 'react';
 import './index.scss';
 
 import { Route, NavLink } from 'react-router-dom';
-// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 class Find extends Component {
   constructor(props) {
@@ -46,7 +45,7 @@ class Find extends Component {
   componentDidMount = () => {
     // console.log(this.props)
   }
-  
+
   componentWillUnmount = () => {
     this.setState = (state, callback) => {
       return;

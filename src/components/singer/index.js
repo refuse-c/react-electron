@@ -1,9 +1,9 @@
 /*
  * @Author: RA
  * @Date: 2020-05-01 22:18:42
- * @LastEditTime: 2020-05-22 16:39:35
+ * @LastEditTime: 2020-06-05 11:31:20
  * @LastEditors: refuse_c
- * @Description: 
+ * @Description: 检索页歌手组件
  */
 import React, { Component } from 'react';
 import './index.scss';

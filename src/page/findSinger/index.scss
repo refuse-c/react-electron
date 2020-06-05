@@ -79,22 +79,6 @@
       }
     }
   }
-
-  span {
-    display: inline-block;
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border: 1px solid #fff;
-    margin: 20px 0;
-
-    &:hover {
-      border: 1px solid#0071fb;
-      background-color: #0071fb;
-    }
-  }
-
   .active {
     background-color: skyblue;
   }

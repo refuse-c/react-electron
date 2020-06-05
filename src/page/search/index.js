@@ -1,9 +1,9 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-05-28 19:24:18
- * @LastEditors: RA
- * @Description:
+ * @LastEditTime: 2020-06-05 11:39:34
+ * @LastEditors: refuse_c
+ * @Description:检索页
  */
 import React, { Component } from 'react';
 import './index.scss';
@@ -339,8 +339,8 @@ class Search extends Component {
           ) : pageStatus === 3 ? (
             <SearchInfo getType={this.getType.bind(this)} /> //searchType={searchType} resultList={resultList}  pageCallbackFn={this.getCurrentPage.bind(this)}
           ) : (
-            <Empty msg={`123211313`} />
-          )}
+                <Empty msg={`123211313`} />
+              )}
           {showsuggest ? (
             <SearchSuggest
               suggestList={suggestList}
