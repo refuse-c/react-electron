@@ -2,8 +2,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-05 11:34:18
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-06 23:36:03
+ * @LastEditors: RA
  * @Description:排行榜
  */
 import React, { Component } from 'react';
@@ -68,6 +68,7 @@ class RankingList extends Component {
     e.list = f;
     e.path = '/home/find/findSinger';
     e.type = 'singer';
+    console.log(a, b, c, d, e);
     const officialList = [a, b, c, d, e];
     setLocal('officialList', officialList);
     this.setState({ officialList });
@@ -82,10 +83,11 @@ class RankingList extends Component {
     })
       .then((res) => {
         const tracks = res.playlist.tracks;
-        const privileges = res.privileges;
+        // const privileges = res.privileges;
         data.name = res.playlist.name;
         data.updateTime = res.playlist.updateTime;
-        data.list = aa(tracks, privileges);
+        // data.list = aa(tracks, privileges);
+        data.list = tracks;
         data.id = res.playlist.id;
         data.path = '/home/single' + res.playlist.id;
         data.coverImgUrl = res.playlist.coverImgUrl;
@@ -159,6 +161,7 @@ class RankingList extends Component {
   };
   render() {
     const { officialList, globalList } = this.state;
+    console.log(officialList, globalList)
     const path = '/home/single';
     return (
       <div className="ranking_ist">
@@ -189,35 +192,34 @@ class RankingList extends Component {
                   ) : null}
 
                   <ul>
-                    {!isEmpty(item.list) && item.list.map((item, index) => {
-                      let num = index < 9 ? '0' + (index + 1) : index + 1;
-                      if (index > 9) return false;
-                      return (
-                        <li
-                          key={index}
-                          onClick={
-                            item.ar ? this.addMusic.bind(this, item) : null
-                          }
-                        >
-                          <p>{num}</p>
-                          <p>{item.name}</p>
-                          {item.ar ? (
-                            <p>
-                              {item.ar
-                                .map((item) => item.name + '')
-                                .join(' - ')}
-                            </p>
-                          ) : null}
-                        </li>
-                      );
-                    })}
+                    {!isEmpty(item.list) &&
+                      item.list.map((item, index) => {
+                        let num = index < 9 ? '0' + (index + 1) : index + 1;
+                        if (index > 9) return false;
+                        return (
+                          <li
+                            key={index}
+                            onClick={
+                              item.ar ? this.addMusic.bind(this, item) : null
+                            }
+                          >
+                            <p>{num}</p>
+                            <p>{item.name}</p>
+                            {item.ar ? (
+                              <p>
+                                {item.ar
+                                  .map((item) => item.name + '')
+                                  .join(' - ')}
+                              </p>
+                            ) : null}
+                          </li>
+                        );
+                      })}
                   </ul>
                   <div>
-                    {
-                      item.path
-                        ? <NavLink to={item.path}>查看全部</NavLink>
-                        : null
-                    }
+                    {item.path ? (
+                      <NavLink to={item.path}>查看全部</NavLink>
+                    ) : null}
                   </div>
                 </div>
               );
@@ -249,7 +251,7 @@ class RankingList extends Component {
               })}
           </ul>
         </div>
-      </div >
+      </div>
     );
   }
 }

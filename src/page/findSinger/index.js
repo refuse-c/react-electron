@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-05 13:52:51
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-07 00:03:31
+ * @LastEditors: RA
  * @Description: 歌手列表
  */
 import React, { Component } from 'react';
@@ -90,6 +90,7 @@ class FindSinger extends Component {
       },
     })
       .then((res) => {
+        console.log(res)
         let obj = {};
         const { artistsList } = this.state;
         if (artistsList.list) {
@@ -118,6 +119,9 @@ class FindSinger extends Component {
     let offsets = offset + limit;
     this.setState({ offset: offsets });
     this.getArtistList(cat, types, area, limit, offsets);
+  };
+  gandleSingerDetail = (item) => {
+    this.props.history.push({ pathname: `/home/singerdetail${item.id}` });
   };
   render() {
     const {
@@ -184,7 +188,10 @@ class FindSinger extends Component {
             {list.list &&
               list.list.map((item, index) => {
                 return (
-                  <li key={index}>
+                  <li
+                    onClick={this.gandleSingerDetail.bind(this, item)}
+                    key={index}
+                  >
                     <div>
                       <img src={imgParam(item.picUrl, 200, 200)} alt="" />
                     </div>
@@ -199,7 +206,9 @@ class FindSinger extends Component {
             点我加载更多喔,不信你试试 ꒰⑅•ᴗ•⑅꒱
           </span>
         ) : list.more === false ? (
-          <span className="load_more" onClick={this.handleMore}>没有更多的啦,不要划了(＞﹏＜)</span>
+          <span className="load_more" onClick={this.handleMore}>
+            没有更多的啦,不要划了(＞﹏＜)
+          </span>
         ) : null}
       </div>
     );

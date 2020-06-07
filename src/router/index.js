@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-06-05 18:01:28
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-06 22:55:52
+ * @LastEditors: RA
  * @Description:
  */
 import Index from '../page/index/';
@@ -30,7 +30,7 @@ import Lately from '../page/lately';
 import FindList from '../page/findList';
 import HostRadio from '../page/hostRadio';
 import DailySpecial from '../page/dailySpecial';
-
+import singerDetail from '../page/singerDetails'
 let routes = [
   {
     path: '/',
@@ -85,8 +85,8 @@ let routes = [
               {
                 path: '/home/video/mv/',
                 component: Mv,
-              }
-            ]
+              },
+            ],
           },
           {
             path: '/home/friend',
@@ -115,6 +115,10 @@ let routes = [
           {
             path: '/home/albumList:id',
             component: AlbumList,
+          },
+          {
+            path: '/home/singerdetail:id',
+            component: singerDetail,
           },
           {
             path: '/home/personalized',

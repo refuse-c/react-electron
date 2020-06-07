@@ -1,45 +1,46 @@
 /*
  * @Author: RA
  * @Date: 2020-05-17 15:20:33
- * @LastEditTime: 2020-06-05 17:47:57
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-05 20:35:42
+ * @LastEditors: RA
  * @Description: 播放全部组件
  */
 import React, { Component } from 'react';
 import './index.scss';
 
-// store 
+// store
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { gainPlayList, gainMusicId, setIsPlay, setIndex } from '../../store/actions';
+import {
+  gainPlayList,
+  gainMusicId,
+  setIsPlay,
+  setIndex,
+} from '../../store/actions';
 import { isEmpty } from '../../common/utils/format';
 import { message } from 'antd';
 class PlayAll extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
   playAll = () => {
     const { list } = this.props;
-    if (isEmpty(list)) {
+    if (isEmpty(list) || list.length < 0) {
       message.destroy();
-      message.error('当前列表还未就绪,请稍后再试!')
+      message.error('当前列表还未就绪,请稍后再试!');
       return;
-    };
+    }
     this.props.setIndex(0);
     this.props.setIsPlay(true);
     this.props.gainPlayList(list);
     this.props.gainMusicId(list[0].id);
-  }
+  };
   render() {
     const { cls, text } = this.props;
     return (
-      <button
-        className={cls}
-        onClick={this.playAll}
-      >
+      <button className={cls} onClick={this.playAll}>
         {text || ''}
-
       </button>
     );
   }
@@ -49,8 +50,8 @@ class PlayAll extends Component {
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -58,6 +59,6 @@ const mapDispatchToProps = (dispatch) => {
     gainMusicId: bindActionCreators(gainMusicId, dispatch),
     setIsPlay: bindActionCreators(setIsPlay, dispatch),
     setIndex: bindActionCreators(setIndex, dispatch),
-  }
-}
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(PlayAll);

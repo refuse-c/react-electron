@@ -9,7 +9,6 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.3.0",
     "axios": "^0.19.2",
-    "electron": "^8.2.0",
     "fs": "0.0.1-security",
     "iconv-lite": "^0.5.1",
     "node-id3": "^0.1.16",
