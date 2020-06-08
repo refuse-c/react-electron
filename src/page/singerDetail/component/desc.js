@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-06-07 01:14:11
- * @LastEditTime: 2020-06-08 20:06:11
+ * @LastEditTime: 2020-06-08 20:30:25
  * @LastEditors: RA
  * @Description: 歌手详情->描述
  */
@@ -19,8 +19,7 @@ class singerDesc extends Component {
     }
   }
   componentDidMount = () => {
-    const str = this.props.history.location.pathname;
-    let id = obtainId(str, 'singerdetail');
+    const id = obtainId(window.location.href, 'singerdetail')
     this.getArtistDesc(id);
   }
   getArtistDesc = async (id) => {

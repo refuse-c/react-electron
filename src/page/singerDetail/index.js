@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-06-05 17:54:41
  * @LastEditors: RA
- * @LastEditTime: 2020-06-08 20:04:46
+ * @LastEditTime: 2020-06-08 21:36:12
  * @Description:歌手详情页
  */
 import React, { Component } from 'react';
@@ -16,8 +16,7 @@ class SingerDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pathname: props.history.location.pathname,
-      id: obtainId(props.history.location.pathname, 'singerdetail'),
+      id: '',
       artistsInfo: {},
       artistsNav: [
         {
@@ -40,15 +39,21 @@ class SingerDetails extends Component {
     };
   }
   componentDidMount = () => {
-    this.requestGroup();
-    this.setState({ url: this.props.location.pathname });
+    const id = obtainId(window.location.href, 'singerdetail');
+    this.setState({ id });
+    this.requestGroup(id);
   };
   componentWillReceiveProps = () => {
-    this.setState({ artistsInfo: {} })
-    this.requestGroup();
+    const id = obtainId(window.location.href, 'singerdetail');
+    this.setState({ id });
+    this.setState({ id, artistsInfo: {} });
+    this.requestGroup(id);
   };
-  requestGroup = async () => {
-    const id =  obtainId(this.props.history.location.pathname, 'singerdetail')
+  componentDidUpdate=(prevState)=>{
+    console.log(prevState)
+
+  }
+  requestGroup = async (id) => {
     let a = await this.getArtistAlbum(id);
     let b = await this.getArtistMv(id);
     let artistsInfo = {};

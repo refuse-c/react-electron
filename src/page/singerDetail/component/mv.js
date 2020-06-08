@@ -19,8 +19,7 @@ class singerMv extends Component {
     }
   }
   componentDidMount = () => {
-    const str = this.props.history.location.pathname;
-    let id = obtainId(str, 'singerdetail');
+    const id = obtainId(window.location.href, 'singerdetail')
     this.getArtistMv(id);
   }
 
