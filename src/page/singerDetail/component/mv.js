@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-06-07 01:14:11
- * @LastEditTime: 2020-06-08 15:52:13
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-08 20:06:23
+ * @LastEditors: RA
  * @Description: 歌手详情->mv
  */
 import React, { Component } from 'react';
@@ -23,7 +23,6 @@ class singerMv extends Component {
     let id = obtainId(str, 'singerdetail');
     this.getArtistMv(id);
   }
-
 
   getArtistMv = async (id) => {
     await RAGet(artistMv.api_url, {

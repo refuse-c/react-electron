@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-08 16:32:35
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-08 19:25:35
+ * @LastEditors: RA
  * @Description: 歌手列表
  */
 import React, { Component } from 'react';
@@ -90,7 +90,6 @@ class FindSinger extends Component {
       },
     })
       .then((res) => {
-        console.log(res)
         let obj = {};
         const { artistsList } = this.state;
         if (artistsList.list) {

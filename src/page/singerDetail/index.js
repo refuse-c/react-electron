@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-06-05 17:54:41
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-08 17:44:54
+ * @LastEditors: RA
+ * @LastEditTime: 2020-06-08 20:04:46
  * @Description:歌手详情页
  */
 import React, { Component } from 'react';
@@ -16,53 +16,60 @@ class SingerDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      pathname: props.history.location.pathname,
       id: obtainId(props.history.location.pathname, 'singerdetail'),
       artistsInfo: {},
       artistsNav: [
         {
-          ti: '专辑', path: `/`
-        }, {
-          ti: 'MV', path: `/mv`
+          ti: '专辑',
+          path: `/`,
         },
         {
-          ti: '歌手详情', path: `/desc`
+          ti: 'MV',
+          path: `/mv`,
         },
         {
-          ti: '相似歌手', path: `/simi`
+          ti: '歌手详情',
+          path: `/desc`,
         },
-      ]
+        {
+          ti: '相似歌手',
+          path: `/simi`,
+        },
+      ],
     };
   }
   componentDidMount = () => {
     this.requestGroup();
+    this.setState({ url: this.props.location.pathname });
   };
   componentWillReceiveProps = () => {
     this.setState({ artistsInfo: {} })
     this.requestGroup();
-    console.log(this.props)
   };
   requestGroup = async () => {
-    const str = this.props.history.location.pathname;
-    const id = obtainId(str, 'singerdetail');
+    const id =  obtainId(this.props.history.location.pathname, 'singerdetail')
     let a = await this.getArtistAlbum(id);
     let b = await this.getArtistMv(id);
     let artistsInfo = {};
-    artistsInfo = a.artist
+    artistsInfo = a.artist;
     artistsInfo.mvLength = isEmpty(b.mvs) ? 0 : b.mvs.length;
-    this.setState({ artistsInfo })
-  }
+    this.setState({ artistsInfo });
+  };
   getArtistAlbum = async (id) => {
-    let data = {}
+    let data = {};
     await RAGet(artistAlbum.api_url, {
       params: {
         id: id,
         limit: 50,
       },
-    }).then((res) => {
-      data = res;
-    }).catch((err) => {
-      console.log(err);
-    });
+    })
+      .then((res) => {
+        data = res;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     return data;
   };
   getArtistMv = async (id) => {
@@ -72,11 +79,13 @@ class SingerDetails extends Component {
         id: id,
         limit: 50,
       },
-    }).then((res) => {
-      data = res;
-    }).catch((err) => {
-      console.log(err);
-    });
+    })
+      .then((res) => {
+        data = res;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     return data;
   };
   componentWillUnmount() {
@@ -117,27 +126,33 @@ class SingerDetails extends Component {
           </div>
           <div className="singer_nav">
             <ul>
-              {
-                artistsNav.map((item, index) => {
-                  return (
-                    <NavLink exact activeClassName="active" key={item.path} to={`/home/singerdetail${id}${item.path}`}>
-                      <li>{item.ti}</li>
-                    </NavLink>
-                  )
-                })
-              }
+              {artistsNav.map((item, index) => {
+                return (
+                  <NavLink
+                    exact
+                    activeClassName="active"
+                    key={item.path}
+                    to={`/home/singerdetail${id}${item.path}`}
+                  >
+                    <li>{item.ti}</li>
+                  </NavLink>
+                );
+              })}
             </ul>
           </div>
           <div className="singer_content">
-            {
-              routes.map((route, key) => {
-                return <Route exact key={key} path={route.path}
-                  render={props => (
+            {routes.map((route, key) => {
+              return (
+                <Route
+                  exact
+                  key={key}
+                  path={route.path}
+                  render={(props) => (
                     <route.component {...props} routes={route.routes} />
                   )}
                 />
-              })
-            }
+              );
+            })}
           </div>
         </ScrollArea>
       </div>

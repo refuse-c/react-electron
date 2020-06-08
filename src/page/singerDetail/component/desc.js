@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-06-07 01:14:11
- * @LastEditTime: 2020-06-08 16:50:03
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-08 20:06:11
+ * @LastEditors: RA
  * @Description: 歌手详情->描述
  */
 import React, { Component } from 'react';
