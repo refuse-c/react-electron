@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 11:38:37
+ * @LastEditTime: 2020-06-08 10:28:51
  * @Description:专辑详情页
  */
 import React, { Component } from 'react';

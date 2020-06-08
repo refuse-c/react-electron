@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-06-04 19:03:52
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-08 14:48:44
+ * @LastEditors: refuse_c
  * @Description:
  */
 
@@ -305,6 +305,9 @@ export const formatIsNum = (str) => {
  * @description: 图片添加param
  */
 export const imgParam = (url, width, height) => {
+  if (!url) {
+    return require('../../common/images/logo.png');
+  }
   const w = isEmpty(width) ? '100' : width;
   const h = isEmpty(height) ? '100' : height;
   return url + '?param=' + w + 'y' + h;
@@ -722,3 +725,13 @@ export const c = (str) => {
       return str.toLowerCase();
   }
 };
+
+// id获取
+export const obtainId = (url, separator) => {
+  let id = url.split(separator)[1];
+  if (id.indexOf('/') !== -1) {
+    return id.split('/')[0]
+  } else {
+    return id;
+  }
+}

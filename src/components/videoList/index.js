@@ -2,52 +2,51 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 11:37:42
- * @Description:检索页专辑组件
+ * @LastEditTime: 2020-06-08 17:18:42
+ * @Description:检索-Video
  */
 import React, { Component } from 'react';
 import './index.scss';
+import { imgParam, isArrays } from '../../common/utils/format';
 import { NavLink } from 'react-router-dom';
+import Empty from '../../components/empty';
+
 //store
 import { connect } from 'react-redux';
-import { imgParam, isArrays } from '../../common/utils/format';
-import Empty from '../../components/empty';
 // import { bindActionCreators } from 'redux';
 // import { setPageNum, gainSearchInfo, setMenuIndex } from '../../store/actions';
 
-class Album extends Component {
+class Video extends Component {
   constructor(props) {
     super(props);
     this.state = {}
   }
   render() {
     const { data } = this.props;
-    const path = '/home/albumList'
+    const path = '/videoDetail';
     return (
-      <div className="album">
+      <div className="video">
         {
-
           isArrays(data) ?
-            < ul >
+            <ul>
               {
                 data && data.map((item, index) => {
                   return (
                     <NavLink
                       key={index}
-                      to={path + item.id}
+                      to={path + (item.vid || item.id)}
                     >
                       <li>
-                        <img src={imgParam(item.picUrl, 50, 50)} alt="" />
-                        <p>{item.name}</p>
-                        <p>{item.artist.name}</p>
+                        <img src={imgParam(item.coverUrl || item.imgurl, 160, 90)} alt="" />
+                        <h4>{item.title || item.name}</h4>
+                        <p>by {item.artistName || item.creator[0].userName || ''}</p>
                       </li>
                     </NavLink>
                   )
                 })
               }
             </ul>
-            :
-            <Empty />
+            : <Empty />
         }
 
       </div>
@@ -68,4 +67,4 @@ const mapDispatchToProps = (dispatch) => {
     // setMenuIndex: bindActionCreators(setMenuIndex, dispatch),
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Album);
+export default connect(mapStateToProps, mapDispatchToProps)(Video);

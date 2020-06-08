@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-06-06 22:55:52
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-08 12:15:51
+ * @LastEditors: refuse_c
  * @Description:
  */
 import Index from '../page/index/';
@@ -16,7 +16,7 @@ import Video from '../page/video/video';
 import Friend from '../page/friend';
 import Personalized from '../page/personalized';
 import SingleDetail from '../page/singleDetail';
-import AlbumList from '../page/albumList';
+import AlbumList from '../page/albumDetail';
 import VideoDetail from '../page/videoDetail';
 import Recommendation from '../page/recommendation';
 import RankingList from '../page/rankingList';
@@ -30,7 +30,11 @@ import Lately from '../page/lately';
 import FindList from '../page/findList';
 import HostRadio from '../page/hostRadio';
 import DailySpecial from '../page/dailySpecial';
-import singerDetail from '../page/singerDetails'
+import singerDetail from '../page/singerDetail';
+import singerAlbum from '../page/singerDetail/component/album';
+import singerMv from '../page/singerDetail/component/mv';
+import singerDesc from '../page/singerDetail/component/desc';
+import singerSimi from '../page/singerDetail/component/simi';
 let routes = [
   {
     path: '/',
@@ -117,8 +121,26 @@ let routes = [
             component: AlbumList,
           },
           {
-            path: '/home/singerdetail:id',
+            path: '/home/singerdetail:id/',
             component: singerDetail,
+            routes: [
+              {
+                path: '/home/singerdetail:id/',
+                component: singerAlbum,
+              },
+              {
+                path: '/home/singerdetail:id/mv',
+                component: singerMv,
+              },
+              {
+                path: '/home/singerdetail:id/desc',
+                component: singerDesc,
+              },
+              {
+                path: '/home/singerdetail:id/simi',
+                component: singerSimi,
+              }
+            ]
           },
           {
             path: '/home/personalized',

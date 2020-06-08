@@ -2,8 +2,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-06 23:36:03
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-08 16:48:44
+ * @LastEditors: refuse_c
  * @Description:排行榜
  */
 import React, { Component } from 'react';
@@ -14,7 +14,6 @@ import { NavLink } from 'react-router-dom';
 import {
   imgParam,
   formatPlaycount,
-  aa,
   setLocal,
   getLocal,
   isEmpty,
@@ -68,7 +67,6 @@ class RankingList extends Component {
     e.list = f;
     e.path = '/home/find/findSinger';
     e.type = 'singer';
-    console.log(a, b, c, d, e);
     const officialList = [a, b, c, d, e];
     setLocal('officialList', officialList);
     this.setState({ officialList });

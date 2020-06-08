@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-01 22:18:42
- * @LastEditTime: 2020-06-05 11:31:20
+ * @LastEditTime: 2020-06-08 17:04:05
  * @LastEditors: refuse_c
  * @Description: 检索页歌手组件
  */
@@ -9,24 +9,31 @@ import React, { Component } from 'react';
 import './index.scss';
 import { imgParam, isArrays } from '../../common/utils/format';
 import Empty from '../../components/empty';
+
 class Singer extends Component {
   constructor(props) {
     super(props);
     this.state = {}
   }
+  handleSingerDetail = (item) => {
+    const { history } = this.props;
+    history.push({ pathname: `/home/singerdetail${item.id}` });
+  };
   render() {
-    const { data } = this.props;
+    const { data, type } = this.props;
     return (
       <div className="singer">
 
         {
           isArrays(data) ?
-            <ul>
+            <ul className={type ? 'across' : 'vertical'}>
               {
                 data.map((item, index) => {
                   return (
-                    <li key={index}>
-                      <img src={imgParam(item.img1v1Url, 50, 50)} alt="" />
+                    <li onClick={this.handleSingerDetail.bind(this, item)}
+                      key={index}
+                    >
+                      <img src={imgParam(item.img1v1Url, 120, 120)} alt="" />
                       <p>{item.name}</p>
                     </li>
                   )

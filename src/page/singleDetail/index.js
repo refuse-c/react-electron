@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 18:00:42
+ * @LastEditTime: 2020-06-08 13:51:46
  * @Description:歌单详情
  */
 import React, { Component } from 'react';
@@ -127,12 +127,17 @@ class List extends Component {
                 <button>分享</button>
                 <button>下载全部</button>
               </div>
-              <div className="single_tag">
-                标签：{tags && tags.map((item) => item + '').join(' / ')}
-              </div>
-              <div className="single_des">
-                介绍：{description && description}
-              </div>
+              {
+                tags && tags.length > 0
+                  ? <div className="single_tag">标签：{tags.map((item) => item + '').join(' / ')}</div>
+                  : null
+              }
+              {
+                description
+                  ? <div className="single_des">简介：{description}</div>
+                  : null
+              }
+
             </div>
           </div>
           <div className="single_info_list">

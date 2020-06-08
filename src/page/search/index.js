@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 16:54:31
- * @LastEditTime: 2020-06-05 11:39:34
+ * @LastEditTime: 2020-06-08 16:37:12
  * @LastEditors: refuse_c
  * @Description:检索页
  */
@@ -337,7 +337,7 @@ class Search extends Component {
               getChildVal={this.getChildVal.bind(this)}
             />
           ) : pageStatus === 3 ? (
-            <SearchInfo getType={this.getType.bind(this)} /> //searchType={searchType} resultList={resultList}  pageCallbackFn={this.getCurrentPage.bind(this)}
+            <SearchInfo getType={this.getType.bind(this)} history={this.props.history} /> //searchType={searchType} resultList={resultList}  pageCallbackFn={this.getCurrentPage.bind(this)}
           ) : (
                 <Empty msg={`123211313`} />
               )}

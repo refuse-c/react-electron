@@ -1,19 +1,19 @@
 /*
  * @Author: RA
  * @Date: 2020-04-21 14:01:33
- * @LastEditTime: 2020-06-05 11:40:03
+ * @LastEditTime: 2020-06-08 16:34:48
  * @LastEditors: refuse_c
  * @Description: 搜索展示框架
  */
 import React, { Component } from 'react';
-import Singer from '../../components/singer';
+import Singer from '../../components/singerList';
 import { dataScreening, returnsongCount } from '../../common/utils/format';
 // import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import Pagination from '../../components/pagination';
 import MusicList from '../../components/musicList';
-import Video from '../../components/video';
-import Album from '../../components/album';
+import Video from '../../components/videoList';
+import Album from '../../components/albumList';
 import List from '../../components/list';
 import User from '../../components/user';
 
@@ -117,7 +117,7 @@ class SearchInfo extends Component {
                     <Album data={searchInfo.albumArr} />
                     :
                     menuIndex === 100 && searchInfo.singerArr ?
-                      <Singer data={searchInfo.singerArr} />
+                      <Singer data={searchInfo.singerArr} history={this.props.history} />
                       :
                       menuIndex === 1000 && searchInfo.listArr ?
                         <List data={searchInfo.listArr} />
