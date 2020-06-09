@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-01 14:34:45
- * @LastEditTime: 2020-06-05 11:36:45
+ * @LastEditTime: 2020-06-09 16:28:38
  * @LastEditors: refuse_c
  * @Description: 登录页
  */
@@ -63,7 +63,6 @@ class Login extends Component {
         password: pwd
       }
     }).then(res => {
-      console.log(res)
       if (res.code !== 200) return;
       let userInfo = {};
       sessionStorage.setItem('token', res.token);
@@ -158,7 +157,6 @@ class Login extends Component {
 
 //注册store
 const mapStateToProps = (state) => {
-  // console.log(state)
   return {
     userInfo: state.userInfo,
     menuList: state.menuList

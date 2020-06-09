@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-08 10:28:51
+ * @LastEditTime: 2020-06-09 16:27:42
  * @Description:专辑详情页
  */
 import React, { Component } from 'react';
@@ -43,7 +43,6 @@ class List extends Component {
     this.props.gainMusicId(muscicList[0].id);
   };
   componentDidMount = () => {
-    console.log(window.location.href);
     const id = window.location.href.split('albumList')[1];
     this.getAlbumList(id);
   };

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-06-05 11:34:34
+ * @LastEditTime: 2020-06-09 16:27:49
  * @LastEditors: refuse_c
  * @Description: 发现音乐
  */
@@ -42,9 +42,7 @@ class Find extends Component {
       ]
     }
   }
-  componentDidMount = () => {
-    // console.log(this.props)
-  }
+  componentDidMount = () => { }
 
   componentWillUnmount = () => {
     this.setState = (state, callback) => {

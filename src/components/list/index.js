@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 17:45:00
+ * @LastEditTime: 2020-06-09 13:47:55
  * @Description:
  */
 import React, { Component } from 'react';
@@ -32,8 +32,8 @@ class List extends Component {
                 data && data.map((item, index) => {
                   const path = '/home/single';
                   return (
-                    <NavLink to={path + item.id}>
-                      <li key={index}>
+                    <NavLink key={index}to={path + item.id}>
+                      <li>
                         <img src={imgParam(item.coverImgUrl, 50, 50)} alt="" />
                         <p>{item.name}</p>
                         <p>{item.trackCount}</p>

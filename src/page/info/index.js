@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:07:55
- * @LastEditTime: 2020-06-05 17:44:27
+ * @LastEditTime: 2020-06-09 15:48:00
  * @LastEditors: refuse_c
  * @Description: 右侧框架
  */
@@ -21,7 +21,7 @@ class Info extends Component {
       <div className="info">
         {
           routes.map((route, key) => {
-            return <Route key={route.path + key} path={route.path}
+            return <Route key={key} path={route.path}
               render={props => (
                 <route.component {...props} routes={route.routes} />
               )}

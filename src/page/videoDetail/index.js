@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 17:42:03
+ * @LastEditTime: 2020-06-09 16:30:04
  * @Description:视频详情(核心)
  */
 import React, { Component } from 'react';
@@ -93,7 +93,6 @@ class Video extends Component {
         mvid: id
       }
     }).then(res => {
-      console.log(res)
       const videoGroup = res.mvs;
       this.setState({ videoGroup });
     }).catch(err => {

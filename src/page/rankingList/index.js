@@ -2,7 +2,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-08 16:48:44
+ * @LastEditTime: 2020-06-09 16:29:06
  * @LastEditors: refuse_c
  * @Description:排行榜
  */
@@ -159,7 +159,6 @@ class RankingList extends Component {
   };
   render() {
     const { officialList, globalList } = this.state;
-    console.log(officialList, globalList)
     const path = '/home/single';
     return (
       <div className="ranking_ist">

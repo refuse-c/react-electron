@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-06-03 16:36:17
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 16:49:58
+ * @LastEditTime: 2020-06-09 16:27:19
  * @Description:独家放送展示组件
  */
 import React, { Component } from 'react';
@@ -26,7 +26,6 @@ class Exclusive extends Component {
   }
   render() {
     const { data } = this.props;
-    console.log(data)
     return (
       <div className="exclusive-list">
         <ul>

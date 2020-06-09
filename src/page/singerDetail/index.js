@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-06-05 17:54:41
- * @LastEditors: RA
- * @LastEditTime: 2020-06-08 21:36:12
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-09 16:29:25
  * @Description:歌手详情页
  */
 import React, { Component } from 'react';
@@ -20,8 +20,12 @@ class SingerDetails extends Component {
       artistsInfo: {},
       artistsNav: [
         {
-          ti: '专辑',
+          ti: 'Top50',
           path: `/`,
+        },
+        {
+          ti: '专辑',
+          path: `/album`,
         },
         {
           ti: 'MV',
@@ -43,54 +47,59 @@ class SingerDetails extends Component {
     this.setState({ id });
     this.requestGroup(id);
   };
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   const { id } = nextProps.match.params;
+  //   if (id !== prevState.id) {
+  //     return {
+  //       id,
+  //       props: {
+  //         id: id,
+  //       },
+  //     };
+  //   }
+  //   return null;
+  // }
+  // componentDidUpdate(prevState) {
+  //   const { id } = prevState.match.params;
+  //   console.log(id, this.props.match.params.id)
+  //   if (this.props.match.params.id !== id) {
+  //     this.requestGroup(id);
+  //   }
+  // }
   componentWillReceiveProps = () => {
     const id = obtainId(window.location.href, 'singerdetail');
     this.setState({ id });
-    this.setState({ id, artistsInfo: {} });
     this.requestGroup(id);
-  };
-  componentDidUpdate=(prevState)=>{
-    console.log(prevState)
-
   }
   requestGroup = async (id) => {
     let a = await this.getArtistAlbum(id);
     let b = await this.getArtistMv(id);
-    let artistsInfo = {};
-    artistsInfo = a.artist;
-    artistsInfo.mvLength = isEmpty(b.mvs) ? 0 : b.mvs.length;
-    this.setState({ artistsInfo });
+    a.mvLength = isEmpty(b) ? 0 : b.mvs.length;
+    this.setState({ artistsInfo: a });
   };
   getArtistAlbum = async (id) => {
     let data = {};
     await RAGet(artistAlbum.api_url, {
-      params: {
-        id: id,
-        limit: 50,
-      },
-    })
-      .then((res) => {
-        data = res;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      params: { id: id }
+    }).then((res) => {
+      const info = res.artist;
+      info.mvLength = '';
+      data = info;
+    }).catch((err) => {
+      console.log(err);
+    });
     return data;
   };
   getArtistMv = async (id) => {
     let data = {};
     await RAGet(artistMv.api_url, {
-      params: {
-        id: id,
-        limit: 50,
-      },
-    })
-      .then((res) => {
-        data = res;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      params: { id: id }
+    }).then((res) => {
+      data = res;
+    }).catch((err) => {
+      data = '';
+      console.log(err);
+    });
     return data;
   };
   componentWillUnmount() {

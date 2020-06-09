@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-08 13:51:46
+ * @LastEditTime: 2020-06-09 16:29:44
  * @Description:歌单详情
  */
 import React, { Component } from 'react';
@@ -68,24 +68,21 @@ class List extends Component {
       params: {
         id: id,
       },
-    })
-      .then((res) => {
-        // console.log(res)
-        const playList = res.playlist;
-        const tracks = res.playlist.tracks;
-        const privileges = res.privileges;
-        const data = aa(tracks, privileges);
-        const nickname =
-          (this.props.userInfo.profile &&
-            this.props.userInfo.profile.nickname) ||
-          '';
-        const muscicList = dataScreening(data);
-        playList.name = playList.name.replace(nickname, '我');
-        this.setState({ playList, muscicList });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      const playList = res.playlist;
+      const tracks = res.playlist.tracks;
+      const privileges = res.privileges;
+      const data = aa(tracks, privileges);
+      const nickname =
+        (this.props.userInfo.profile &&
+          this.props.userInfo.profile.nickname) ||
+        '';
+      const muscicList = dataScreening(data);
+      playList.name = playList.name.replace(nickname, '我');
+      this.setState({ playList, muscicList });
+    }).catch((err) => {
+      console.log(err);
+    });
   };
   render() {
     const { playList, muscicList } = this.state;
@@ -107,7 +104,7 @@ class List extends Component {
           minScrollSize={5}
         >
           <div className="single_info">
-            <img src={imgParam(playList.coverImgUrl, 150, 150)} alt="" />
+            <img src={imgParam(playList.coverImgUrl, 200, 200)} alt="" />
             <div className="single_box">
               <div className="single_user">
                 <p>歌单</p>

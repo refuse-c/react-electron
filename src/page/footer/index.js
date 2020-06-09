@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-06-05 17:38:50
+ * @LastEditTime: 2020-06-09 16:28:29
  * @LastEditors: refuse_c
  * @Description:audio核心
  */
@@ -129,7 +129,6 @@ class Footer extends Component {
     })
       .then((res) => {
         const audio = this.audio;
-        // console.log('音乐地址是' + res.data[0].url)
         const url = res.data[0].url;
         this.setState({ url });
         if (isEmpty(url)) {

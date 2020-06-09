@@ -1,16 +1,17 @@
 /*
  * @Author: RA
  * @Date: 2020-06-07 01:14:11
- * @LastEditTime: 2020-06-08 20:30:25
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-09 13:46:58
+ * @LastEditors: refuse_c
  * @Description: 歌手详情->描述
  */
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown'
 import '../index.scss';
-import { obtainId } from '../../../common/utils/format';
+import { obtainId, isEmpty } from '../../../common/utils/format';
 import { RAGet } from '../../../api/netWork';
 import { artistDesc } from '../../../api/api';
+import Empty from '../../../components/empty';
 class singerDesc extends Component {
   constructor(props) {
     super(props);
@@ -35,8 +36,10 @@ class singerDesc extends Component {
         desc.forEach(ele => {
           text += `\n## ${ele.ti}\n +  ${ele.txt.replace(/\n/g, '\n + ')}`
         });
-      } else {
+      } else if (!isEmpty(res.briefDesc)) {
         text += `\n## 人物简介\n +  ${res.briefDesc}`
+      } else {
+        text = ''
       }
       this.setState({ artistDesc: text });
     }).catch((err) => {
@@ -53,10 +56,16 @@ class singerDesc extends Component {
     const { artistDesc } = this.state;
     return (
       <div className="singer_desc">
-        <ReactMarkdown
-          source={artistDesc}
-          escapeHtml={false}  //不进行HTML标签的转化
-        />
+        {
+          !isEmpty(artistDesc)
+            ? <ReactMarkdown
+              source={artistDesc}
+              escapeHtml={false}  //不进行HTML标签的转化
+            />
+            : <Empty />
+        }
+
+
       </div>
     );
   }

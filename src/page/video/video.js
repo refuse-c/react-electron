@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-05-29 16:21:35
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 17:41:40
+ * @LastEditTime: 2020-06-09 16:29:52
  * @Description:视频->VIDEO
  */
 import React, { Component } from 'react';
@@ -24,10 +24,8 @@ class ComponentVideo extends Component {
   getVideoGroupList = () => {
     RAGet(videoGroupList.api_url)
       .then(res => {
-        // console.log(res)
         const videoGroupList = res.data
         this.setState({ videoGroupList })
-        // console.log(videoGroupList)
       }).catch(err => {
         console.log(err)
       })
@@ -38,7 +36,6 @@ class ComponentVideo extends Component {
         id: id
       }
     }).then(res => {
-      // console.log(res)
     }).catch(err => {
       console.log(err)
     })

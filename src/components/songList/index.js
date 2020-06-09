@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 17:48:50
+ * @LastEditTime: 2020-06-09 16:27:32
  * @Description:检索->歌单组件
  */
 import React, { Component } from 'react';
@@ -24,8 +24,6 @@ class SongList extends Component {
   }
   render() {
     const { data } = this.props;
-    console.log(data)
-    // const path = '/home/single';
     return (
       <div className="song_list">
         <ul>

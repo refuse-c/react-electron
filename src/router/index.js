@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-06-08 12:15:51
+ * @LastEditTime: 2020-06-09 09:47:07
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -31,6 +31,7 @@ import FindList from '../page/findList';
 import HostRadio from '../page/hostRadio';
 import DailySpecial from '../page/dailySpecial';
 import singerDetail from '../page/singerDetail';
+import singerTopSong from '../page/singerDetail/component/topSong';
 import singerAlbum from '../page/singerDetail/component/album';
 import singerMv from '../page/singerDetail/component/mv';
 import singerDesc from '../page/singerDetail/component/desc';
@@ -121,11 +122,16 @@ let routes = [
             component: AlbumList,
           },
           {
+
             path: '/home/singerdetail:id/',
             component: singerDetail,
             routes: [
               {
                 path: '/home/singerdetail:id/',
+                component: singerTopSong,
+              },
+              {
+                path: '/home/singerdetail:id/album',
                 component: singerAlbum,
               },
               {

@@ -10,20 +10,20 @@
     &::before {
       position: absolute;
       top: 20px;
-      left: 165px;
+      left: 215px;
       content: '';
-      width: 20px;
-      height: 150px;
+      width: 30px;
+      height: 200px;
       background: url('../../common/images/ayy.png') center center / cover no-repeat;
     }
 
     img {
-      width: 150px;
-      height: 150px;
-      min-width: 150px;
-      min-height: 150px;
+      width: 200px;
+      height: 200px;
+      min-width: 200px;
+      min-height: 200px;
       border-radius: 1px;
-      border: 1px solid #e5e5e5;
+      // border: 1px solid #e5e5e5;
       border-radius: 4px;
       // 黑白色
       // -webkit-filter: grayscale(1); /* Webkit */
@@ -34,7 +34,7 @@
     .album_list_box {
       display: flex;
       flex-direction: column;
-      padding-left: 40px;
+      padding-left: 60px;
 
       .album_list_user {
         display: flex;

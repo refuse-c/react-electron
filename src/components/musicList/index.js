@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-22 12:07:13
- * @LastEditTime: 2020-06-05 11:37:16
+ * @LastEditTime: 2020-06-09 14:41:51
  * @LastEditors: refuse_c
  * @Description:音乐列表展示组件
  */
@@ -54,9 +54,13 @@ class MusicList extends Component {
       this.props.setIndex(flag);
       flag = null;
     } else {
-      array.unshift(item);
-      // this.props.setIndex(0);
+      const { index } = this.props;
+      const length = array.length;
+      length === index
+        ? array.push(item) && this.props.setIndex(index)
+        : array.splice(index + 1, 0, item) && this.props.setIndex(index + 1)
       this.props.gainPlayList(array);
+
     }
     this.props.setIsPlay(true);
     this.props.gainMusicId(item.id);
@@ -132,6 +136,7 @@ class MusicList extends Component {
 const mapStateToProps = (state) => {
   return {
     musicList: state.musicList,
+    index: state.index,
     playList: state.playList,
     musicId: state.musicId,
     toolStatus: state.toolStatus,

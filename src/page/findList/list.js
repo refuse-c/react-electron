@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-05-25 13:46:36
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 17:38:38
+ * @LastEditTime: 2020-06-09 16:28:05
  * @Description:发现->歌单->歌单tag
  */
 import React, { Component } from 'react';
@@ -27,7 +27,6 @@ class List extends Component {
     e.stopPropagation();
   };
   chooseItem = (text) => {
-    console.log(text);
     this.props.setShowPopStatus('');
     this.props.setSonglstText(text);
   };

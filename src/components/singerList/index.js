@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-01 22:18:42
- * @LastEditTime: 2020-06-08 19:59:05
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-09 09:05:25
+ * @LastEditors: refuse_c
  * @Description: 检索页歌手组件
  */
 import React, { Component } from 'react';
@@ -30,7 +30,9 @@ class Singer extends Component {
               return (
                 <NavLink to={`/home/singerdetail${item.id}`} key={index}>
                   <li>
-                    <img src={imgParam(item.img1v1Url, 120, 120)} alt="" />
+                    <div>
+                      <img src={imgParam(item.img1v1Url, 150, 150)} alt="" />
+                    </div>
                     <p>{item.name}</p>
                   </li>
                 </NavLink>
@@ -38,8 +40,8 @@ class Singer extends Component {
             })}
           </ul>
         ) : (
-          <Empty />
-        )}
+            <Empty />
+          )}
       </div>
     );
   }

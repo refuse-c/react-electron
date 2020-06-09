@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-06-08 19:37:47
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-09 16:47:56
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React from 'react';
@@ -44,8 +44,8 @@ function App() {
             );
           }
         })}
-        {/* <Redirect to="/home/singerdetail6452/simi" /> */}
-        <Redirect to="/home/find/findSinger" />
+        <Redirect to="/home/find/" />
+        {/* <Redirect to="/home/find/findSinger" /> */}
         {/* <Redirect to="/home/find/rankingList" /> */}
         {/* <Redirect to="/home/albumList4546" /> */}
         {/* <Redirect to="/videoDetail5331966" /> */}

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-20 12:19:27
- * @LastEditTime: 2020-06-05 09:29:11
+ * @LastEditTime: 2020-06-09 13:41:50
  * @LastEditors: refuse_c
  * @Description: 空数据组件
  */
@@ -16,7 +16,7 @@ class empty extends Component {
     return (
       <div className="empty">
         <img src={require('../../common/images/empty.png')} alt="" />
-        <p>哎呀,您检索的内容被外星人拦截了···</p>
+        <p>哎呀,你查看内容被外星人拦截了···</p>
       </div>
     );
   }

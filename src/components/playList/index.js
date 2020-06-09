@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-08 19:19:33
- * @LastEditTime: 2020-06-05 17:23:52
+ * @LastEditTime: 2020-06-09 16:26:49
  * @LastEditors: refuse_c
  * @Description:当前播放音乐组件
  */
@@ -29,11 +29,7 @@ class PlayList extends Component {
       this.content.scrollArea.scrollYTo(index * 24);
     }, 10);
   };
-  // componentWillReceiveProps = (nextProps) => {
-  //   console.log(nextProps)
-  // }
   static getDerivedStateFromProps(nextProps, prevState) {
-    // console.log(nextProps, prevState)
     const { index } = nextProps;
     if (index !== prevState.index) {
       return {
@@ -66,7 +62,6 @@ class PlayList extends Component {
   };
   render() {
     const { playList, musicId, index } = this.props;
-    // console.log(playList)
     const length = playList.length;
     return (
       <div className="play-list" onClick={this.stopBubbling}>

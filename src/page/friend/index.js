@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 11:35:41
+ * @LastEditTime: 2020-06-09 16:28:21
  * @Description:朋友
  */
 import React, { Component } from 'react';
@@ -25,17 +25,14 @@ class Frind extends Component {
         id: '1374329431',
         br: 128000, //码率, 默认设置了 999000 即最大码率, 如果要 320k 则可设置为 320000, 其他类推
       },
-    })
-      .then((res) => {
-        const url = res.data[0].url;
-        console.log(url)
-        if (!isEmpty(url)) {
-          ipc.send('down', url);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      const url = res.data[0].url;
+      if (!isEmpty(url)) {
+        ipc.send('down', url);
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
   };
   render() {
     return (

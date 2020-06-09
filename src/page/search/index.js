@@ -141,7 +141,6 @@ class Search extends Component {
         val = inputVal;
       }
       const { menuIndex } = this.props;
-      // console.log(index)
       this.props.setPageNum(1);
       this.getSearch(val, menuIndex, 1);
     }
