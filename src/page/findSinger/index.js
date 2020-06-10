@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-08 19:25:35
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-10 14:04:01
+ * @LastEditors: refuse_c
  * @Description: 歌手列表
  */
 import React, { Component } from 'react';
@@ -90,12 +90,24 @@ class FindSinger extends Component {
       },
     })
       .then((res) => {
+
         let obj = {};
         const { artistsList } = this.state;
         if (artistsList.list) {
           obj.list = artistsList.list.concat(res.artists);
         } else {
-          obj.list = res.artists;
+          if (cat === '-1' && type === '-1' && area === '-1') {
+            let artistTopItem = {
+              name: '歌手排行榜',
+              type: 'artistList',
+              path: '/home/find/artistTop',
+              picUrl: require('../../common/images/artist-top.jpg')
+            }
+            obj.list = res.artists;
+            obj.list.unshift(artistTopItem)
+          } else {
+            obj.list = res.artists;
+          }
         }
         obj.more = res.more;
         this.setState({ artistsList: obj });
@@ -122,6 +134,9 @@ class FindSinger extends Component {
   handleSingerDetail = (item) => {
     this.props.history.push({ pathname: `/home/singerdetail${item.id}` });
   };
+  gotoArtist = (item) => {
+    this.props.history.push({ pathname: `/home/find/artistTop` })
+  }
   render() {
     const {
       singerCat,
@@ -188,7 +203,10 @@ class FindSinger extends Component {
               list.list.map((item, index) => {
                 return (
                   <li
-                    onClick={this.handleSingerDetail.bind(this, item)}
+                    onClick={item.type !== 'artistList'
+                      ? this.handleSingerDetail.bind(this, item)
+                      : this.gotoArtist.bind(this, item)
+                    }
                     key={index}
                   >
                     <div>
@@ -200,16 +218,18 @@ class FindSinger extends Component {
               })}
           </ul>
         </div>
-        {list.more === true ? (
-          <span className="load_more" onClick={this.handleMore}>
-            点我加载更多喔,不信你试试 ꒰⑅•ᴗ•⑅꒱
-          </span>
-        ) : list.more === false ? (
-          <span className="load_more" onClick={this.handleMore}>
-            没有更多的啦,不要划了(＞﹏＜)
-          </span>
-        ) : null}
-      </div>
+        {
+          list.more === true ? (
+            <span className="load_more" onClick={this.handleMore}>
+              点我加载更多喔,不信你试试 ꒰⑅•ᴗ•⑅꒱
+            </span>
+          ) : list.more === false ? (
+            <span className="load_more" onClick={this.handleMore}>
+              没有更多的啦,不要划了(＞﹏＜)
+            </span>
+          ) : null
+        }
+      </div >
     );
   }
 }

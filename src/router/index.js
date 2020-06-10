@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-06-09 09:47:07
+ * @LastEditTime: 2020-06-10 09:58:06
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -19,6 +19,7 @@ import SingleDetail from '../page/singleDetail';
 import AlbumList from '../page/albumDetail';
 import VideoDetail from '../page/videoDetail';
 import Recommendation from '../page/recommendation';
+import ArtistTop from '../page/artistTop';
 import RankingList from '../page/rankingList';
 import FindSinger from '../page/findSinger';
 import NewMusic from '../page/newMusic';
@@ -77,6 +78,10 @@ let routes = [
                 path: '/home/find/newMusic',
                 component: NewMusic,
               },
+              {
+                path: '/home/find/artistTop',
+                component: ArtistTop,
+              }
             ],
           },
           {

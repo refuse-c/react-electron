@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-06-08 19:51:47
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-10 17:12:31
+ * @LastEditors: refuse_c
  * @Description:
  */
 
@@ -616,6 +616,7 @@ export const foramtLrc = (array) => {
   });
   return lrcArr;
 };
+
 /**
  * @param {type}
  * @return:

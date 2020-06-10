@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 16:31:03
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 11:39:14
+ * @LastEditTime: 2020-06-10 17:30:21
  * @Description:播放页
  */
 import React, { Component } from 'react';
@@ -53,6 +53,7 @@ class Player extends Component {
   componentDidUpdate(prevState) {
     // 当前音乐更新了
     if (prevState.musicId !== this.state.musicId) {
+      console.log(11111111)
       const { musicId } = this.state;
       this.getLyric(musicId);
       this.getMusicDetail(musicId);
@@ -84,23 +85,13 @@ class Player extends Component {
       params: {
         id: id,
       },
-    })
-      .then((res) => {
-        if (res.nolyric || res.uncollected) {
-          const lyric = foramtLrc(null);
-          this.setState({ lyric });
-          return false;
-        }
-        const lrc = res.lrc.lyric;
-        // const tlyric = res.tlyric.lyric;
-        // console.log(foramtLrc(lrc))
-        // console.log(foramtLrc(tlyric))
-        const lyric = foramtLrc(lrc);
-        this.setState({ lyric });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      let lyric = res.lrc.lyric ? res.lrc.lyric : res.tlyric.lyric ? res.tlyric.lyric : null
+      lyric = foramtLrc(lyric)
+      this.setState({ lyric });
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   componentWillUnmount = () => {

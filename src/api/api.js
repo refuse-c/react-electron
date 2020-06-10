@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-06-07 00:23:45
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-10 14:09:20
+ * @LastEditors: refuse_c
  * @Description:
  */
 //获取歌单
@@ -186,3 +186,7 @@ export const simiArtist = {
 export const artistTopSong = {
   api_url: '/artist/top/song',
 };
+//新歌速递
+export const topSong = {
+  api_url: '/top/song'
+}

@@ -2,7 +2,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-09 16:29:06
+ * @LastEditTime: 2020-06-10 11:31:33
  * @LastEditors: refuse_c
  * @Description:排行榜
  */
@@ -52,7 +52,6 @@ class RankingList extends Component {
       allData: [],
     };
   }
-
   componentDidMount = () => {
     this.getAllTopList();
     this.testResult();
@@ -65,7 +64,7 @@ class RankingList extends Component {
     let e = await this.getToplistDetail();
     let f = await this.getToplistArtist();
     e.list = f;
-    e.path = '/home/find/findSinger';
+    e.path = '/home/find/artistTop';
     e.type = 'singer';
     const officialList = [a, b, c, d, e];
     setLocal('officialList', officialList);
@@ -78,24 +77,21 @@ class RankingList extends Component {
       params: {
         idx: id,
       },
-    })
-      .then((res) => {
-        const tracks = res.playlist.tracks;
-        // const privileges = res.privileges;
-        data.name = res.playlist.name;
-        data.updateTime = res.playlist.updateTime;
-        // data.list = aa(tracks, privileges);
-        data.list = tracks;
-        data.id = res.playlist.id;
-        data.path = '/home/single' + res.playlist.id;
-        data.coverImgUrl = res.playlist.coverImgUrl;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      const tracks = res.playlist.tracks;
+      // const privileges = res.privileges;
+      data.name = res.playlist.name;
+      data.updateTime = res.playlist.updateTime;
+      // data.list = aa(tracks, privileges);
+      data.list = tracks;
+      data.id = res.playlist.id;
+      data.path = '/home/single' + res.playlist.id;
+      data.coverImgUrl = res.playlist.coverImgUrl;
+    }).catch((err) => {
+      console.log(err);
+    });
     return data;
   };
-
   //所有榜单
   getAllTopList = () => {
     const { filterArr } = this.state;
@@ -136,7 +132,6 @@ class RankingList extends Component {
       });
     return data;
   };
-
   addMusic = (item) => {
     let flag = null;
     const array = getLocal('playList');
@@ -157,6 +152,9 @@ class RankingList extends Component {
     this.props.setIsPlay(true);
     this.props.gainMusicId(item.id);
   };
+  gotoArtist = (item) => {
+    this.props.history.push({ pathname: `/home/singerdetail${item.id}` })
+  }
   render() {
     const { officialList, globalList } = this.state;
     const path = '/home/single';
@@ -196,9 +194,7 @@ class RankingList extends Component {
                         return (
                           <li
                             key={index}
-                            onClick={
-                              item.ar ? this.addMusic.bind(this, item) : null
-                            }
+                            onClick={item.ar ? this.addMusic.bind(this, item) : this.gotoArtist.bind(this, item)}
                           >
                             <p>{num}</p>
                             <p>{item.name}</p>
