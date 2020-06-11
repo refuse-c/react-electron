@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-06-07 21:01:51
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-11 16:02:49
+ * @LastEditors: refuse_c
  * @Description:
  */
 // 引入electron并创建一个Browserwindow
@@ -26,7 +26,7 @@ function createWindow() {
   //创建浏览器窗口,宽高自定义具体大小你开心就好
   mainWindow = new BrowserWindow({
     width: 1000,
-    height: 600,
+    height: 630,
     useContentSize: true,
     frame: false,
     webPreferences: {

@@ -59,7 +59,69 @@
     border-radius: 4px;
     background: url('../../common/images/icon_arrow_b.png') right 5px center / 12px 12px no-repeat;
   }
+
+  .all_list {
+    position: absolute;
+    top: 60px;
+    left: 4px;
+    width: 540px;
+    height: 400px;
+    z-index: 3;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ccc;
+    background-color: rgba($color: #000000, $alpha: 0.8);
+
+    .area {
+     height: calc(100% - 10px);
+    }
+
+    &::before {
+      position: absolute;
+      content: '';
+      top: -10px;
+      left: 12px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid rgba($color: #000000, $alpha: 0.8);
+    }
+
+    .lists {
+      display: flex;
+      padding: 20px 10px 0;
+      flex-direction: column;
+
+      & p:first-child {
+        width: 100%;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        margin: 5px;
+        border-radius: 2px;
+        font-size: 13px;
+        background-color: rgba($color: #fff, $alpha: 0.2);
+      }
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        li {
+          width: 80px;
+          text-align: center;
+          height: 30px;
+          line-height: 30px;
+          margin: 5px;
+          border-radius: 2px;
+          font-size: 13px;
+          background-color: rgba($color: #fff, $alpha: 0.2);
+        }
+      }
+    }
+
+  }
 }
+
 
 .components_mv {
   .contents {

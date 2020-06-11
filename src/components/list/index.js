@@ -2,8 +2,8 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-09 13:47:55
- * @Description:
+ * @LastEditTime: 2020-06-11 18:00:24
+ * @Description: 歌单列表
  */
 import React, { Component } from 'react';
 import './index.scss';
@@ -12,7 +12,7 @@ import Empty from '../../components/empty';
 
 //store
 import { connect } from 'react-redux';
-import { imgParam, isArrays } from '../../common/utils/format';
+import { imgParam, isArrays, formatPlaycount } from '../../common/utils/format';
 // import { bindActionCreators } from 'redux';
 // import { setPageNum, gainSearchInfo, setMenuIndex } from '../../store/actions';
 
@@ -22,22 +22,33 @@ class List extends Component {
     this.state = {}
   }
   render() {
-    const { data } = this.props;
+    const { data, type } = this.props;
     return (
       <div className="list">
         {
           isArrays(data) ?
-            <ul>
+            <ul className={type ? 'vertical' : 'across'}>
               {
                 data && data.map((item, index) => {
                   const path = '/home/single';
                   return (
-                    <NavLink key={index}to={path + item.id}>
+                    <NavLink key={index} to={path + item.id}>
                       <li>
-                        <img src={imgParam(item.coverImgUrl, 50, 50)} alt="" />
-                        <p>{item.name}</p>
-                        <p>{item.trackCount}</p>
-                        <p>by {item.creator.nickname}</p>
+                        <div>
+                          {
+                            type
+                              ? <p className="playCount">{formatPlaycount(item.playCount)}</p>
+                              : ''
+                          }
+                          <img src={imgParam(item.coverImgUrl, 200, 200)} alt="" />
+                        </div>
+                        <p className="name">{item.name}</p>
+                        {
+                          type
+                            ? ''
+                            : <p className="trackCount">{item.trackCount}</p>
+                        }
+                        <p className="nickname">by {item.creator.nickname}</p>
                       </li>
                     </NavLink>
                   )

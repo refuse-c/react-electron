@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-06-10 09:50:41
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-10 11:25:23
+ * @LastEditTime: 2020-06-11 14:19:56
  * @Description:发现 ->歌手排行榜
  */
 import React, { Component } from 'react';
@@ -51,6 +51,12 @@ class ArtistTop extends Component {
     this.setState({ artistList })
     this.geTtoplistArtist(index + 1);
     this.setState({ areaStatus: index + 1 })
+  }
+
+  componentWillUnmount = () => {
+    this.setState = (state, callback) => {
+      return;
+    };
   }
   render() {
     const { areaNav, areaStatus, artistList } = this.state;

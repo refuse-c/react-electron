@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-06-05 11:40:31
+ * @LastEditTime: 2020-06-11 09:26:02
  * @LastEditors: refuse_c
  * @Description: 视频页
  */
@@ -9,7 +9,6 @@ import React, { Component } from 'react';
 import './index.scss';
 
 import { Route, NavLink } from 'react-router-dom';
-// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 class Videos extends Component {
   constructor(props) {

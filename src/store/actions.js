@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:28
- * @LastEditTime: 2020-06-01 20:05:25
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-11 16:00:32
+ * @LastEditors: refuse_c
  * @Description:
  */
 import * as ACTIONSTYPES from './actionTypes';
@@ -122,6 +122,13 @@ export const setSonglstText = (data) => {
 export const setToolsStatus = (data) => {
   return {
     type: ACTIONSTYPES.TOOLS,
+    data,
+  };
+};
+// 视频类型
+export const setVideoText = (data) => {
+  return {
+    type: ACTIONSTYPES.VIDEO_TEXT,
     data,
   };
 };

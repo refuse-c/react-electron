@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-06-10 14:09:20
+ * @LastEditTime: 2020-06-11 09:29:08
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -79,9 +79,17 @@ export const albumList = {
   api_url: '/album',
 };
 //视频标签列表
+export const videoCategory = {
+  api_url: '/video/category/list'
+}
+//视频分类列表
 export const videoGroupList = {
   api_url: '/video/group/list',
 };
+//全部视频
+export const videoAll = {
+  api_url: '/video/timeline/all'
+}
 //单个标签数据
 export const videoGroup = {
   api_url: '/video/group',

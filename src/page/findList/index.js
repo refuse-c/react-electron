@@ -1,20 +1,21 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-05 17:37:56
+ * @LastEditTime: 2020-06-11 18:07:17
  * @LastEditors: refuse_c
  * @Description:发现->歌单
  */
 import React, { Component } from 'react';
 import './index.scss';
 
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import { RAGet } from '../../api/netWork';
 import { playlistCatlist, playlistHot, topPlaylist } from '../../api/api';
 import Pagination from '../../components/pagination';
 import List from './list';
+import Lists from '../../components/list/';
 // import SongList from '../songList';
-import { formatArr, imgParam, isEmpty, formatTotal } from '../../common/utils/format';
+import { formatArr, isEmpty, formatTotal } from '../../common/utils/format';
 
 // store
 import { connect } from 'react-redux';
@@ -111,21 +112,20 @@ class FindList extends Component {
     const { songListText, hotListData, allListData, songListdata, total } = this.state;
     return (
       <div className="findList">
-        {
-          // <SongList data={songListdata} />
-        }
         <h3 className="song_list_text" onClick={this.showPlop}>
           {songListText}
         </h3>
-        <div className="hot_tags">
+        <div className="tags">
           热门标签：
           <ul>
             {hotListData.length > 0 &&
               hotListData.map((item, index) => {
+                let active = item.name === songListText ? 'active' : '';
                 return (
                   <li
                     onClick={this.chooseItem.bind(this, item.playlistTag.name)}
                     key={index}
+                    className={active}
                   >
                     {item.playlistTag.name}
                   </li>
@@ -138,7 +138,10 @@ class FindList extends Component {
         ) : null}
 
         <div className="recommend-list">
-          <ul>
+          {
+            <Lists data={songListdata} type={true} />
+          }
+          {/* <ul>
             {
               songListdata.length > 0 &&
               songListdata.map((item, index) => {
@@ -168,7 +171,7 @@ class FindList extends Component {
                   );
               })
             }
-          </ul>
+          </ul> */}
         </div>
         {
           !isEmpty(total) && total > 0

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-06-10 17:12:31
+ * @LastEditTime: 2020-06-11 11:20:16
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -498,6 +498,22 @@ export const aa = (arr1, arr2) => {
   return arr1;
 };
 
+
+export const formatVideoData = (array) => {
+  let newArray = []
+  if (!isArrays(array)) return false;
+  array.map((item, index) => {
+    let obj = {}
+    obj = item.data;
+    obj.alg = item.alg || '';
+    obj.displayed = item.displayed || '';
+    obj.extAlg = item.extAlg || '';
+    obj.type = item.type || '';
+    newArray.push(obj)
+    return index.id
+  })
+  return newArray;
+}
 /**
  * @param {type}
  * @return:

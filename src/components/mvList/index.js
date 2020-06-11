@@ -2,14 +2,14 @@
  * @Author: REFUSE_C
  * @Date: 2020-06-03 09:52:21
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 17:47:38
+ * @LastEditTime: 2020-06-11 15:02:24
  * @Description:视频->NV->list
  */
 import React, { Component } from 'react';
 import './index.scss';
 
 import { NavLink } from 'react-router-dom';
-import { imgParam, formatPlaycount } from '../../common/utils/format';
+import { imgParam, formatPlaycount, isEmpty } from '../../common/utils/format';
 class MvList extends Component {
   constructor(props) {
     super(props);
@@ -25,15 +25,19 @@ class MvList extends Component {
               return (
                 <NavLink
                   key={index}
-                  to={path + item.id}
+                  to={path + (item.id || item.vid)}
                 >
                   <li>
-                    <span>{formatPlaycount(item.playCount)}</span>
-                    <img src={imgParam(item.cover || item.picUrl, 240, 140)} alt="" />
                     <div>
-                      <p className="overflow">{item.name}</p>
-                      <p className="overflow">by {item.artistName}</p>
+                      <span>{formatPlaycount(item.playCount || item.praisedCount)}</span>
+                      <img src={imgParam(item.cover || item.coverUrl || item.picUrl, 240, 134)} alt="" />
                     </div>
+                    <p className="overflow mv_ti">{item.name || item.title}</p>
+                    {
+                      !isEmpty(item.artistName)
+                        ? <p className="overflow mv_by">by {item.artistName}</p>
+                        : ''
+                    }
                   </li>
                 </NavLink>
               )
@@ -44,5 +48,4 @@ class MvList extends Component {
     );
   }
 }
-
 export default MvList;

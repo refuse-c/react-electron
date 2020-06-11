@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:14:35
- * @LastEditTime: 2020-06-01 20:05:35
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-11 15:59:54
+ * @LastEditors: refuse_c
  * @Description: 
  */
 export const MUSIC_LIST = 'MUSIC_LIST';//音乐列表
@@ -22,3 +22,5 @@ export const Page_TOTAL = 'Page_TOTAL';//分页总数
 export const CURRENT_TIME = 'CURRENT_TIME';//分页总数
 export const SONG_LIST_TEXT = 'SONG_LIST_TEXT';//歌单字段
 export const TOOLS = 'TOOLS';//歌单字段
+export const VIDEO_TEXT = 'VIDEO_TEXT';//歌单字段
+

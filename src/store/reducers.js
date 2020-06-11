@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-27 11:11:08
- * @LastEditTime: 2020-06-05 10:16:45
+ * @LastEditTime: 2020-06-11 15:59:39
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -28,6 +28,7 @@ const defaultState = {
   pageNum: 1,
   total: 0,
   songListText: '全部歌单',
+  videoText: '全部视频',
   toolStatus: false,
   menuList: [
     { name: 'EMusic' },
@@ -177,6 +178,14 @@ const songListText = (state = defaultState.songListText, action) => {
       return state;
   }
 };
+const videoText = (state = defaultState.videoText, action) => {
+  switch (action.type) {
+    case ACTIONTYPES.VIDEO_TEXT:
+      return action.data;
+    default:
+      return state;
+  }
+};
 const toolStatus = (state = defaultState.toolStatus, action) => {
   switch (action.type) {
     case ACTIONTYPES.TOOLS:
@@ -204,4 +213,5 @@ export default combineReducers({
   currentTime,
   songListText,
   toolStatus,
+  videoText
 });

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-05 11:23:56
+ * @LastEditTime: 2020-06-11 14:21:37
  * @LastEditors: refuse_c
  * @Description: 个性推荐
  */
@@ -129,6 +129,11 @@ class Recommendation extends Component {
         this.props.history.push({ pathname: '/home/video/mv' });
         break;
     }
+  }
+  componentWillUnmount = () => {
+    this.setState = (state, callback) => {
+      return;
+    };
   }
   render() {
     const { bannersData, recommendListData, privatecontentData, topSongsData, personalizedMvData } = this.state;
