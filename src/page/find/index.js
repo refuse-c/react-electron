@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-06-09 16:27:49
+ * @LastEditTime: 2020-06-12 10:36:17
  * @LastEditors: refuse_c
  * @Description: 发现音乐
  */
@@ -23,10 +23,10 @@ class Find extends Component {
           name: '歌单',
           path: '/home/find/findList'
         },
-        {
-          name: '主播电台',
-          path: '/home/find/hostRadio'
-        },
+        // {
+        //   name: '主播电台',
+        //   path: '/home/find/hostRadio'
+        // },
         {
           name: '排行榜',
           path: '/home/find/rankingList'

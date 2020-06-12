@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-06-10 09:58:06
+ * @LastEditTime: 2020-06-12 09:45:29
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -25,6 +25,7 @@ import FindSinger from '../page/findSinger';
 import NewMusic from '../page/newMusic';
 import IM from '../page/im';
 import Local from '../page/local';
+import AllMv from '../page/allMv';
 
 import Down from '../page/down';
 import Lately from '../page/lately';
@@ -97,6 +98,10 @@ let routes = [
                 component: Mv,
               },
             ],
+          },
+          {
+            path: '/home/allMv',
+            component: AllMv
           },
           {
             path: '/home/friend',
