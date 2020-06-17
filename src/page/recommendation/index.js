@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-11 14:21:37
+ * @LastEditTime: 2020-06-16 10:56:56
  * @LastEditors: refuse_c
  * @Description: 个性推荐
  */
@@ -10,9 +10,11 @@ import './index.scss';
 import { NavLink } from 'react-router-dom';
 import { recommendList, privatecontent, getBanner, topSongs, personalizedMv } from '../../api/api';
 import { RAGet } from '../../api/netWork';
-import { imgParam, getDate, dataScreening } from '../../common/utils/format';
+import { imgParam, getDate, dataScreening, getDevice } from '../../common/utils/format';
 import MvList from '../../components/mvList';
 import Exclusive from '../../components/exclusive';
+import Swiper from 'swiper';
+import './swiper.min.css';
 // store 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -21,7 +23,8 @@ class Recommendation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bannersData: {},
+      device: '',
+      bannerData: {},
       recommendListData: {},
       privatecontentData: {},
       topSongsData: {},
@@ -30,7 +33,9 @@ class Recommendation extends Component {
     }
   }
   componentDidMount = () => {
-    this.getBanner();
+    const device = getDevice().device.id;
+    this.setState({ device });
+    this.getBanner(device);
     this.getRecommendList();
     this.getPrivatecontentList();
     this.getTopSongs();
@@ -40,8 +45,9 @@ class Recommendation extends Component {
     RAGet(getBanner.api_url, {
       params: { type: 0 }
     }).then(res => {
-      const bannersData = res.banners;
-      this.setState({ bannersData })
+      const bannerData = res.banners;
+      this.setState({ bannerData })
+      this.runSwiper()
     }).catch(err => {
       console.log(err)
     })
@@ -104,7 +110,6 @@ class Recommendation extends Component {
     const array = JSON.parse(JSON.stringify(playList));
     array.forEach((element, index) => {
       if (element.id === item.id) {
-        // if (index === 0) return;
         array.splice(index, 1)
       }
     });
@@ -130,27 +135,48 @@ class Recommendation extends Component {
         break;
     }
   }
+  runSwiper = () => {
+    new Swiper('.swiper-container', {
+      direction: 'horizontal',//横向轮播
+      loop: true,//无缝轮播
+      effect: 'coverflow',
+      autoplay: {
+        delay: 3000,
+      },
+      pagination: {//小圆点分页
+        el: '.swiper-pagination',
+      }
+    })
+  }
   componentWillUnmount = () => {
     this.setState = (state, callback) => {
       return;
     };
   }
   render() {
-    const { bannersData, recommendListData, privatecontentData, topSongsData, personalizedMvData } = this.state;
+    const { device, bannerData, recommendListData, privatecontentData, topSongsData, personalizedMvData } = this.state;
+    console.log(bannerData)
     return (
       <div className="recommendation">
         <div className="recommend-banner">
-          <ul>
-            {
-              bannersData.length > 0 && bannersData.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <img src={imgParam(item.imageUrl, 700, 200)} alt="" />
-                  </li>
-                )
-              })
-            }
-          </ul>
+          <div className="swiper-container">
+            <div className="swiper-wrapper">
+              {
+                bannerData.length > 0 && bannerData.map((item, index) => {
+                  const imgUrl = Number(device) === 0 ? item.imageUrl : item.pic
+                  return (
+                    <div
+                      key={index}
+                      style={{ backgroundImage: 'url(' + imgUrl + ')' }}
+                      className="swiper-slide">
+                      <span style={{ backgroundColor: item.titleColor }}>{item.typeTitle}</span>
+                    </div>
+                  )
+                })
+              }
+            </div>
+            <div className="swiper-pagination"></div>
+          </div>
         </div>
         <div className="headline">
           <p className="headline_title">推荐歌单</p>
