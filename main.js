@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:59:57
- * @LastEditTime: 2020-06-16 09:08:53
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-20 18:52:47
+ * @LastEditors: RA
  * @Description:
  */
 // 引入electron并创建一个Browserwindow
@@ -14,7 +14,8 @@ const {
   globalShortcut,
   ipcMain,
 } = require('electron');
-// const path = require('path');
+const path = require('path')
+const url = require('url')
 //打开目录地址
 // const path1 = 'd:';
 // shell.openItem(path1);
@@ -39,16 +40,14 @@ function createWindow() {
   app.on('window-all-closed', () => {
     app.quit();
   });
-  /** 加载应用-----  electron-quick-start中默认的加载入口
     mainWindow.loadURL(url.format({
       pathname: path.join(__dirname, './build/index.html'),
       protocol: 'file:',
       slashes: true
     }))
-  */
   // 加载应用----适用于 react 项目
-  mainWindow.setIcon('./src/common/images/logo.png');
-  mainWindow.loadURL('http://localhost:3000/');
+  // mainWindow.setIcon('./build/static/media/logo.png');
+  // mainWindow.loadURL('http://localhost:3000/');
   // mainWindow.loadFile('./build/index.html')
   mainWindow.setMinimumSize(1000, 600);
   // 关闭window时触发下列事件.

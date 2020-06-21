@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-06-01 11:13:01
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 17:47:21
+ * @LastEditors: RA
+ * @LastEditTime: 2020-06-20 16:04:02
  * @Description:音乐列表->右击tools
  */
 import React, { Component } from 'react';
@@ -23,7 +23,7 @@ import {
 import { isEmpty, getLocal } from '../../common/utils/format';
 import { RAGet } from '../../api/netWork';
 import { getMusicUrl } from '../../api/api';
-const { ipcRenderer: ipc } = window.require('electron');
+// const { ipcRenderer: ipc } = window.require('electron');
 
 class Tools extends Component {
   constructor(props) {
@@ -32,10 +32,10 @@ class Tools extends Component {
   }
   componentDidMount = () => {
     //接收消息并展示到页面上
-    ipc.on('reply', (event, arg) => {
-      message.destroy();
-      arg.indexOf('.成功') !== -1 ? message.error(arg) : message.info(arg);
-    });
+    // ipc.on('reply', (event, arg) => {
+    //   message.destroy();
+    //   arg.indexOf('.成功') !== -1 ? message.error(arg) : message.info(arg);
+    // });
   };
   //评论
   handleComment = (e) => {
@@ -141,7 +141,7 @@ class Tools extends Component {
       .then((res) => {
         const url = res.data[0].url;
         if (!isEmpty(url)) {
-          ipc.send('down', url, item.name + '.mp3');
+          // ipc.send('down', url, item.name + '.mp3');
         }
       })
       .catch((err) => {

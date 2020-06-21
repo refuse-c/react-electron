@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-16 10:56:56
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-06-17 12:40:53
+ * @LastEditors: RA
  * @Description: 个性推荐
  */
 import React, { Component } from 'react';
