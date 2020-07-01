@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-07-01 13:54:24
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-07-01 23:13:36
+ * @LastEditors: RA
  * @Description:
  */
 import Index from '../page/index/';
@@ -26,6 +26,7 @@ import NewMusic from '../page/newMusic';
 import IM from '../page/im';
 import Local from '../page/local';
 import AllMv from '../page/allMv';
+import TopMv from '../page/topMv';
 
 import Down from '../page/down';
 import Lately from '../page/lately';
@@ -102,6 +103,10 @@ let routes = [
           {
             path: '/home/allMv:id',
             component: AllMv
+          },
+          {
+            path: '/home/topMv',
+            component: TopMv
           },
           {
             path: '/home/friend',

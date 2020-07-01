@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-07-01 14:04:31
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-07-01 23:42:37
+ * @LastEditors: RA
  * @Description:
  */
 import React from 'react';
@@ -44,7 +44,7 @@ function App() {
             );
           }
         })}
-        <Redirect to="/home/allMvnew" />
+        <Redirect to="/home/find" />
         {/* <Redirect to="/home/find/findSinger" /> */}
         {/* <Redirect to="/home/find/rankingList" /> */}
         {/* <Redirect to="/home/albumList4546" /> */}
