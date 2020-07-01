@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-17 12:40:53
- * @LastEditors: RA
+ * @LastEditTime: 2020-06-24 16:06:38
+ * @LastEditors: refuse_c
  * @Description: 个性推荐
  */
 import React, { Component } from 'react';
@@ -155,7 +155,6 @@ class Recommendation extends Component {
   }
   render() {
     const { device, bannerData, recommendListData, privatecontentData, topSongsData, personalizedMvData } = this.state;
-    console.log(bannerData)
     return (
       <div className="recommendation">
         <div className="recommend-banner">
@@ -180,7 +179,7 @@ class Recommendation extends Component {
         </div>
         <div className="headline">
           <p className="headline_title">推荐歌单</p>
-          <p className="headline_more" onClick={this.handelMore.bind(this, 1)}>更多></p>
+          <p className="headline_more" onClick={this.handelMore.bind(this, 1)}>更多</p>
         </div>
         <div className="recommend-list">
           <ul>
@@ -217,7 +216,7 @@ class Recommendation extends Component {
         </div>
         <div className="headline">
           <p className="headline_title">独家放送</p>
-          <p className="headline_more" onClick={this.handelMore.bind(this, 2)}>更多></p>
+          <p className="headline_more" onClick={this.handelMore.bind(this, 2)}>更多</p>
         </div>
         {
           privatecontentData.length > 0
@@ -226,7 +225,7 @@ class Recommendation extends Component {
         }
         <div className="headline">
           <p className="headline_title">最新音乐</p>
-          <p className="headline_more" onClick={this.handelMore.bind(this, 3)}>更多></p>
+          <p className="headline_more" onClick={this.handelMore.bind(this, 3)}>更多</p>
         </div>
         <div className="top-songs">
           <ul>
@@ -253,7 +252,7 @@ class Recommendation extends Component {
         </div>
         <div className="headline">
           <p className="headline_title">推荐MV</p>
-          <p className="headline_more" onClick={this.handelMore.bind(this, 4)}>更多></p>
+          <p className="headline_more" onClick={this.handelMore.bind(this, 4)}>更多</p>
         </div>
         {
           personalizedMvData.length > 0 ? <MvList data={personalizedMvData} path={'/videoDetail'} /> : null

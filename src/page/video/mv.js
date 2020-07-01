@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-05-29 16:21:25
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 17:41:24
+ * @LastEditTime: 2020-07-01 18:00:09
  * @Description:视频->MV
  */
 import React, { Component } from 'react';
@@ -98,6 +98,11 @@ class ComponentMvs extends Component {
     this.getMvTop(title);
     this.setState({ menu2State: index })
   }
+  //跳转全部mv
+  gotoAllMv = index => {
+    console.log(index)
+    this.props.history.push({ pathname: `/home/allMv${index}` })
+  }
   //mv排行榜
   getMvTop = (text) => {
     RAGet(mvTop.api_url, {
@@ -130,21 +135,21 @@ class ComponentMvs extends Component {
               })
             }
           </ul>
-          <p>更多></p>
+          <p className="headline_more" onClick={this.gotoAllMv.bind(this, 'new')}>更多</p>
         </div>
         {
           newMv.length > 0 ? <MvList data={newMv} path={path} /> : null
         }
         <div className="headline">
           <p className="headline_title">热播MV</p>
-          <p className="headline_more">更多></p>
+          <p className="headline_more" onClick={this.gotoAllMv.bind(this, 'hot')}>更多</p>
         </div>
         {
           hotMv.length > 0 ? <MvList data={hotMv} path={path} /> : null
         }
         <div className="headline">
           <p className="headline_title">网易出品</p>
-          <p className="headline_more">更多></p>
+          <p className="headline_more" onClick={this.gotoAllMv.bind(this, 'wycp')}>更多</p>
         </div>
         {
           wyMv.length > 0 ? <MvList data={wyMv} path={path} /> : null
@@ -161,7 +166,7 @@ class ComponentMvs extends Component {
               })
             }
           </ul>
-          <p className="headline_more">更多></p>
+          <p className="headline_more" onClick={this.gotoAllMv.bind(this, 'topMv')}>更多</p>
         </div>
         <div className="contents">
           <ul>

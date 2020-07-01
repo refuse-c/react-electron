@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-06-11 09:26:02
+ * @LastEditTime: 2020-07-01 17:06:54
  * @LastEditors: refuse_c
  * @Description: 视频页
  */
@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import './index.scss';
 
 import { Route, NavLink } from 'react-router-dom';
-import ScrollArea from 'react-scrollbar';
+import ScrollView from 'react-custom-scrollbars';
 class Videos extends Component {
   constructor(props) {
     super(props);
@@ -23,10 +23,19 @@ class Videos extends Component {
           name: 'MV',
           path: '/home/video/mv'
         }
-      ]
+      ],
+      loadMore: false
     }
   }
   componentDidMount = () => {
+  }
+  /*监听滚动*/
+  onScroll = e => {
+    if (e.target.scrollTop + e.target.clientHeight - 100 === e.target.scrollHeight - 100) {
+      // 滚动到底部需要做的事情
+      this.setState({ loadMore: true })
+      this.setState({ loadMore: false })
+    }
   }
   render() {
     const { videoNav } = this.state;
@@ -46,24 +55,19 @@ class Videos extends Component {
             }
           </ul>
         </div>
-        {/* <div className="find-area"> */}
-        <ScrollArea
-          speed={1}
-          className="area"
-          ref={ref => (this.content = ref)}
-        >
-          <div className="videos-area">
+        <div className="videos-area">
+          <ScrollView onScroll={this.onScroll}>
             {
               routes.map((route, key) => {
                 return <Route exact key={key} path={route.path}
                   render={props => (
-                    <route.component {...props} routes={route.routes} />
+                    <route.component {...props} routes={route.routes} loadMore={this.state.loadMore} />
                   )}
                 />
               })
             }
-          </div>
-        </ScrollArea>
+          </ScrollView>
+        </div>
       </div>
     );
   }

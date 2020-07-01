@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-05-29 16:21:35
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-11 16:09:14
+ * @LastEditTime: 2020-07-01 10:53:22
  * @Description:视频->VIDEO
  */
 import React, { Component } from 'react';
@@ -27,6 +27,7 @@ class ComponentVideo extends Component {
       videoList: {},
       ids: '',
       offset: 0,
+      loadMore: false
     }
   }
   componentDidMount = () => {
@@ -36,7 +37,7 @@ class ComponentVideo extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { videoText } = nextProps;
+    const { videoText, loadMore } = nextProps;
     if (videoText !== prevState.videoText) {
       return {
         videoText,
@@ -45,22 +46,31 @@ class ComponentVideo extends Component {
         },
       };
     }
+    if (loadMore !== prevState.loadMore) {
+      return {
+        loadMore,
+        props: {
+          loadMore: loadMore,
+        },
+      };
+    }
     return null;
   }
   componentDidUpdate(prevState) {
     if (prevState.videoText !== this.state.videoText) {
-      this.setState({ videoList: {}, offset: 0 })
+      this.setState({ videoList: {} })
       const { videoText } = this.state;
       const ids = videoText.split('RA')[1];
-      console.log(ids)
       if (isEmpty(ids)) {
         this.getVideoAll(0);
       } else {
         this.getVideoGroup(ids, 0)
       }
     }
+    if (prevState.loadMore !== this.state.loadMore) {
+      global.debounce(() => this.handleMore(), 100);
+    }
   }
-
   // 全部视频
   getVideoAll = (offset) => {
     this.setState({ offset })
@@ -76,6 +86,9 @@ class ComponentVideo extends Component {
       }
       obj.more = res.hasmore;
       this.setState({ videoList: obj })
+      if (offset === 0) {
+        this.getVideoAll(offset + 1)
+      }
     }).catch(err => {
       console.log(err)
     })
@@ -102,6 +115,7 @@ class ComponentVideo extends Component {
   }
   // 单个标签数据
   getVideoGroup = (ids, offset) => {
+    console.log(offset)
     this.setState({ ids, offset: offset })
     RAGet(videoGroup.api_url, {
       params: {
@@ -118,10 +132,14 @@ class ComponentVideo extends Component {
       }
       obj.more = res.hasmore;
       this.setState({ videoList: obj })
+      if (offset === 0) {
+        this.getVideoGroup(ids, offset + 1)
+      }
     }).catch(err => {
       console.log(err)
     })
   }
+  // 加载更多
   handleMore = () => {
     const { ids, offset } = this.state;
     const num = offset + 1
@@ -132,11 +150,10 @@ class ComponentVideo extends Component {
     }
   };
   handleChoose = (item) => {
-    this.setState({ videoList: {}, offset: 0 })
+    this.setState({ videoList: {} })
     this.props.setShowPopStatus('');
     this.props.setVideoText(`${item.name}RA${item.id}`);
-    const { offset } = this.state;
-    this.getVideoGroup(item.id, offset)
+    //   this.getVideoGroup(item.id, 0)
   }
   showPlop = () => {
     this.props.setShowPopStatus('song_list')
@@ -144,7 +161,6 @@ class ComponentVideo extends Component {
   render() {
     const path = '/videoDetail';
     const { videoText, categoryList, videoList, videoGroupList } = this.state;
-    console.log(videoGroupList)
     const { showPlop } = this.props;
     const list = formatVideoData(videoList.list)
     return (
@@ -181,11 +197,12 @@ class ComponentVideo extends Component {
         </div>
         {
           videoList.more === true ? (
-            <span className="load_more" onClick={this.handleMore}>
-              点我加载更多喔,不信你试试 ꒰⑅•ᴗ•⑅꒱
+            <span className="load_more"  >
+              {/* onClick= { this.handleMore} */}
+            正在加载请稍后 ꒰⑅•ᴗ•⑅꒱
             </span>
           ) : videoList.more === false ? (
-            <span className="load_more" onClick={this.handleMore}>
+            <span className="load_more">
               没有更多的啦,不要划了(＞﹏＜)
             </span>
           ) : null

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-06-12 09:45:29
+ * @LastEditTime: 2020-07-01 13:54:24
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -100,7 +100,7 @@ let routes = [
             ],
           },
           {
-            path: '/home/allMv',
+            path: '/home/allMv:id',
             component: AllMv
           },
           {
