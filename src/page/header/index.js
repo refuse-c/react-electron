@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 14:46:55
- * @LastEditTime: 2020-06-20 16:02:39
- * @LastEditors: RA
+ * @LastEditTime: 2020-07-02 13:25:57
+ * @LastEditors: refuse_c
  * @Description: 头部
  */
 import React, { Component } from 'react';
@@ -23,6 +23,8 @@ class Header extends Component {
     this.state = {
       pathname: '',
       initpathname: '',
+      endUrl: '',
+      forwardState: false
     };
   }
   componentDidMount = () => {
@@ -33,6 +35,15 @@ class Header extends Component {
   };
   static getDerivedStateFromProps(nextProps, prevState) {
     const { pathname } = nextProps.history.location;
+    const endUrl = nextProps.history.location.pathname;
+    if (nextProps.history.action === "PUSH") {
+      return {
+        endUrl,
+        props: {
+          endUrl: endUrl,
+        },
+      };
+    }
     if (pathname !== prevState.pathname) {
       return {
         pathname,
@@ -43,6 +54,7 @@ class Header extends Component {
     }
     return null;
   }
+
   buttonClick = (type) => {
     console.log(type);
     // ipc.send(type);
@@ -103,17 +115,36 @@ class Header extends Component {
         console.log(err);
       });
   };
+  goBack = () => {
+    this.props.history.goBack();
+    this.setState({ forwardState: true })
+  }
+  goForward = () => {
+    const { endUrl } = this.state;
+    const nowUrl = window.location.href.split('#')[1];
+    if (endUrl === nowUrl) {
+      this.setState({ forwardState: false })
+    }
+    this.props.history.goForward();
+  }
   render() {
     const { userInfo, isLogin } = this.props;
-    const { pathname, initpathname } = this.state;
+    const { pathname, initpathname, forwardState } = this.state;
     return (
       <div className="header">
         {pathname !== initpathname ? (
           <div
             className="header-back"
-            onClick={() => this.props.history.goBack()}
+            onClick={this.goBack}
           ></div>
         ) : null}
+        {
+          forwardState ? (
+            <div
+              className="header-forward"
+              onClick={this.goForward}
+            ></div>
+          ) : null}
         <div className="left">EMusic</div>
         <div className="center">
           <ul>
@@ -126,8 +157,8 @@ class Header extends Component {
                 {userInfo.account && userInfo.profile.nickname}
               </li>
             ) : (
-              <li onClick={this.showLogin}>未登录</li>
-            )}
+                <li onClick={this.showLogin}>未登录</li>
+              )}
             <li>皮肤</li>
             <li>设置</li>
             <li onClick={this.openIm}>IM</li>
