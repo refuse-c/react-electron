@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-10 14:04:01
+ * @LastEditTime: 2020-07-03 10:51:39
  * @LastEditors: refuse_c
  * @Description: 歌手列表
  */
@@ -57,6 +57,25 @@ class FindSinger extends Component {
   componentDidMount = () => {
     this.getArtistList('-1', '-1', '-1', 50, 0);
   };
+
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { loadMore } = nextProps;
+    if (loadMore !== prevState.loadMore) {
+      return {
+        loadMore,
+        props: {
+          loadMore: loadMore,
+        },
+      };
+    }
+    return null;
+  }
+  componentDidUpdate(prevState) {
+    if (prevState.loadMore !== this.state.loadMore) {
+      global.debounce(() => this.handleMore(), 100);
+    }
+  }
   hangleClick = (text, type) => {
     this.setState({ artistsList: {}, offset: 0 });
     const { singerCatText, singerTypeText, singerAreaText } = this.state;
@@ -88,33 +107,30 @@ class FindSinger extends Component {
         limit: limit,
         offset: offset,
       },
-    })
-      .then((res) => {
-
-        let obj = {};
-        const { artistsList } = this.state;
-        if (artistsList.list) {
-          obj.list = artistsList.list.concat(res.artists);
-        } else {
-          if (cat === '-1' && type === '-1' && area === '-1') {
-            let artistTopItem = {
-              name: '歌手排行榜',
-              type: 'artistList',
-              path: '/home/find/artistTop',
-              picUrl: require('../../common/images/artist-top.jpg')
-            }
-            obj.list = res.artists;
-            obj.list.unshift(artistTopItem)
-          } else {
-            obj.list = res.artists;
+    }).then((res) => {
+      let obj = {};
+      const { artistsList } = this.state;
+      if (artistsList.list) {
+        obj.list = artistsList.list.concat(res.artists);
+      } else {
+        if (cat === '-1' && type === '-1' && area === '-1') {
+          let artistTopItem = {
+            name: '歌手排行榜',
+            type: 'artistList',
+            path: '/home/find/artistTop',
+            picUrl: require('../../common/images/artist-top.jpg')
           }
+          obj.list = res.artists;
+          obj.list.unshift(artistTopItem)
+        } else {
+          obj.list = res.artists;
         }
-        obj.more = res.more;
-        this.setState({ artistsList: obj });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      }
+      obj.more = res.more;
+      this.setState({ artistsList: obj });
+    }).catch((err) => {
+      console.log(err);
+    });
   };
   handleMore = () => {
     const {
@@ -220,11 +236,14 @@ class FindSinger extends Component {
         </div>
         {
           list.more === true ? (
-            <span className="load_more" onClick={this.handleMore}>
-              点我加载更多喔,不信你试试 ꒰⑅•ᴗ•⑅꒱
+            <span
+              className="load_more"
+            // onClick={this.handleMore}
+            >
+              正在加载请稍后 ꒰⑅•ᴗ•⑅꒱
             </span>
           ) : list.more === false ? (
-            <span className="load_more" onClick={this.handleMore}>
+            <span className="load_more">
               没有更多的啦,不要划了(＞﹏＜)
             </span>
           ) : null

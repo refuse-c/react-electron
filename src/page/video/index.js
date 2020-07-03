@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-07-01 17:06:54
+ * @LastEditTime: 2020-07-03 10:39:05
  * @LastEditors: refuse_c
  * @Description: 视频页
  */
@@ -38,7 +38,7 @@ class Videos extends Component {
     }
   }
   render() {
-    const { videoNav } = this.state;
+    const { videoNav, loadMore } = this.state;
     const { routes } = this.props;
     return (
       <div className="videos">
@@ -61,7 +61,7 @@ class Videos extends Component {
               routes.map((route, key) => {
                 return <Route exact key={key} path={route.path}
                   render={props => (
-                    <route.component {...props} routes={route.routes} loadMore={this.state.loadMore} />
+                    <route.component {...props} routes={route.routes} loadMore={loadMore} />
                   )}
                 />
               })

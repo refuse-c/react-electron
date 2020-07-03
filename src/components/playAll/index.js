@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-17 15:20:33
- * @LastEditTime: 2020-06-05 20:35:42
- * @LastEditors: RA
+ * @LastEditTime: 2020-07-03 11:04:12
+ * @LastEditors: refuse_c
  * @Description: 播放全部组件
  */
 import React, { Component } from 'react';
@@ -26,15 +26,16 @@ class PlayAll extends Component {
   }
   playAll = () => {
     const { list } = this.props;
-    if (isEmpty(list) || list.length < 0) {
+    if (!isEmpty(list) && list.length > 0) {
+      this.props.setIndex(0);
+      this.props.setIsPlay(true);
+      this.props.gainPlayList(list);
+      this.props.gainMusicId(list[0].id);
+    } else {
       message.destroy();
       message.error('当前列表还未就绪,请稍后再试!');
-      return;
     }
-    this.props.setIndex(0);
-    this.props.setIsPlay(true);
-    this.props.gainPlayList(list);
-    this.props.gainMusicId(list[0].id);
+
   };
   render() {
     const { cls, text } = this.props;

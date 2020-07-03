@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-06-09 09:40:56
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-09 09:51:23
+ * @LastEditTime: 2020-07-03 12:33:00
  * @Description: 歌手详情->top50
  */
 import React, { Component } from 'react';
@@ -33,6 +33,7 @@ class TopSong extends Component {
     }).then(res => {
       const songList = res.songs;
       this.setState({ songList })
+      this.props.toFatherValue(songList);
     }).catch(err => {
       console.log(err)
     })

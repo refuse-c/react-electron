@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-06-12 09:42:42
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-01 18:05:02
+ * @LastEditTime: 2020-07-03 10:52:09
  * @Description:
  */
 import React, { Component } from 'react';
@@ -166,9 +166,11 @@ class AllMv extends Component {
             }
             {
               allMvList.more === true ? (
-                <span className="load_more"  >
-                  {/* onClick= { this.handleMore} */}
-            正在加载请稍后 ꒰⑅•ᴗ•⑅꒱
+                <span
+                  className="load_more"
+                  onClick={this.handleMore}
+                >
+                  正在加载请稍后 ꒰⑅•ᴗ•⑅꒱
                 </span>
               ) : allMvList.more === false ? (
                 <span className="load_more">

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-06-05 17:54:41
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-09 16:29:25
+ * @LastEditTime: 2020-07-03 12:35:49
  * @Description:歌手详情页
  */
 import React, { Component } from 'react';
@@ -12,6 +12,7 @@ import { artistAlbum, artistMv } from '../../api/api';
 import ScrollArea from 'react-scrollbar';
 import { imgParam, isEmpty, obtainId } from '../../common/utils/format';
 import { Route, NavLink } from 'react-router-dom';
+import PlayAll from '../../components/playAll';
 class SingerDetails extends Component {
   constructor(props) {
     super(props);
@@ -40,6 +41,8 @@ class SingerDetails extends Component {
           path: `/simi`,
         },
       ],
+      list: [],
+      showPlayAll: true
     };
   }
   componentDidMount = () => {
@@ -66,6 +69,17 @@ class SingerDetails extends Component {
   //     this.requestGroup(id);
   //   }
   // }
+  componentDidUpdate = () => {
+    // this.props.history.listen(route => {
+    //   const a = route.pathname.split('singerdetai')[1];
+    //   const b = a.split('/')[1]
+    //   if (isEmpty(b)) {
+    //     this.setState({ showPlayAll: true })
+    //   } else {
+    //     this.setState({ showPlayAll: false })
+    //   }
+    // });
+  }
   componentWillReceiveProps = () => {
     const id = obtainId(window.location.href, 'singerdetail');
     this.setState({ id });
@@ -108,9 +122,12 @@ class SingerDetails extends Component {
       return;
     };
   }
+  getChildValue(list) {
+    this.setState({ list })
+  }
   render() {
     const { routes } = this.props;
-    const { artistsInfo, artistsNav, id } = this.state;
+    const { artistsInfo, artistsNav, id, list, showPlayAll } = this.state;
     return (
       <div className="singer_details">
         <ScrollArea
@@ -153,6 +170,15 @@ class SingerDetails extends Component {
                 );
               })}
             </ul>
+            {
+              showPlayAll
+                ? <PlayAll
+                  cls={`btn1`}
+                  text={`播放全部`}
+                  list={list}
+                />
+                : ''
+            }
           </div>
           <div className="singer_content">
             {routes.map((route, key) => {
@@ -162,14 +188,14 @@ class SingerDetails extends Component {
                   key={key}
                   path={route.path}
                   render={(props) => (
-                    <route.component {...props} routes={route.routes} />
+                    <route.component {...props} routes={route.routes} toFatherValue={this.getChildValue.bind(this)} />
                   )}
                 />
               );
             })}
           </div>
         </ScrollArea>
-      </div>
+      </div >
     );
   }
 }

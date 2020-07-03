@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-06-07 01:14:11
- * @LastEditTime: 2020-06-09 15:51:24
+ * @LastEditTime: 2020-07-03 12:17:37
  * @LastEditors: refuse_c
  * @Description: 歌手详情->专辑
  */
@@ -20,7 +20,6 @@ class singerAlbum extends Component {
   }
   componentDidMount = () => {
     const id = obtainId(window.location.href, 'singerdetail')
-    console.log(id)
     this.getArtistAlbum(id);
   };
   getArtistAlbum = async (id) => {

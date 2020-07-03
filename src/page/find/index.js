@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-06-12 10:36:17
+ * @LastEditTime: 2020-07-03 10:49:41
  * @LastEditors: refuse_c
  * @Description: 发现音乐
  */
@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import './index.scss';
 
 import { Route, NavLink } from 'react-router-dom';
-import ScrollArea from 'react-scrollbar';
+import ScrollView from 'react-custom-scrollbars';
 class Find extends Component {
   constructor(props) {
     super(props);
@@ -43,14 +43,21 @@ class Find extends Component {
     }
   }
   componentDidMount = () => { }
-
+  /*监听滚动*/
+  onScroll = e => {
+    if (e.target.scrollTop + e.target.clientHeight - 100 === e.target.scrollHeight - 100) {
+      // 滚动到底部需要做的事情
+      this.setState({ loadMore: true })
+      this.setState({ loadMore: false })
+    }
+  }
   componentWillUnmount = () => {
     this.setState = (state, callback) => {
       return;
     };
   };
   render() {
-    const { findNav } = this.state;
+    const { findNav, loadMore } = this.state;
     const { routes } = this.props;
     return (
       <div className="find">
@@ -67,26 +74,22 @@ class Find extends Component {
             }
           </ul>
         </div>
-        {/* <div className="find-area"> */}
-        <ScrollArea
-          speed={1}
-          className="area"
-          ref={ref => (this.content = ref)}
-        >
-          <div className="find-area">
-            {
-              routes.map((route, key) => {
-                return <Route exact key={key} path={route.path}
-                  render={props => (
-                    <route.component {...props} routes={route.routes} />
-                  )}
-                />
-              })
-            }
-          </div>
-        </ScrollArea>
+        <div className="find-area">
+          <ScrollView onScroll={this.onScroll} className="find-scroll">
+            <div className="find-content">
+              {
+                routes.map((route, key) => {
+                  return <Route exact key={key} path={route.path}
+                    render={props => (
+                      <route.component {...props} routes={route.routes} loadMore={loadMore} />
+                    )}
+                  />
+                })
+              }
+            </div>
+          </ScrollView>
+        </div>
       </div>
-      // </div>
     );
   }
 }

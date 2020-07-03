@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-10 17:29:24
+ * @LastEditTime: 2020-07-03 10:58:44
  * @LastEditors: refuse_c
  * @Description:  最新音乐
  */
@@ -10,6 +10,7 @@ import { RAGet } from '../../api/netWork';
 import { topSong } from '../../api/api';
 import MusicList from '../../components/musicList';
 import { dataScreening } from '../../common/utils/format';
+import PlayAll from '../../components/playAll';
 class NewMusic extends Component {
   constructor(props) {
     super(props);
@@ -80,6 +81,11 @@ class NewMusic extends Component {
               })
             }
           </ul>
+          <PlayAll
+            cls={`btn1`}
+            text={`播放全部`}
+            list={songList}
+          />
         </div>
         {
           songList.length > 0

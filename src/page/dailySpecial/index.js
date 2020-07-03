@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-16 22:35:46
- * @LastEditTime: 2020-06-05 17:36:29
+ * @LastEditTime: 2020-07-03 10:56:06
  * @LastEditors: refuse_c
  * @Description: 每日推荐歌曲
  */
@@ -12,7 +12,7 @@ import { getDate, dataScreening } from '../../common/utils/format';
 import { RAGet } from '../../api/netWork';
 import { recommendSong } from '../../api/api';
 import MusicList from '../../components/musicList';
-import PlayAlll from '../../components/playAll';
+import PlayAll from '../../components/playAll';
 class DailySpecial extends Component {
   constructor(props) {
     super(props);
@@ -62,11 +62,10 @@ class DailySpecial extends Component {
             </div>
           </div>
           <div className="tool">
-            <PlayAlll
+            <PlayAll
               cls={`btn1`}
               text={`播放全部`}
               list={recommendList}
-
             />
             {/* <h3 onClick={this.playAll}>播放全部</h3> */}
 
