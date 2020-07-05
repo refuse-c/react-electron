@@ -1,14 +1,14 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:54
- * @LastEditTime: 2020-06-04 15:28:47
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-07-05 17:55:01
+ * @LastEditors: RA
  * @Description: 
  */
 import axios from "axios";
 import { message } from 'antd';
 const Axios = axios.create({
-  baseURL: 'http://139.155.89.11:3389',
+  baseURL: 'https://xiangbh.cn:3389/',
   withCredentials: true,
   headers: {},
 });

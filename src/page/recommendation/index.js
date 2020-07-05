@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-24 16:06:38
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-07-05 21:47:37
+ * @LastEditors: RA
  * @Description: 个性推荐
  */
 import React, { Component } from 'react';
@@ -166,7 +166,7 @@ class Recommendation extends Component {
                   return (
                     <div
                       key={index}
-                      style={{ backgroundImage: 'url(' + imgUrl + ')' }}
+                      style={{ backgroundImage: 'url(' + imgParam(imgUrl,1000,360) + ')' }}
                       className="swiper-slide">
                       <span style={{ backgroundColor: item.titleColor }}>{item.typeTitle}</span>
                     </div>
@@ -220,7 +220,7 @@ class Recommendation extends Component {
         </div>
         {
           privatecontentData.length > 0
-            ? <Exclusive data={privatecontentData} />
+            ? <Exclusive history={this.props.history} data={privatecontentData} />
             : null
         }
         <div className="headline">

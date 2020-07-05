@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-06-22 13:38:38
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-07-05 21:46:40
+ * @LastEditors: RA
  * @Description:
  */
 
@@ -308,9 +308,10 @@ export const imgParam = (url, width, height) => {
   if (!url) {
     return require('../../common/images/logo.png');
   }
+  const urls = url.indexOf('https')===-1?url.replace('http','https'):url;
   const w = isEmpty(width) ? '100' : width;
   const h = isEmpty(height) ? '100' : height;
-  return url + '?param=' + w + 'y' + h;
+  return urls + '?param=' + w + 'y' + h;
 };
 
 /**

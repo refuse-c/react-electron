@@ -84,7 +84,12 @@ pre {
 
 .rc_disabled {
   pointer-events: none;
-  color: #666;
+  color: #ccc;
+}
+
+.button-disabled {
+  color: #ccc !important;
+  border: 1px solid #ccc !important;
 }
 
 .overflow {
@@ -243,6 +248,7 @@ pre {
 .mvActive1 {
   color: red !important;
 }
-.btn1{
+
+.btn1 {
   height: max-content;
 }

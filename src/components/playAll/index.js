@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-17 15:20:33
- * @LastEditTime: 2020-07-03 11:04:12
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-07-05 11:43:26
+ * @LastEditors: RA
  * @Description: 播放全部组件
  */
 import React, { Component } from 'react';
@@ -35,14 +35,19 @@ class PlayAll extends Component {
       message.destroy();
       message.error('当前列表还未就绪,请稍后再试!');
     }
-
   };
   render() {
-    const { cls, text } = this.props;
+    const { cls, text, list } = this.props;
     return (
-      <button className={cls} onClick={this.playAll}>
-        {text || ''}
-      </button>
+      <div>
+        {!isEmpty(list) && list.length > 0 ? (
+          <button className={cls} onClick={this.playAll}>
+            {text || ''}
+          </button>
+        ) : (
+          <button className={`button-disabled `}>{text || ''}</button>
+        )}
+      </div>
     );
   }
 }
