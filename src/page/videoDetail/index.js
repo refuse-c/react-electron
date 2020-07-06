@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-09 16:30:04
+ * @LastEditTime: 2020-07-06 17:41:02
  * @Description:视频详情(核心)
  */
 import React, { Component } from 'react';
@@ -13,7 +13,7 @@ import ScrollArea from 'react-scrollbar';
 //store
 import { connect } from 'react-redux';
 import { RAGet } from '../../api/netWork';
-import { videoDetail, videoUrl, relatedAllvideo, mvUrl, simiMv, mvDetail } from '../../api/api';
+import { videoDetail, videoUrl, relatedAllvideo, mvUrl, simiMv, mvDetail, mvComment, videoComment } from '../../api/api';
 import {
   formatDate,
   formatPlaycount,
@@ -32,6 +32,8 @@ class Video extends Component {
       videoUrl: '',
       videoDetail: {},
       videoGroup: {},
+      //评论
+      comments: {}
     };
   }
 
@@ -43,10 +45,12 @@ class Video extends Component {
       this.getMvUrl(id);
       this.getSimiMv(id);
       this.getMvDetail(id);
+      this.getMvComment(id);
     } else {
       this.getVideoDetail(id);
       this.getVideoUrl(id);
       this.getRelatedAllvideo(id);
+      this.getVideoComment(id);
     }
 
 
@@ -65,10 +69,12 @@ class Video extends Component {
       this.getMvUrl(id);
       this.getSimiMv(id);
       this.getMvDetail(id);
+      this.getMvComment(id)
     } else {
       this.getVideoDetail(id);
       this.getVideoUrl(id);
       this.getRelatedAllvideo(id);
+      this.getVideoComment(id)
     }
   };
 
@@ -159,8 +165,40 @@ class Video extends Component {
         console.log(err);
       });
   };
+  //获取视频/mv/热门 评论
+  // mvComment
+  // videoComment
+  // hotComment
+  getMvComment = (id) => {
+    RAGet(mvComment.api_url, {
+      params: {
+
+      }
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  getVideoComment = (id) => {
+    RAGet(videoComment.api_url, {
+      params: {
+        id: id,
+        limit: 100,
+        offset: 0,
+        before: ''
+
+      },
+    }).then(res => {
+      console.log(res)
+      const comments = res;
+      this.setState({ comments })
+    }).catch(err => {
+      console.log(err)
+    })
+  }
   render() {
-    const { videoUrl, videoDetail, videoGroup } = this.state;
+    const { videoUrl, videoDetail, videoGroup, comments } = this.state;
     return (
       <div className="video-info">
         <ScrollArea
@@ -178,7 +216,7 @@ class Video extends Component {
               </div>
               <video
                 src={videoUrl}
-                autoPlay
+                // autoPlay
                 controls
                 poster={videoDetail.coverUrl ? imgParam(videoDetail.coverUrl, 700, 400) : imgParam(videoDetail.cover, 700, 400)}
                 ref={(video) => (this.video = video)}
@@ -234,6 +272,54 @@ class Video extends Component {
                 </ul>
               </div>
             </div>
+          </div>
+          <div className="comment">
+            <p>精彩评论</p>
+            <ul className="hot-comment-list">
+              {comments.hotComments && comments.hotComments.map((item, index) => {
+                console.log(item)
+                return (
+                  <li
+                    key={index}
+                  >
+                    <img src={item.user.avatarUrl} alt="" />
+                    <div className='aa'>
+                      <p>{`${item.user.nickname}:${item.content}`}</p>
+                      {
+                        item.beReplied.length > 0
+                          ? <p className='comment-reply'>@{item.beReplied[0].user.nickname}:{item.beReplied[0].content}</p>
+                          : ''
+                      }
+                      <p>{formatDate(item.time)}</p>
+                    </div>
+
+                  </li>
+                );
+              })}
+            </ul>
+            <p>热门评论</p>
+            <ul className="hot-comment-list">
+              {comments.comments && comments.comments.map((item, index) => {
+                console.log(item)
+                return (
+                  <li
+                    key={index}
+                  >
+                    <img src={item.user.avatarUrl} alt="" />
+                    <div className='aa'>
+                      <p>{`${item.user.nickname}:${item.content}`}</p>
+                      {
+                        item.beReplied.length > 0
+                          ? <p className='comment-reply'>@{item.beReplied[0].user.nickname}:{item.beReplied[0].content}</p>
+                          : ''
+                      }
+                      <p>{formatDate(item.time)}</p>
+                    </div>
+
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </ScrollArea>
       </div>

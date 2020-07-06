@@ -2,47 +2,58 @@
   width: 980px;
   margin: 0 auto;
   height: calc(100vh - 40px);
+
   // background-color: red;
   .video-content {
     display: flex;
     justify-content: space-between;
+
     .video-left {
       .name {
         font-size: 16px;
         line-height: 36px;
       }
+
       video {
         width: 690px;
         max-height: 430px;
         background-color: rgba(0, 0, 0, 0.5);
       }
     }
+
     .video-right {
       width: 250px;
       margin-right: 10px;
+
       h3 {
         font-size: 16px;
         line-height: 36px;
         border-bottom: 1px solid #e1e1e2;
       }
+
       .video-time {
         display: flex;
         justify-content: space-between;
         font-size: 12px;
         margin-top: 10px;
       }
+
       .description {
         margin-top: 10px;
         font-size: 13px;
         word-break: break-all;
       }
+
       .videoGroup {
         margin-top: 10px;
         font-size: 13px;
+
         span {
           padding: 0 5px;
         }
+
         color: #0c73c2;
+
         span:hover {
           text-decoration: underline;
         }
@@ -51,25 +62,31 @@
       .video-group {
         ul {
           width: 100%;
+
           li {
             display: flex;
             width: 100%;
             margin-top: 10px;
+
             img {
               width: 120px;
               height: 70px;
             }
+
             div {
               width: 130px;
               padding-left: 10px;
+
               p {
                 &:nth-child(1) {
                   font-size: 12px;
                 }
+
                 &:nth-child(2) {
                   color: #dfdfdf;
                   font-size: 12px;
                 }
+
                 &:nth-child(3) {
                   color: #dfdfdf;
                   font-size: 12px;
@@ -79,6 +96,41 @@
           }
         }
       }
+    }
+  }
+
+  .hot-comment-list {
+    li {
+      display: flex;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #acacac;
+
+      img {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+
+      .aa {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .comment-reply {
+          margin: 10px 0;
+          width: 100%;
+          padding: 4px;
+          border-radius: 2px;
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      .bb {
+        display: flex;
+      }
+
     }
   }
 }

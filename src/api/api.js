@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-06-11 09:29:08
+ * @LastEditTime: 2020-07-06 14:36:46
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -197,4 +197,16 @@ export const artistTopSong = {
 //新歌速递
 export const topSong = {
   api_url: '/top/song'
+}
+// mv评论
+export const mvComment = {
+  api_url: '/comment/mv'
+}
+// 视频评论
+export const videoComment = {
+  api_url: '/comment/video'
+}
+// 热门评论
+export const hotComment = {
+  api_url: '/comment/hot'
 }
