@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-07-01 23:13:36
- * @LastEditors: RA
+ * @LastEditTime: 2020-07-08 17:09:42
+ * @LastEditors: refuse_c
  * @Description:
  */
 import Index from '../page/index/';
@@ -39,6 +39,7 @@ import singerAlbum from '../page/singerDetail/component/album';
 import singerMv from '../page/singerDetail/component/mv';
 import singerDesc from '../page/singerDetail/component/desc';
 import singerSimi from '../page/singerDetail/component/simi';
+import UserDetail from '../page/userDetail';
 let routes = [
   {
     path: '/',
@@ -51,6 +52,10 @@ let routes = [
           {
             path: '/home/search',
             component: Search,
+          },
+          {
+            path: '/home/userdetail:id',
+            component: UserDetail,
           },
           {
             path: '/home/find/',
@@ -180,7 +185,7 @@ let routes = [
       {
         path: '/videoDetail:id',
         component: VideoDetail,
-      },
+      }
     ],
   },
 ];

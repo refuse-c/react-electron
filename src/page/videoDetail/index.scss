@@ -98,39 +98,4 @@
       }
     }
   }
-
-  .hot-comment-list {
-    li {
-      display: flex;
-      padding-bottom: 10px;
-      margin-bottom: 10px;
-      border-bottom: 1px solid #acacac;
-
-      img {
-        width: 32px;
-        height: 32px;
-        margin-right: 10px;
-        border-radius: 50%;
-      }
-
-      .aa {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-
-        .comment-reply {
-          margin: 10px 0;
-          width: 100%;
-          padding: 4px;
-          border-radius: 2px;
-          background-color: rgba(0, 0, 0, 0.5);
-        }
-      }
-
-      .bb {
-        display: flex;
-      }
-
-    }
-  }
 }

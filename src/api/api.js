@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-07-06 14:36:46
+ * @LastEditTime: 2020-07-08 14:27:30
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -209,4 +209,12 @@ export const videoComment = {
 // 热门评论
 export const hotComment = {
   api_url: '/comment/hot'
+}
+// 获取用户信息 , 歌单，收藏，mv, dj 数量
+export const userSubcount = {
+  api_url: '/user/subcount'
+}
+// 获取用户详情
+export const userDetail = {
+  api_url: '/user/detail'
 }

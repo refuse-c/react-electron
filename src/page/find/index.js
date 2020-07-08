@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 20:05:10
- * @LastEditTime: 2020-07-03 10:49:41
+ * @LastEditTime: 2020-07-08 14:16:12
  * @LastEditors: refuse_c
  * @Description: 发现音乐
  */
@@ -75,7 +75,7 @@ class Find extends Component {
           </ul>
         </div>
         <div className="find-area">
-          <ScrollView onScroll={this.onScroll} className="find-scroll">
+          <ScrollView onScroll={this.onScroll}>
             <div className="find-content">
               {
                 routes.map((route, key) => {

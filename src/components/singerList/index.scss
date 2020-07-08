@@ -33,31 +33,39 @@
     flex-wrap: wrap;
     justify-content: space-between;
 
-    li {
-      padding: 5px 15px 10px;
+    a {
+      &:last-child {
+        margin-right: auto;
+      }
 
-      div {
-        position: relative;
-        width: 150px;
-        height: 150px;
-        overflow: hidden;
-        img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border-radius: 2px;
+      li {
+        padding: 5px 15px 10px;
+
+        div {
+          position: relative;
+          width: 150px;
+          height: 150px;
+          overflow: hidden;
+
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+            transition: all 1s ease;
+          }
+        }
+
+        p {
+          text-align: center;
+        }
+
+        &:hover img {
+          transform: scale(1.1);
           transition: all 1s ease;
         }
-      }
-
-      p {
-        text-align: center;
-      }
-      &:hover img {
-         transform: scale(1.1);
-         transition: all 1s ease;
       }
     }
   }

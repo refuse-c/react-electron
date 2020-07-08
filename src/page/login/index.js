@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-01 14:34:45
- * @LastEditTime: 2020-07-05 11:33:54
- * @LastEditors: RA
+ * @LastEditTime: 2020-07-08 15:57:04
+ * @LastEditors: refuse_c
  * @Description: 登录页
  */
 import React, { Component } from 'react';
@@ -83,25 +83,23 @@ class Login extends Component {
         phone: phone,
         password: pwd,
       },
-    })
-      .then((res) => {
-        if (res.code !== 200) return;
-        let userInfo = {};
-        sessionStorage.setItem('token', res.token);
-        userInfo.account = res.account;
-        userInfo.token = res.token;
-        userInfo.profile = res.profile;
-        userInfo.bindings = res.bindings;
-        const userId = res.profile.userId;
-        const nickname = res.profile.nickname;
-        this.props.gainUserInfo(userInfo);
-        this.props.isSHowLogin(false);
-        this.props.isLogin(true);
-        this.getMusicList(userId, nickname);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      if (res.code !== 200) return;
+      let userInfo = {};
+      sessionStorage.setItem('token', res.token);
+      userInfo.account = res.account;
+      userInfo.token = res.token;
+      userInfo.profile = res.profile;
+      userInfo.bindings = res.bindings;
+      const userId = res.profile.userId;
+      const nickname = res.profile.nickname;
+      this.props.gainUserInfo(userInfo);
+      this.props.isSHowLogin(false);
+      this.props.isLogin(true);
+      this.getMusicList(userId, nickname);
+    }).catch((err) => {
+      console.log(err);
+    });
   };
   getMusicList = (id, nickname) => {
     const { menuList } = this.props;
@@ -109,38 +107,36 @@ class Login extends Component {
       params: {
         uid: id,
       },
-    })
-      .then((res) => {
-        if (res.code === 200) {
-          res.playlist.map((item, index) => {
-            item.path = '/home/single';
-            item.icon = 'default';
-            if (item.privacy !== 10) {
-              if (item.userId === Number(id)) {
-                const title = { name: '创建的歌单' };
-                let index = menuList.findIndex((item) => {
-                  return item.name === '创建的歌单';
-                });
-                if (index === -1) menuList.push(title);
-                item.name = item.name.replace(nickname, '我');
-                menuList.push(item);
-              } else {
-                const title = { name: '收藏的歌单' };
-                let index = menuList.findIndex((item) => {
-                  return item.name === '收藏的歌单';
-                });
-                if (index === -1) menuList.push(title);
-                menuList.push(item);
-              }
+    }).then((res) => {
+      if (res.code === 200) {
+        res.playlist.map((item, index) => {
+          item.path = '/home/single';
+          item.icon = 'default';
+          if (item.privacy !== 10) {
+            if (item.userId === Number(id)) {
+              const title = { name: '创建的歌单' };
+              let index = menuList.findIndex((item) => {
+                return item.name === '创建的歌单';
+              });
+              if (index === -1) menuList.push(title);
+              item.name = item.name.replace(nickname, '我');
+              menuList.push(item);
+            } else {
+              const title = { name: '收藏的歌单' };
+              let index = menuList.findIndex((item) => {
+                return item.name === '收藏的歌单';
+              });
+              if (index === -1) menuList.push(title);
+              menuList.push(item);
             }
-            return index.id;
-          });
-          this.props.gainMenuList(menuList);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+          }
+          return index.id;
+        });
+        this.props.gainMenuList(menuList);
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
   };
   fork = () => {
     this.props.isSHowLogin(false);

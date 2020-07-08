@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-06 17:41:02
+ * @LastEditTime: 2020-07-08 10:51:40
  * @Description:视频详情(核心)
  */
 import React, { Component } from 'react';
@@ -22,6 +22,7 @@ import {
   isEmpty,
   IsNum,
 } from '../../common/utils/format';
+import Comment from '../../components/comment';
 import { bindActionCreators } from 'redux';
 import { setIsPlay } from '../../store/actions';
 
@@ -33,7 +34,7 @@ class Video extends Component {
       videoDetail: {},
       videoGroup: {},
       //评论
-      comments: {}
+      commentList: {}
     };
   }
 
@@ -191,14 +192,14 @@ class Video extends Component {
       },
     }).then(res => {
       console.log(res)
-      const comments = res;
-      this.setState({ comments })
+      const commentList = res;
+      this.setState({ commentList })
     }).catch(err => {
       console.log(err)
     })
   }
   render() {
-    const { videoUrl, videoDetail, videoGroup, comments } = this.state;
+    const { videoUrl, videoDetail, videoGroup, commentList } = this.state;
     return (
       <div className="video-info">
         <ScrollArea
@@ -273,54 +274,7 @@ class Video extends Component {
               </div>
             </div>
           </div>
-          <div className="comment">
-            <p>精彩评论</p>
-            <ul className="hot-comment-list">
-              {comments.hotComments && comments.hotComments.map((item, index) => {
-                console.log(item)
-                return (
-                  <li
-                    key={index}
-                  >
-                    <img src={item.user.avatarUrl} alt="" />
-                    <div className='aa'>
-                      <p>{`${item.user.nickname}:${item.content}`}</p>
-                      {
-                        item.beReplied.length > 0
-                          ? <p className='comment-reply'>@{item.beReplied[0].user.nickname}:{item.beReplied[0].content}</p>
-                          : ''
-                      }
-                      <p>{formatDate(item.time)}</p>
-                    </div>
-
-                  </li>
-                );
-              })}
-            </ul>
-            <p>热门评论</p>
-            <ul className="hot-comment-list">
-              {comments.comments && comments.comments.map((item, index) => {
-                console.log(item)
-                return (
-                  <li
-                    key={index}
-                  >
-                    <img src={item.user.avatarUrl} alt="" />
-                    <div className='aa'>
-                      <p>{`${item.user.nickname}:${item.content}`}</p>
-                      {
-                        item.beReplied.length > 0
-                          ? <p className='comment-reply'>@{item.beReplied[0].user.nickname}:{item.beReplied[0].content}</p>
-                          : ''
-                      }
-                      <p>{formatDate(item.time)}</p>
-                    </div>
-
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <Comment data={commentList} />
         </ScrollArea>
       </div>
     );

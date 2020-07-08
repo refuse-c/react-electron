@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-07-06 16:47:53
+ * @LastEditTime: 2020-07-08 17:09:51
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -44,7 +44,7 @@ function App() {
             );
           }
         })}
-        <Redirect to="/videoDetail3A04EA2BAB69AEA8B9EB9A58F682F076" />
+        <Redirect to="/home/userdetail:1841631599" />
         {/* <Redirect to="/home/find/findSinger" /> */}
         {/* <Redirect to="/home/find/rankingList" /> */}
         {/* <Redirect to="/home/albumList4546" /> */}
