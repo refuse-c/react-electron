@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-06-05 17:54:41
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-03 12:35:49
+ * @LastEditors: RA
+ * @LastEditTime: 2020-07-09 19:59:24
  * @Description:歌手详情页
  */
 import React, { Component } from 'react';
@@ -10,7 +10,7 @@ import './index.scss';
 import { RAGet } from '../../api/netWork';
 import { artistAlbum, artistMv } from '../../api/api';
 import ScrollArea from 'react-scrollbar';
-import { imgParam, isEmpty, obtainId } from '../../common/utils/format';
+import { imgParam, obtainId } from '../../common/utils/format';
 import { Route, NavLink } from 'react-router-dom';
 import PlayAll from '../../components/playAll';
 class SingerDetails extends Component {
@@ -42,7 +42,7 @@ class SingerDetails extends Component {
         },
       ],
       list: [],
-      showPlayAll: true
+      showPlayAll: true,
     };
   }
   componentDidMount = () => {
@@ -79,41 +79,45 @@ class SingerDetails extends Component {
     //     this.setState({ showPlayAll: false })
     //   }
     // });
-  }
+  };
   componentWillReceiveProps = () => {
     const id = obtainId(window.location.href, 'singerdetail');
     this.setState({ id });
     this.requestGroup(id);
-  }
+  };
   requestGroup = async (id) => {
     let a = await this.getArtistAlbum(id);
     let b = await this.getArtistMv(id);
-    a.mvLength = isEmpty(b) ? 0 : b.mvs.length;
+    a.mvLength = b.mvs.length === 0 ? 0 : b.mvs.length;
     this.setState({ artistsInfo: a });
   };
   getArtistAlbum = async (id) => {
     let data = {};
     await RAGet(artistAlbum.api_url, {
-      params: { id: id }
-    }).then((res) => {
-      const info = res.artist;
-      info.mvLength = '';
-      data = info;
-    }).catch((err) => {
-      // console.log(err);
-    });
+      params: { id: id },
+    })
+      .then((res) => {
+        const info = res.artist;
+        info.mvLength = '';
+        data = info;
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
     return data;
   };
   getArtistMv = async (id) => {
     let data = {};
     await RAGet(artistMv.api_url, {
-      params: { id: id }
-    }).then((res) => {
-      data = res;
-    }).catch((err) => {
-      data = '';
-      // console.log(err);
-    });
+      params: { id: id },
+    })
+      .then((res) => {
+        data = res;
+      })
+      .catch((err) => {
+        data = '';
+        // console.log(err);
+      });
     return data;
   };
   componentWillUnmount() {
@@ -123,7 +127,7 @@ class SingerDetails extends Component {
     };
   }
   getChildValue(list) {
-    this.setState({ list })
+    this.setState({ list });
   }
   render() {
     const { routes } = this.props;
@@ -149,9 +153,9 @@ class SingerDetails extends Component {
                 </div>
               </div>
               <div className="artists_info">
-                <p>{`单曲数：${artistsInfo.musicSize || ''}`}</p>
-                <p>{`专辑数：${artistsInfo.albumSize || ''}`}</p>
-                <p>{`MV数：${artistsInfo.mvLength || ''}`}</p>
+                <p>{`单曲数：${artistsInfo.musicSize || '0'}`}</p>
+                <p>{`专辑数：${artistsInfo.albumSize || '0'}`}</p>
+                <p>{`MV数：${artistsInfo.mvLength || '0'}`}</p>
               </div>
             </div>
           </div>
@@ -170,15 +174,11 @@ class SingerDetails extends Component {
                 );
               })}
             </ul>
-            {
-              showPlayAll
-                ? <PlayAll
-                  cls={`btn1`}
-                  text={`播放全部`}
-                  list={list}
-                />
-                : ''
-            }
+            {showPlayAll ? (
+              <PlayAll cls={`btn1`} text={`播放全部`} list={list} />
+            ) : (
+              ''
+            )}
           </div>
           <div className="singer_content">
             {routes.map((route, key) => {
@@ -188,14 +188,18 @@ class SingerDetails extends Component {
                   key={key}
                   path={route.path}
                   render={(props) => (
-                    <route.component {...props} routes={route.routes} toFatherValue={this.getChildValue.bind(this)} />
+                    <route.component
+                      {...props}
+                      routes={route.routes}
+                      toFatherValue={this.getChildValue.bind(this)}
+                    />
                   )}
                 />
               );
             })}
           </div>
         </ScrollArea>
-      </div >
+      </div>
     );
   }
 }
