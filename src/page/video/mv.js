@@ -61,7 +61,7 @@ class ComponentMvs extends Component {
         this.setState({ newMv });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   //热播MV
@@ -73,7 +73,7 @@ class ComponentMvs extends Component {
         this.setState({ hotMv });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   //网易出品
@@ -85,7 +85,7 @@ class ComponentMvs extends Component {
         this.setState({ wyMv });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   getMvRcmd = () => {
@@ -96,7 +96,7 @@ class ComponentMvs extends Component {
         this.setState({ wyMv });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   handleMenu1 = (title, index) => {
@@ -130,7 +130,7 @@ class ComponentMvs extends Component {
         this.setState({ mvTop });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   render() {

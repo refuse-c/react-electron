@@ -43,7 +43,7 @@ class singerDesc extends Component {
       }
       this.setState({ artistDesc: text });
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
   };
   componentWillUnmount() {

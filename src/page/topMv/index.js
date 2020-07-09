@@ -51,7 +51,7 @@ class AllMv extends Component {
         this.setState({ topMvList, date });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   render() {

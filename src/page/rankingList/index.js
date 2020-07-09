@@ -88,7 +88,7 @@ class RankingList extends Component {
       data.path = '/home/single' + res.playlist.id;
       data.coverImgUrl = res.playlist.coverImgUrl;
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
     return data;
   };
@@ -103,7 +103,7 @@ class RankingList extends Component {
         this.setState({ globalList });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   //所有榜单摘要详情
@@ -116,7 +116,7 @@ class RankingList extends Component {
         data.updateFrequency = res.artistToplist.updateFrequency;
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
     return data;
   };
@@ -128,7 +128,7 @@ class RankingList extends Component {
         data = res.list.artists;
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
     return data;
   };

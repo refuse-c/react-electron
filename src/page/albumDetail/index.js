@@ -64,7 +64,7 @@ class List extends Component {
 
       this.setState({ albumDetail, muscicList });
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
   };
   render() {

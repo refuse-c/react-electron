@@ -145,7 +145,7 @@ class Footer extends Component {
         audio.play();
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         this.props.setIsPlay(false);
       });
   };
@@ -161,7 +161,7 @@ class Footer extends Component {
         this.props.gainPlayList(playList);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   gotoPlayer = () => {

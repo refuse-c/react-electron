@@ -51,7 +51,7 @@ class NewMusic extends Component {
       const songList = dataScreening(res.data);
       this.setState({ songList });
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   handleMenu = (item) => {

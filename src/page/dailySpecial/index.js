@@ -38,7 +38,7 @@ class DailySpecial extends Component {
         const recommendList = dataScreening(res.recommend)
         this.setState({ recommendList })
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
       })
   }
 

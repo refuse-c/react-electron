@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-07-08 14:27:30
+ * @LastEditTime: 2020-07-09 17:21:21
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -217,4 +217,8 @@ export const userSubcount = {
 // 获取用户详情
 export const userDetail = {
   api_url: '/user/detail'
+}
+// 获取动态消息
+export const event = {
+  api_url: '/event'
 }

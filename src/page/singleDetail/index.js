@@ -81,7 +81,7 @@ class List extends Component {
       playList.name = playList.name.replace(nickname, '我');
       this.setState({ playList, muscicList });
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
   };
   render() {

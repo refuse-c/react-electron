@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-05 17:49:46
+ * @LastEditTime: 2020-07-09 15:54:22
  * @Description:检索->用户
  */
 import React, { Component } from 'react';
@@ -20,6 +20,9 @@ class User extends Component {
     super(props);
     this.state = {}
   }
+  gotouserDetail = item => {
+    this.props.history.push({ pathname: `/home/userdetail${item.userId}` })
+  }
   render() {
     const { data } = this.props;
     return (
@@ -31,7 +34,7 @@ class User extends Component {
                 data && data.map((item, index) => {
                   const gender = item.gender === 1 ? 'man' : item.gender === 2 ? 'woman' : ''
                   return (
-                    <li key={index}>
+                    <li key={index} onClick={this.gotouserDetail.bind(this, item)}>
                       <img src={imgParam(item.avatarUrl, 50, 50)} alt="" />
                       <p>{item.nickname} <span className={gender}></span></p>
 

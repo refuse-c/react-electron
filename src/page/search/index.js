@@ -169,7 +169,7 @@ class Search extends Component {
           : this.setState({ showsuggest: true, suggestList });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   // search
@@ -279,7 +279,7 @@ class Search extends Component {
         // this.setState({ resultList })
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         this.props.setTotal(null);
       });
   };
@@ -291,7 +291,7 @@ class Search extends Component {
         this.setState({ hotList });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   //defult serach
@@ -302,7 +302,7 @@ class Search extends Component {
         this.setState({ placeholder });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   render() {

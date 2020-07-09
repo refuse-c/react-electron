@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-08 10:51:40
+ * @LastEditTime: 2020-07-09 17:17:43
  * @Description:视频详情(核心)
  */
 import React, { Component } from 'react';
@@ -90,7 +90,7 @@ class Video extends Component {
       const videoUrl = res.data.url;
       this.setState({ videoUrl });
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   //相似mv
@@ -103,7 +103,7 @@ class Video extends Component {
       const videoGroup = res.mvs;
       this.setState({ videoGroup });
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   //mv详情
@@ -116,7 +116,7 @@ class Video extends Component {
       const videoDetail = res.data;
       this.setState({ videoDetail });
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
 
@@ -133,7 +133,7 @@ class Video extends Component {
         this.setState({ videoDetail });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   //视频url
@@ -148,7 +148,7 @@ class Video extends Component {
         this.setState({ videoUrl });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   //相似视频
@@ -163,7 +163,7 @@ class Video extends Component {
         this.setState({ videoGroup });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   //获取视频/mv/热门 评论
@@ -176,9 +176,9 @@ class Video extends Component {
 
       }
     }).then(res => {
-      console.log(res)
+      // console.log(res)
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   getVideoComment = (id) => {
@@ -191,11 +191,11 @@ class Video extends Component {
 
       },
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       const commentList = res;
       this.setState({ commentList })
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   render() {
@@ -274,7 +274,7 @@ class Video extends Component {
               </div>
             </div>
           </div>
-          <Comment data={commentList} />
+          <Comment data={commentList} history={this.props.history} />
         </ScrollArea>
       </div>
     );

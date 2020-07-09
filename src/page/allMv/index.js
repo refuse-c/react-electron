@@ -100,7 +100,7 @@ class AllMv extends Component {
       obj.more = res.hasMore;
       this.setState({ allMvList: obj })
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   render() {

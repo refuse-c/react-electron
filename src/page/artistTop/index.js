@@ -41,7 +41,7 @@ class ArtistTop extends Component {
       const artistList = res.list;
       this.setState({ artistList })
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
   };
   handleMenu = (index) => {

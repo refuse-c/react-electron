@@ -67,7 +67,7 @@ class FindList extends Component {
         this.setState({ allListData });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   getPlaylistHot = () => {
@@ -77,7 +77,7 @@ class FindList extends Component {
         this.setState({ hotListData });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   getTopPlaylist = (songListText) => {
@@ -94,7 +94,7 @@ class FindList extends Component {
       const songListdata = res.playlists;
       this.setState({ songListdata });
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
   };
   showPlop = () => {

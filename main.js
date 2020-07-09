@@ -40,11 +40,11 @@ function createWindow() {
   app.on('window-all-closed', () => {
     app.quit();
   });
-    mainWindow.loadURL(url.format({
-      pathname: path.join(__dirname, './build/index.html'),
-      protocol: 'file:',
-      slashes: true
-    }))
+  mainWindow.loadURL(url.format({
+    pathname: path.join(__dirname, './build/index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
   // 加载应用----适用于 react 项目
   // mainWindow.setIcon('./build/static/media/logo.png');
   // mainWindow.loadURL('http://localhost:3000/');
@@ -155,7 +155,7 @@ ipcMain.on('down', (event, url, name) => {
         if (err) {
           event.sender.send('reply', `音乐 ${name} 下载失败 `);
           console.log('[downloadPic]文件   ' + fileName + '  下载失败.');
-          console.log(err);
+          // console.log(err);
         } else {
           console.log('文件' + fileName + '下载成功');
           event.sender.send('reply', `音乐 ${name} 下载成功 `);

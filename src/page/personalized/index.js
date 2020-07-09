@@ -43,7 +43,7 @@ class Personalized extends Component {
       obj.more = res.more;
       this.setState({ exclusiveList: obj });
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   handleMore = () => {

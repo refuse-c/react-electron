@@ -1,7 +1,7 @@
 .user-detail {
   width: 100%;
   margin: 0 auto;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 90px);
 
   .user-content {
     // padding: 30px;
@@ -9,6 +9,12 @@
     .user-header {
       display: flex;
       width: 100%;
+      padding: 30px 30px 0;
+
+      img {
+        width: 200px;
+        height: 200px;
+      }
 
       .user-info {
         width: calc(100% - 200px);
@@ -21,7 +27,13 @@
           height: 60px;
           border-bottom: 1px solid #ccc;
 
-          img {
+          .vip-img {
+            width: 60px;
+            height: 20px;
+            margin-left: 20px;
+          }
+
+          .gender-img {
             width: 20px;
             height: 20px;
             margin: 0 20px;
@@ -42,6 +54,42 @@
             border: 1px solid #CD2929
           }
         }
+
+        .user-info-list {
+          display: flex;
+
+          li {
+            margin-top: 10px;
+            padding-right: 20px;
+            cursor: pointer;
+
+            &:not(:first-child) {
+              border-left: 1px solid #ccc;
+              padding-left: 20px;
+            }
+
+            p {
+              cursor: pointer;
+
+              &:first-child {
+                color: #333;
+                font-size: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .user-list {
+      padding: 0 14px;
+
+      h2 {
+        padding: 10px 0;
+        margin: 10px 16px;
+        font-size: 20px;
+        color: #fff;
+        border-bottom: 1px solid #ccc;
       }
     }
   }

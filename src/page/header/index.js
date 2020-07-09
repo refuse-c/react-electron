@@ -73,7 +73,7 @@ class Header extends Component {
         this.getMusicList(userId, nickname);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   getMusicList = (id, nickname) => {
@@ -112,7 +112,7 @@ class Header extends Component {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   goBack = () => {

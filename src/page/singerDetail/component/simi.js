@@ -39,7 +39,7 @@ class SimiSinger extends Component {
         this.setState({ artistsList });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   render() {

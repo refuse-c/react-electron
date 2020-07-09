@@ -49,7 +49,7 @@ class Recommendation extends Component {
       this.setState({ bannerData })
       this.runSwiper()
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   getRecommendList = () => {
@@ -74,7 +74,7 @@ class Recommendation extends Component {
         }
         this.setState({ recommendListData })
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
       })
   }
   getPrivatecontentList = () => {
@@ -83,7 +83,7 @@ class Recommendation extends Component {
         const privatecontentData = res.result;
         this.setState({ privatecontentData })
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
       })
   }
   getTopSongs = () => {
@@ -93,7 +93,7 @@ class Recommendation extends Component {
       const topSongsData = dataScreening(res.data);
       this.setState({ topSongsData });
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   getPersonalizedMv = () => {
@@ -102,7 +102,7 @@ class Recommendation extends Component {
         const personalizedMvData = res.result;
         this.setState({ personalizedMvData });
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
       })
   }
   addMusic = (item) => {
@@ -166,7 +166,7 @@ class Recommendation extends Component {
                   return (
                     <div
                       key={index}
-                      style={{ backgroundImage: 'url(' + imgParam(imgUrl,1000,360) + ')' }}
+                      style={{ backgroundImage: 'url(' + imgParam(imgUrl, 1000, 360) + ')' }}
                       className="swiper-slide">
                       <span style={{ backgroundColor: item.titleColor }}>{item.typeTitle}</span>
                     </div>

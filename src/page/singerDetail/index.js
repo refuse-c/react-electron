@@ -100,7 +100,7 @@ class SingerDetails extends Component {
       info.mvLength = '';
       data = info;
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
     return data;
   };
@@ -112,7 +112,7 @@ class SingerDetails extends Component {
       data = res;
     }).catch((err) => {
       data = '';
-      console.log(err);
+      // console.log(err);
     });
     return data;
   };

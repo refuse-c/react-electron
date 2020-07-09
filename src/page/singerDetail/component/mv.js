@@ -33,7 +33,7 @@ class singerMv extends Component {
       const artistMvList = res.mvs;
       this.setState({ artistMvList })
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
   };
   componentWillUnmount() {

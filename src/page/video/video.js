@@ -90,7 +90,7 @@ class ComponentVideo extends Component {
         this.getVideoAll(offset + 1)
       }
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   // 视频标签列表
@@ -100,7 +100,7 @@ class ComponentVideo extends Component {
         const videoGroupList = res.data
         this.setState({ videoGroupList })
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
       })
   }
   //视频分类列表
@@ -110,7 +110,7 @@ class ComponentVideo extends Component {
         const categoryList = res.data;
         this.setState({ categoryList })
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
       })
   }
   // 单个标签数据
@@ -136,7 +136,7 @@ class ComponentVideo extends Component {
         this.getVideoGroup(ids, offset + 1)
       }
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   // 加载更多

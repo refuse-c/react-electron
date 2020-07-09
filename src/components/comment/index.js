@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-08 16:01:31
+ * @LastEditTime: 2020-07-09 17:11:28
  * @Description:评论组件
  */
 import React, { Component } from 'react';
@@ -18,13 +18,15 @@ class Comment extends Component {
     super(props);
     this.state = {}
   }
+  gotouserDetail = item => {
+    this.props.history.push({ pathname: `/home/userdetail${item.userId}` })
+  }
   render() {
     const { data } = this.props;
     return (
       <div className="comment">
         <ul className="comment-list">
           {data.hotComments && data.hotComments.map((item, index) => {
-            console.log(item)
             return (
               <li
                 key={index}
@@ -33,13 +35,13 @@ class Comment extends Component {
                 <img src={imgParam(item.user.avatarUrl, 40, 40)} alt="" />
                 <div className="comment-info">
                   <div className='commenter'>
-                    <p className="commenter-name">{item.user.nickname}：</p>
+                    <p className="commenter-name" onClick={this.gotouserDetail.bind(this, item.user)}>{item.user.nickname}：</p>
                     <p className="commenter-text">{item.content}</p>
                   </div>
                   {
                     item.beReplied.length > 0
                       ? <div className="replyer">
-                        <p className='replyer-name commenter-name'>@{item.beReplied[0].user.nickname}：</p>
+                        <p className='replyer-name commenter-name' onClick={this.gotouserDetail.bind(this, item.beReplied[0].user)}>@{item.beReplied[0].user.nickname}：</p>
                         <p className='replyer-text commenter-text'>{item.beReplied[0].content}</p>
                       </div>
                       : ''
@@ -57,7 +59,7 @@ class Comment extends Component {
             );
           })}
         </ul>
-      </div>
+      </div >
     );
   }
 }

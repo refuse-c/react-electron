@@ -34,7 +34,7 @@ class singerAlbum extends Component {
         this.setState({ artistsAlbum });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   componentWillUnmount() {

@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-21 14:01:33
- * @LastEditTime: 2020-06-08 16:34:48
+ * @LastEditTime: 2020-07-09 15:57:05
  * @LastEditors: refuse_c
  * @Description: 搜索展示框架
  */
@@ -125,7 +125,7 @@ class SearchInfo extends Component {
                         //   menuIndex === 1009 ?
                         //  :
                         menuIndex === 1002 && searchInfo.userArr ?
-                          <User data={searchInfo.userArr} />
+                          <User data={searchInfo.userArr} history={this.props.history} />
                           :
                           menuIndex === 1014 && searchInfo.videoArr ?
                             <Video data={searchInfo.videoArr} />

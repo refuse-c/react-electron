@@ -35,7 +35,7 @@ class TopSong extends Component {
       this.setState({ songList })
       this.props.toFatherValue(songList);
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   render() {

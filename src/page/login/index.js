@@ -98,7 +98,7 @@ class Login extends Component {
       this.props.isLogin(true);
       this.getMusicList(userId, nickname);
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
   };
   getMusicList = (id, nickname) => {
@@ -135,7 +135,7 @@ class Login extends Component {
         this.props.gainMenuList(menuList);
       }
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
   };
   fork = () => {

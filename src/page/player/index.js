@@ -76,7 +76,7 @@ class Player extends Component {
         this.setState({ songsAlbum });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   //获取歌词
@@ -90,7 +90,7 @@ class Player extends Component {
       lyric = foramtLrc(lyric)
       this.setState({ lyric });
     }).catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
   };
 
