@@ -1,4 +1,6 @@
   .comment {
+    width: 100%;
+
     h2 {
       font-size: 20px;
       font-weight: 500;
@@ -37,8 +39,9 @@
           }
 
           .commenter-name {
-            color: #0A63A8;
+            color: #066cea;
             cursor: pointer;
+            white-space: nowrap;
           }
 
           .commenter-text {
@@ -57,10 +60,11 @@
 
               .ct-item {
                 padding: 5px 10px;
-                color: #ccc;
+                color: #fafafa;
 
                 &:hover {
                   color: #fafafa;
+                  cursor: pointer;
                 }
               }
             }

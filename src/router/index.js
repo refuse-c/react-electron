@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-07-08 17:09:42
+ * @LastEditTime: 2020-07-10 17:45:20
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -27,6 +27,7 @@ import IM from '../page/im';
 import Local from '../page/local';
 import AllMv from '../page/allMv';
 import TopMv from '../page/topMv';
+import UserEvent from '../page/userEvent';
 
 import Down from '../page/down';
 import Lately from '../page/lately';
@@ -56,6 +57,10 @@ let routes = [
           {
             path: '/home/userdetail:id',
             component: UserDetail,
+          },
+          {
+            path: '/home/userevent:id',
+            component: UserEvent,
           },
           {
             path: '/home/find/',

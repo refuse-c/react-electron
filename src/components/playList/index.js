@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-08 19:19:33
- * @LastEditTime: 2020-06-09 16:26:49
+ * @LastEditTime: 2020-07-10 15:51:47
  * @LastEditors: refuse_c
  * @Description:当前播放音乐组件
  */
@@ -88,7 +88,7 @@ class PlayList extends Component {
                     >
                       <div>{formatNum(index)}</div>
                       <div>{item.name}</div>
-                      <div>{formatPlayTime(item.dt / 1000)}</div>
+                      <div>{formatPlayTime((item.dt || item.duration) / 1000)}</div>
                     </li>
                   );
                 })}

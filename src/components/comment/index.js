@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-09 17:11:28
+ * @LastEditTime: 2020-07-10 10:08:27
  * @Description:评论组件
  */
 import React, { Component } from 'react';
@@ -35,14 +35,12 @@ class Comment extends Component {
                 <img src={imgParam(item.user.avatarUrl, 40, 40)} alt="" />
                 <div className="comment-info">
                   <div className='commenter'>
-                    <p className="commenter-name" onClick={this.gotouserDetail.bind(this, item.user)}>{item.user.nickname}：</p>
-                    <p className="commenter-text">{item.content}</p>
+                    <p className="commenter-text"><span className="commenter-name" onClick={this.gotouserDetail.bind(this, item.user)}>{item.user.nickname}：</span>{item.content}</p>
                   </div>
                   {
                     item.beReplied.length > 0
                       ? <div className="replyer">
-                        <p className='replyer-name commenter-name' onClick={this.gotouserDetail.bind(this, item.beReplied[0].user)}>@{item.beReplied[0].user.nickname}：</p>
-                        <p className='replyer-text commenter-text'>{item.beReplied[0].content}</p>
+                        <p className='replyer-text commenter-text'><span className='replyer-name commenter-name' onClick={this.gotouserDetail.bind(this, item.beReplied[0].user)}>@{item.beReplied[0].user.nickname}：</span>{item.beReplied[0].content}</p>
                       </div>
                       : ''
                   }

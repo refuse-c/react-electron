@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-06-09 16:28:29
+ * @LastEditTime: 2020-07-10 15:49:14
  * @LastEditors: refuse_c
  * @Description:audio核心
  */
@@ -293,10 +293,10 @@ class Footer extends Component {
     return (
       <div className="footer">
         <div className="control">
-          {playList.length > 0 && !isEmpty(playList[index].picUrl) ? (
+          {playList.length > 0 ? (
             <img
               onClick={this.gotoPlayer}
-              src={imgParam(playList[index].picUrl, 100, 100)}
+              src={imgParam(playList[index].picUrl || '', 100, 100)}
               alt=""
             />
           ) : (

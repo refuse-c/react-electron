@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:43
- * @LastEditTime: 2020-07-09 17:21:21
+ * @LastEditTime: 2020-07-10 17:42:34
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -210,6 +210,10 @@ export const videoComment = {
 export const hotComment = {
   api_url: '/comment/hot'
 }
+//歌曲评论
+export const musicComment = {
+  api_url: '/comment/music'
+}
 // 获取用户信息 , 歌单，收藏，mv, dj 数量
 export const userSubcount = {
   api_url: '/user/subcount'
@@ -221,4 +225,21 @@ export const userDetail = {
 // 获取动态消息
 export const event = {
   api_url: '/event'
+}
+// 获取动态消息
+export const userEvent = {
+  api_url: '/user/event'
+}
+
+//相似音乐
+export const simiSong = {
+  api_url: '/simi/song'
+}
+//包含歌曲的歌单
+export const simiPlaylist = {
+  api_url: '/simi/playlist'
+}
+//获取最近 5 个听了这首歌的用户
+export const simiUser = {
+  api_url: '/simi/user'
 }

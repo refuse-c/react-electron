@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-07-09 19:56:21
- * @LastEditors: RA
+ * @LastEditTime: 2020-07-10 17:48:19
+ * @LastEditors: refuse_c
  * @Description:
  */
 import React, { Component } from 'react';
@@ -52,11 +52,11 @@ class App extends Component {
               );
             }
           })}
-          {/* <Redirect to="/videoDetail3A04EA2BAB69AEA8B9EB9A58F682F076" /> */}
-          <Redirect to="/home/singerdetail30285885/" />
+          <Redirect to="/home/userdetail287070050" />
+          {/* <Redirect to="/home/singerdetail30285885/" /> */}
           {/* <Redirect to="/home/find/rankingList" /> */}
           {/* <Redirect to="/home/albumList4546" /> */}
-          {/* <Redirect to="/videoDetail5331966" /> */}
+          {/* <Redirect to="/player" /> */}
         </Router>
       </div >
     );

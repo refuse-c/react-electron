@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-07-08 10:43:20
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-09 17:17:28
+ * @LastEditTime: 2020-07-10 17:53:58
  * @Description:
  */
 import React, { Component } from 'react';
@@ -23,7 +23,6 @@ class UserDetail extends Component {
   }
   componentDidMount = () => {
     const id = window.location.href.split('userdetail')[1];
-    // 287070050    1841631599
     this.getUserDetail(id)
     this.getmusicList(id)
   }
@@ -67,9 +66,16 @@ class UserDetail extends Component {
       // console.log(err)
     })
   }
-
+  gotoUserEvent = (data) => {
+    const { userId } = data;
+    console.log(userId)
+    this.props.history.push({ pathname: `/home/userevent${userId}` });
+  }
   render() {
     const { userData, createList, collectList } = this.state;
+
+    console.log(userData);
+
     return (
       <div className="user-detail">
         <ScrollView onScroll={this.onScroll}>
@@ -94,7 +100,7 @@ class UserDetail extends Component {
                   <p className='user-level'> Lv{userData.level}</p>
                 </div>
                 <ul className="user-info-list">
-                  <li>
+                  <li onClick={this.gotoUserEvent.bind(this, userData.profile)}>
                     <p>{userData.profile && userData.profile.eventCount}</p>
                     <p>动态</p>
                   </li>

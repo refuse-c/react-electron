@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-07-08 16:11:40
+ * @LastEditTime: 2020-07-10 17:41:18
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -309,8 +309,10 @@ export const imgParam = (url, width, height) => {
     return require('../../common/images/logo.png');
   }
   const urls = url.indexOf('https') === -1 ? url.replace('http', 'https') : url;
-  const w = isEmpty(width) ? '100' : width;
-  const h = isEmpty(height) ? '100' : height;
+  let w = isEmpty(width) ? 'auto' : width;
+  let h = isEmpty(height) ? 'auto' : height;
+  w = w > 1000 ? w / 5 : w;
+  h = h > 1000 ? h / 5 : h;
   return urls + '?param=' + w + 'y' + h;
 };
 
@@ -753,3 +755,29 @@ export const obtainId = (url, separator) => {
     return id;
   }
 }
+// 动态类型
+export const formatDynamicType = (type) => {
+  switch (Number(type)) {
+    case 13: return '分享歌单';
+    case 17: return '分享节目';
+    case 18: return '分享单曲';
+    case 19: return '分享专辑';
+    case 21: return '分享视频';
+    case 22: return '转发';
+    case 24: return '分享专栏文章';
+    case 28: return '分享节目';
+    case 35: return '发布动态';
+    case 39: return '发布视频';
+    case 41: return '分享视频';
+    default: return '';
+  }
+}
+
+// 18 分享单曲
+// 19 分享专辑
+// 17、28 分享电台节目
+// 22 转发
+// 39 发布视频
+// 35、13 分享歌单
+// 24 分享专栏文章
+// 41、21 分享视频

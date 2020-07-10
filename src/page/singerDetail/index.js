@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-06-05 17:54:41
- * @LastEditors: RA
- * @LastEditTime: 2020-07-09 19:59:24
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-07-10 09:04:31
  * @Description:歌手详情页
  */
 import React, { Component } from 'react';
@@ -10,7 +10,7 @@ import './index.scss';
 import { RAGet } from '../../api/netWork';
 import { artistAlbum, artistMv } from '../../api/api';
 import ScrollArea from 'react-scrollbar';
-import { imgParam, obtainId } from '../../common/utils/format';
+import { imgParam, obtainId, isEmpty } from '../../common/utils/format';
 import { Route, NavLink } from 'react-router-dom';
 import PlayAll from '../../components/playAll';
 class SingerDetails extends Component {
@@ -88,7 +88,9 @@ class SingerDetails extends Component {
   requestGroup = async (id) => {
     let a = await this.getArtistAlbum(id);
     let b = await this.getArtistMv(id);
-    a.mvLength = b.mvs.length === 0 ? 0 : b.mvs.length;
+    if (!isEmpty(b.mvs)) {
+      a.mvLength = b.mvs.length === 0 ? 0 : b.mvs.length;
+    }
     this.setState({ artistsInfo: a });
   };
   getArtistAlbum = async (id) => {
@@ -177,8 +179,8 @@ class SingerDetails extends Component {
             {showPlayAll ? (
               <PlayAll cls={`btn1`} text={`播放全部`} list={list} />
             ) : (
-              ''
-            )}
+                ''
+              )}
           </div>
           <div className="singer_content">
             {routes.map((route, key) => {
