@@ -11,8 +11,13 @@
           line-height: 20px;
 
           div {
+
             p {
               span {
+                &.user-name {
+                  cursor: pointer;
+                }
+
                 margin-right: 10px;
               }
             }

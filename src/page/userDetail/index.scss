@@ -24,7 +24,7 @@
           display: flex;
           align-items: center;
           width: 100%;
-          height: 60px;
+          padding: 15px 0;
           border-bottom: 1px solid #ccc;
 
           .vip-img {
@@ -41,7 +41,8 @@
 
           .user-nickname {
             color: #333;
-            font-size: 24px;
+            font-size: 18px;
+            font-weight: 600;
           }
 
           .user-level {

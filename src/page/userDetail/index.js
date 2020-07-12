@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-07-08 10:43:20
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-10 17:53:58
+ * @LastEditors: RA
+ * @LastEditTime: 2020-07-10 18:52:05
  * @Description:
  */
 import React, { Component } from 'react';
@@ -68,7 +68,6 @@ class UserDetail extends Component {
   }
   gotoUserEvent = (data) => {
     const { userId } = data;
-    console.log(userId)
     this.props.history.push({ pathname: `/home/userevent${userId}` });
   }
   render() {

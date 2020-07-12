@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-07-10 17:41:18
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-07-10 20:39:46
+ * @LastEditors: RA
  * @Description:
  */
 
@@ -311,8 +311,8 @@ export const imgParam = (url, width, height) => {
   const urls = url.indexOf('https') === -1 ? url.replace('http', 'https') : url;
   let w = isEmpty(width) ? 'auto' : width;
   let h = isEmpty(height) ? 'auto' : height;
-  w = w > 1000 ? w / 5 : w;
-  h = h > 1000 ? h / 5 : h;
+  w = w > 500 ? Math.floor(w / 5) : w;
+  h = h > 500 ? Math.floor(h / 5) : h;
   return urls + '?param=' + w + 'y' + h;
 };
 
@@ -501,22 +501,21 @@ export const aa = (arr1, arr2) => {
   return arr1;
 };
 
-
 export const formatVideoData = (array) => {
-  let newArray = []
+  let newArray = [];
   if (!isArrays(array)) return false;
   array.map((item, index) => {
-    let obj = {}
+    let obj = {};
     obj = item.data;
     obj.alg = item.alg || '';
     obj.displayed = item.displayed || '';
     obj.extAlg = item.extAlg || '';
     obj.type = item.type || '';
-    newArray.push(obj)
-    return index.id
-  })
+    newArray.push(obj);
+    return index.id;
+  });
   return newArray;
-}
+};
 /**
  * @param {type}
  * @return:
@@ -750,28 +749,40 @@ export const c = (str) => {
 export const obtainId = (url, separator) => {
   let id = url.split(separator)[1];
   if (id.indexOf('/') !== -1) {
-    return id.split('/')[0]
+    return id.split('/')[0];
   } else {
     return id;
   }
-}
+};
 // 动态类型
 export const formatDynamicType = (type) => {
   switch (Number(type)) {
-    case 13: return '分享歌单';
-    case 17: return '分享节目';
-    case 18: return '分享单曲';
-    case 19: return '分享专辑';
-    case 21: return '分享视频';
-    case 22: return '转发';
-    case 24: return '分享专栏文章';
-    case 28: return '分享节目';
-    case 35: return '发布动态';
-    case 39: return '发布视频';
-    case 41: return '分享视频';
-    default: return '';
+    case 13:
+      return '分享歌单';
+    case 17:
+      return '分享节目';
+    case 18:
+      return '分享单曲';
+    case 19:
+      return '分享专辑';
+    case 21:
+      return '分享视频';
+    case 22:
+      return '转发';
+    case 24:
+      return '分享专栏文章';
+    case 28:
+      return '分享节目';
+    case 35:
+      return '发布动态';
+    case 39:
+      return '发布视频';
+    case 41:
+      return '分享视频';
+    default:
+      return '';
   }
-}
+};
 
 // 18 分享单曲
 // 19 分享专辑
