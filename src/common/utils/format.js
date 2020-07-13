@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-07-10 20:39:46
- * @LastEditors: RA
+ * @LastEditTime: 2020-07-13 17:10:58
+ * @LastEditors: refuse_c
  * @Description:
  */
 
@@ -311,8 +311,8 @@ export const imgParam = (url, width, height) => {
   const urls = url.indexOf('https') === -1 ? url.replace('http', 'https') : url;
   let w = isEmpty(width) ? 'auto' : width;
   let h = isEmpty(height) ? 'auto' : height;
-  w = w > 500 ? Math.floor(w / 5) : w;
-  h = h > 500 ? Math.floor(h / 5) : h;
+  // w = w > 500 ? Math.floor(w / 5) : w;
+  // h = h > 500 ? Math.floor(h / 5) : h;
   return urls + '?param=' + w + 'y' + h;
 };
 
@@ -792,3 +792,7 @@ export const formatDynamicType = (type) => {
 // 35、13 分享歌单
 // 24 分享专栏文章
 // 41、21 分享视频
+export const formatArrayNull = (str) => {
+  const array = str.split("#");
+  return array.filter((item) => item);
+}

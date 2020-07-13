@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: RA
- * @LastEditTime: 2020-07-10 19:34:43
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-07-13 14:02:45
  * @Description:朋友
  */
 import React, { Component } from 'react';
@@ -43,11 +43,13 @@ class Frind extends Component {
     return (
       <div className="frind">
         <ScrollView onScroll={this.onScroll}>
-          <div className="headline">
-            <p className="headline_title">动态</p>
-            <p className="headline_more">写动态</p>
+          <div className="frind-top">
+            <div className="headline">
+              <p className="headline_title">动态</p>
+              <p className="headline_more">写动态</p>
+            </div>
           </div>
-          {<Event data={eventList} history={this.props.history}/>}
+          {<Event data={eventList} history={this.props.history} />}
         </ScrollView>
       </div>
     );

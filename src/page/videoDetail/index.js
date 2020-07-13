@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-09 17:17:43
+ * @LastEditTime: 2020-07-13 12:37:53
  * @Description:视频详情(核心)
  */
 import React, { Component } from 'react';
@@ -217,7 +217,7 @@ class Video extends Component {
               </div>
               <video
                 src={videoUrl}
-                // autoPlay
+                autoPlay
                 controls
                 poster={videoDetail.coverUrl ? imgParam(videoDetail.coverUrl, 700, 400) : imgParam(videoDetail.cover, 700, 400)}
                 ref={(video) => (this.video = video)}

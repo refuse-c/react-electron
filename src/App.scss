@@ -44,8 +44,6 @@ pre {
   display: flex;
   width: 100%;
   height: 100vh;
-
-
 }
 
 // scroll container style
@@ -151,7 +149,8 @@ pre {
     font-size: 14px;
     color: #fff;
     padding-right: 10px;
-    background: url('./common/images/arrow-right.png') center right / contain no-repeat;
+    background: url("./common/images/arrow-right.png") center right / contain
+      no-repeat;
 
     &:hover {
       color: #222;
@@ -236,7 +235,7 @@ pre {
 
       &:not(:last-child)::before {
         position: absolute;
-        content: '';
+        content: "";
         top: 4px;
         right: -10px;
         width: 1px;
@@ -253,4 +252,14 @@ pre {
 
 .btn1 {
   height: max-content;
+}
+
+.commenter-name {
+  color: #066cea;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.commenter-text {
+  color: #eee;
 }
