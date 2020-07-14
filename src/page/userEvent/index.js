@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-07-10 17:43:17
  * @LastEditors: RA
- * @LastEditTime: 2020-07-10 19:34:52
+ * @LastEditTime: 2020-07-14 21:06:18
  * @Description:用户动态
  */
 import React, { Component } from 'react';
@@ -27,6 +27,7 @@ class UserEvent extends Component {
     RAGet(userEvent.api_url, {
       params: {
         uid: id,
+        limit: 50,
       },
     }).then((res) => {
       const eventList = res.events;

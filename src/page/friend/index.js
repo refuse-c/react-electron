@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-14 16:00:12
+ * @LastEditors: RA
+ * @LastEditTime: 2020-07-14 21:08:12
  * @Description:朋友
  */
 import React, { Component } from 'react';
@@ -29,12 +29,14 @@ class Frind extends Component {
       params: {
         uid: id,
       },
-    }).then((res) => {
-      const eventList = res.event;
-      this.setState({ eventList });
-    }).catch((err) => {
-      // console.log(err)
-    });
+    })
+      .then((res) => {
+        const eventList = res.event;
+        this.setState({ eventList });
+      })
+      .catch((err) => {
+        // console.log(err)
+      });
   };
 
   render() {

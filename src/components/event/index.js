@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-07-10 17:54:31
- * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-14 18:06:09
+ * @LastEditors: RA
+ * @LastEditTime: 2020-07-14 21:12:30
  * @Description: 动态组件
  */
 import React, { Component } from "react";
@@ -265,11 +265,11 @@ class Event extends Component {
                               <span
                                 onClick={(e) =>
                                   this.props.history.push({
-                                    pathname: `/videoDetail${jsonData.video.id}`,
+                                    pathname: `/videoDetail${jsonData.mv.id}`,
                                   })
                                 }
                               >
-                                {jsonData.video.title}
+                                {jsonData.mv.name}
                               </span>
                             </p>
                             <video
