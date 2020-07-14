@@ -1,11 +1,11 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-07-13 17:10:58
+ * @LastEditTime: 2020-07-14 18:05:19
  * @LastEditors: refuse_c
  * @Description:
  */
-
+let myDate = new Date();
 /**
  * @param {string}
  * @return:
@@ -33,7 +33,6 @@ export const formatDate = (v, type) => {
  * @description: 获取当前时间
  */
 export const getCurrentDate = () => {
-  let myDate = new Date();
   let y = myDate.getFullYear();
   y = y > 10 ? y + '' : '0' + y;
   let m = myDate.getMonth();
@@ -43,6 +42,60 @@ export const getCurrentDate = () => {
   let dateStr = y + m + d;
   return dateStr;
 };
+
+// 动态时间
+export const formatDynamicDate = oldTime => {
+  let yyyy = '';
+  let hhmm = '';
+  //获取今天的时间
+  let _year = myDate.getFullYear(); //年份
+  let _month = myDate.getMonth() + 1;//月份
+  _month = _month < 10 ? '0' + _month : _month;
+  let _date = myDate.getDate();//日期
+
+  //获取传入的时间
+  let oldDate = new Date(oldTime);
+
+  console.log(oldDate)
+  let old_year = oldDate.getFullYear(); //年份
+  let old_month = oldDate.getMonth() + 1;//月份
+  let old_date = oldDate.getDate();//日期
+  let old_hour = oldDate.getHours();//小时
+  let old_minu = oldDate.getMinutes();//分钟
+  old_month = old_month < 10 ? '0' + old_month : old_month;
+  old_date = old_date < 10 ? '0' + old_date : old_date;
+  old_hour = old_hour < 10 ? '0' + old_hour : old_hour;
+  old_minu = old_minu < 10 ? '0' + old_minu : old_minu;
+
+  //昨天 今天
+  const today = `${_year}-${_month}-${_date} 00:00`;
+  const startTime = new Date(today);
+  const nowDay = startTime - oldTime;
+  if (nowDay > 0 && nowDay <= 24 * 60 * 60 * 1000) {
+    yyyy = '昨天'
+  } else if (nowDay < 0 && nowDay >= -24 * 60 * 60 * 1000) {
+    yyyy = '今天';
+  } else {
+    yyyy = old_year + '-' + old_month + '-' + old_date;
+  }
+  // 时分秒之前
+  const nowTime = myDate.getTime();
+  const newTime = (nowTime - oldTime) / 1000;
+  if (newTime < 60) {
+    hhmm = newTime + '秒前'
+  } else if (newTime < 3600) {
+    hhmm = Math.floor(newTime / 60) + '分钟前'
+  } else {
+    hhmm = old_hour + ':' + old_minu
+  }
+  //  else if (newTime < 3600 * 3) {
+  //   hhmm = (newTime / 3600).toFixed(1) + '小时前'
+  // }
+  console.log(yyyy, hhmm)
+  return yyyy + '' + hhmm;
+
+
+}
 
 /**
  * @param {number}  取值范围0~1之间
@@ -536,16 +589,14 @@ export const isArrays = (v) => {
  * @return:
  * @description:获取年/月/日/星期
  */
-
 export const getDate = (str) => {
-  const date = new Date();
   switch (str) {
     case 'day':
-      const day = date.getDate();
+      const day = myDate.getDate();
       const days = day < 10 ? '0' + day : day;
       return days;
     case 'week':
-      const week = date.getDay();
+      const week = myDate.getDay();
       let weeks = '';
       switch (week) {
         case 1:

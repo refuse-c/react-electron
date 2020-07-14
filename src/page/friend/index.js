@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-13 14:02:45
+ * @LastEditTime: 2020-07-14 16:00:12
  * @Description:朋友
  */
 import React, { Component } from 'react';
@@ -24,18 +24,17 @@ class Frind extends Component {
     this.getEvent();
   };
   getEvent = (id) => {
+    this.setState({ eventList: [] });
     RAGet(event.api_url, {
       params: {
         uid: id,
       },
-    })
-      .then((res) => {
-        const eventList = res.event;
-        this.setState({ eventList });
-      })
-      .catch((err) => {
-        // console.log(err)
-      });
+    }).then((res) => {
+      const eventList = res.event;
+      this.setState({ eventList });
+    }).catch((err) => {
+      // console.log(err)
+    });
   };
 
   render() {

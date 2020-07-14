@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-07-10 15:49:14
+ * @LastEditTime: 2020-07-14 09:26:05
  * @LastEditors: refuse_c
  * @Description:audio核心
  */
@@ -319,7 +319,7 @@ class Footer extends Component {
           <div className="progress_time">
             <p>{formatPlayTime(currentTime)}</p>
             {playList.length > 0 ? (
-              <p>{formatPlayTime(duration || playList[index].dt / 1000)}</p>
+              <p>{formatPlayTime(duration || playList[index].dt / 1000 || playList[index].duration / 1000)}</p>
             ) : (
                 <p>{`00:00`}</p>
               )}

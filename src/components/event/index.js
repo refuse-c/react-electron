@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-07-10 17:54:31
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-13 17:46:12
+ * @LastEditTime: 2020-07-14 18:06:09
  * @Description: 动态组件
  */
 import React, { Component } from "react";
@@ -10,11 +10,11 @@ import "./index.scss";
 import {
   imgParam,
   formatDynamicType,
-  formatDate,
   isEmpty,
   IsNum,
   formatPlayTime,
   formatPlaycount,
+  formatDynamicDate
 } from "../../common/utils/format";
 
 // store
@@ -39,7 +39,7 @@ class Event extends Component {
       videoId: "",
     };
   }
-  componentDidMount = () => {};
+  componentDidMount = () => { };
   // 获取视频url
   getMediaUrl = (id) => {
     console.log(id);
@@ -130,7 +130,7 @@ class Event extends Component {
                         </span>
                         {formatDynamicType(item.type)}{" "}
                       </p>
-                      <p>{formatDate(item.eventTime)}</p>
+                      <p>{formatDynamicDate(item.eventTime)}</p>
                     </div>
                   </div>
                   {jsonData && jsonData.msg ? (
@@ -140,8 +140,8 @@ class Event extends Component {
                       escapeHtml={false} //不进行HTML标签的转化
                     />
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {
                     //歌单
                     jsonData && jsonData.playlist ? (
@@ -163,8 +163,8 @@ class Event extends Component {
                         </div>
                       </div>
                     ) : (
-                      ""
-                    )
+                        ""
+                      )
                   }
                   {
                     //电台
@@ -183,72 +183,72 @@ class Event extends Component {
                         </div>
                       </div>
                     ) : (
-                      ""
-                    )
+                        ""
+                      )
                   }
                   {
                     //视频
                     jsonData && jsonData.video ? (
                       <div className="media-video">
                         {videoId === jsonData.video.videoId &&
-                        !isEmpty(videoUrl) ? (
-                          <div className="media-info">
-                            <p>
-                              <span
-                                onClick={(e) => this.setState({ videoId: "" })}
-                              >
-                                收起
+                          !isEmpty(videoUrl) ? (
+                            <div className="media-info">
+                              <p>
+                                <span
+                                  onClick={(e) => this.setState({ videoId: "" })}
+                                >
+                                  收起
                               </span>
-                              <span
-                                onClick={(e) =>
-                                  this.props.history.push({
-                                    pathname: `/videoDetail${jsonData.video.videoId}`,
-                                  })
-                                }
-                              >
-                                {jsonData.video.title}
-                              </span>
-                            </p>
-                            <video
-                              src={videoUrl}
-                              controls
-                              autoPlay
-                              poster={imgParam(
-                                jsonData.video.coverUrl,
-                                340,
-                                190
-                              )}
-                            ></video>
-                          </div>
-                        ) : (
-                          <div
-                            className="media-box"
-                            onClick={this.getMediaUrl.bind(
-                              this,
-                              jsonData.video.videoId
-                            )}
-                          >
-                            <img
-                              src={imgParam(jsonData.video.coverUrl, 340, 190)}
-                              alt=""
-                            />
-                            <div className="media-player"></div>
-                            <p>
-                              <span>
-                                {formatPlaycount(jsonData.video.playTime)}
-                              </span>
-                              <span>
-                                {formatPlayTime(
-                                  jsonData.video.durationms / 1000
+                                <span
+                                  onClick={(e) =>
+                                    this.props.history.push({
+                                      pathname: `/videoDetail${jsonData.video.videoId}`,
+                                    })
+                                  }
+                                >
+                                  {jsonData.video.title}
+                                </span>
+                              </p>
+                              <video
+                                src={videoUrl}
+                                controls
+                                autoPlay
+                                poster={imgParam(
+                                  jsonData.video.coverUrl,
+                                  340,
+                                  190
                                 )}
-                              </span>
-                            </p>
-                          </div>
-                        )}
+                              ></video>
+                            </div>
+                          ) : (
+                            <div
+                              className="media-box"
+                              onClick={this.getMediaUrl.bind(
+                                this,
+                                jsonData.video.videoId
+                              )}
+                            >
+                              <img
+                                src={imgParam(jsonData.video.coverUrl, 340, 190)}
+                                alt=""
+                              />
+                              <div className="media-player"></div>
+                              <p>
+                                <span>
+                                  {formatPlaycount(jsonData.video.playTime)}
+                                </span>
+                                <span>
+                                  {formatPlayTime(
+                                    jsonData.video.durationms / 1000
+                                  )}
+                                </span>
+                              </p>
+                            </div>
+                          )}
                       </div>
                     ) : (
-                      ""
-                    )
+                        ""
+                      )
                   }
                   {
                     //mv
@@ -280,32 +280,32 @@ class Event extends Component {
                             ></video>
                           </div>
                         ) : (
-                          <div
-                            className="media-box"
-                            onClick={this.getMediaUrl.bind(
-                              this,
-                              jsonData.mv.id
-                            )}
-                          >
-                            <img
-                              src={imgParam(jsonData.mv.imgurl, 340, 190)}
-                              alt=""
-                            />
-                            <div className="media-player"></div>
-                            <p>
-                              <span>
-                                {formatPlaycount(jsonData.mv.playCount)}
-                              </span>
-                              <span>
-                                {formatPlayTime(jsonData.mv.duration / 1000)}
-                              </span>
-                            </p>
-                          </div>
-                        )}
+                            <div
+                              className="media-box"
+                              onClick={this.getMediaUrl.bind(
+                                this,
+                                jsonData.mv.id
+                              )}
+                            >
+                              <img
+                                src={imgParam(jsonData.mv.imgurl, 340, 190)}
+                                alt=""
+                              />
+                              <div className="media-player"></div>
+                              <p>
+                                <span>
+                                  {formatPlaycount(jsonData.mv.playCount)}
+                                </span>
+                                <span>
+                                  {formatPlayTime(jsonData.mv.duration / 1000)}
+                                </span>
+                              </p>
+                            </div>
+                          )}
                       </div>
                     ) : (
-                      ""
-                    )
+                        ""
+                      )
                   }
 
                   {
@@ -327,8 +327,8 @@ class Event extends Component {
                         </div>
                       </div>
                     ) : (
-                      ""
-                    )
+                        ""
+                      )
                   }
                   {
                     //图片
@@ -339,8 +339,8 @@ class Event extends Component {
                             item.pics.length === 3
                               ? "400px"
                               : item.pics.length < 5
-                              ? "270px"
-                              : "400px",
+                                ? "270px"
+                                : "400px",
                         }}
                         className="pics"
                       >
@@ -353,8 +353,8 @@ class Event extends Component {
                         ))}
                       </div>
                     ) : (
-                      ""
-                    )
+                        ""
+                      )
                   }
                   {
                     //转发 / 图片
@@ -381,8 +381,8 @@ class Event extends Component {
                               jsonData.event.pics.length === 3
                                 ? "400px"
                                 : jsonData.event.pics.length < 5
-                                ? "270px"
-                                : "400px",
+                                  ? "270px"
+                                  : "400px",
                           }}
                           className="pics"
                         >
@@ -396,8 +396,8 @@ class Event extends Component {
                         </div>
                       </div>
                     ) : (
-                      ""
-                    )
+                        ""
+                      )
                   }
                 </li>
               );

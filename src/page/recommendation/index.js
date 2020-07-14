@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-07-09 19:44:24
- * @LastEditors: RA
+ * @LastEditTime: 2020-07-14 18:00:51
+ * @LastEditors: refuse_c
  * @Description: 个性推荐
  */
 import React, { Component } from 'react';
@@ -21,6 +21,8 @@ import {
   getDate,
   dataScreening,
   getDevice,
+  formatDynamicDate,
+  formatDate
 } from '../../common/utils/format';
 import MvList from '../../components/mvList';
 import Exclusive from '../../components/exclusive';
@@ -50,6 +52,8 @@ class Recommendation extends Component {
     };
   }
   componentDidMount = () => {
+    console.log(formatDate('2020-07-14 14:28'))
+    console.log(formatDynamicDate('2020-07-14 17:52'))
     const device = getDevice().device.id;
     this.setState({ device });
     this.getBanner(device);
@@ -244,13 +248,13 @@ class Recommendation extends Component {
                     </li>
                   </NavLink>
                 ) : (
-                  <NavLink to={path + item.id} key={index}>
-                    <li>
-                      <img src={imgParam(item.picUrl, 160, 160)} alt="" />
-                      <p>{item.name}</p>
-                    </li>
-                  </NavLink>
-                );
+                    <NavLink to={path + item.id} key={index}>
+                      <li>
+                        <img src={imgParam(item.picUrl, 160, 160)} alt="" />
+                        <p>{item.name}</p>
+                      </li>
+                    </NavLink>
+                  );
               })}
           </ul>
         </div>
