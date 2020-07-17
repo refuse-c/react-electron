@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-16 22:35:46
- * @LastEditTime: 2020-07-03 10:56:06
+ * @LastEditTime: 2020-07-17 16:02:04
  * @LastEditors: refuse_c
  * @Description: 每日推荐歌曲
  */
@@ -67,13 +67,11 @@ class DailySpecial extends Component {
               text={`播放全部`}
               list={recommendList}
             />
-            {/* <h3 onClick={this.playAll}>播放全部</h3> */}
-
             <p>收藏全部</p>
           </div>
           <div className="subassembly-style">
             {recommendList.length > 0 && recommendList ?
-              <MusicList muscicList={recommendList} />
+              <MusicList history={this.props.history} muscicList={recommendList} />
               :
               null
             }

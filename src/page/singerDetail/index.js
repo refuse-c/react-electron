@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-06-05 17:54:41
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-10 09:04:31
+ * @LastEditTime: 2020-07-17 15:43:13
  * @Description:歌手详情页
  */
 import React, { Component } from 'react';
@@ -192,6 +192,7 @@ class SingerDetails extends Component {
                   render={(props) => (
                     <route.component
                       {...props}
+                      id={id}
                       routes={route.routes}
                       toFatherValue={this.getChildValue.bind(this)}
                     />

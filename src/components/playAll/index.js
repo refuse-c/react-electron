@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-17 15:20:33
- * @LastEditTime: 2020-07-05 11:43:26
- * @LastEditors: RA
+ * @LastEditTime: 2020-07-17 17:38:06
+ * @LastEditors: refuse_c
  * @Description: 播放全部组件
  */
 import React, { Component } from 'react';
@@ -26,6 +26,7 @@ class PlayAll extends Component {
   }
   playAll = () => {
     const { list } = this.props;
+    console.log(list)
     if (!isEmpty(list) && list.length > 0) {
       this.props.setIndex(0);
       this.props.setIsPlay(true);
@@ -37,16 +38,16 @@ class PlayAll extends Component {
     }
   };
   render() {
-    const { cls, text, list } = this.props;
+    const { cls, text, list, type } = this.props;
     return (
       <div>
-        {!isEmpty(list) && list.length > 0 ? (
+        {!isEmpty(list) && list.length > 0 && type !== -1 ? (
           <button className={cls} onClick={this.playAll}>
             {text || ''}
           </button>
         ) : (
-          <button className={`button-disabled `}>{text || ''}</button>
-        )}
+            <button className={`button-disabled `}>{text || ''}</button>
+          )}
       </div>
     );
   }

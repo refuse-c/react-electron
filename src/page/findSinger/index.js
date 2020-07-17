@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-07-03 10:51:39
+ * @LastEditTime: 2020-07-17 16:38:57
  * @LastEditors: refuse_c
  * @Description: 歌手列表
  */
@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import './index.scss';
 import { RAGet } from '../../api/netWork';
 import { artistList } from '../../api/api';
-import { imgParam, a, b, c } from '../../common/utils/format';
+import { imgParam, a, b, c, jumpDetails } from '../../common/utils/format';
 class FindSinger extends Component {
   constructor(props) {
     super(props);
@@ -148,7 +148,7 @@ class FindSinger extends Component {
     this.getArtistList(cat, types, area, limit, offsets);
   };
   handleSingerDetail = (item) => {
-    this.props.history.push({ pathname: `/home/singerdetail${item.id}` });
+    jumpDetails(this, 'singer', item.id)
   };
   gotoArtist = (item) => {
     this.props.history.push({ pathname: `/home/find/artistTop` })

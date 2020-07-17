@@ -89,7 +89,7 @@ class NewMusic extends Component {
         </div>
         {
           songList.length > 0
-            ? <MusicList muscicList={songList} />
+            ? <MusicList history={this.props.history} muscicList={songList} />
             : null
         }
       </div>

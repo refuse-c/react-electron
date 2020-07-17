@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-07-14 09:14:44
+ * @LastEditTime: 2020-07-17 18:03:40
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -55,7 +55,7 @@ class App extends Component {
           <Redirect to="/home/find" />
           {/* <Redirect to="/home/singerdetail30285885/" /> */}
           {/* <Redirect to="/home/find/rankingList" /> */}
-          {/* <Redirect to="/home/albumList4546" /> */}
+          {/* <Redirect to="/home/albumdetail4546" /> */}
           {/* <Redirect to="/player" /> */}
         </Router>
       </div >

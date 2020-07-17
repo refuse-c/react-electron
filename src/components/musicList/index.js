@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-22 12:07:13
- * @LastEditTime: 2020-06-10 14:29:44
+ * @LastEditTime: 2020-07-17 16:36:46
  * @LastEditors: refuse_c
  * @Description:音乐列表展示组件
  */
@@ -14,6 +14,7 @@ import {
   isEmpty,
   isArrays,
   getLocal,
+  jumpDetails,
 } from '../../common/utils/format';
 import Empty from '../empty';
 import Tools from './tools';
@@ -92,7 +93,12 @@ class MusicList extends Component {
     this.setState({ showTools: true, sty, item, index });
     this.props.setToolsStatus(true);
   };
-
+  gotoAlbum = id => {
+    jumpDetails(this, 'album', id)
+  }
+  gotoSinger = id => {
+    jumpDetails(this, 'singer', id)
+  }
   render() {
     const { pageNum, muscicList, musicId, toolStatus } = this.props;
     const { sty, item, index } = this.state;
@@ -117,8 +123,8 @@ class MusicList extends Component {
                 >
                   <div>{formatNum((num - 1) * 50 + index)}</div>
                   <div>{item.name}</div>
-                  <div>{item.ar.map((item) => item.name + '').join(' - ')}</div>
-                  <div>{item.al.name}</div>
+                  <div>{item.ar.map((item, index) => <span onClick={this.gotoSinger.bind(this, item.id)} key={index}>{item.name}</span>)}</div>
+                  <div onClick={this.gotoAlbum.bind(this, item.al.id)}>{item.al.name}</div>
                   <div>{formatPlayTime(item.dt / 1000)}</div>
                 </li>
               );

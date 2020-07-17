@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-09 16:29:44
+ * @LastEditTime: 2020-07-17 15:58:33
  * @Description:歌单详情
  */
 import React, { Component } from 'react';
@@ -46,13 +46,13 @@ class List extends Component {
     }
     return true;
   };
-  playAll = () => {
-    const { muscicList } = this.state;
-    this.props.setIndex(0);
-    this.props.setIsPlay(true);
-    this.props.gainPlayList(muscicList);
-    this.props.gainMusicId(muscicList[0].id);
-  };
+  // playAll = () => {
+  //   const { muscicList } = this.state;
+  //   this.props.setIndex(0);
+  //   this.props.setIsPlay(true);
+  //   this.props.gainPlayList(muscicList);
+  //   this.props.gainMusicId(muscicList[0].id);
+  // };
   componentDidMount = () => {
     const id = window.location.href.split('single')[1];
     this.getPlayList(id);
@@ -139,7 +139,7 @@ class List extends Component {
           </div>
           <div className="single_info_list">
             {!isEmpty(muscicList) ? (
-              <MusicList muscicList={muscicList} />
+              <MusicList history={this.props.history} muscicList={muscicList} />
             ) : null}
           </div>
         </ScrollArea>

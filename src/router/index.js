@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 17:10:30
- * @LastEditTime: 2020-07-10 17:45:20
+ * @LastEditTime: 2020-07-17 16:07:26
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -16,7 +16,7 @@ import Video from '../page/video/video';
 import Friend from '../page/friend';
 import Personalized from '../page/personalized';
 import SingleDetail from '../page/singleDetail';
-import AlbumList from '../page/albumDetail';
+import AlbumDetail from '../page/albumDetail';
 import VideoDetail from '../page/videoDetail';
 import Recommendation from '../page/recommendation';
 import ArtistTop from '../page/artistTop';
@@ -143,8 +143,8 @@ let routes = [
             component: DailySpecial,
           },
           {
-            path: '/home/albumList:id',
-            component: AlbumList,
+            path: '/home/albumdetail:id',
+            component: AlbumDetail,
           },
           {
 

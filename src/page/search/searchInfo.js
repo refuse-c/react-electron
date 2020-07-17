@@ -111,7 +111,7 @@ class SearchInfo extends Component {
               {
                 // 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018: 综合
                 menuIndex === 1 && searchInfo.singleArr ?
-                  <MusicList muscicList={dataScreening(searchInfo.singleArr)} pageNum={pageNum} />
+                  <MusicList history={this.props.history} muscicList={dataScreening(searchInfo.singleArr)} pageNum={pageNum} />
                   :
                   menuIndex === 10 && searchInfo.albumArr ?
                     <Album data={searchInfo.albumArr} />

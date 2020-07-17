@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-07-14 18:05:19
+ * @LastEditTime: 2020-07-17 18:03:56
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -846,4 +846,18 @@ export const formatDynamicType = (type) => {
 export const formatArrayNull = (str) => {
   const array = str.split("#");
   return array.filter((item) => item);
+}
+//页面跳转详情
+export const jumpDetails = (that, type, id) => {
+  let pathname = '';
+  switch (type) {
+    case 'user': pathname = `/home/userdetail${id}`; break;
+    case 'album': pathname = `/home/albumdetail${id}`; break;
+    case 'singer': pathname = `/home/singerdetail${id}`; break;
+    case 'event': pathname = `/home/userevent${id}`; break;
+    case 'mv': pathname = `/home/allMv${id}`; break;
+    case 'video': pathname = `/videoDetail${id}`; break;
+    default: pathname = '/home/find'; break
+  }
+  that.props.history.push({ pathname })
 }

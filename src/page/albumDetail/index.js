@@ -2,14 +2,13 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-09 16:27:42
+ * @LastEditTime: 2020-07-17 17:34:56
  * @Description:专辑详情页
  */
 import React, { Component } from 'react';
 import './index.scss';
 import { albumList } from '../../api/api';
 import { RAGet } from '../../api/netWork';
-// import 'react-scrollbar/dist/css/scrollArea.css';
 import ScrollArea from 'react-scrollbar';
 import MusicList from '../../components/musicList';
 import {
@@ -18,37 +17,23 @@ import {
   isEmpty,
   dataScreening,
 } from '../../common/utils/format';
-
-// store
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import {
-  gainPlayList,
-  gainMusicId,
-  setIsPlay,
-  setIndex,
-} from '../../store/actions';
-class List extends Component {
+import PlayAll from '../../components/playAll';
+class AlbumDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       muscicList: '',
       albumDetail: {},
+      status: 0
     };
   }
-  playAll = () => {
-    const { muscicList } = this.state;
-    this.props.setIsPlay(true);
-    this.props.gainPlayList(muscicList);
-    this.props.gainMusicId(muscicList[0].id);
-  };
   componentDidMount = () => {
-    const id = window.location.href.split('albumList')[1];
+    const id = window.location.href.split('albumdetail')[1];
     this.getAlbumList(id);
   };
   componentWillReceiveProps = () => {
     this.setState({ playList: [], muscicList: '' }); //清空数据
-    const id = window.location.href.split('albumList')[1];
+    const id = window.location.href.split('albumdetail')[1];
     this.getAlbumList(id);
   };
   //获取歌单音乐列表
@@ -60,15 +45,16 @@ class List extends Component {
     }).then((res) => {
       const data = res.songs;
       const albumDetail = res.album;
+      const status = albumDetail.status;
       const muscicList = dataScreening(data);
 
-      this.setState({ albumDetail, muscicList });
+      this.setState({ albumDetail, muscicList, status });
     }).catch((err) => {
       // console.log(err);
     });
   };
   render() {
-    const { albumDetail, muscicList } = this.state;
+    const { albumDetail, muscicList, status } = this.state;
     const { name, artists, publishTime, info } = albumDetail;
     return (
       <div className="album_list">
@@ -88,7 +74,7 @@ class List extends Component {
                 <h2>{name}</h2>
               </div>
               <div className="album_list_btn">
-                <button onClick={this.playAll}>播放全部</button>
+                <PlayAll list={muscicList} text={`播放全部`} type={status} />
                 <button>收藏{info && info.commentCount}</button>
                 <button>分享{info && info.shareCount}</button>
                 <button>下载全部</button>
@@ -104,7 +90,7 @@ class List extends Component {
           </div>
           <div className="album_list_info_list">
             {!isEmpty(muscicList) ? (
-              <MusicList muscicList={muscicList} />
+              <MusicList history={this.props.history} muscicList={muscicList} />
             ) : null}
           </div>
         </ScrollArea>
@@ -113,16 +99,4 @@ class List extends Component {
   }
 }
 
-//注册store
-const mapStateToProps = (state) => { };
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    gainPlayList: bindActionCreators(gainPlayList, dispatch),
-    gainMusicId: bindActionCreators(gainMusicId, dispatch),
-    setIsPlay: bindActionCreators(setIsPlay, dispatch),
-    setIndex: bindActionCreators(setIndex, dispatch),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default AlbumDetail;

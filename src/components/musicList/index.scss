@@ -27,11 +27,25 @@
 
       div:nth-child(3) {
         flex: 2;
+        span {
+          height: 100%;
+          cursor: pointer;
+          &:hover {
+            color: #0071fb;
+          }
+          &:not(:first-child) {
+            margin-left: 5px;
+          }
+        }
       }
 
       div:nth-child(4) {
         flex: 2;
+        cursor: pointer;
         padding: 0 10px;
+        &:hover {
+          color: #0071fb;
+        }
       }
 
       div:nth-child(5) {

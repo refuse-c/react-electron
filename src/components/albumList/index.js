@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-06-08 15:38:50
+ * @LastEditTime: 2020-07-17 15:54:23
  * @Description:检索页专辑组件
  */
 import React, { Component } from 'react';
@@ -22,7 +22,7 @@ class Album extends Component {
   }
   render() {
     const { data } = this.props;
-    const path = '/home/albumList'
+    const path = '/home/albumdetail'
     return (
       <div className="album">
         {
@@ -61,7 +61,7 @@ class Album extends Component {
 //注册store
 const mapStateToProps = (state) => {
   return {
-    searchInfo: state.searchInfo,
+    // searchInfo: state.searchInfo,
   }
 }
 

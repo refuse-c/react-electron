@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-10 10:08:27
+ * @LastEditTime: 2020-07-17 16:38:05
  * @Description:评论组件
  */
 import React, { Component } from 'react';
@@ -11,7 +11,7 @@ import './index.scss';
 
 //store
 import { connect } from 'react-redux';
-import { imgParam, formatDate } from '../../common/utils/format';
+import { imgParam, formatDate, jumpDetails } from '../../common/utils/format';
 
 class Comment extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class Comment extends Component {
     this.state = {}
   }
   gotouserDetail = item => {
-    this.props.history.push({ pathname: `/home/userdetail${item.userId}` })
+    jumpDetails(this, 'user', item.userId)
   }
   render() {
     const { data } = this.props;

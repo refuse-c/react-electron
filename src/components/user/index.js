@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-09 15:54:22
+ * @LastEditTime: 2020-07-17 16:42:45
  * @Description:检索->用户
  */
 import React, { Component } from 'react';
@@ -11,7 +11,7 @@ import Empty from '../../components/empty';
 
 //store
 import { connect } from 'react-redux';
-import { imgParam, isArrays } from '../../common/utils/format';
+import { imgParam, isArrays, jumpDetails } from '../../common/utils/format';
 // import { bindActionCreators } from 'redux';
 // import { setPageNum, gainSearchInfo, setMenuIndex } from '../../store/actions';
 
@@ -21,7 +21,7 @@ class User extends Component {
     this.state = {}
   }
   gotouserDetail = item => {
-    this.props.history.push({ pathname: `/home/userdetail${item.userId}` })
+    jumpDetails(this, 'user', item.userId)
   }
   render() {
     const { data } = this.props;

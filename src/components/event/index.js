@@ -1,8 +1,8 @@
 /*
  * @Author: REFUSE_C
  * @Date: 2020-07-10 17:54:31
- * @LastEditors: RA
- * @LastEditTime: 2020-07-14 21:12:30
+ * @LastEditors: refuse_c
+ * @LastEditTime: 2020-07-17 18:05:10
  * @Description: 动态组件
  */
 import React, { Component } from "react";
@@ -14,7 +14,8 @@ import {
   IsNum,
   formatPlayTime,
   formatPlaycount,
-  formatDynamicDate
+  formatDynamicDate,
+  jumpDetails
 } from "../../common/utils/format";
 
 // store
@@ -98,8 +99,7 @@ class Event extends Component {
     e.stopPropagation();
   };
   gotouserDetail = (item) => {
-    console.log(item);
-    this.props.history.push({ pathname: `/home/userdetail${item.userId}` });
+    jumpDetails(this, 'user', item.userId)
   };
   render() {
     const { data } = this.props;
