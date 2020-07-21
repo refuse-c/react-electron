@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-06-11 18:07:17
+ * @LastEditTime: 2020-07-21 20:40:03
  * @LastEditors: refuse_c
  * @Description:发现->歌单
  */
@@ -84,7 +84,7 @@ class FindList extends Component {
     RAGet(topPlaylist.api_url, {
       params: {
         order: '', //可选值为 'new' 和 'hot', 分别对应最新和最热 , 默认为 'hot'
-        limit: 100, //取出评论数量, 默认为 50
+        limit: 50, //取出评论数量, 默认为 50
         offset: '', // 偏移数量, 用于分页, 如: (评论页数 - 1) * 50, 其中 50 为 limit 的值
         cat: songListText,
       },

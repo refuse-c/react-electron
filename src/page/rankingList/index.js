@@ -2,7 +2,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-07-21 19:37:53
+ * @LastEditTime: 2020-07-21 19:54:59
  * @LastEditors: refuse_c
  * @Description:排行榜
  */
@@ -66,10 +66,10 @@ class RankingList extends Component {
       const tracks = res.playlist.tracks;
       const privileges = res.privileges;
       const playList = aa(tracks, privileges);
-      const nickname = getLocal('userInfo').profile.nickname || '';
+      // const nickname = getLocal('userInfo').profile.nickname || '';
       list = dataScreening(playList);
       data.list = list;
-      data.name = res.playlist.name.replace(nickname, '我');
+      // data.name = res.playlist.name.replace(nickname, '我');
       data.updateTime = res.playlist.updateTime;
       data.id = res.playlist.id;
       data.path = '/home/single' + res.playlist.id;

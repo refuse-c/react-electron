@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-04-01 15:56:06
- * @LastEditTime: 2020-07-21 15:05:23
+ * @LastEditTime: 2020-07-21 19:56:22
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -52,7 +52,7 @@ class App extends Component {
               );
             }
           })}
-          <Redirect to="/home/find/rankingList" />
+          <Redirect to="/home/find" />
           {/* <Redirect to="/home/singerdetail30285885/" /> */}
           {/* <Redirect to="/home/find/rankingList" /> */}
           {/* <Redirect to="/home/albumdetail4546" /> */}
