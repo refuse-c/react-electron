@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-17 15:20:33
- * @LastEditTime: 2020-07-17 17:38:06
+ * @LastEditTime: 2020-07-21 19:21:18
  * @LastEditors: refuse_c
  * @Description: 播放全部组件
  */
@@ -26,7 +26,6 @@ class PlayAll extends Component {
   }
   playAll = () => {
     const { list } = this.props;
-    console.log(list)
     if (!isEmpty(list) && list.length > 0) {
       this.props.setIndex(0);
       this.props.setIsPlay(true);

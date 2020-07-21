@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2020-04-03 15:13:06
  * @LastEditors: refuse_c
- * @LastEditTime: 2020-07-17 15:58:33
+ * @LastEditTime: 2020-07-21 15:39:47
  * @Description:歌单详情
  */
 import React, { Component } from 'react';
@@ -17,7 +17,7 @@ import {
   formatDate,
   dataScreening,
   isEmpty,
-  aa,
+  aa, getLocal
 } from '../../common/utils/format';
 import PlayAll from '../../components/playAll';
 // store
@@ -73,10 +73,7 @@ class List extends Component {
       const tracks = res.playlist.tracks;
       const privileges = res.privileges;
       const data = aa(tracks, privileges);
-      const nickname =
-        (this.props.userInfo.profile &&
-          this.props.userInfo.profile.nickname) ||
-        '';
+      const nickname = getLocal('userInfo').profile.nickname || '';
       const muscicList = dataScreening(data);
       playList.name = playList.name.replace(nickname, '我');
       this.setState({ playList, muscicList });

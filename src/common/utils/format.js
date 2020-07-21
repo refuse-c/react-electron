@@ -1,7 +1,7 @@
 /*
  * @Author: RA
  * @Date: 2020-03-06 15:36:10
- * @LastEditTime: 2020-07-17 18:03:56
+ * @LastEditTime: 2020-07-21 19:27:42
  * @LastEditors: refuse_c
  * @Description:
  */
@@ -857,6 +857,8 @@ export const jumpDetails = (that, type, id) => {
     case 'event': pathname = `/home/userevent${id}`; break;
     case 'mv': pathname = `/home/allMv${id}`; break;
     case 'video': pathname = `/videoDetail${id}`; break;
+    case 'single': pathname = `/home/single${id}`; break;
+
     default: pathname = '/home/find'; break
   }
   that.props.history.push({ pathname })

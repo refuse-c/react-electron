@@ -2,7 +2,7 @@
 /*
  * @Author: RA
  * @Date: 2020-05-15 15:24:07
- * @LastEditTime: 2020-07-17 16:43:10
+ * @LastEditTime: 2020-07-21 19:37:53
  * @LastEditors: refuse_c
  * @Description:排行榜
  */
@@ -17,13 +17,11 @@ import {
   setLocal,
   getLocal,
   isEmpty,
-  formatDate,
+  formatDate, dataScreening, aa, jumpDetails
 } from '../../common/utils/format';
 import {
-  topList,
   allTopList,
-  toplistDetail,
-  toplistArtist,
+  toplistArtist, playList
 } from '../../api/api';
 
 // store
@@ -36,11 +34,13 @@ import {
   setIsPlay,
   gainMusicId,
 } from '../../store/actions';
+import { message } from 'antd';
 class RankingList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      officialList: getLocal('officialList') || {},
+      officialData: getLocal('officialData') || {},
+      officialList: {},
       globalList: {},
       singerList: {},
       filterArr: [
@@ -48,50 +48,35 @@ class RankingList extends Component {
         '云音乐新歌榜',
         '网易原创歌曲榜',
         '云音乐热歌榜',
-      ],
-      allData: [],
+      ]
     };
   }
   componentDidMount = () => {
     this.getAllTopList();
-    this.testResult();
   };
-  testResult = async () => {
-    let a = await this.getTopList(3);
-    let b = await this.getTopList(0);
-    let c = await this.getTopList(2);
-    let d = await this.getTopList(1);
-    let e = await this.getToplistDetail();
-    let f = await this.getToplistArtist();
-    e.list = f;
-    e.path = '/home/find/artistTop';
-    e.type = 'singer';
-    const officialList = [a, b, c, d, e];
-    setLocal('officialList', officialList);
-    this.setState({ officialList });
-  };
-  // 排行榜
-  getTopList = async (id) => {
+  // 歌单详情
+  getPlayList = async (id, type) => {
     let data = {};
-    await RAGet(topList.api_url, {
+    let list;
+    await RAGet(playList.api_url, {
       params: {
-        idx: id,
-      },
-    }).then((res) => {
+        id: id
+      }
+    }).then(res => {
       const tracks = res.playlist.tracks;
-      // const privileges = res.privileges;
-      data.name = res.playlist.name;
+      const privileges = res.privileges;
+      const playList = aa(tracks, privileges);
+      const nickname = getLocal('userInfo').profile.nickname || '';
+      list = dataScreening(playList);
+      data.list = list;
+      data.name = res.playlist.name.replace(nickname, '我');
       data.updateTime = res.playlist.updateTime;
-      // data.list = aa(tracks, privileges);
-      data.list = tracks;
       data.id = res.playlist.id;
       data.path = '/home/single' + res.playlist.id;
       data.coverImgUrl = res.playlist.coverImgUrl;
-    }).catch((err) => {
-      // console.log(err);
-    });
-    return data;
-  };
+    }).catch(err => { console.log(err) })
+    return type === 'only' ? list : data;
+  }
   //所有榜单
   getAllTopList = () => {
     const { filterArr } = this.state;
@@ -100,32 +85,31 @@ class RankingList extends Component {
         const list = res.list;
         let globalList = list.filter((e) => !filterArr.includes(e.name));
         // 传入两个数组a，b，将数组a中包含b的值全部去掉，重复的也去掉，返回去掉之后新数组
-        this.setState({ globalList });
+        let officialList = list.filter((e) => filterArr.includes(e.name));
+        officialList.push('singer')
+        this.setState({ globalList })
+
+        const promises = officialList.map(
+          item => item === 'singer' ? this.getToplistArtist() : this.getPlayList(item.id));
+        Promise.all(promises)
+          .then(officialData => {
+            this.setState({ officialData })
+            setLocal('officialData', officialData)
+          })
+
       })
       .catch((err) => {
         // console.log(err);
       });
-  };
-  //所有榜单摘要详情
-  getToplistDetail = async () => {
-    let data = {};
-    await RAGet(toplistDetail.api_url)
-      .then((res) => {
-        data.name = res.artistToplist.name;
-        data.coverImgUrl = res.artistToplist.coverUrl;
-        data.updateFrequency = res.artistToplist.updateFrequency;
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-    return data;
   };
   //歌手榜
   getToplistArtist = async () => {
-    let data;
+    let data = {};
     await RAGet(toplistArtist.api_url)
       .then((res) => {
-        data = res.list.artists;
+        data.list = res.list.artists;
+        data.path = '/home/find/artistTop';
+        data.type = 'singer';
       })
       .catch((err) => {
         // console.log(err);
@@ -155,24 +139,35 @@ class RankingList extends Component {
   gotoArtist = (item) => {
     this.props.history.push({ pathname: `/home/singerdetail${item.id}` })
   }
+  handelAll = async (e, id) => {
+    e.stopPropagation();
+    const list = await this.getPlayList(id, 'only')
+    if (!isEmpty(list) && list.length > 0) {
+      this.props.setIndex(0);
+      this.props.setIsPlay(true);
+      this.props.gainPlayList(list);
+      this.props.gainMusicId(list[0].id);
+    } else {
+      message.destroy();
+      message.error('当前列表还未就绪,请稍后再试!');
+    }
+  }
   render() {
-    const { officialList, globalList } = this.state;
-    const path = '/home/single';
+    const { officialData, globalList } = this.state;
     return (
       <div className="ranking_ist">
         <div className="headline">
           <p>官方榜</p>
         </div>
         <div className="official_List">
-          {officialList.length > 0 &&
-            officialList.map((item, index) => {
+          {officialData.length > 0 &&
+            officialData.map((item, index) => {
               return (
                 <div
                   className="official_List_box"
                   key={index}
                   style={{
-                    backgroundImage:
-                      'url(' + require(`./img/${index}.png`) + ')',
+                    background: 'url(' + require(`./img/${index}.png`) + ')  center top / 100% 90px no-repeat',
                   }}
                 >
                   {item.type === 'singer' ? null : (
@@ -190,7 +185,7 @@ class RankingList extends Component {
                     {!isEmpty(item.list) &&
                       item.list.map((item, index) => {
                         let num = index < 9 ? '0' + (index + 1) : index + 1;
-                        if (index > 9) return false;
+                        if (index > 7) return false;
                         return (
                           <li
                             key={index}
@@ -209,7 +204,7 @@ class RankingList extends Component {
                         );
                       })}
                   </ul>
-                  <div>
+                  <div className="viewAll">
                     {item.path ? (
                       <NavLink to={item.path}>查看全部</NavLink>
                     ) : null}
@@ -226,25 +221,27 @@ class RankingList extends Component {
             {globalList.length > 0 &&
               globalList.map((item, index) => {
                 return (
-                  <NavLink key={index} to={path + item.id}>
-                    <li>
-                      <div>
-                        <img
-                          src={imgParam(item.coverImgUrl, 300, 300)}
-                          alt=""
-                        />
-                        <p className="play_count">
-                          {formatPlaycount(item.playCount)}
-                        </p>
-                      </div>
-                      <p className="play_name">{item.name}</p>
-                    </li>
-                  </NavLink>
+                  // <NavLink key={index} to={path + item.id}>
+                  <li key={index} onClick={e => { jumpDetails(this, 'single', item.id) }}>
+                    <div>
+                      <img
+                        src={imgParam(item.coverImgUrl, 300, 300)}
+                        alt=""
+                      />
+                      <p className="play_count">
+                        {formatPlaycount(item.playCount)}
+                      </p>
+                      <p className={`play_all`} onClick={e => this.handelAll(e, item.id)}></p>
+                    </div>
+                    <p className="play_name" >{item.name}</p>
+
+                  </li>
+                  // </NavLink>
                 );
               })}
           </ul>
         </div>
-      </div>
+      </div >
     );
   }
 }
