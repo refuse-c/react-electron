@@ -1,15 +1,15 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 09:29:54
- * @LastEditTime: 2020-07-09 15:26:31
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-09-19 13:45:15
+ * @LastEditors: REFUSE_C
  * @Description: 
  */
 import axios from "axios";
 import { message } from 'antd';
 import { isEmpty } from "../common/utils/format";
 const Axios = axios.create({
-  baseURL: 'https://xiangbh.cn:3389/',
+  baseURL: 'http://103.52.154.247:3000',
   withCredentials: true,
   headers: {},
 });
@@ -25,10 +25,11 @@ Axios.interceptors.response.use(
       return
     }
   }, err => {
+    console.dir(err)
     let { data } = err.response;
     if (data.code === 301 || data.code === '301') {
       message.destroy();
-      message.error('亲,部分功能需要登录后才可以使用哟,请先去登录吧')
+      message.error(data && data.msg)
     }
     return err;
   }

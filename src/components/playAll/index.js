@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-17 15:20:33
- * @LastEditTime: 2020-07-21 19:21:18
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-09-19 13:45:01
+ * @LastEditors: REFUSE_C
  * @Description: 播放全部组件
  */
 import React, { Component } from 'react';
@@ -17,7 +17,6 @@ import {
   setIsPlay,
   setIndex,
 } from '../../store/actions';
-import { isEmpty } from '../../common/utils/format';
 import { message } from 'antd';
 class PlayAll extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class PlayAll extends Component {
   }
   playAll = () => {
     const { list } = this.props;
-    if (!isEmpty(list) && list.length > 0) {
+    if (list && list.length > 0) {
       this.props.setIndex(0);
       this.props.setIsPlay(true);
       this.props.gainPlayList(list);
@@ -40,7 +39,7 @@ class PlayAll extends Component {
     const { cls, text, list, type } = this.props;
     return (
       <div>
-        {!isEmpty(list) && list.length > 0 && type !== -1 ? (
+        {list && list.length > 0 && type !== -1 ? (
           <button className={cls} onClick={this.playAll}>
             {text || ''}
           </button>

@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-04-02 11:14:28
- * @LastEditTime: 2020-07-14 09:26:05
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-08-29 21:21:25
+ * @LastEditors: REFUSE_C
  * @Description:audio核心
  */
 import React, { Component } from 'react';

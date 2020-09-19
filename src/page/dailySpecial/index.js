@@ -1,8 +1,8 @@
 /*
  * @Author: RA
  * @Date: 2020-05-16 22:35:46
- * @LastEditTime: 2020-07-17 16:02:04
- * @LastEditors: refuse_c
+ * @LastEditTime: 2020-09-19 13:46:08
+ * @LastEditors: REFUSE_C
  * @Description: 每日推荐歌曲
  */
 import React, { Component } from 'react';
@@ -24,7 +24,7 @@ class DailySpecial extends Component {
         picUrl: require('../../common/images/transparent.jpg'),
         copywriter: '根据您的音乐口味生成,每天6:00更新',
       },
-      recommendList: {}
+      recommendList: []
     }
   }
 
@@ -35,7 +35,7 @@ class DailySpecial extends Component {
   getRecommendSong = () => {
     RAGet(recommendSong.api_url, {})
       .then(res => {
-        const recommendList = dataScreening(res.recommend)
+        const recommendList = dataScreening(res.data.dailySongs)
         this.setState({ recommendList })
       }).catch(err => {
         // console.log(err)
@@ -70,7 +70,7 @@ class DailySpecial extends Component {
             <p>收藏全部</p>
           </div>
           <div className="subassembly-style">
-            {recommendList.length > 0 && recommendList ?
+            {recommendList && recommendList.length > 0 ?
               <MusicList history={this.props.history} muscicList={recommendList} />
               :
               null
