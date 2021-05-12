@@ -27,7 +27,7 @@
     "redux": "^4.0.5",
     "reset.css": "^2.0.2",
     "sass-loader": "^8.0.2",
-    "swiper": "^5.4.3"
+    "swiper": "^6.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
